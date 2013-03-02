@@ -1,0 +1,37 @@
+<%= form_for(@importador) do |f| %>
+  <% if @importador.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@importador.errors.count, "error") %> prohibited this importador from being saved:</h2>
+
+      <ul>
+      <% @importador.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rif %><br />
+    <%= f.text_field :rif %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :pais_origen %><br />
+    <%= f.text_field :pais_origen %>
+  </div>
+  <div class="field">
+    <%= f.label :mail %><br />
+    <%= f.text_field :mail %>
+  </div>
+  <div class="field">
+    <%= f.label :telefono %><br />
+    <%= f.text_field :telefono %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,41 @@
+<%= form_for(@documento) do |f| %>
+  <% if @documento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@documento.errors.count, "error") %> prohibited this documento from being saved:</h2>
+
+      <ul>
+      <% @documento.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tipo %><br />
+    <%= f.number_field :tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_vencimiento %><br />
+    <%= f.date_select :fecha_vencimiento %>
+  </div>
+  <div class="field">
+    <%= f.label :alerta %><br />
+    <%= f.check_box :alerta %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_emision %><br />
+    <%= f.date_select :fecha_emision %>
+  </div>
+  <div class="field">
+    <%= f.label :archivo %><br />
+    <%= f.text_field :archivo %>
+  </div>
+  <div class="field">
+    <%= f.label :producto %><br />
+    <%= f.text_field :producto %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

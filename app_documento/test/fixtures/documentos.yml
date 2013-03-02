@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tipo: 1
+  fecha_vencimiento: 2013-03-02
+  alerta: false
+  fecha_emision: 2013-03-02
+  archivo: MyString
+  producto: 
+
+two:
+  tipo: 1
+  fecha_vencimiento: 2013-03-02
+  alerta: false
+  fecha_emision: 2013-03-02
+  archivo: MyString
+  producto: 

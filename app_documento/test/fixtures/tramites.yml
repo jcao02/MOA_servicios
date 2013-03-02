@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  codigo_seguimiento: MyString
+  tipo: 1
+  estado: 1
+  fecha_recepcion: 2013-03-02
+  observacion: MyText
+
+two:
+  codigo_seguimiento: MyString
+  tipo: 1
+  estado: 1
+  fecha_recepcion: 2013-03-02
+  observacion: MyText

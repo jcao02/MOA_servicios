@@ -1,4 +1,31 @@
 AppDocumento::Application.routes.draw do
+  get "inicio/index"
+  root :to => 'inicio#index'
+
+  resources :presentacions
+
+
+  resources :documentos
+
+
+  resources :requisitos
+
+
+  resources :logs
+
+
+  resources :tramites
+
+
+  resources :importadors
+
+
+  resources :productos
+
+
+  resources :usuarios
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

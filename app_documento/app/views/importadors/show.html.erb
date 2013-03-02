@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Rif:</b>
+  <%= @importador.rif %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @importador.nombre %>
+</p>
+
+<p>
+  <b>Pais origen:</b>
+  <%= @importador.pais_origen %>
+</p>
+
+<p>
+  <b>Mail:</b>
+  <%= @importador.mail %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @importador.telefono %>
+</p>
+
+
+<%= link_to 'Edit', edit_importador_path(@importador) %> |
+<%= link_to 'Back', importadors_path %>

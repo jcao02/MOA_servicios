@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cpe:</b>
+  <%= @presentacion.cpe %>
+</p>
+
+<p>
+  <b>Fecha vencimiento:</b>
+  <%= @presentacion.fecha_vencimiento %>
+</p>
+
+<p>
+  <b>Empaque:</b>
+  <%= @presentacion.empaque %>
+</p>
+
+<p>
+  <b>Peso neto:</b>
+  <%= @presentacion.peso_neto %>
+</p>
+
+<p>
+  <b>Peso escurrido:</b>
+  <%= @presentacion.peso_escurrido %>
+</p>
+
+
+<%= link_to 'Edit', edit_presentacion_path(@presentacion) %> |
+<%= link_to 'Back', presentacions_path %>

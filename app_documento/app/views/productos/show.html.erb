@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Registro sanitario:</b>
+  <%= @producto.registro_sanitario %>
+</p>
+
+<p>
+  <b>Alimento:</b>
+  <%= @producto.alimento %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @producto.nombre %>
+</p>
+
+<p>
+  <b>Marca:</b>
+  <%= @producto.marca %>
+</p>
+
+<p>
+  <b>Pais elaboracion:</b>
+  <%= @producto.pais_elaboracion %>
+</p>
+
+<p>
+  <b>Fabricante:</b>
+  <%= @producto.fabricante %>
+</p>
+
+<p>
+  <b>Codigo arancelario:</b>
+  <%= @producto.codigo_arancelario %>
+</p>
+
+
+<%= link_to 'Edit', edit_producto_path(@producto) %> |
+<%= link_to 'Back', productos_path %>

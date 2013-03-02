@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Codigo seguimiento:</b>
+  <%= @tramite.codigo_seguimiento %>
+</p>
+
+<p>
+  <b>Tipo:</b>
+  <%= @tramite.tipo %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @tramite.estado %>
+</p>
+
+<p>
+  <b>Fecha recepcion:</b>
+  <%= @tramite.fecha_recepcion %>
+</p>
+
+<p>
+  <b>Observacion:</b>
+  <%= @tramite.observacion %>
+</p>
+
+
+<%= link_to 'Edit', edit_tramite_path(@tramite) %> |
+<%= link_to 'Back', tramites_path %>

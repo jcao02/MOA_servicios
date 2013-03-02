@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @requisito.id %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%= @requisito.descripcion %>
+</p>
+
+<p>
+  <b>Observacion:</b>
+  <%= @requisito.observacion %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @requisito.estado %>
+</p>
+
+<p>
+  <b>Tramite:</b>
+  <%= @requisito.tramite %>
+</p>
+
+
+<%= link_to 'Edit', edit_requisito_path(@requisito) %> |
+<%= link_to 'Back', requisitos_path %>

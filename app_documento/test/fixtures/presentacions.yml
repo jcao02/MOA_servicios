@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cpe: MyString
+  fecha_vencimiento: 2013-03-02
+  empaque: MyString
+  peso_neto: 1
+  peso_escurrido: 1
+
+two:
+  cpe: MyString
+  fecha_vencimiento: 2013-03-02
+  empaque: MyString
+  peso_neto: 1
+  peso_escurrido: 1

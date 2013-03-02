@@ -1,0 +1,37 @@
+<%= form_for(@presentacion) do |f| %>
+  <% if @presentacion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@presentacion.errors.count, "error") %> prohibited this presentacion from being saved:</h2>
+
+      <ul>
+      <% @presentacion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cpe %><br />
+    <%= f.text_field :cpe %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha_vencimiento %><br />
+    <%= f.date_select :fecha_vencimiento %>
+  </div>
+  <div class="field">
+    <%= f.label :empaque %><br />
+    <%= f.text_field :empaque %>
+  </div>
+  <div class="field">
+    <%= f.label :peso_neto %><br />
+    <%= f.number_field :peso_neto %>
+  </div>
+  <div class="field">
+    <%= f.label :peso_escurrido %><br />
+    <%= f.number_field :peso_escurrido %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

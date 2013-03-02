@@ -1,0 +1,31 @@
+<h1>Listing requisitos</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Descripcion</th>
+    <th>Observacion</th>
+    <th>Estado</th>
+    <th>Tramite</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @requisitos.each do |requisito| %>
+  <tr>
+    <td><%= requisito.id %></td>
+    <td><%= requisito.descripcion %></td>
+    <td><%= requisito.observacion %></td>
+    <td><%= requisito.estado %></td>
+    <td><%= requisito.tramite %></td>
+    <td><%= link_to 'Show', requisito %></td>
+    <td><%= link_to 'Edit', edit_requisito_path(requisito) %></td>
+    <td><%= link_to 'Destroy', requisito, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Requisito', new_requisito_path %>

@@ -1,0 +1,31 @@
+<h1>Listing presentacions</h1>
+
+<table>
+  <tr>
+    <th>Cpe</th>
+    <th>Fecha vencimiento</th>
+    <th>Empaque</th>
+    <th>Peso neto</th>
+    <th>Peso escurrido</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @presentacions.each do |presentacion| %>
+  <tr>
+    <td><%= presentacion.cpe %></td>
+    <td><%= presentacion.fecha_vencimiento %></td>
+    <td><%= presentacion.empaque %></td>
+    <td><%= presentacion.peso_neto %></td>
+    <td><%= presentacion.peso_escurrido %></td>
+    <td><%= link_to 'Show', presentacion %></td>
+    <td><%= link_to 'Edit', edit_presentacion_path(presentacion) %></td>
+    <td><%= link_to 'Destroy', presentacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Presentacion', new_presentacion_path %>

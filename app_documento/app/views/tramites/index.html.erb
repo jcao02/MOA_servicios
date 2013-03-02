@@ -1,0 +1,31 @@
+<h1>Listing tramites</h1>
+
+<table>
+  <tr>
+    <th>Codigo seguimiento</th>
+    <th>Tipo</th>
+    <th>Estado</th>
+    <th>Fecha recepcion</th>
+    <th>Observacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tramites.each do |tramite| %>
+  <tr>
+    <td><%= tramite.codigo_seguimiento %></td>
+    <td><%= tramite.tipo %></td>
+    <td><%= tramite.estado %></td>
+    <td><%= tramite.fecha_recepcion %></td>
+    <td><%= tramite.observacion %></td>
+    <td><%= link_to 'Show', tramite %></td>
+    <td><%= link_to 'Edit', edit_tramite_path(tramite) %></td>
+    <td><%= link_to 'Destroy', tramite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tramite', new_tramite_path %>

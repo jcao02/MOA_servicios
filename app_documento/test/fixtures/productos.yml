@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  registro_sanitario: MyString
+  alimento: false
+  nombre: MyString
+  marca: MyString
+  pais_elaboracion: MyString
+  fabricante: MyString
+  codigo_arancelario: MyString
+
+two:
+  registro_sanitario: MyString
+  alimento: false
+  nombre: MyString
+  marca: MyString
+  pais_elaboracion: MyString
+  fabricante: MyString
+  codigo_arancelario: MyString

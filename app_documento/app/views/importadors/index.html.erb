@@ -1,0 +1,31 @@
+<h1>Listing importadors</h1>
+
+<table>
+  <tr>
+    <th>Rif</th>
+    <th>Nombre</th>
+    <th>Pais origen</th>
+    <th>Mail</th>
+    <th>Telefono</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @importadors.each do |importador| %>
+  <tr>
+    <td><%= importador.rif %></td>
+    <td><%= importador.nombre %></td>
+    <td><%= importador.pais_origen %></td>
+    <td><%= importador.mail %></td>
+    <td><%= importador.telefono %></td>
+    <td><%= link_to 'Show', importador %></td>
+    <td><%= link_to 'Edit', edit_importador_path(importador) %></td>
+    <td><%= link_to 'Destroy', importador, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Importador', new_importador_path %>
