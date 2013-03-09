@@ -11,9 +11,9 @@
   <div id="wrapper">
     <header>
       <div id="headUp">
-        <a href="#inicio"><img id="logo" title="Inicio" src="http://placehold.it/600x400/0eafff/ffffff.png"/></a>
+        <%= link_to image_tag("http://placehold.it/2000x200/234567/ffffff.png", :id => "logo"), home_path %>
         <ul id="navigation">
-          <li class="dropClose">Mi Compañia</li>
+          <li class="dropClose" title="Mi Compaadad saajandjknasd adasjansdjkankjdnasd asdjkajkdnaskjñia">Mi Compaadad saajandjknasd adasjansdjkankjdnasd asdjkajkdnaskjñia</li>
           <li class="dropClose">Alertas<img id="alerta" src="/assets/red.png"></li>
         </ul>
         <ul id="company" class="dropOpen">
@@ -22,18 +22,21 @@
         </ul>
         <ul id="alerts" class="dropOpen">
           <!-- NOTE: FOR de numero de alertas -->
-          <li class="dropElem">Configuración</li>
+          <li class="dropElem">importante</li>
           <li class="dropElem">super importante</li>
-          <li class="dropElem">Configuración</li>
-          <li class="dropElem">Configuración</li>
+          <li class="dropElem">importante</li>
+          <li class="dropElem">importante</li>
 
         </ul>
       </div>
 
       <ul id="headDown">
-        <a href="#inicio"><li class="nav">Inicio</li></a>
+        <%= link_to content_tag(:li, 'Inicio', :class => "nav"), home_path %>
+        <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
+        <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), productos_path %>
+        <!-- <a href="#inicio"><li class="nav">Inicio</li></a>
         <a href="#misproductos"><li class="nav">Mis Productos</li></a>
-        <a href="#missolicitudes"><li class="nav">Mis Solicitudes</li></a>
+        <a href="#missolicitudes"><li class="nav">Mis Solicitudes</li></a> -->
       </ul>
     </header>
 
@@ -44,17 +47,23 @@
     <footer>
       <ul>
         <li style="float: left;">
-          <a title="Envia un e-mail para comunicarte con nosotros." target="_blank" href="mailto:marthaovalles@gmail.com">Contáctanos</a>
+          <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
+                      :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank" %>
+          <!-- <a title="Envia un e-mail para comunicarte con nosotros." target="_blank" href="mailto:marthaovalles@gmail.com">Contáctanos</a> -->
         </li>
         <li>
-          <a target="_blank" href="https://www.google.com/intl/en/chrome/browser/">
+          <%= link_to image_tag("/assets/chrome.png", :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
+                      "https://www.google.com/intl/en/chrome/browser", :target => "_blank" %>
+          <!-- <a target="_blank" href="https://www.google.com/intl/en/chrome/browser/">
             <img title="Para esta pagina se recomienda usar el explorador Google Chrome." src="/assets/chrome.png"/>
-          </a>
+          </a> -->
         </li>
         <li>
-          <a target="_blank" href="http://www.facebook.com/chamini2">
+          <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
+                      "http://www.facebook.com/chamini2", :target => "_blank" %>
+          <!-- <a target="_blank" href="http://www.facebook.com/chamini2">
             <img title="Elaborado por Kiwi Systems" src="/assets/kiwi.png">
-          </a>
+          </a> -->
         </li>
       </ul>
     </footer>
