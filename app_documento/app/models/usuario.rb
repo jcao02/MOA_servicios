@@ -19,10 +19,10 @@ class Usuario < ActiveRecord::Base
 
   #Validaciones login, string SIN espacios
   VALID_LOGIN_REGEX = /\A[\w+\-.]*\z/
-  validates :login, presence: true, uniqueness: true, format: { with: VALID_STRING_REGEX }
+  validates :login, presence: true, uniqueness: true, format: { with: VALID_LOGIN_REGEX }
 
   #Validaciones strings CON espacio
-  VALID_STRING_SPACE_REGEX = /\A[\w+\-\ .]*\z/
+  VALID_STRING_REGEX = /\A[\w+\-\ .]*\z/
 
   validates :apellido, format: { with: VALID_STRING_REGEX }
   validates :compania, presence: true, format: { with: VALID_STRING_REGEX }
