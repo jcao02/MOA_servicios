@@ -17,13 +17,16 @@ class Usuario < ActiveRecord::Base
   VALID_RIF_REGEX = /\A[a-zA-Z0-9\-]*\z/
   validates :rif, format: { with: VALID_RIF_REGEX }
 
-  #Validaciones strings
-  VALID_STRING_REGEX = /\A[\w+\-.]*\z/
-  
+  #Validaciones login, string SIN espacios
+  VALID_LOGIN_REGEX = /\A[\w+\-.]*\z/
+  validates :login, presence: true, uniqueness: true, format: { with: VALID_STRING_REGEX }
+
+  #Validaciones strings CON espacio
+  VALID_STRING_SPACE_REGEX = /\A[\w+\-\ .]*\z/
+
   validates :apellido, format: { with: VALID_STRING_REGEX }
   validates :compania, presence: true, format: { with: VALID_STRING_REGEX }
   validates :contrasena, presence: true, format: { with: VALID_STRING_REGEX }
-  validates :login, presence: true, uniqueness: true, format: { with: VALID_STRING_REGEX }
   validates :nombre, format: { with: VALID_STRING_REGEX }
 
 end
