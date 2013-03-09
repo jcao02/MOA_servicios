@@ -1,14 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AppDocumento</title>
+  <meta charset="utf-8">
+  <title>Productos Kiwi</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="wrapper">
+    <header>
+      <div id="headUp">
+        <a href="#inicio"><img id="logo" title="Inicio" src="http://placehold.it/600x400/0eafff/ffffff.png"/></a>
+        <ul id="navigation">
+          <li class="dropClose">Mi Compañia</li>
+          <li class="dropClose">Alertas<img id="alerta" src="/assets/red.png"></li>
+        </ul>
+        <ul id="company" class="dropOpen">
+          <li class="dropElem">Configuración</li>
+          <li class="dropElem">Salir</li>
+        </ul>
+        <ul id="alerts" class="dropOpen">
+          <!-- NOTE: FOR de numero de alertas -->
+          <li class="dropElem">Configuración</li>
+          <li class="dropElem">super importante</li>
+          <li class="dropElem">Configuración</li>
+          <li class="dropElem">Configuración</li>
 
-<%= yield %>
+        </ul>
+      </div>
 
+      <ul id="headDown">
+        <a href="#inicio"><li class="nav">Inicio</li></a>
+        <a href="#misproductos"><li class="nav">Mis Productos</li></a>
+        <a href="#missolicitudes"><li class="nav">Mis Solicitudes</li></a>
+      </ul>
+    </header>
+
+    <div id="content">
+      <%= yield %>
+    </div>
+
+    <footer>
+      <ul>
+        <li style="float: left;">
+          <a title="Envia un e-mail para comunicarte con nosotros." target="_blank" href="mailto:marthaovalles@gmail.com">Contáctanos</a>
+        </li>
+        <li>
+          <a target="_blank" href="https://www.google.com/intl/en/chrome/browser/">
+            <img title="Para esta pagina se recomienda usar el explorador Google Chrome." src="/assets/chrome.png"/>
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="http://www.facebook.com/chamini2">
+            <img title="Elaborado por Kiwi Systems" src="/assets/kiwi.png">
+          </a>
+        </li>
+      </ul>
+    </footer>
+  </div>
 </body>
 </html>

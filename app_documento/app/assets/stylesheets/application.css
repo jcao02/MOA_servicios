@@ -11,3 +11,160 @@
  *= require_self
  *= require_tree .
  */
+body {
+  font-family: helvetica !important;
+  font-size: 16px;
+  background: url(fondo.png) no-repeat center center fixed;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+}
+
+ul {
+  list-style: none;
+}
+
+a,a:visited {
+  text-decoration: none;
+  color: black !important;
+  background: transparent !important;
+}
+
+footer,#headUp {
+  background: #A8183C;
+}
+
+/************************BEGIN HEADER************************/
+
+#logo {
+  height: 70%;
+  margin: 8px;
+  float: left;
+}
+
+#wrapper {
+  width: 900px;
+  height: 650px;
+  border: 1px solid #666;
+  background: white;
+  margin: 0 auto;
+
+  -webkit-box-shadow: 0 0 30px;
+  box-shadow: 0 0 30px;
+}
+
+header {
+  height: 78px;
+  margin-bottom: 5px;
+  position: relative;
+  background: white;
+}
+
+#headUp {
+  height: 53px;
+  border-bottom: 1px solid #666;
+}
+
+#headUp ul {
+  float: right;
+}
+
+#headUp ul li:hover {
+  background: #ffaaaa;
+  cursor: pointer;
+}
+
+#headDown {
+  height: 23px;
+  line-height: 23px;
+  float: left;
+  background: white;
+  padding: 0;
+  margin: 0;
+  margin-left: 8px;
+  border-left: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+
+.dropOpen,.dropClose {
+  padding: 0 20px;
+  margin-right: 10px;
+  background: white;
+}
+
+.dropClose {
+  text-align: center;
+  width: 100px;
+  float: right;
+  padding: 0 20px;
+  border: 1px solid #666;
+  border-radius: 10px;
+}
+
+.dropOpen {
+  min-width: 100px;
+  position: absolute;
+  display: none;
+}
+
+#alerta {
+  margin-top: 1px;
+  margin-bottom: -1px;
+  margin-left: 10px;
+  margin-right: -10px;
+  height: 14px;
+  width: auto;
+}
+
+.nav {
+  float: left;
+  padding: 0 20px;
+  border-right: 1px solid #666;
+}
+
+.nav:hover {
+  background: #ffaaaa;
+}
+
+/*************************END HEADER*************************/
+
+#content {
+  height: 533px;
+  width: 890px;
+  margin-left: 10px;
+  max-height: 533px;
+  overflow: auto;
+}
+
+/************************BEGIN FOOTER************************/
+
+footer {
+  text-align: center;
+  height: 28px;
+  border-top: 1px solid #666;
+  margin-top: 5px;
+}
+
+footer ul {
+  margin: auto;
+  padding: 0;
+  width: 100%;
+  height: 80%;
+}
+
+footer li {
+  height: 28px;
+  line-height: 28px;
+  font-size: 15px;
+  text-align: center;
+  float: right;
+  margin: auto;
+  padding-right: 10px;
+  width: 30%;
+}
+footer img {
+  height: 90%;
+}
+
+/*************************END FOOTER*************************/
