@@ -46,7 +46,7 @@ footer,#headUp {
 
 #wrapper {
   width: 900px;
-  height: 650px;
+  height: 600px;
   border: 1px solid #666;
   background: white;
   margin: 0 auto;
@@ -57,14 +57,14 @@ footer,#headUp {
 
 /************************BEGIN HEADER************************/
 header {
-  height: 78px;
+  height: 72px;
   margin-bottom: 5px;
   position: relative;
   background: white;
 }
 
 #headUp {
-  height: 53px;
+  height: 50px;
   border-bottom: 1px solid #666;
 }
 
@@ -72,9 +72,47 @@ header {
   float: right;
 }
 
+.dropOpen, .dropClose {
+  padding: 0 20px;
+  margin-right: 10px;
+  background: white;
+}
+
+.dropClose {
+  text-align: center;
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  padding: 0 20px;
+  border: 1px solid #666;
+  border-radius: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.dropClose:hover {
+  background: #ffaaaa;
+  cursor: pointer;
+}
+
+.dropOpen {
+  min-width: 100px;
+  position: absolute;
+  display: none;
+}
+
+#alerta {
+  height: 14px;
+  width: auto;
+}
+
 #headDown {
-  height: 23px;
-  line-height: 23px;
+  height: 20px;
+  line-height: 20px;
   float: left;
   background: white;
   padding: 0;
@@ -121,7 +159,7 @@ header {
   margin-bottom: -1px;
   margin-left: 10px;
   margin-right: -10px;
-  height: 14px;
+  height: 10px;
   width: auto;
 }
 
@@ -137,19 +175,23 @@ header {
 
 /*************************END HEADER*************************/
 #content {
-  height: 533px;
+  height: 492px;
+  max-height: 492px;
   width: 890px;
   margin-left: 10px;
-  max-height: 533px;
   overflow: auto;
 }
 
 /************************BEGIN FOOTER************************/
 footer {
   text-align: center;
-  height: 28px;
+  height: 25px;
   border-top: 1px solid #666;
   margin-top: 5px;
+}
+
+footer a {
+  color: white !important;
 }
 
 footer ul {
@@ -160,8 +202,8 @@ footer ul {
 }
 
 footer li {
-  height: 28px;
-  line-height: 28px;
+  height: 25px;
+  line-height: 25px;
   font-size: 15px;
   text-align: center;
   float: right;
