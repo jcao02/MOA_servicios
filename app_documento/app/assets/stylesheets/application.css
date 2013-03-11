@@ -36,11 +36,11 @@ footer,#headUp {
   background: #911100;
 }
 
-/************************BEGIN HEADER************************/
-
 #logo {
-  height: 70%;
-  margin: 8px;
+  max-height: 80%;
+  max-width: 50%;
+  margin-left: 8px;
+  margin-top: 6px;
   float: left;
 }
 
@@ -55,6 +55,7 @@ footer,#headUp {
   box-shadow: 0 0 30px;
 }
 
+/************************BEGIN HEADER************************/
 header {
   height: 78px;
   margin-bottom: 5px;
@@ -69,11 +70,6 @@ header {
 
 #headUp ul {
   float: right;
-}
-
-#headUp ul li:hover {
-  background: #ffaaaa;
-  cursor: pointer;
 }
 
 #headDown {
@@ -97,10 +93,21 @@ header {
 .dropClose {
   text-align: center;
   width: 100px;
+  height: 20px;
   float: right;
   padding: 0 20px;
   border: 1px solid #666;
   border-radius: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.dropClose:hover {
+  background: #ffaaaa;
+  cursor: pointer;
 }
 
 .dropOpen {
@@ -129,7 +136,6 @@ header {
 }
 
 /*************************END HEADER*************************/
-
 #content {
   height: 533px;
   width: 890px;
@@ -139,7 +145,6 @@ header {
 }
 
 /************************BEGIN FOOTER************************/
-
 footer {
   text-align: center;
   height: 28px;
@@ -164,6 +169,7 @@ footer li {
   padding-right: 10px;
   width: 30%;
 }
+
 footer img {
   height: 90%;
 }

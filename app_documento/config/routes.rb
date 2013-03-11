@@ -1,6 +1,6 @@
 AppDocumento::Application.routes.draw do
   get "inicio/index"
-  root :to => 'inicio#index'
+  root :to => 'inicio#index', :as => :home # Hace posible usar home_path
 
   resources :presentacions
 
