@@ -11,10 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
 body {
   font-family: helvetica !important;
   font-size: 16px;
-  background: url(fondo.png) no-repeat center center fixed;
+  background: url(vino.png) no-repeat center center fixed;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -32,7 +33,7 @@ a,a:visited {
 }
 
 footer,#headUp {
-  background: #A8183C;
+  background: #911100;
 }
 
 /************************BEGIN HEADER************************/
