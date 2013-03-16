@@ -1,4 +1,12 @@
 class Usuario < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :authentication_keys => [ :login ]
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail, :nombre, :rif, :telefono
 
   #Validaciones admin
@@ -7,7 +15,7 @@ class Usuario < ActiveRecord::Base
 
   #Validaciones email
   VALID_MAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :mail, presence: true, format: { with: VALID_MAIL_REGEX }
+  validates :email, presence: true, format: { with: VALID_MAIL_REGEX }
 
   #Validaciones telefono
   VALID_TELEFONO_REGEX = /\A[0-9]*\z/
@@ -26,7 +34,8 @@ class Usuario < ActiveRecord::Base
 
   validates :apellido, format: { with: VALID_STRING_REGEX }
   validates :compania, presence: true, format: { with: VALID_STRING_REGEX }
-  validates :contrasena, presence: true, format: { with: VALID_STRING_REGEX }
+  validates :password, presence: true, format: { with: VALID_STRING_REGEX }
+  validates_confirmation_of :password
   validates :nombre, format: { with: VALID_STRING_REGEX }
 
 end

@@ -34,4 +34,10 @@ AppDocumento::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # El url debe ser del host
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Por si hacemos deploy en heroku
+  config.assets.initialize_on_precompile = false
 end

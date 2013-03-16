@@ -1,4 +1,4 @@
-<!-- <h1>Inicio#index</h1>
+<h1>Inicio#index</h1>
 <p>Find me in app/views/inicio/index.html.erb</p>
 <%= link_to 'Productos', productos_path %>
 <%= link_to 'Usuarios', usuarios_path %>
@@ -7,25 +7,7 @@
 <%= link_to 'Presentaciones', presentacions_path %>
 <%= link_to 'Requisitos', requisitos_path %>
 <%= link_to 'Tramites', tramites_path %>
-
-<br><br>prueba para ver que tal el scroll prueba para ver que tal el scrollknasdklansjkdnsajksd kja ldh asjhd ahlj djhas dhas hjkd ashlj dhlas hd ashjd as djhas lhd asljh dhjla dhlj aslhjd hals dhla shd aslh dsa prueba para ver que tal el scroll prueba para ver que tal el scroll prueba para ver que tal el scrollprueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll
-<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br>prueba para ver que tal el scroll<br> -->
-
-<table id="division">
-  <tr>
-    <td style="border-right: 1px #911100 solid; padding: 30px;">
-      <h1>APLICACIÓN</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti autem id non fugiat sit quae praesentium dolorum eveniet ipsam sed voluptatibus consectetur quo provident rem eos beatae repellendus ut nam ad minima voluptas dolor perspiciatis consequatur corporis veritatis qui rerum sunt obcaecati facilis consequuntur excepturi distinctio alias architecto. Placeat ducimus eveniet temporibus est fugit exercitationem magnam reprehenderit iusto atque inventore aliquam hic maxime nobis nostrum qui sint enim sunt excepturi dolores praesentium non similique natus culpa illo numquam unde animi ratione nulla doloribus illum beatae eius pariatur in. A architecto consequatur consequuntur eligendi numquam quia perferendis optio hic soluta temporibus!</p>
-      <a href="#">¿Quieres saber más?</a>
-    </td>
-    <td style="border-left: 1px #911100 solid;">
-
-    </td>
-  </tr>
-</table>
+<% if usuario_signed_in? %>
+  <%= current_usuario.compania %>
+  <%= link_to 'Salir', destroy_usuario_session_path, :method => :delete %>
+<% end %>
