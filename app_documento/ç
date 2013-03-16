@@ -19,8 +19,8 @@
 <% @usuarios.each do |usuario| %>
   <tr>
     <td><%= usuario.login %></td>
-    <td><%= usuario.encrypted_password%></td>
-    <td><%= usuario.email %></td>
+    <td><%= usuario.password%></td>
+    <td><%= usuario.mail %></td>
     <td><%= usuario.telefono %></td>
     <td><%= usuario.nombre %></td>
     <td><%= usuario.apellido %></td>
