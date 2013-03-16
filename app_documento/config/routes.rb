@@ -3,29 +3,32 @@ AppDocumento::Application.routes.draw do
 
   get "inicio/index"
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path
+  match '/:locale' => 'inicio#index'
+  scope "(:locale)", :locale => /en|es/ do
 
-  resources :presentacions
-
-
-  resources :documentos
-
-
-  resources :requisitos
+    resources :presentacions
 
 
-  resources :logs
+    resources :documentos
 
 
-  resources :tramites
+    resources :requisitos
 
 
-  resources :importadors
+    resources :logs
 
 
-  resources :productos
+    resources :tramites
 
 
-  resources :usuarios
+    resources :importadors
+
+
+    resources :productos
+
+
+    resources :usuarios
+  end
 
 
   # The priority is based upon order of creation:

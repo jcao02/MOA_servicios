@@ -47,10 +47,14 @@
     <%= f.label :rif %><br />
     <%= f.text_field :rif %>
   </div>
-  <div class="field">
-    <%= f.label :admin %><br />
-    <%= f.select :admin, [['Cliente', 0 ], ['Admin', 1], ['Super-Admin', 2]] %>
-  </div>
+  <% if current_usuario.admin == 1 %> 
+    <%= f.hidden_field :admin, :value => 0 %>
+  <% else %>
+    <div class="field">
+      <%= f.label :admin %><br />
+      <%= f.select :admin, [['Cliente', 0 ], ['Admin', 1], ['Super-Admin', 2]] %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
