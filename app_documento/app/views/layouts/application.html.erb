@@ -14,43 +14,44 @@
       <div id="headUp">
         <%= link_to image_tag("http://placehold.it/200x20/234567/ffffff.png", :id => "logo"), home_path %>
         <% if usuario_signed_in? %>
-          <ul id="navigation">
-            <li class="dropClose" title="Mi Compania larga">Mi Compania larga</li>
-            <li class="dropClose">Alertas<div id="alerta"></div></li>
-            <!-- NOTE: Color depende de alertas -->
-          </ul>
-          <ul id="company" class="dropOpen">
-            <li class="dropElem">Configuración</li>
-            <li class="dropElem">Salir</li>
-          </ul>
-          <ul id="alerts" class="dropOpen">
-            <!-- NOTE: FOR de numero de alertas -->
-            <li class="dropElem">importante</li>
-            <li class="dropElem">super importante</li>
-            <li class="dropElem">importante</li>
-            <li class="dropElem">importante</li>
+          <ul>
+            <li class="drop" id="compania" title="<%= current_usuario.compania %>"><%= current_usuario.compania %></li>
+            <ul class="dropAppear" id="companiaAppear">
+
+              <%= link_to content_tag(:li, content_tag(:div, 'Configuración') + image_tag("/assets/settings.png", :class => "dropImg"),
+                                      :class => "dropElem"), edit_usuario_path(current_usuario) %>
+              <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
+                                      :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
+            </ul>
+            <li class="drop" id="alertas">Alertas<div class="alerta" style="background: green;"></div></li>
+            <ul class="dropAppear" id="alertasAppear">
+
+              <li class="dropElem">
+                <div>Alerta super importantisima</div>
+                <div class="alerta" style="background: red;"></div>
+              </li>
+
+            </ul>
+            <!-- NOTE: Color depende de alertas (atributo de background #alerta) -->
           </ul>
         <% end %>
       </div>
 
       <% if usuario_signed_in? %>
-      <ul id="headDown">
-        <%= link_to content_tag(:li, 'Inicio', :class => "nav"), home_path %>
-        <% case current_usuario.admin
-             when 0 %>
-        <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
-        <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), tramites_path %>
-        <%   when 1..2%>
+        <ul id="headDown">
+          <%= link_to content_tag(:li, 'Inicio', :class => "nav"), home_path %>
+          <% case current_usuario.admin
+               when 0 %>
+             <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
+             <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), tramites_path %>
 
-            <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
-            <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
-            <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
-        <% end %>
+            <% when 1..2%>
+             <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
+             <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
+             <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
 
-        <!-- <a href="#inicio"><li class="nav">Inicio</li></a>
-        <a href="#misproductos"><li class="nav">Mis Productos</li></a>
-        <a href="#missolicitudes"><li class="nav">Mis Solicitudes</li></a> -->
-      </ul>
+          <% end %>
+        </ul>
       <%end%>
     </header>
 
@@ -64,21 +65,15 @@
           <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
                       :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank",
                       :style => "color: white !important; font-weight:20;" %>
-          <!-- <a title="Envia un e-mail para comunicarte con nosotros." target="_blank" href="mailto:marthaovalles@gmail.com">Contáctanos</a> -->
         </li>
         <li>
-          <%= link_to image_tag("/assets/chrome.png", :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
+          <%= link_to image_tag("/assets/chrome.png",
+                      :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
                       "https://www.google.com/intl/en/chrome/browser", :target => "_blank" %>
-          <!-- <a target="_blank" href="https://www.google.com/intl/en/chrome/browser/">
-            <img title="Para esta pagina se recomienda usar el explorador Google Chrome." src="/assets/chrome.png"/>
-          </a> -->
         </li>
         <li>
           <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
                       "http://www.facebook.com/chamini2", :target => "_blank" %>
-          <!-- <a target="_blank" href="http://www.facebook.com/chamini2">
-            <img title="Elaborado por Kiwi Systems" src="/assets/kiwi.png">
-          </a> -->
         </li>
       </ul>
     </footer>

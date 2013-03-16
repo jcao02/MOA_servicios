@@ -78,7 +78,6 @@ footer,#headUp {
 
 /************************BEGIN HEADER************************/
 header {
-  overflow: hidden;
   position: absolute;
   height: 72px;
   width: 100%;
@@ -91,49 +90,104 @@ header {
 
   ul {
     float: right;
+    padding: 0;
+
+    .drop {
+      padding: 0 20px;
+      margin-right: 10px;
+      background: white;
+      text-align: center;
+      width: 120px;
+      height: 20px;
+      float: right;
+      border: 1px solid #666;
+
+      /*Puntos suspensivos*/
+      white-space: nowrap;
+      overflow: hidden;
+      -o-text-overflow: ellipsis;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+
+      &:hover {
+        background: #ffaaaa;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .dropAppear {
+    display: none;
+    position: absolute;
+    top: 35px;
+    border: 1px #666 solid;
+    border-top: none;
+    border-bottom: none;
+    margin-right: 10px;
+    z-index: 10;
+    background: white;
+
+    .dropElem {
+      min-width: 120px;
+      max-width: 120px;
+      height: 20px;
+      padding: 0 20px;
+      border-bottom: 1px #666 solid;
+
+      &:hover {
+        background: #ffaaaa;
+        cursor: pointer;
+      }
+
+      div {
+        min-width: 100px;
+        max-width: 100px;
+        height: 20px;
+        float: left;
+
+        /*Puntos suspensivos*/
+        white-space: nowrap;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+      }
+
+      img {
+        height: 16px;
+        margin: 2px 0 0 2px;
+        width: auto;
+        float: right;
+      }
+    }
+  }
+
+  #companiaAppear {
+    right: 0;
+  }
+
+  #alertasAppear {
+    right: 172px;
+
+    .dropElem {
+      max-width: 250px;
+      div {
+        max-width: 230px;
+      }
+    }
   }
 }
 
-.dropOpen,.dropClose {
-  padding: 0 20px;
-  margin-right: 10px;
-  background: white;
-}
-
-.dropClose {
-  text-align: center;
-  width: 100px;
-  height: 20px;
-  float: right;
-  border: 1px solid #666;
-  border-radius: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-
-  &:hover {
-    background: #ffaaaa;
-    cursor: pointer;
-  }
-}
-
-.dropOpen {
-  min-width: 100px;
-  position: absolute;
-  display: none;
-}
-
-#alerta {
-  float: right;
+.alerta {
+  float: right !important;
   margin-top: 3px;
-  height: 13px;
-  width: 13px;
+  margin-left: 3px;
+  height: 13px !important;
+  max-width: 13px;
+  min-width: 13px !important;
   border-radius: 7px;
   border: 1px solid black;
-  background: green;
+  background: white;
 }
 
 #headDown {
@@ -146,16 +200,17 @@ header {
   margin-left: 8px;
   border-left: 1px solid #666;
   border-bottom: 1px solid #666;
-}
 
-.nav {
-  float: left;
-  padding: 0 20px;
-  border-right: 1px solid #666;
+  .nav {
+    float: left;
+    padding: 0 20px;
+    border-right: 1px solid #666;
 
-  &:hover {
-  background: #ffaaaa;
-}
+    &:hover {
+      background: #ffaaaa;
+      font-style: normal;
+    }
+  }
 }
 
 /*************************END HEADER*************************/

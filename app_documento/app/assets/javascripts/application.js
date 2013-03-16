@@ -15,6 +15,35 @@
 //= require_tree .
 //= require jquery.formalize
 
+//Fondo random
 $(document).ready(function() {
   $('body').css("background-image", "url(/assets/fondo" + (Math.round(2 * Math.random())) + ".png)");
 })
+
+//Toggle menus de usuario
+$(document).ready(function() {
+  $('#compania').click(function () {
+    $('#companiaAppear').toggle();
+  });
+  $('#alertas').click(function () {
+    $('#alertasAppear').toggle();
+  });
+})
+
+//Si presiona una tecla
+$(document).keyup(function(e) {
+  if (e.keyCode == 27) {  //esc
+    $('#companiaAppear').toggle(false);
+    $('#alertasAppear').toggle(false);
+  }
+});
+
+//Toggle si clickea otro sitio
+$('html').click(function(event) {
+  if (event.target.id != 'compania') {
+    $('#companiaAppear').toggle(false);
+  }
+  if (event.target.id != 'alertas') {
+    $('#alertasAppear').toggle(false);
+  }
+});
