@@ -1,3 +1,47 @@
 // Place all the styles related to the Inicio controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+p {
+  text-align: justify;
+}
+
+#division {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  border-spacing: 0;
+  margin-top: -12px;
+
+  tr {
+    width: 100%;
+    height: 100%;
+    border: 0;
+
+    td {
+      width: 50%;
+      height: 100%;
+      border: 0;
+      padding: 5px;
+
+      #saber {
+        color: #029 !important;
+      }
+
+      form {
+        margin: auto;
+        width: 250px;
+        padding: 20px;
+        border: 3px #666 solid;
+        border-radius: 5px;
+        background-color: #eee;
+
+        h2 {
+          margin: 5px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

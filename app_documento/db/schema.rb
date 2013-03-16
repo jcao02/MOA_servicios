@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20130316034903) do
 
   create_table "usuarios", :force => true do |t|
     t.string   "login"
+    t.string   "contrasena"
+    t.string   "mail"
     t.string   "telefono"
     t.string   "nombre"
     t.string   "apellido"
