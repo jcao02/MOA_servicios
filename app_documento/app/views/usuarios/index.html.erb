@@ -3,14 +3,13 @@
 <table>
   <tr>
     <th>Login</th>
-    <th>Contrasena</th>
     <th>Mail</th>
     <th>Telefono</th>
     <th>Nombre</th>
     <th>Apellido</th>
     <th>Compania</th>
     <th>Rif</th>
-    <th>Admin</th>
+    <th>Permisos</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,14 +18,24 @@
 <% @usuarios.each do |usuario| %>
   <tr>
     <td><%= usuario.login %></td>
-    <td><%= usuario.encrypted_password%></td>
     <td><%= usuario.email %></td>
     <td><%= usuario.telefono %></td>
     <td><%= usuario.nombre %></td>
     <td><%= usuario.apellido %></td>
     <td><%= usuario.compania %></td>
     <td><%= usuario.rif %></td>
-    <td><%= usuario.admin %></td>
+    <td>
+      <% case usuario.admin
+           when 0 %>
+           Cliente
+      <%   when 1 %>
+           Admin
+      <%   when 2 %>
+        Super-Admin
+      <%   else   %>
+        Contactar servicio
+      <% end %>
+      </td>
     <td><%= link_to 'Show', usuario %></td>
     <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
     <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>

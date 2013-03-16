@@ -30,14 +30,25 @@
         </ul>
       </div>
 
+      <% if usuario_signed_in? %>
       <ul id="headDown">
         <%= link_to content_tag(:li, 'Inicio', :class => "nav"), home_path %>
+        <% case current_usuario.admin 
+             when 0 %>
         <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
-        <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), productos_path %>
+        <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), tramites_path %>
+        <%   when 1..2%>
+             
+            <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
+            <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
+            <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
+        <% end %>
+
         <!-- <a href="#inicio"><li class="nav">Inicio</li></a>
         <a href="#misproductos"><li class="nav">Mis Productos</li></a>
         <a href="#missolicitudes"><li class="nav">Mis Solicitudes</li></a> -->
       </ul>
+      <%end%>
     </header>
 
     <div id="content">

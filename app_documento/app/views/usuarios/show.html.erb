@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <b>Contrasena:</b>
-  <%= @usuario.password %>
-</p>
-
-<p>
   <b>Mail:</b>
   <%= @usuario.email %>
 </p>
@@ -41,8 +36,17 @@
 </p>
 
 <p>
-  <b>Admin:</b>
-  <%= @usuario.admin %>
+  <b>Permisos:</b>
+      <% case @usuario.admin
+           when 0 %>
+           Cliente
+      <%   when 1 %>
+           Admin
+      <%   when 2 %>
+        Super-Admin
+      <%   else   %>
+        Contactar servicio
+      <% end %>
 </p>
 
 
