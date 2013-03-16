@@ -13,3 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery.formalize
+
+$(document).ready(function() {
+  $('body').css("background-image", "url(/assets/fondo" + (Math.round(2 * Math.random())) + ".png)");
+})
