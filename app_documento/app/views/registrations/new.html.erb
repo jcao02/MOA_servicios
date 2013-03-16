@@ -24,8 +24,8 @@
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label :Email %><br />
-    <%= f.text_field :email %>
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
   </div>
   <div class="field">
     <%= f.label :telefono %><br />
@@ -55,3 +55,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+<%= render "devise/shared/links" %>
