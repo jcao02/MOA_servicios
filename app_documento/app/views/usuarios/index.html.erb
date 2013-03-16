@@ -36,10 +36,12 @@
         Contactar servicio
       <% end %>
       </td>
-    <td><%= link_to 'Show', usuario %></td>
-    <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
-    <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+      <td><%= link_to 'Show', usuario %></td>
+      <% if current_usuario.admin == 2 %>
+        <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
+        <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
 <% end %>
 </table>
 
