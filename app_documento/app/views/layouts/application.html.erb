@@ -13,8 +13,9 @@
       <div id="headUp">
         <%= link_to image_tag("http://placehold.it/2000x200/234567/ffffff.png", :id => "logo"), home_path %>
         <ul id="navigation">
-          <li class="dropClose" title="Mi Compaadad saajandjknasd adasjansdjkankjdnasd asdjkajkdnaskjñia">Mi Compaadad saajandjknasd adasjansdjkankjdnasd asdjkajkdnaskjñia</li>
-          <li class="dropClose">Alertas<img id="alerta" src="/assets/red.png"></li> <!-- NOTE: Color depende de alertas -->
+          <li class="dropClose" title="Mi Compania larga">Mi Compania larga</li>
+          <li class="dropClose">Alertas<div id="alerta"></div></li>
+          <!-- NOTE: Color depende de alertas -->
         </ul>
         <ul id="company" class="dropOpen">
           <li class="dropElem">Configuración</li>
@@ -26,7 +27,6 @@
           <li class="dropElem">super importante</li>
           <li class="dropElem">importante</li>
           <li class="dropElem">importante</li>
-
         </ul>
       </div>
 
@@ -48,7 +48,8 @@
       <ul>
         <li style="float: left;">
           <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
-                      :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank" %>
+                      :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank",
+                      :style => "color: white !important; font-weight:20;" %>
           <!-- <a title="Envia un e-mail para comunicarte con nosotros." target="_blank" href="mailto:marthaovalles@gmail.com">Contáctanos</a> -->
         </li>
         <li>

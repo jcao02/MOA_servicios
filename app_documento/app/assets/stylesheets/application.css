@@ -1,25 +1,32 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
+ * This is a manifest file that'll be compiled into application.css,
+ * which will include all the files listed below.
  *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets,
+ * vendor/assets/stylesheets, or vendor/assets/stylesheets of plugins,
+ * if any, can be referenced here using a relative path.
  *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
+ * You're free to add application-wide styles to this file and they'll
+ * appear at the top of the compiled file, but it's generally better
+ * to create a new file per style scope.
  *
  *= require_self
  *= require_tree .
  */
-
 body {
   font-family: helvetica !important;
   font-size: 16px;
   background: url(vino.png) no-repeat center center fixed;
+  margin: 0;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 ul {
@@ -30,6 +37,10 @@ a,a:visited {
   text-decoration: none;
   color: black !important;
   background: transparent !important;
+}
+
+a:hover {
+  font-style: italic;
 }
 
 footer,#headUp {
@@ -46,10 +57,14 @@ footer,#headUp {
 
 #wrapper {
   width: 900px;
-  height: 600px;
+  height: 95%;
   border: 1px solid #666;
   background: white;
-  margin: 0 auto;
+  margin: 20px auto;
+  left: 50%;
+  margin-left: -450px;
+  overflow: hidden;
+  position: absolute;
 
   -webkit-box-shadow: 0 0 30px;
   box-shadow: 0 0 30px;
@@ -57,9 +72,10 @@ footer,#headUp {
 
 /************************BEGIN HEADER************************/
 header {
+  overflow: hidden;
+  position: absolute;
   height: 72px;
-  margin-bottom: 5px;
-  position: relative;
+  width: 100%;
   background: white;
 }
 
@@ -72,7 +88,7 @@ header {
   float: right;
 }
 
-.dropOpen, .dropClose {
+.dropOpen,.dropClose {
   padding: 0 20px;
   margin-right: 10px;
   background: white;
@@ -82,14 +98,13 @@ header {
   text-align: center;
   width: 100px;
   height: 20px;
-  line-height: 20px;
   float: right;
-  padding: 0 20px;
   border: 1px solid #666;
   border-radius: 10px;
-
   white-space: nowrap;
   overflow: hidden;
+
+  -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
@@ -106,8 +121,13 @@ header {
 }
 
 #alerta {
-  height: 14px;
-  width: auto;
+  float: right;
+  margin-top: 3px;
+  height: 13px;
+  width: 13px;
+  border-radius: 7px;
+  border: 1px solid black;
+  background: green;
 }
 
 #headDown {
@@ -122,47 +142,6 @@ header {
   border-bottom: 1px solid #666;
 }
 
-.dropOpen,.dropClose {
-  padding: 0 20px;
-  margin-right: 10px;
-  background: white;
-}
-
-.dropClose {
-  text-align: center;
-  width: 100px;
-  height: 20px;
-  float: right;
-  padding: 0 20px;
-  border: 1px solid #666;
-  border-radius: 10px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-}
-
-.dropClose:hover {
-  background: #ffaaaa;
-  cursor: pointer;
-}
-
-.dropOpen {
-  min-width: 100px;
-  position: absolute;
-  display: none;
-}
-
-#alerta {
-  margin-top: 1px;
-  margin-bottom: -1px;
-  margin-left: 10px;
-  margin-right: -10px;
-  height: 10px;
-  width: auto;
-}
-
 .nav {
   float: left;
   padding: 0 20px;
@@ -175,30 +154,37 @@ header {
 
 /*************************END HEADER*************************/
 #content {
-  height: 492px;
-  max-height: 492px;
-  width: 890px;
-  margin-left: 10px;
+  position: absolute;
+  overflow: hidden;
+  top: 72px;
+  bottom: 26px;
+  margin: 5px 0;
+  padding: 0 8px;
   overflow: auto;
+
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 /************************BEGIN FOOTER************************/
 footer {
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
+  width: 100%;
   text-align: center;
   height: 25px;
   border-top: 1px solid #666;
   margin-top: 5px;
 }
 
-footer a {
-  color: white !important;
-}
-
 footer ul {
   margin: auto;
   padding: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
 }
 
 footer li {
