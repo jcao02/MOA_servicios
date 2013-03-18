@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery.formalize
+//= require jquery.dataTables.js
 
 $(document).ready(function() {
   $('body').css("background-image", "url(/assets/fondo" + (Math.round(2 * Math.random())) + ".png)");
