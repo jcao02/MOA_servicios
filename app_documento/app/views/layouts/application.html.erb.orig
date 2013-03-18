@@ -14,6 +14,23 @@
       <div id="headUp">
         <%= link_to image_tag("http://placehold.it/200x20/234567/ffffff.png", :id => "logo"), home_path %>
         <% if usuario_signed_in? %>
+<<<<<<< HEAD
+          <ul id="navigation">
+            <li class="dropClose" title="Mi Compania larga">Mi Compania larga</li>
+            <li class="dropClose">Alertas<div class="alerta"></div></li>
+            <!-- NOTE: Color depende de alertas -->
+          </ul>
+          <ul id="company" class="dropOpen">
+            <li class="dropElem">Configuración</li>
+            <li class="dropElem">Salir</li>
+          </ul>
+          <ul id="alerts" class="dropOpen">
+            <!-- NOTE: FOR de numero de alertas -->
+            <li class="dropElem">importante</li>
+            <li class="dropElem">super importante</li>
+            <li class="dropElem">importante</li>
+            <li class="dropElem">importante</li>
+=======
           <ul>
             <li class="drop" id="compania" title="<%= current_usuario.compania %>"><%= current_usuario.compania %></li>
             <ul class="dropAppear" id="companiaAppear">
@@ -33,6 +50,7 @@
 
             </ul>
             <!-- NOTE: Color depende de alertas (atributo de background #alerta) -->
+>>>>>>> 52b2b83d8444b1ee5cac23a8103990adba13d68a
           </ul>
         <% end %>
       </div>

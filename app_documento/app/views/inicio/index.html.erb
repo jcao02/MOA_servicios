@@ -1,61 +1,130 @@
 <center>
-<table id="tablas_inicio" >
-  <tr>
+  <table id="tablas_inicio" >
+    <tr>
+      <% if current_usuario.admin == 0 %>
+        <td class="titulos_inicio">Mis productos</td>
+        <td class="titulos_inicio">Mis Solicitudes</td>
+      <% else %>
+        <td class="titulos_inicio">Registro de Actividades</td>
+        <td class="titulos_inicio">Solicitudes Pendientes</td>
+      <% end %>
+    </tr>
+    <tr>
     <td>
-      <table id="mis_productos" border="1">
+      <table id="mis_productos">
         <thead>
-          <th>Nombre</th>
-          <th>Marca</th>
+          <% if current_usuario.admin == 0 %>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Registro</th>
+          <% else %>
+            <th>Usuario</th>
+            <th>Actividad</th>
+            <th>Fecha</th>
+          <% end %>
         </thead>
         <tbody>
           <tr>
             <td>Producto 1</td>
             <td>Marca 1</td>
+            <td>XXXXXX</td>
           </tr>
           <tr>
             <td>Producto 2</td>
             <td>Marca 2</td>
+            <td>XXXXXX</td>
           </tr>
           <tr>
             <td>Producto 3</td>
             <td>Marca 3</td>
+            <td>XXXXXX</td>
           </tr>
           <tr>
-            <td>Producto 4</td>
+            <td>Producto 3 4</td>
             <td>Marca 4</td>
+            <td>XXXXXX</td>
           </tr>
           <tr>
             <td>Producto 5</td>
             <td>Marca 5</td>
+            <td>XXXXXX</td>
+          </tr>
+          <tr>
+            <td>Producto 5</td>
+            <td>Marca 5</td>
+            <td>XXXXXX</td>
+          </tr>
+          <tr>
+            <td>Producto 5</td>
+            <td>Marca 5</td>
+            <td>XXXXXX</td>
+          </tr>
+          <tr>
+            <td>Producto 5</td>
+            <td>Marca 5</td>
+            <td>XXXXXX</td>
+          </tr>
+          <tr>
+            <td>Producto 5</td>
+            <td>Marca 5</td>
+            <td>XXXXXX</td>
           </tr>
         </tbody>
       </table>
     </td>
     <td>
-      <table id="mis_solicitudes" border="1">
+      <table id="mis_solicitudes">
         <thead>
-          <th>Nombre</th>
-          <th>Estado</th>
+          <% if current_usuario.admin == 0 %>
+            <th>Nombre</th>
+            <th>Producto</th>
+            <th>Edo</th>
+          <% else %>
+            <th>Nombre</th>
+            <th>Producto</th>
+            <th>Usuario</th>
+            <th>Edo</th>
+          <% end %>
         </thead>
         <tbody>
           <tr>
             <td>Solicitud 1</td>
+            <td>Producto 1</td>
+            <% if current_usuario.admin > 0 %>
+              <td>Usuario X</td>
+            <% end %>
             <td><div class="alerta"></div></td>
           </tr>
           <tr>
             <td>Solicitud 2</td>
+            <td>Producto 2</td>
+            <% if current_usuario.admin > 0 %>
+              <td>Usuario X</td>
+            <% end %>
             <td><div class="alerta" style="background: red;"></div></td>
           </tr>
           <tr>
             <td>Solicitud 3</td>
+            <td>Producto 3</td>
+            <% if current_usuario.admin > 0 %>
+              <td>Usuario X</td>
+            <% end %>
             <td><div class="alerta" style="background : yellow"></div></td>
           </tr>
           <tr>
             <td>Solicitud 4</td>
+            <td>Producto 4</td>
+            <% if current_usuario.admin > 0 %>
+              <td>Usuario X</td>
+            <% end %>
             <td><div class="alerta" ></div></td>
           </tr>
           <tr>
             <td>Solicitud 5</td>
+            <td>Producto 5</td>
+            <% if current_usuario.admin > 0 %>
+              <td>Usuario X</td>
+            <% end %>
             <td><div class="alerta" style="background: blue"></div></td>
           </tr>
         </tbody>

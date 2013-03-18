@@ -2,14 +2,19 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-
+#Seteando atributos de la dataTable
 dataTable_opc = 
   bScrollInfinite: true
   bScrollCollapse: true
   bPagination    : false
-  sScrollY       : "400px"
+  bScrollAutoCss : true
+  sScrollY       : "250px"
   oLanguage :  
-    sSearch      : "Filtro: "
+    sSearch      : ""
+    sInfo        : ""
+    sInfoFiltered: ""
+    sInfoEmpty   : ""
+    sZeroRecords : "No se encontraron coincidencias"
           
 
 $(document).ready -> 
