@@ -60,7 +60,7 @@ p {
       width: 50%;
       height: 100%;
       padding: 5px;
-      
+
       table {
         border: 0;
 
@@ -72,6 +72,16 @@ p {
           min-width: 70px;
         }
 
+        .estado {
+          max-width: 28px;
+          text-align: center;
+
+          div {
+            margin: auto;
+            float: none !important;
+          }
+        }
+
         td:first-child {
           cursor: pointer;
         }
@@ -81,7 +91,7 @@ p {
 }
 
 .dataTables_filter {
-  float: right; 
+  float: right;
   background-image: url(icon_search.png);
   background: no-repeat;
   background-position: 0px 0px;

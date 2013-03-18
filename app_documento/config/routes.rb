@@ -6,28 +6,28 @@ AppDocumento::Application.routes.draw do
   match '/:locale' => 'inicio#index'
   scope "(:locale)", :locale => /en|es/ do
 
-    resources :presentacions
+  resources :presentacions
 
 
-    resources :documentos
+  resources :documentos
 
 
-    resources :requisitos
+  resources :requisitos
 
 
-    resources :logs
+  resources :logs
 
 
-    resources :tramites
+  resources :tramites
 
 
-    resources :importadors
+  resources :importadors
 
 
-    resources :productos
+  resources :productos
 
 
-    resources :usuarios
+  resources :usuarios
   end
 
 

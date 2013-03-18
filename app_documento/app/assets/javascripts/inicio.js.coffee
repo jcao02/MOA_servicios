@@ -3,20 +3,20 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 #Seteando atributos de la dataTable
-dataTable_opc = 
+dataTable_opc =
   bScrollInfinite: true
   bScrollCollapse: true
   bPagination    : false
   bScrollAutoCss : true
   sScrollY       : "250px"
-  oLanguage :  
-    sSearch      : ""
+  oLanguage :
+    sSearch      : "Busqueda"
     sInfo        : ""
     sInfoFiltered: ""
     sInfoEmpty   : ""
     sZeroRecords : "No se encontraron coincidencias"
-          
 
-$(document).ready -> 
+
+$(document).ready ->
   $("#mis_productos").dataTable(dataTable_opc)
   $("#mis_solicitudes").dataTable(dataTable_opc)

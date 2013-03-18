@@ -12,7 +12,7 @@
   <div id="wrapper">
     <header>
       <div id="headUp">
-        <%= link_to image_tag("http://placehold.it/200x20/234567/ffffff.png", :id => "logo"), home_path %>
+        <%= link_to image_tag("http://placehold.it/400x40/701100/ffffff.png", :id => "logo"), home_path %>
         <% if usuario_signed_in? %>
           <ul>
             <li class="drop" id="compania" title="<%= current_usuario.compania %>"><%= current_usuario.compania %></li>
@@ -23,7 +23,7 @@
               <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
                                       :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
             </ul>
-            <li class="drop" id="alertas">Alertas<div class="alerta" style="background: green;"></div></li>
+            <li class="drop" id="alertas">Alertas<div class="alerta" id="alertas" style="background: green;"></div></li>
             <ul class="dropAppear" id="alertasAppear">
 
               <li class="dropElem">
