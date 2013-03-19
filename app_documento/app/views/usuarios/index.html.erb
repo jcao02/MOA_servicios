@@ -1,48 +1,46 @@
 <h1>Listing usuarios</h1>
 
-<table>
-  <tr>
-    <th>Login</th>
-    <th>Mail</th>
-    <th>Telefono</th>
-    <th>Nombre</th>
-    <th>Apellido</th>
-    <th>Compania</th>
-    <th>Rif</th>
-    <th>Permisos</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @usuarios.each do |usuario| %>
-  <tr>
-    <td><%= usuario.login %></td>
-    <td><%= usuario.email %></td>
-    <td><%= usuario.telefono %></td>
-    <td><%= usuario.nombre %></td>
-    <td><%= usuario.apellido %></td>
-    <td><%= usuario.compania %></td>
-    <td><%= usuario.rif %></td>
-    <td>
-      <% case usuario.admin
-           when 0 %>
-           Cliente
-      <%   when 1 %>
-           Admin
-      <%   when 2 %>
-        Super-Admin
-      <%   else   %>
-        Contactar servicio
-      <% end %>
-      </td>
-      <td><%= link_to 'Show', usuario %></td>
-      <% if current_usuario.admin == 2 %>
-        <td><%= link_to 'Edit', edit_usuario_path(usuario) %></td>
-        <td><%= link_to 'Destroy', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
+<table class="tabla_list">
+  <thead>
+    <tr>
+      <th>Login</th>
+      <th>Mail</th>
+      <th>Telefono</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Compania</th>
+      <th>Rif</th>
+      <th>Permisos</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
+  </thead>
+    <tbody>
+  <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= link_to usuario.login, usuario %></td>
+        <td><%= usuario.email %></td>
+        <td><%= usuario.telefono %></td>
+        <td><%= usuario.nombre %></td>
+        <td><%= usuario.apellido %></td>
+        <td><%= usuario.compania %></td>
+        <td><%= usuario.rif %></td>
+        <td>
+          <% case usuario.admin
+  when 0 %>
+  Cliente
+<%   when 1 %>
+  Admin
+<%   when 2 %>
+  Super-Admin
+<%   else   %>
+  Contactar servicio
 <% end %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
 </table>
 
 <br />

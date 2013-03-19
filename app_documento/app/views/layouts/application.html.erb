@@ -19,7 +19,7 @@
             <ul class="dropAppear" id="companiaAppear">
 
               <%= link_to content_tag(:li, content_tag(:div, 'Configuración') + image_tag("/assets/settings.png", :class => "dropImg"),
-                                      :class => "dropElem"), edit_usuario_path(current_usuario) %>
+                                      :class => "dropElem"), current_usuario %>
               <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
                                       :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
             </ul>

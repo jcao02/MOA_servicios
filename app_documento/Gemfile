@@ -25,9 +25,6 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 
-# Para los forms
-gem 'formalize-rails'
-
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -48,3 +45,10 @@ gem 'devise'
 
 #Gema para localidad
 gem 'i18n'
+
+#Gema para dataTables
+gem 'jquery-datatables-rails'
+
+# Para los forms
+gem 'formalize-rails'
+gem 'formtastic'

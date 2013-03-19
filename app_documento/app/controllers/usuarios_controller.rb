@@ -26,7 +26,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios/new.json
   def new
     @usuario = Usuario.new
-
+    @accion = "Nuevo Usuario"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @usuario }
@@ -36,6 +36,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1/edit
   def edit
     @usuario = Usuario.find(params[:id])
+    @accion = "Editar usuario"
   end
 
   # POST /usuarios

@@ -1,3 +1,101 @@
 // Place all the styles related to the Usuarios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$background_color : #911100;
+
+.tabla_list {
+
+  border-spacing: 0;
+  margin: auto;
+  margin-top: 35px;
+  border: 1px solid #666;
+  border-radius: 3px;
+
+  input[type="submit"]{
+    padding: 10px;
+    margin-left: 0;
+    margin-bottom: 5px;
+  }
+  thead {
+    color: white;
+
+    tr {
+      background: $background_color;
+    }
+  }
+  tbody {
+    td {
+      text-align:center;
+      /*Puntos suspensivos*/
+      white-space: nowrap;
+      overflow: hidden;
+      -o-text-overflow: ellipsis;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      min-width: 90px;
+      max-width: 90px;
+
+    }
+    tr:nth-child(even) {
+      background-color: #D3A099;
+    }
+
+  }
+}
+
+.tabla_show {
+
+  border-spacing: 0;
+  margin: auto;
+  margin-top: 70px;
+  width: 400px;
+  border: 1px solid #666;
+  border-radius: 3px;
+
+  input[type="submit"]{
+    padding: 10px;
+    margin-left: 0;
+    margin-bottom: 5px;
+  }
+  thead {
+    color: white;
+    text-align: center;
+    tr {
+      background: $background_color;
+      td {
+
+        padding: 5px;
+        font-size: 16px;
+
+      }
+    }
+  }
+  tbody {
+    tr {
+
+      td:first-child{
+        width: 50px;
+      }
+
+      td {
+        text-align:center;
+        /*Puntos suspensivos*/
+        white-space: nowrap;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        min-width: 90px;
+        max-width: 90px;
+        height: 30px;
+
+      }
+    }
+    tr:nth-child(even) {
+      background-color: #D3A099;
+    }
+  }
+}
+.customize {
+  margin-top: 30px;
+}

@@ -1,61 +1,71 @@
-<%= form_for(@usuario) do |f| %>
-  <% if @usuario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
+<%= semantic_form_for @usuario do |f| %>
+  <ul>
+    <table class="table_forms">
+      <thead>
+        <tr>
+          <td colspan="2">
+            <h1>
+              <%= @accion %>
+            </h1>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= f.input :login, :label => "Usuario" %>
+          </td>
+          <td>
+            <%= f.input :email, :label => "Correo"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :password, :label => "Contraseña" %>
+          </td>
+          <td>
+            <%= f.input :password_confirmation, :label => "Confirmación" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :compania, :label => "Compañia"%>
+          </td>
+          <td>
+            <%= f.input :rif, :label => "RIF"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :nombre, :label => "Nombre"%>
+          </td>
+          <td>
+            <%= f.input :apellido, :label => "Apellido"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :telefono, :label => "Teléfono"%>
+          </td>
+          <td>
+            <% if current_usuario.admin == 2 %>
+              <%= f.input :admin, :label => "Permisología", :as => :radio, :collection => [["Cliente", 0], ["Admin", 1], ["Super-Admin", 2]]%>
+            <% else %>
+              <%= f.input :admin, :as => :hidden, :value => 0 %>
+            <%= f.actions %>
+            <% end %>
 
-      <ul>
-      <% @usuario.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+          </td>
+        </tr>
+        <% if current_usuario.admin == 2 %> 
+        <tr>
+          <td>
+            <%= f.actions %>
+          </td>
+          <td></td>
+        </tr>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :login %><br />
-    <%= f.text_field :login %>
-  </div>
-  <div class="field">
-    <%= f.label :contrasena %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :confirmar_contrasena %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :Email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono %><br />
-    <%= f.text_field :telefono %>
-  </div>
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :apellido %><br />
-    <%= f.text_field :apellido %>
-  </div>
-  <div class="field">
-    <%= f.label :compania %><br />
-    <%= f.text_field :compania %>
-  </div>
-  <div class="field">
-    <%= f.label :rif %><br />
-    <%= f.text_field :rif %>
-  </div>
-  <% if current_usuario.admin == 1 %> 
-    <%= f.hidden_field :admin, :value => 0 %>
-  <% else %>
-    <div class="field">
-      <%= f.label :admin %><br />
-      <%= f.select :admin, [['Cliente', 0 ], ['Admin', 1], ['Super-Admin', 2]] %>
-    </div>
-  <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      </tbody>
+    </table>
+  </ul>
 <% end %>

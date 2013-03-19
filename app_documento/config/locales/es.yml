@@ -96,7 +96,7 @@ es:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
-      accepted: debe ser aceptado
+      accepted: debe ser acep
       blank: no puede estar en blanco
       confirmation: no coincide con la confirmación
       empty: no puede estar vacío
