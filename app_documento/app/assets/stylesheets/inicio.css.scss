@@ -2,8 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$border_color     : #555;
+
 p {
   text-align: justify;
+  margin-left: 20px;
+  width: 90%;
 }
 
 #division {
@@ -23,19 +27,24 @@ p {
       width: 50%;
       height: 100%;
       border: 0;
-      padding: 5px;
+      padding: 30px;
 
-      #saber {
+      .saber {
         color: #029 !important;
+        font-size: 15px;
       }
 
       form {
         margin: auto;
         width: 250px;
         padding: 20px;
-        border: 3px #666 solid;
+        border: 3px $border_color solid;
         border-radius: 5px;
         background-color: #eee;
+
+        td {
+          padding: 5px;
+        }
 
         h2 {
           margin: 5px;
@@ -52,11 +61,12 @@ p {
   margin: 0;
   border-spacing: 20px;
   margin-top: 40px;
+
   tr {
     width: 100%;
     height: 100%;
 
-    td {
+    td{
       width: 50%;
       height: 100%;
       padding: 5px;
@@ -64,26 +74,37 @@ p {
       table {
         border: 0;
 
-        tr:nth-child(even) {
-          background-color: #D3A099;
-        }
-
-        td {
-          min-width: 70px;
-        }
-
-        .estado {
-          max-width: 28px;
-          text-align: center;
-
-          div {
-            margin: auto;
-            float: none !important;
+        tbody {
+          tr:nth-child(even) {
+            background-color: #5294aa;
           }
-        }
 
-        td:first-child {
-          cursor: pointer;
+          tr:nth-child(odd) {
+            background-color: #fff;
+          }
+
+          td {
+            min-width: 70px;
+            max-width: 70px;
+          }
+
+          tr:hover {
+            background-color: #74b6cc;
+          }
+
+          .estado {
+            max-width: 28px;
+            text-align: center;
+
+            div {
+              margin: auto;
+              float: none !important;
+            }
+          }
+
+          td:first-child {
+            cursor: pointer;
+          }
         }
       }
     }
@@ -92,9 +113,6 @@ p {
 
 .dataTables_filter {
   float: right;
-  background-image: url(icon_search.png);
-  background: no-repeat;
-  background-position: 0px 0px;
   input[type="text"] {
     border-radius: 5px;
     width: 360px;
