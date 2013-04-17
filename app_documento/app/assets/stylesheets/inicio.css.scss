@@ -77,10 +77,18 @@ p {
         tbody {
           tr:nth-child(even) {
             background-color: #5294aa;
+
+            td.sorting_1 {
+              background-color: transparent;
+            }
           }
 
           tr:nth-child(odd) {
             background-color: #fff;
+
+            td.sorting_1 {
+              background-color: transparent;
+            }
           }
 
           td {
