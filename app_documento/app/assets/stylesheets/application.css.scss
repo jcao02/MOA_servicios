@@ -15,12 +15,13 @@
  *= require formalize
  *= require formtastic_changes
  *= require formtastic
+ *= require dataTables/jquery.dataTables
  */
 
 // Colores de la aplicacion
 
-$hover_color      : #D3A099;
-$background_color : #911100;
+$hover_color      : #718fb0;
+$background_color : #133a6b;
 $border_color     : #555;
 
 body {
@@ -139,7 +140,7 @@ header {
       border-bottom: 1px $border_color solid;
 
       &:hover {
-        background: #ffaaaa;
+        background: $hover_color;
         cursor: pointer;
       }
 
@@ -192,6 +193,7 @@ header {
   border-radius: 7px;
   border: 1px solid black;
   background: white;
+  color: transparent; /*Para hacer sorting de las tablas*/
 }
 
 #headDown {
@@ -257,7 +259,7 @@ footer {
       line-height: 25px;
       font-size: 15px;
       text-align: center;
-      float: right;
+      float: left;
       margin: auto;
       padding-right: 10px;
       width: 30%;

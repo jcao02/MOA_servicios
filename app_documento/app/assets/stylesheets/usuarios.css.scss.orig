@@ -5,19 +5,20 @@ $background_color : #133a6b;
 
 .tabla_list {
 
-  input[type="submit"]{
-    padding: 10px;
-    margin-left: 0;
-    margin-bottom: 5px;
+  border-spacing: 0;
+  margin: auto;
+  margin-top: 35px;
+  border: 1px solid #666;
+  border-radius: 3px;
+
+  $background_color : #911100;
+
+
+  .dataTables_wrapper {
   }
-  thead {
-    color: white;
-
-
-    }
-    tr:nth-child(even) {
-      background-color: #5294aa;
-    }
+  tr:nth-child(even) {
+    background-color: #5294aa;
+  }
 
   height: 300px;
   margin-top:60px;
