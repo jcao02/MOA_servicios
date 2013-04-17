@@ -1,8 +1,14 @@
-<h1>Listing usuarios</h1>
+
+<span class="titulos_list">
+  <h1>Usuarios</h1>
+</span>
+
+<button class="new_element">
+  <%= link_to 'Nuevo Usuario', new_usuario_path %>
+</button>
 
 <table class="tabla_list">
   <thead>
-    <tr>
       <th>Login</th>
       <th>Mail</th>
       <th>Telefono</th>
@@ -11,13 +17,9 @@
       <th>Compania</th>
       <th>Rif</th>
       <th>Permisos</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
-    <tbody>
-  <% @usuarios.each do |usuario| %>
+  <tbody>
+    <% @usuarios.each do |usuario| %>
       <tr>
         <td><%= link_to usuario.login, usuario %></td>
         <td><%= usuario.email %></td>
@@ -28,21 +30,17 @@
         <td><%= usuario.rif %></td>
         <td>
           <% case usuario.admin
-  when 0 %>
-  Cliente
-<%   when 1 %>
-  Admin
-<%   when 2 %>
-  Super-Admin
-<%   else   %>
-  Contactar servicio
-<% end %>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
+            when 0 %>
+            Cliente
+            <%   when 1 %>
+            Admin
+            <%   when 2 %>
+            Super-Admin
+            <%   else   %>
+            Contactar servicio
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Usuario', new_usuario_path %>

@@ -270,3 +270,36 @@ footer {
 }
 
 /*************************END FOOTER*************************/
+
+/*Clase para las dataTables que listan datos*/
+.tabla_list {
+  border: 0;
+  thead {
+    color: white;
+
+    tr {
+      background: $background_color;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: #D3A099;
+  }
+
+  td {
+    min-width: 70px;
+  }
+
+  td:first-child {
+    cursor: pointer;
+  }
+}
+
+.new_element {
+
+  float:left;
+}
+
+.titulos_list {
+
+}
