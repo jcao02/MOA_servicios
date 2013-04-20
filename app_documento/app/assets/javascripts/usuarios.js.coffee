@@ -38,11 +38,19 @@ $(document).ready ->
   $("#dialog_contr").bind("ajax:success", (event, data, status, xhr) ->
     str = xhr.responseText
     json = jQuery.parseJSON(str)  #parseo a json
+    
+    arr = new Array;
 
+    for elem of json
+      arr.push json[elem]
     #Si existen errores, se muestran.
-    if json.errorpassword
+    if arr.length > 0
       $('.errorpassword').remove()
-      error = '<p class="errorpassword" style="color:red;">'+json.errorpassword+'</p>'
+      error = '<p class="errorpassword" style="color:red;">'
+      for elem of arr
+        error += arr[elem]
+        error += '</br>'
+      error += '</p>'
       $(this).prepend(error)
     #Si no, se muestra mensaje de error
     else

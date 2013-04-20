@@ -85,25 +85,24 @@ class UsuariosController < ApplicationController
     oldpass = params[:usuario][:oldpassword]
     newpass = params[:usuario][:password]
 
+    lengthCondition = newpass.length < 8 or newpass.length > 16
+    
     respond_to do |format|
       if @usuario.valid_password?(oldpass) and newpass == params[:usuario][:password_confirmation]
         @usuario.password = newpass
-        if @usuario.valid?
+        if @usuario.valid? and !lengthCondition
           @usuario.update_attribute("password", newpass)
-          flash[:notice] = "hola"
           sign_in(@usuario, :bypass => true) #Evita que cierre sesion automaticamente
-          format.json { render json: @usuario }
-        else
-          puts @usuario.errors
-          format.json { render json: @usuario.errors }
         end
       elsif !@usuario.valid_password?(oldpass)
           @usuario.errors[:errorpassword] = "Contrasena actual invalida"
-          format.json { render json: @usuario.errors }
       else
           @usuario.errors[:errorpassword] = "Contrasenas no coinciden"
-          format.json { render json: @usuario.errors }
       end
+      if lengthCondition
+        @usuario.errors[:errorlength] = "Constrasena nueva invalida (debe tener entre 8 y 16 caracteres)"
+      end
+      format.json { render json: @usuario.errors }
     end
 
   end
