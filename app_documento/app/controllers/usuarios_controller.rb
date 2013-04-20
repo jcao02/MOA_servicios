@@ -1,5 +1,6 @@
 class UsuariosController < ApplicationController
   before_filter :authenticate_usuario!
+  respond_to :html, :js
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -40,6 +41,10 @@ class UsuariosController < ApplicationController
     flash[:accion] = "Editar Usuario"
   end
 
+  def edit_password
+    @usuario = current_usuario
+    respond_with(@usuario, :layout => false)
+  end
  # POST /usuarios
   # POST /usuarios.json
   def create

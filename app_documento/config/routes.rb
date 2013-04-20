@@ -7,6 +7,7 @@ AppDocumento::Application.routes.draw do
   resources :usuarios do
     collection do 
       put :update_password
+      get :edit_password
     end
   end
   

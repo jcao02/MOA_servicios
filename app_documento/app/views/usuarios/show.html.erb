@@ -98,7 +98,9 @@
          </li>
        <% end %>
        <% if current_usuario.login == @usuario.login%>
-         <li><a id="cambiar_contr">Cambiar Contraseña</a> <%= image_tag("/assets/password.png", :class => "cos_icon")%></li>
+         <li>
+         <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> <%= image_tag("/assets/password.png", :class => "cos_icon")%>
+         </li>
        <%end%>
        <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
          <li>
@@ -110,41 +112,4 @@
    </td>
  </tr>
  </table>
- <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;">
-   <%= semantic_form_for @usuario, :remote => true, :url => update_password_usuarios_path do |f| %>
-       <ul>
-     <table class="table_forms" style="border: none;">
-       <tbody>
-       <tr>
-         <td>
-           <%= f.input :oldpassword, :label => "Contraseña actual"%>
-         </td>
-       </tr>
-       <tr>
-         <td>
-     <%= f.input :password, :label => "Contraseña nueva"%>
-         </td>
-       </tr>
-       <tr>
-         <td>
-     <%= f.input :password_confirmation, :label => "Confirmar contraseña"%>
-         </td>
-       </tr>
-       <tr>
-         <td>
-           <%= f.action :submit, :label => "Cambiar contraseña" %>
-         </td>
-       </tr>
-       </tbody>
-   </table>
-       </ul>
-   <% end %>
- </div>
-
- <script type="text/javascript">
-   <% if flash[:notice] %>
-     $("#dialog_contr").html(<%=flash[:notice]%>)
-   <% elsif flash[:error] %>
-     $("#dialog_contr_error").html(<%=flash[:error]%>)
-   <%end%>
- </script>
+ <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>
