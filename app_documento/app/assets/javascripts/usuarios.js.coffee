@@ -18,7 +18,12 @@ dataTable_opc =
 changePassDialog_opc = 
   width   : 350
   height  : 450
-  scroll  : false
+  title   : 'Cambiar Contraseña'
+
+askPassDialog_opc = 
+  width  : 320
+  height : 250
+  title  : 'Recuperar Contraseña'
       
 
 
@@ -57,4 +62,22 @@ $(document).ready ->
       mensaje = '<center><p style="color:green; font-size: 14px; margin-top:170px;">Contraseña cambiada exitosamente </p></center>'
       $(this).html mensaje
   #Funcion en caso de error (no deberia caer nunca aqui)
+  ).bind("ajax:error", (xhr, data, status, error) -> alert "Error")
+
+  $("#ask_password").click ->
+    #Se crea funcion para generar el form para cambiarla
+    $( this ).bind("ajax:success", (event, data, status, xhr) ->
+      $("#dialog_recover").dialog "option", "buttons", {}
+      $("#dialog_recover").html xhr.responseText
+    ).bind("ajax:error", (xhr, data, status, error) -> alert data.responseText)
+    $("#dialog_recover").dialog askPassDialog_opc
+
+  $("#dialog_recover form").submit ->
+    $(this + ' input[type="submit"]').css "value", "Enviando..."
+  $("#dialog_recover").bind("ajax:beforeSend", () -> 
+    mensaje = '<p>Por razones de seguridad, usted será contactado para confirmar un cambio de contraseña a su correo o teléfono</p>'
+    $(this).html mensaje
+    $(this).dialog "option", "buttons",
+      Aceptar: ->
+        $( this ).dialog "close"
   ).bind("ajax:error", (xhr, data, status, error) -> alert "Error")

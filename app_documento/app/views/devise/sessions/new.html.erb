@@ -38,6 +38,12 @@
               <%= f.submit "Iniciar Sesion" %>
             </td>
           </tr>
+          <tr>
+            <td colspan="2">
+              <div><%= link_to '¿Olvidaste tu contraseña?', ask_password_usuarios_path, :remote => true, :id => 'ask_password'%></div>
+              <div id="dialog_recover" style="display:none;"></div>
+            </td>
+          </tr>
         </table>
       <% end %>
     </td>

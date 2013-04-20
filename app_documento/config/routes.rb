@@ -1,13 +1,16 @@
 AppDocumento::Application.routes.draw do
-  devise_for :usuarios
+  devise_for :usuarios 
 
   get "inicio/index"
 
-  #Enrutamiento de la accion update_password
+  #Enrutamiento sobre modelo de Usuario
   resources :usuarios do
     collection do 
       put :update_password
+      post :recover_password
       get :edit_password
+      get :ask_password
+      get :send_password
     end
   end
   

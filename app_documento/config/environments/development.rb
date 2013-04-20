@@ -22,8 +22,8 @@ AppDocumento::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => 'gmail.com',
-    :user_name            => 'jcarochaov@gmail.com',
-    :password             => '21469952',
+    :user_name            => 'productosKiwi@gmail.com',
+    :password             => 'contrasena123',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }

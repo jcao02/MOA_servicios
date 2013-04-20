@@ -1,5 +1,6 @@
 class UsuariosController < ApplicationController
-  before_filter :authenticate_usuario!
+  before_filter :authenticate_usuario! #Para que se requiera estar logueado
+  skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
   # GET /usuarios
   # GET /usuarios.json
@@ -41,6 +42,7 @@ class UsuariosController < ApplicationController
     flash[:accion] = "Editar Usuario"
   end
 
+  #Para mostrar el form de cambiar contraseña
   def edit_password
     @usuario = current_usuario
     respond_with(@usuario, :layout => false)
@@ -52,7 +54,7 @@ class UsuariosController < ApplicationController
 
     respond_to do |format|
       if @usuario.save
-        CorreosUsuario.enviar_contrasena(@usuario, flash[:contrasena]).deliver
+        CorreosUsuario.enviar_contrasena(@usuario, flash[:contrasena], 1).deliver
         format.html { redirect_to @usuario, notice: 'Usuario was successfully created.'}
         format.json { render json: @usuario, status: :created, location: @usuario }
       else
@@ -80,11 +82,13 @@ class UsuariosController < ApplicationController
     end
   end
 
+  #Cambiar contraseña con ajax
   def update_password
     @usuario = Usuario.find(current_usuario.id)
     oldpass = params[:usuario][:oldpassword]
     newpass = params[:usuario][:password]
 
+    #Validacion de largo de contraseña manual
     lengthCondition = newpass.length < 8 or newpass.length > 16
     
     respond_to do |format|
@@ -106,6 +110,39 @@ class UsuariosController < ApplicationController
     end
 
   end
+
+  #Para ver el form de recuperar contraseña
+  def ask_password
+    @usuario = Usuario.new
+    respond_with(@usuario, :layout => false)
+  end
+
+  #Recuperar contraseña
+  def recover_password
+    result = Usuario.where(:login => params[:usuario][:login])
+    respond_to do |format|
+      if result.length >= 1
+        @usuario = result[0]
+        CorreosUsuario.recuperar_contrasena(@usuario).deliver
+      end
+      format.json { render json: @usuario }
+    end
+
+  end
+
+  #Enviar contraseña nueva
+  def send_password
+    @usuario = Usuario.find(params[:id])
+    newpass = SecureRandom.hex(4)
+    @usuario.update_attribute("password", newpass)
+    CorreosUsuario.enviar_contrasena(@usuario, newpass, 2).deliver
+    respond_to do |format|
+      format.html
+    end
+
+  end
+
+
 
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
