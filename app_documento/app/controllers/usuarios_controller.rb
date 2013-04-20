@@ -26,7 +26,8 @@ class UsuariosController < ApplicationController
   # GET /usuarios/new.json
   def new
     @usuario = Usuario.new
-    @accion = "Nuevo Usuario"
+    flash[:accion] = "Crear Usuario"
+    flash[:contrasena] = SecureRandom.hex(4)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @usuario }
@@ -36,19 +37,21 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1/edit
   def edit
     @usuario = Usuario.find(params[:id])
-    @accion = "Editar usuario"
+    flash[:accion] = "Editar Usuario"
   end
 
-  # POST /usuarios
+ # POST /usuarios
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(params[:usuario])
 
     respond_to do |format|
       if @usuario.save
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
+        CorreosUsuario.enviar_contrasena(@usuario, flash[:contrasena]).deliver
+        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.'}
         format.json { render json: @usuario, status: :created, location: @usuario }
       else
+        flash.keep
         format.html { render action: "new" }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
@@ -59,16 +62,45 @@ class UsuariosController < ApplicationController
   # PUT /usuarios/1.json
   def update
     @usuario = Usuario.find(params[:id])
-
+    params[:usuario].delete :password
     respond_to do |format|
       if @usuario.update_attributes(params[:usuario])
         format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
         format.json { head :no_content }
       else
+        flash.keep
         format.html { render action: "edit" }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_password
+    @usuario = Usuario.find(current_usuario.id)
+    oldpass = params[:usuario][:oldpassword]
+    newpass = params[:usuario][:password]
+
+    respond_to do |format|
+      if @usuario.valid_password?(oldpass) and newpass == params[:usuario][:password_confirmation]
+        @usuario.password = newpass
+        if @usuario.valid?
+          @usuario.update_attribute("password", newpass)
+          flash[:notice] = "hola"
+          sign_in(@usuario, :bypass => true) #Evita que cierre sesion automaticamente
+          format.json { render json: @usuario }
+        else
+          puts @usuario.errors
+          format.json { render json: @usuario.errors }
+        end
+      elsif !@usuario.valid_password?(oldpass)
+          @usuario.errors[:errorpassword] = "Contrasena actual invalida"
+          format.json { render json: @usuario.errors }
+      else
+          @usuario.errors[:errorpassword] = "Contrasenas no coinciden"
+          format.json { render json: @usuario.errors }
+      end
+    end
+
   end
 
   # DELETE /usuarios/1

@@ -1,75 +1,82 @@
 
-
-<table class="tabla_show">
-  <thead>
-    <tr>
-      <td colspan="2">
-        <b>Información de usuario</b>
-      </td>
-    </tr>
-  </thead> 
+<table class="area_show">
   <tr>
     <td>
-      <b>Usuario:</b>
+      <div class="title_show">
+        <h2>Información de usuario</h2>
+      </div>
     </td>
     <td>
-      <%= @usuario.login %>
+      <div class="title_show">
+        <h2>Configuración</h2>
+      </div>
     </td>
   </tr>
   <tr>
     <td>
-      <b>Mail:</b>
-    </td>
-    <td>
-      <%= @usuario.email %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Telefono:</b>
-    </td>
-    <td>
-      <%= @usuario.telefono %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Nombre:</b>
-    </td>
-    <td>
-      <%= @usuario.nombre %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Apellido:</b>
-    </td>
-    <td>
-      <%= @usuario.apellido %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Compania:</b>
-    </td>
-    <td>
-      <%= @usuario.compania %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Rif:</b>
-    </td>
-    <td>
-      <%= @usuario.rif %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Permisos:</b>
-    </td>
-    <td>
-      <% case @usuario.admin
+      <table class="tabla_show">
+        <tr>
+          <td>
+            <b>Usuario:</b>
+          </td>
+          <td>
+            <%= @usuario.login %>
+          </td>
+        </tr>
+      <tr>
+        <td>
+          <b>Nombre:</b>
+        </td>
+        <td>
+          <%= @usuario.nombre %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Apellido:</b>
+        </td>
+        <td>
+          <%= @usuario.apellido %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Mail:</b>
+        </td>
+        <td>
+          <%= @usuario.email %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Telefono:</b>
+        </td>
+        <td>
+          <%= @usuario.telefono %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Compania:</b>
+        </td>
+        <td>
+          <%= @usuario.compania %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Rif:</b>
+        </td>
+        <td>
+          <%= @usuario.rif %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Tipo de usuario </b>
+        </td>
+        <td>
+          <% case @usuario.admin
            when 0 %>
            Cliente
          <%   when 1 %>
@@ -81,21 +88,63 @@
          <% end %>
        </td>
      </table>
-     <center>
-       <% if current_usuario.admin == 2 %>
-         <button class="customize">
-           <%= link_to 'Modificar', edit_usuario_path(@usuario) %> 
-         </button>
-         <button class="customize">             
-           <%= link_to 'Eliminar', @usuario, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este usuario?' } %>
-         </button>
-         <% elsif current_usuario.login == @usuario.login %>
-         <button class="customize">
-           <%= link_to 'Modificar', edit_usuario_path(@usuario) %> 
-         </button>
-
+   </td>
+   <td class="conf_list" valign="top">
+     <ul>
+       <% if current_usuario.admin == 2  or  current_usuario.login == @usuario.login %>
+         <li>
+         <%= link_to 'Editar Perfil', edit_usuario_path(@usuario)%>
+         <%=link_to image_tag("/assets/edit.jpg", :class => "cos_icon"), edit_usuario_path(@usuario) %>
+         </li>
        <% end %>
-     </center>
+       <% if current_usuario.login == @usuario.login%>
+         <li><a id="cambiar_contr">Cambiar Contraseña</a> <%= image_tag("/assets/password.png", :class => "cos_icon")%></li>
+       <%end%>
+       <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
+         <li>
+         <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este usuario?' } %>
+         <%= image_tag("/assets/delete.png", :class => "cos_icon")%>
+         </li>
+       <% end %>
+     </ul>
+   </td>
+ </tr>
+ </table>
+ <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;">
+   <%= semantic_form_for @usuario, :remote => true, :url => update_password_usuarios_path do |f| %>
+       <ul>
+     <table class="table_forms" style="border: none;">
+       <tbody>
+       <tr>
+         <td>
+           <%= f.input :oldpassword, :label => "Contraseña actual"%>
+         </td>
+       </tr>
+       <tr>
+         <td>
+     <%= f.input :password, :label => "Contraseña nueva"%>
+         </td>
+       </tr>
+       <tr>
+         <td>
+     <%= f.input :password_confirmation, :label => "Confirmar contraseña"%>
+         </td>
+       </tr>
+       <tr>
+         <td>
+           <%= f.action :submit, :label => "Cambiar contraseña" %>
+         </td>
+       </tr>
+       </tbody>
+   </table>
+       </ul>
+   <% end %>
+ </div>
 
-   <p id="notice"><%= notice %></p>
-
+ <script type="text/javascript">
+   <% if flash[:notice] %>
+     $("#dialog_contr").html(<%=flash[:notice]%>)
+   <% elsif flash[:error] %>
+     $("#dialog_contr_error").html(<%=flash[:error]%>)
+   <%end%>
+ </script>

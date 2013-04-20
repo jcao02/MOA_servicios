@@ -34,8 +34,10 @@ class Usuario < ActiveRecord::Base
 
   validates :apellido, format: { with: VALID_STRING_REGEX }
   validates :compania, presence: true, format: { with: VALID_STRING_REGEX }
-  validates :password, presence: true, format: { with: VALID_STRING_REGEX }
+  validates :password, presence: true, format: { with: VALID_STRING_REGEX }, :on => :create,  :on => :update_password
   validates_confirmation_of :password
   validates :nombre, format: { with: VALID_STRING_REGEX }
+
+  #Validaciones de presencia
 
 end

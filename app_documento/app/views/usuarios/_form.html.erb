@@ -5,7 +5,7 @@
         <tr>
           <td colspan="2">
             <h1>
-              <%= @accion %>
+              <%=flash[:accion]%>
             </h1>
           </td>
         </tr>
@@ -19,14 +19,7 @@
             <%= f.input :email, :label => "Correo"%>
           </td>
         </tr>
-        <tr>
-          <td>
-            <%= f.input :password, :label => "Contraseña" %>
-          </td>
-          <td>
-            <%= f.input :password_confirmation, :label => "Confirmación" %>
-          </td>
-        </tr>
+        <%= f.input :password, :as => :hidden, :input_html => {:value => flash[:contrasena] }  %>
         <tr>
           <td>
             <%= f.input :compania, :label => "Compañia"%>
@@ -51,8 +44,8 @@
             <% if current_usuario.admin == 2 %>
               <%= f.input :admin, :label => "Permisología", :as => :radio, :collection => [["Cliente", 0], ["Admin", 1], ["Super-Admin", 2]]%>
             <% else %>
-              <%= f.input :admin, :as => :hidden, :value => 0 %>
-            <%= f.actions %>
+              <%= f.input :admin, :as => :hidden, :input_html => { :value => 0 } %>
+                <%= f.action :submit, :label => flash[:accion] %>
             <% end %>
 
           </td>
@@ -60,7 +53,9 @@
         <% if current_usuario.admin == 2 %> 
         <tr>
           <td>
-            <%= f.actions %>
+            <center>
+              <%= f.action :submit, :label => flash[:accion] %>
+            </center>
           </td>
           <td></td>
         </tr>

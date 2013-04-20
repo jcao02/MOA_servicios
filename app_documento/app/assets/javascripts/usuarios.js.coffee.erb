@@ -1,0 +1,46 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+dataTable_opc =
+  bScrollInfinite: true
+  bScrollCollapse: true
+  bPagination    : false
+  bScrollAutoCss : true
+  sScrollY       : "250px"
+  oLanguage :
+    sSearch      : "Busqueda"
+    sInfo        : ""
+    sInfoFiltered: ""
+    sInfoEmpty   : ""
+    sZeroRecords : "No se encontraron coincidencias"
+
+changePassDialog_opc = 
+  width   : 350
+  height  : 450
+  scroll  : false
+      
+
+
+$(document).ready ->
+  $.ajaxSetup dataType: "json"
+  $(".tabla_list").dataTable(dataTable_opc)
+  $("#cambiar_contr").click ->
+    $("#dialog_contr").dialog(changePassDialog_opc)
+  $("#dialog_contr").bind("ajax:success", (event, data, status, xhr) ->
+    str = xhr.responseText
+    json = jQuery.parseJSON(str)
+
+    if json.errorpassword
+      $('.errorpassword').remove()
+      error = '<p class="errorpassword" style="color:red;">'+json.errorpassword+'</p>'
+      $(this).prepend(error)
+    else
+      mensaje = '<center><p style="color:green; font-size: 14px; margin-top:170px;">Contraseña cambiada exitosamente </p></center>'
+      $(this).html mensaje
+  ).bind("ajax:error", (xhr, data, status, error) ->
+    alert "Error"
+  ).bind("ajax:complete", (xhr, status, data, settings) ->
+    alert "Listo"
+  ).bind "ajax:beforeSend", (xhr, status, data, settings) ->
+    alert "Enviando..."

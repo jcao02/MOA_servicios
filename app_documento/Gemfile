@@ -52,3 +52,9 @@ gem 'jquery-datatables-rails'
 # Para los forms
 gem 'formalize-rails'
 gem 'formtastic'
+
+#jquery ui
+gem "jquery-ui-rails", "~> 4.0.2"
+
+#jquery validations
+#gem 'jquery-validation-rails'

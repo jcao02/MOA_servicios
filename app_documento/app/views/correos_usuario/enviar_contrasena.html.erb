@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Bienvenido a NombredelaAplicacion, <%= @usuario.nombre %></h1>
+    <p>
+    Usted ha sido exitosamente registrado en la aplicación X
+    Sus datos para inicio de sesión son los siguientes:
+    </p>
+    <table border="0">
+      <tr>
+        login: <%= @usuario.login %>
+      </tr>
+      <tr>
+        contrasena : <%=@contrasena%>
+      </tr>
+    </table>
+    <p>
+    Para iniciar sesion, haga click en el siguiente enlace: <%= @url %>.
+    </p>
+    <p>Gracias por elegirnos!</p>
+  </body>
+</html>
