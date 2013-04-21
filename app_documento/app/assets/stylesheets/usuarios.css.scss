@@ -3,24 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $background_color : #133a6b;
 
-.tabla_list {
-
-  input[type="submit"]{
-    padding: 10px;
-    margin-left: 0;
-    margin-bottom: 5px;
-  }
+#tabla_list_usuario_wrapper {
   thead {
-    color: white;
+    color: white !important;
+    background-color:$background_color !important; 
 
+  }
+  tr:nth-child(even) {
+    background-color: #5294aa;
+  }
 
-    }
-    tr:nth-child(even) {
-      background-color: #5294aa;
-    }
-
-  height: 300px;
-  margin-top:60px;
 }
 
 .title_show {
