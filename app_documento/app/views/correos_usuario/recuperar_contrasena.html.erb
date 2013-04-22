@@ -1,0 +1,8 @@
+<h2>Solicitud de recuperacion de contraseña</h2>
+<p>El usuario <%=@usuario.login %> ha solicitado recuperación de contraseña</p>
+<p>Si desea contactarlo para confirmar esta peticion, sus datos de contacto son:</p>
+<ul>
+  <li>Telefono: <%=@usuario.telefono%></li>
+  <li>Correo  : <%=@usuario.email%></li>
+</ul>
+<p>Para confirmar el cambio de contraseña, haga click en este <%= link_to 'enlace', send_password_usuarios_url(:id => @usuario) %></p>

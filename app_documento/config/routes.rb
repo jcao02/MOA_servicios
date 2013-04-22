@@ -1,33 +1,51 @@
 AppDocumento::Application.routes.draw do
-  devise_for :usuarios
+  devise_for :usuarios 
 
   get "inicio/index"
+
+  #Enrutamiento sobre modelo de Usuario
+  resources :usuarios do
+    collection do 
+      put :update_password
+      post :recover_password
+      get :edit_password
+      get :ask_password
+      get :send_password
+    end
+  end
+  
+  
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path
+
+  #Redirecciona locale (en/es) al index
   match '/:locale' => 'inicio#index'
+
+  #Alcance de locale
   scope "(:locale)", :locale => /en|es/ do
 
-  resources :presentacions
+    resources :presentacions
 
 
-  resources :documentos
+    resources :documentos
 
 
-  resources :requisitos
+    resources :requisitos
 
 
-  resources :logs
+    resources :logs
 
 
-  resources :tramites
+    resources :tramites
 
 
-  resources :importadors
+    resources :importadors
 
 
-  resources :productos
+    resources :productos
 
 
-  resources :usuarios
+    resources :usuarios
+
   end
 
 

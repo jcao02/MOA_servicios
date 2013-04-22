@@ -1,5 +1,7 @@
 class UsuariosController < ApplicationController
-  before_filter :authenticate_usuario!
+  before_filter :authenticate_usuario! #Para que se requiera estar logueado
+  skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
+  respond_to :html, :js
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -26,7 +28,8 @@ class UsuariosController < ApplicationController
   # GET /usuarios/new.json
   def new
     @usuario = Usuario.new
-    @accion = "Nuevo Usuario"
+    flash[:accion] = "Crear Usuario"
+    flash[:contrasena] = SecureRandom.hex(4)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @usuario }
@@ -36,19 +39,26 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1/edit
   def edit
     @usuario = Usuario.find(params[:id])
-    @accion = "Editar usuario"
+    flash[:accion] = "Editar Usuario"
   end
 
-  # POST /usuarios
+  #Para mostrar el form de cambiar contraseña
+  def edit_password
+    @usuario = current_usuario
+    respond_with(@usuario, :layout => false)
+  end
+ # POST /usuarios
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(params[:usuario])
 
     respond_to do |format|
       if @usuario.save
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
+        CorreosUsuario.enviar_contrasena(@usuario, flash[:contrasena], 1).deliver
+        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.'}
         format.json { render json: @usuario, status: :created, location: @usuario }
       else
+        flash.keep
         format.html { render action: "new" }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
@@ -59,17 +69,80 @@ class UsuariosController < ApplicationController
   # PUT /usuarios/1.json
   def update
     @usuario = Usuario.find(params[:id])
-
+    params[:usuario].delete :password
     respond_to do |format|
       if @usuario.update_attributes(params[:usuario])
         format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
         format.json { head :no_content }
       else
+        flash.keep
         format.html { render action: "edit" }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
   end
+
+  #Cambiar contraseña con ajax
+  def update_password
+    @usuario = Usuario.find(current_usuario.id)
+    oldpass = params[:usuario][:oldpassword]
+    newpass = params[:usuario][:password]
+
+    #Validacion de largo de contraseña manual
+    lengthCondition = newpass.length < 8 or newpass.length > 16
+    
+    respond_to do |format|
+      if @usuario.valid_password?(oldpass) and newpass == params[:usuario][:password_confirmation]
+        @usuario.password = newpass
+        if @usuario.valid? and !lengthCondition
+          @usuario.update_attribute("password", newpass)
+          sign_in(@usuario, :bypass => true) #Evita que cierre sesion automaticamente
+        end
+      elsif !@usuario.valid_password?(oldpass)
+          @usuario.errors[:errorpassword] = "Contrasena actual invalida"
+      else
+          @usuario.errors[:errorpassword] = "Contrasenas no coinciden"
+      end
+      if lengthCondition
+        @usuario.errors[:errorlength] = "Constrasena nueva invalida (debe tener entre 8 y 16 caracteres)"
+      end
+      format.json { render json: @usuario.errors }
+    end
+
+  end
+
+  #Para ver el form de recuperar contraseña
+  def ask_password
+    @usuario = Usuario.new
+    respond_with(@usuario, :layout => false)
+  end
+
+  #Recuperar contraseña
+  def recover_password
+    result = Usuario.where(:login => params[:usuario][:login])
+    respond_to do |format|
+      if result.length >= 1
+        @usuario = result[0]
+        CorreosUsuario.recuperar_contrasena(@usuario).deliver
+      end
+      format.json { render json: @usuario }
+    end
+
+  end
+
+  #Enviar contraseña nueva
+  def send_password
+    @usuario = Usuario.find(params[:id])
+    newpass = SecureRandom.hex(4)
+    @usuario.update_attribute("password", newpass)
+    CorreosUsuario.enviar_contrasena(@usuario, newpass, 2).deliver
+    respond_to do |format|
+      format.html
+    end
+
+  end
+
+
 
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json

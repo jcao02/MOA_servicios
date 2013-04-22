@@ -6,8 +6,9 @@ ol {
 
 
 form.formtastic {
-  height: 300px;
+ /* height: 300px;*/
 }
+
 
 form.formtastic input {
   border-radius: 3px;
@@ -22,13 +23,13 @@ form.formtastic {
     margin-top: 35px;
     border: 1px solid #666;
     border-radius: 3px;
+    height: 0px;
 
     label {
       margin-left: 10px;
     }
     input[type="submit"]{
       padding: 10px;
-      margin-left: 0;
       margin-bottom: 5px;
     }
     thead {

@@ -16,6 +16,7 @@
  *= require formtastic_changes
  *= require formtastic
  *= require dataTables/jquery.dataTables
+ *= require jquery.ui.all
  */
 
 // Colores de la aplicacion
@@ -48,6 +49,7 @@ ul {
 a,a:visited {
   text-decoration: none;
   color: black !important;
+  cursor: pointer;
   background: transparent !important;
 
   &:hover {
@@ -275,29 +277,6 @@ footer {
 /*************************END FOOTER*************************/
 
 /*Clase para las dataTables que listan datos*/
-.tabla_list {
-  border: 0;
-  thead {
-    color: white;
-
-    tr {
-      background: $background_color;
-    }
-  }
-
-  tr:nth-child(even) {
-    background-color: #D3A099;
-  }
-
-  td {
-    min-width: 70px;
-  }
-
-  td:first-child {
-    cursor: pointer;
-  }
-}
-
 .new_element {
 
   float:left;

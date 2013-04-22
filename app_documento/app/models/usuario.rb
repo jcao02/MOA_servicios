@@ -15,11 +15,11 @@ class Usuario < ActiveRecord::Base
 
   #Validaciones email
   VALID_MAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_MAIL_REGEX }
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_MAIL_REGEX }
 
   #Validaciones telefono
   VALID_TELEFONO_REGEX = /\A[0-9]*\z/
-  validates :telefono, format: { with: VALID_TELEFONO_REGEX }
+  validates :telefono, presence: true, format: { with: VALID_TELEFONO_REGEX }
 
   #Validaciones rif
   VALID_RIF_REGEX = /\A[a-zA-Z0-9\-]*\z/
@@ -34,8 +34,10 @@ class Usuario < ActiveRecord::Base
 
   validates :apellido, format: { with: VALID_STRING_REGEX }
   validates :compania, presence: true, format: { with: VALID_STRING_REGEX }
-  validates :password, presence: true, format: { with: VALID_STRING_REGEX }
+  validates :password, presence: true, format: { with: VALID_STRING_REGEX }, :length => { :in => 8..16 }, :on => :create,  :on => :update_password
   validates_confirmation_of :password
   validates :nombre, format: { with: VALID_STRING_REGEX }
+
+  #Validaciones de presencia
 
 end

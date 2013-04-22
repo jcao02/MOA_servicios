@@ -40,7 +40,7 @@
         </center>
       </td>
       <td class="regisProd"><%= producto.registro_sanitario %></td>
-      <td class="nombreProd"><%= link_to producto.nombre, producto %></td>
+      <td class="nombreProd"><%= link_to content_tag(:div, producto.nombre), producto %></td>
       <!-- <td><%= producto.fabricante %></td> -->
       <!-- <td><%= producto.codigo_arancelario %></td> -->
       <td class="tipoProd remX"><%= link_to '✘', producto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
