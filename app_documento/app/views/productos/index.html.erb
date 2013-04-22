@@ -1,35 +1,61 @@
 <h1>Listing productos</h1>
 
-<table>
-  <tr>
-    <th>Registro sanitario</th>
-    <th>Alimento</th>
-    <th>Nombre</th>
-    <th>Marca</th>
-    <th>Pais elaboracion</th>
-    <th>Fabricante</th>
-    <th>Codigo arancelario</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @productos.each do |producto| %>
-  <tr>
-    <td><%= producto.registro_sanitario %></td>
-    <td><%= producto.alimento %></td>
-    <td><%= producto.nombre %></td>
-    <td><%= producto.marca %></td>
-    <td><%= producto.pais_elaboracion %></td>
-    <td><%= producto.fabricante %></td>
-    <td><%= producto.codigo_arancelario %></td>
-    <td><%= link_to 'Show', producto %></td>
-    <td><%= link_to 'Edit', edit_producto_path(producto) %></td>
-    <td><%= link_to 'Destroy', producto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
 <%= link_to 'New Producto', new_producto_path %>
+
+<table id="productos">
+  <thead>
+    <th class="paisProd">Pais elaboracion</th>
+    <th class="marcaProd">Marca</th>
+    <th class="tipoProd">Tipo</th>
+    <th class="regisProd">Registro sanitario</th>
+    <th class="nombreProd">Nombre</th>
+    <!-- <th>Fabricante</th> -->
+    <!-- <th>Codigo arancelario</th> -->
+    <th class="tipoProd remX"></th>
+  </thead>
+
+  <tbody>
+<% @productos.each do |producto| %>
+    <tr>
+      <td class="paisProd">
+        <%= producto.pais_elaboracion %>
+          <div class="filter">
+            <% if producto.pais_elaboracion.downcase == "venezuela" %>
+            Nacional
+            <% else %>
+            Importado
+            <% end %>
+          </div>
+      </td>
+      <td class="marcaProd"><%= producto.marca %></td>
+      <td class="tipoProd">
+        <center>
+          <% if producto.alimento %>
+            <div class="sort">alimento</div>
+            <%= image_tag("food.png", :id => "food") %>
+          <% else %>
+            <div class="sort">bebida</div>
+            <%= image_tag("wine.png", :id => "wine") %>
+          <% end %>
+        </center>
+      </td>
+      <td class="regisProd"><%= producto.registro_sanitario %></td>
+      <td class="nombreProd"><%= link_to producto.nombre, producto %></td>
+      <!-- <td><%= producto.fabricante %></td> -->
+      <!-- <td><%= producto.codigo_arancelario %></td> -->
+      <td class="tipoProd remX"><%= link_to '✘', producto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+<% end %>
+  </tbody>
+
+  <tfoot>
+    <th class="paisProd">Elaboracion</th>
+    <th class="marcaProd">Marca</th>
+    <th class="tipoProd">Tipo</th>
+    <th class="regisProd">Registro sanitario</th>
+    <th class="nombreProd">Nombre</th>
+    <!-- <th>Fabricante</th> -->
+    <!-- <th>Codigo arancelario</th> -->
+    <th class="tipoProd remX"></th>
+  </tfoot>
+</table>

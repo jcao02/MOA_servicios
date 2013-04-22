@@ -1,3 +1,91 @@
 // Place all the styles related to the Productos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#food, #wine {
+  height: 30px;
+}
+
+.sort, .filter {
+  display: none;
+}
+
+#productos {
+  border: 0;
+  width: 800px;
+
+  tbody {
+    tr:nth-child(even) {
+      background-color: #5294aa;
+
+      td.sorting_1, td.sorting_2, td.sorting_3 {
+        background-color: transparent;
+      }
+    }
+
+    tr:nth-child(odd) {
+      background-color: #fff;
+
+      td.sorting_1, td.sorting_2, td.sorting_3 {
+        background-color: transparent;
+      }
+    }
+
+    td {
+      text-align: center;
+      min-width: 70px;
+      max-width: 70px;
+    }
+
+    tr:hover {
+      background-color: #74b6cc;
+    }
+  }
+}
+
+.remX {
+  font-size: 25px;
+}
+
+.tipoProd {
+  min-width: 20px !important;
+  max-width: 20px !important;
+  width: 20px !important;
+  text-align: center;
+
+  img { // Para la imagen de lupa
+    width: 20px;
+  }
+
+  select {
+    width: 10px !important;
+  }
+}
+
+.regisProd {
+  min-width: 70px;
+  max-width: 70px;
+  width: 70px;
+}
+
+.nombreProd {
+}
+
+.paisProd {
+  min-width: 100px;
+  max-width: 100px;
+  width: 100px;
+}
+
+.marcaProd {
+  min-width: 80px;
+  max-width: 80px;
+  width: 80px;
+  input {
+    width: 80px;
+  }
+}
+
+.dataTables_wrapper {
+  height: 300px;
+}

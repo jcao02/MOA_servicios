@@ -78,7 +78,7 @@ p {
           tr:nth-child(even) {
             background-color: #5294aa;
 
-            td.sorting_1 {
+            td.sorting_1, td.sorting_2, td.sorting_3 {
               background-color: transparent;
             }
           }
@@ -86,12 +86,13 @@ p {
           tr:nth-child(odd) {
             background-color: #fff;
 
-            td.sorting_1 {
+            td.sorting_1, td.sorting_2, td.sorting_3 {
               background-color: transparent;
             }
           }
 
           td {
+            text-align: center;
             min-width: 70px;
             max-width: 70px;
           }
@@ -101,18 +102,10 @@ p {
           }
 
           .estado {
-            max-width: 28px;
-            text-align: center;
-
-            div {
-              margin: auto;
-              float: none !important;
-            }
+            margin: 5px 20px 0 20px !important;
+            cursor: default;
           }
 
-          td:first-child {
-            cursor: pointer;
-          }
         }
       }
     }
