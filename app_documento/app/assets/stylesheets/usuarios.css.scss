@@ -5,12 +5,18 @@ $background_color : #133a6b;
 
 #tabla_list_usuario_wrapper {
   thead {
-    color: white !important;
-    background-color:$background_color !important; 
-
+    th{
+    }
   }
-  tr:nth-child(even) {
-    background-color: #5294aa;
+  tr.even {
+    td{
+    background-color: #5294aa !important;
+    }
+  }
+  tr.odd {
+    td{
+    background-color: #FFF !important;
+    }
   }
 
 }

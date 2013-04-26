@@ -8,49 +8,84 @@ dataTable_opc =
   bScrollCollapse: true
   bPagination    : false
   bScrollAutoCss : true
-  sScrollY       : "250px"
+  sScrollY       : "269px"
   oLanguage :
-    sSearch      : "Filtrar"
+    sSearch      : ""
     sInfo        : ""
     sInfoFiltered: ""
     sInfoEmpty   : ""
     sZeroRecords : "No se encontraron coincidencias"
 
-# asInitVals = new Array()
-# $(document).ready ->
-#   oTable = $("#productos").dataTable(dataTable_opc)
-#   $("tfoot input").keyup ->
+dataTableM_opc =
+  bScrollInfinite: true
+  bScrollCollapse: true
+  bPagination    : false
+  bScrollAutoCss : true
+  sScrollY       : "269px"
+  oLanguage :
+    sSearch      : ""
+    sInfo        : ""
+    sInfoFiltered: ""
+    sInfoEmpty   : ""
+    sZeroRecords : "No se encontraron coincidencias"
+  oTableTools :
+    sRowSelect   : "multi"
 
-#     # Filter on the column (the index) of this element
-#     oTable.fnFilter @value, $("tfoot input").index(this)
-
-
-#   # Support functions to provide a little bit of 'user friendlyness' to the textboxes in
-#   # the footer
-#   $("tfoot input").each (i) ->
-#     asInitVals[i] = @value
-
-#   $("tfoot input").focus ->
-#     if @className is "search_init"
-#       @className = ""
-#       @value = ""
-
-#   $("tfoot input").blur (i) ->
-#     if @value is ""
-#       @className = "search_init"
-#       @value = asInitVals[$("tfoot input").index(this)]
+#Elimina la clase clase de los td de la tabla elem
+eliminar_class = (elem, clase) ->
+  elems = "#"+elem.id + " tr td"
+  $(elems).removeClass clase
 
 $(document).ready ->
-  $("#productos").dataTable(dataTable_opc).columnFilter aoColumns: [
-      type: "select"
-      values: ["Nacional", "Importado"]
-    ,
-      type: "text"
-    ,
-      type: "select"
-      values: ["Alimento", "Bebida"]
-    ,
-      null
-    ,
-      type: "text"
-  ]
+  $("#productos").dataTable dataTable_opc 
+  $("#marcas").dataTable dataTableM_opc 
+  $("#producto_marca").autocomplete source : marcasDisponibles
+  $("#producto_fabricante").autocomplete source : fabricantesDisponibles
+  #Fltrado
+  #Por marca
+  $("#marcas tr").click ->
+    $(this).toggleClass "row_selected"
+    
+    coleccion = document.getElementsByClassName "row_selected"
+    if (coleccion.length == 0)
+      inputs = document.getElementsByClassName "producto_marca"
+      for index, elem of inputs
+        if elem.parentNode
+          elem.parentNode.removeChild(elem);
+    else
+      input = '<input class="producto_marca" type="hidden" '
+      n = coleccion.length - 1
+      for i in [0..n]
+        input += 'name="producto[marca]['+i+']" '+'value="'+coleccion[i].innerText+'"'+' />'
+        input += ' <input class="producto_marca" type="hidden" '
+      $("#marca_inputs").html input
+
+    $("#marca_form").submit()
+    $("#marca_form").bind "ajax:success", (event, data, status, xhr) -> 
+      $("#body_prod").html xhr.responseText
+  
+  #Por procedencia
+  $("#Procedencia_prod").click (event) ->
+    $("#arrow_proc").remove()
+    imagen = '<img id="arrow_proc" src="/assets/flecha_select.png"/>'
+    $(event.target).append imagen
+    proc = event.target.innerText
+    elem = document.getElementById "proc_input"
+    elem.value = proc
+    value = elem.value
+    $("#proc_form").submit()
+    #En caso de exito se filtran las tablas
+    $("#proc_form").bind "ajax:success", (event, data, status, xhr) -> 
+      $("#body_prod").html xhr.responseText
+
+  #Por tipo
+  $("#Tipo_prod").click (event) ->
+    $("#arrow_tipo").remove()
+    imagen = '<img id="arrow_tipo" src="/assets/flecha_select.png"/>'
+    $(event.target).append imagen
+    tipo = event.target.innerText
+    input = document.getElementById "type_input"
+    input.value = tipo
+    $("#type_form").submit()
+    $("#type_form").bind "ajax:success", (event, data, status, xhr) -> 
+      $("#body_prod").html xhr.responseText

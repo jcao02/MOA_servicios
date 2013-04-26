@@ -1,40 +1,99 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Registro sanitario:</b>
-  <%= @producto.registro_sanitario %>
-</p>
-
-<p>
-  <b>Alimento:</b>
-  <%= @producto.alimento %>
-</p>
-
-<p>
-  <b>Nombre:</b>
-  <%= @producto.nombre %>
-</p>
-
-<p>
-  <b>Marca:</b>
-  <%= @producto.marca %>
-</p>
-
-<p>
-  <b>Pais elaboracion:</b>
-  <%= @producto.pais_elaboracion %>
-</p>
-
-<p>
-  <b>Fabricante:</b>
-  <%= @producto.fabricante %>
-</p>
-
-<p>
-  <b>Codigo arancelario:</b>
-  <%= @producto.codigo_arancelario %>
-</p>
-
-
-<%= link_to 'Edit', edit_producto_path(@producto) %> |
-<%= link_to 'Back', productos_path %>
+<table class="area_show">
+  <tr>
+    <td>
+      <div class="title_show">
+        <h2><%=@producto.nombre %></h2>
+      </div>
+    </td>
+    <td>
+      <div class="title_show">
+        <h2>Documentos</h2>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table class="tabla_show">
+        <tr>
+          <td>
+            <b>Nº Registro:</b>
+          </td>
+          <td>
+            <%= @producto.registro_sanitario %>
+          </td>
+        </tr>
+      <tr>
+        <td>
+          <b>Tipo:</b>
+        </td>
+        <td>
+          <% if @producto.alimento %>
+            Alimento
+          <% else %>
+            Licor
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Marca:</b>
+        </td>
+        <td>
+          <%= @producto.marca %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Pais elaboracion:</b>
+        </td>
+        <td>
+          <%= Carmen::Country.coded(@producto.pais_elaboracion).name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Fabricante:</b>
+        </td>
+        <td>
+          <%= @producto.fabricante %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Codigo arancelario:</b>
+        </td>
+        <td>
+          <%= @producto.codigo_arancelario %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <% if current_usuario.admin > 0 %>
+        <tr>
+          <td>
+            <button>
+              <%= link_to 'Editar Producto', edit_producto_path(@producto) %> 
+            </button>
+          </td>
+          <td>
+            <button>
+              <%= link_to 'Eliminar Producto', @producto, method: :delete, data: { confirm: '¿Esta seguro de eliminar este producto?'} %> 
+            </button>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    </td>
+    <td class="conf_list" valign="top">
+    </td>
+  </tr>
+</table>
+<div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>
+<%= javascript_tag do %>
+  marcasDisponibles =  <%=raw @marcas.to_json %>
+  fabricantesDisponibles =  <%=raw @fabricantes.to_json %>
+<% end %>

@@ -15,7 +15,6 @@
  *= require formalize
  *= require formtastic_changes
  *= require formtastic
- *= require dataTables/jquery.dataTables
  *= require jquery.ui.all
  */
 
@@ -24,6 +23,7 @@
 $hover_color      : #718fb0;
 $background_color : #133a6b;
 $border_color     : #555;
+$list_selected : #396877; 
 
 body {
   font-family: helvetica !important;
@@ -275,6 +275,10 @@ footer {
 }
 
 /*************************END FOOTER*************************/
+.ui-widget-header{
+  background: $background_color !important;
+  color: #FFF !important;
+}
 
 /*Clase para las dataTables que listan datos*/
 .new_element {
@@ -284,4 +288,27 @@ footer {
 
 .titulos_list {
 
+}
+
+/*Tablas de filtrado*/
+.area_filtro{
+  margin: auto;
+  margin-top: 40px;
+  height: 300px;
+  width: 740px;
+  border-bottom: 2px solid $list_selected;
+  table{
+    th{
+    }
+  }
+  .filtro_estatico{
+    padding:0;
+    float:left;
+    display:inline;
+  }
+  .filtro_dinamico{
+    float:left;
+    width: 750px;
+
+  }
 }

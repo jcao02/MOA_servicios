@@ -56,5 +56,12 @@ gem 'formtastic'
 #jquery ui
 gem "jquery-ui-rails", "~> 4.0.2"
 
+#claves foraneas (no funciona con sqlite3, pero puede ser util cuando lo montemos con postgre o mysql
+gem 'foreigner'
+
+#gema para listar paises
+gem 'country-select'
+gem 'carmen-rails', '~> 1.0.0'
+
 #jquery validations
 #gem 'jquery-validation-rails'

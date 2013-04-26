@@ -13,6 +13,15 @@ AppDocumento::Application.routes.draw do
       get :send_password
     end
   end
+
+  #Enrutamiento sobre modelo producto
+  resources :productos do
+    collection do
+      post :prov_filter
+      post :type_filter
+      post :marca_filter
+    end
+  end
   
   
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path

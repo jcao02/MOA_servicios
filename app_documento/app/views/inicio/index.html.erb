@@ -24,57 +24,16 @@
             <% end %>
           </thead>
           <tbody>
-            <!-- NOTE: for de los porductos/registros -->
-            <tr>
-              <td>Producto 1</td>
-              <td>Marca 1</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 2</td>
-              <td>Marca 2</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 3</td>
-              <td>Marca 3</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 3 4</td>
-              <td>Marca 4</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 4</td>
-              <td>Marca 3</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 5</td>
-              <td>Marca 5</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 5</td>
-              <td>Marca 5</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 5</td>
-              <td>Marca 5</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 5</td>
-              <td>Marca 5</td>
-              <td>XXXXXX</td>
-            </tr>
-            <tr>
-              <td>Producto 5</td>
-              <td>Marca 5</td>
-              <td>XXXXXX</td>
-            </tr>
+            <% if current_usuario.admin == 0%>
+              <!-- NOTE: for de los porductos/registros -->
+              <% @productos.each do |p|%>
+                <tr>
+                  <td><%= link_to p.nombre, p%></td>
+                  <td><%=p.marca %></td>
+                  <td><%=p.registro_sanitario%></td>
+                </tr>
+              <% end %>
+            <% end %>
           </tbody>
         </table>
       </td>

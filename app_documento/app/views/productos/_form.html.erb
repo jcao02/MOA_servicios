@@ -1,45 +1,64 @@
-<%= form_for(@producto) do |f| %>
-  <% if @producto.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@producto.errors.count, "error") %> prohibited this producto from being saved:</h2>
-
-      <ul>
-      <% @producto.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :registro_sanitario %><br />
-    <%= f.text_field :registro_sanitario %>
-  </div>
-  <div class="field">
-    <%= f.label :alimento %><br />
-    <%= f.check_box :alimento %>
-  </div>
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :marca %><br />
-    <%= f.text_field :marca %>
-  </div>
-  <div class="field">
-    <%= f.label :pais_elaboracion %><br />
-    <%= f.text_field :pais_elaboracion %>
-  </div>
-  <div class="field">
-    <%= f.label :fabricante %><br />
-    <%= f.text_field :fabricante %>
-  </div>
-  <div class="field">
-    <%= f.label :codigo_arancelario %><br />
-    <%= f.text_field :codigo_arancelario %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= semantic_form_for @producto do |f| %>
+  <ul>
+    <table class="table_forms">
+      <thead>
+        <tr>
+          <td colspan="2">
+            <h1>
+              <%=flash[:accion]%>
+            </h1>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= f.input :registro_sanitario, :label => "Registro Sanitario" %>
+          </td>
+          <td>
+            <%= f.input :alimento, :as => :radio, :collection => [["Alimento", true], ["Licor", false]], :label => "Tipo"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :nombre, :label => "Nombre"%>
+          </td>
+          <td>
+            <%= f.input :marca, :label => "Marca"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :pais_elaboracion, :as => :country, :label => "País de origen"%>
+          </td>
+          <td>
+            <%= f.input :fabricante, :label => "Fabricante"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :codigo_arancelario, :label => "Código alancelario"%>
+          </td>
+          <% if flash[:accion] == "Crear Producto"%>
+          <td>
+            <%= f.input :usuario_id, :as => :select, :collection => @companias, :label => "Cliente"%>
+          </td>
+        <% else %>
+          <td></td>
+        <% end %>
+        </tr>
+        <tr>
+          <td>
+            <%= f.action :submit, :label => flash[:accion] %>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ul>
+<% end %>
+<%= javascript_tag do %>
+  marcasDisponibles =  <%=raw @marcas.to_json %>
+  fabricantesDisponibles =  <%=raw @fabricantes.to_json %>
 <% end %>

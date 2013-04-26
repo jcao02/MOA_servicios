@@ -1,0 +1,12 @@
+<% @productos.each do |producto| %>
+  <tr>
+    <td>
+      <% if producto.alimento %>
+        <%= image_tag("food.png", :id => "food", :class => "foodwine", :title => "Alimento") %>
+      <% else %>
+        <%= image_tag("wine.png", :id => "wine", :class => "foodwine", :title => "Licor") %>
+      <% end %>
+      <%= link_to "#{producto.nombre} </br> <span style='font-size:10px;'>#{producto.registro_sanitario}</span>".html_safe, producto %> </br>
+    </td>
+  </tr>
+<% end %>

@@ -1,13 +1,134 @@
 class ProductosController < ApplicationController
+  respond_to :html, :js
   # GET /productos
   # GET /productos.json
   def index
-    @productos = Producto.all
-
+    if current_usuario.admin != 0
+      flash[:title] = "Productos"
+      @productos = Producto.all
+    else
+      flash[:title] = "Mis Productos"
+      @productos = Producto.where(:usuario_id => current_usuario.id)
+    end
+    @marcas = get_marcas(@productos)
+    #Conjuntos de filtrado
+    flash[:productos] = []
+    4.times { flash[:productos].push(@productos) }
+    
+    @producto = Producto.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @productos }
     end
+  end
+
+  def get_fabricantes(productos)
+    fabricantes= []
+    #Lista de marcas sin repeticiones
+    productos.each do |p|
+      if not fabricantes.include?(p.fabricante)
+        fabricantes.push(p.fabricante)
+      end
+    end
+    return fabricantes
+  end
+
+  def get_marcas(productos)
+    marcas = []
+    #Lista de marcas sin repeticiones
+    productos.each do |p|
+      if not marcas.include?(p.marca)
+        marcas.push(p.marca)
+      end
+    end
+    return marcas
+  end
+  #Filtrar por provenencia
+  def prov_filter
+    prov = params[:producto][:pais_elaboracion]
+    todo = flash[:productos][0]
+    
+    #Elimina todos los espacios en blanco
+    prov.gsub!(/\s+/, "")
+
+    if prov == "Todo"
+      puts "todo"
+      filtro = todo
+    elsif prov == "Nacional"
+      filtro = todo.select{ |x| x.pais_elaboracion == "VE" }
+    else
+      filtro = todo.select{ |x| x.pais_elaboracion != "VE" }
+    end
+
+    flash[:productos][1] = filtro
+    @productos = flash[:productos][0]
+    for i in 1..3
+      @productos = @productos & flash[:productos][i]
+    end
+    @marcas = get_marcas(@productos)
+    flash.keep
+    respond_with(@productos, @marcas,:layout => false)
+  end
+
+  #Filtrar por tipo 
+  def type_filter
+    tipo = params[:producto][:alimento]
+    todo = flash[:productos][0]
+  
+    #Elimina todos los espacios en blanco
+    tipo.gsub!(/\s+/, "")
+
+    if tipo == "Todo"
+      filtro = todo
+    elsif tipo == "Alimento"
+      filtro = todo.select{ |x| x.alimento == true }
+    else
+      filtro = todo.select{ |x| x.alimento == false }
+    end
+
+    flash[:productos][2] = filtro
+    @productos = flash[:productos][0]
+    for i in 1..3
+      @productos = @productos & flash[:productos][i]
+    end
+    flash.keep
+    @marcas = get_marcas(@productos)
+    render "prov_filter", :layout => false
+  end
+
+  #Filtrar por marca
+  def marca_filter
+    if params.has_key?("producto")
+      marca = params[:producto][:marca]
+    else
+      marca = []
+    end
+    todo = flash[:productos][0]
+    filtro = []
+
+    if marca.empty?()
+      filtro = todo
+    else
+      for index, elem in marca
+        filtro += todo.select{ |x| x.marca == elem }
+      end
+    end
+
+    #En este caso no se modifica el cjto de marcas.
+    prod = flash[:productos][0]
+    for i in 1..3
+      prod = prod & flash[:productos][i]
+    end
+
+    @marcas = get_marcas(prod)
+
+    flash[:productos][3] = filtro
+    @productos = flash[:productos][0]
+    for i in 1..3
+      @productos = @productos & flash[:productos][i]
+    end
+    flash.keep
+    render "prov_filter", :layout => false
   end
 
   # GET /productos/1
@@ -25,6 +146,16 @@ class ProductosController < ApplicationController
   # GET /productos/new.json
   def new
     @producto = Producto.new
+    @producto.alimento = true   #Para que aparezca un default en el select
+    usuarios = Usuario.all     #Para coleccion del dueño del producto
+    prod = Producto.all
+    @marcas = get_marcas(prod)
+    @fabricantes = get_fabricantes(prod)
+    @companias = []
+    for elem in usuarios do
+      @companias.push([elem.compania, elem.id])
+    end
+    flash[:accion] = "Crear Producto"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +166,10 @@ class ProductosController < ApplicationController
   # GET /productos/1/edit
   def edit
     @producto = Producto.find(params[:id])
+    prod = Producto.all
+    @marcas = get_marcas(prod)
+    @fabricantes = get_fabricantes(prod)
+    flash[:accion] = "Editar Producto"
   end
 
   # POST /productos
@@ -47,6 +182,7 @@ class ProductosController < ApplicationController
         format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
         format.json { render json: @producto, status: :created, location: @producto }
       else
+        flash.keep
         format.html { render action: "new" }
         format.json { render json: @producto.errors, status: :unprocessable_entity }
       end
@@ -68,6 +204,7 @@ class ProductosController < ApplicationController
       end
     end
   end
+
 
   # DELETE /productos/1
   # DELETE /productos/1.json

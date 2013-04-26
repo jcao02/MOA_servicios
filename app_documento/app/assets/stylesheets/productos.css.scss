@@ -2,93 +2,94 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#food, #wine {
-  height: 30px;
+$list_even     : #5294AA;
+$list_hover    : #74B6CC;
+$list_selected : #396877; 
+
+#food, #wine{
+  height: 20px;
 }
 
-.sort, .filter {
-  display: none;
+#arrow_proc, #arrow_tipo{
+  height:15px;
+  float: right;
 }
 
-#productos {
-  border: 0;
-  width: 800px;
-
-  tbody {
-    tr:nth-child(even) {
-      background-color: #5294aa;
-
-      td.sorting_1, td.sorting_2, td.sorting_3 {
-        background-color: transparent;
-      }
-    }
-
-    tr:nth-child(odd) {
-      background-color: #fff;
-
-      td.sorting_1, td.sorting_2, td.sorting_3 {
-        background-color: transparent;
-      }
-    }
-
-    td {
-      text-align: center;
-      min-width: 70px;
-      max-width: 70px;
-    }
-
-    tr:hover {
-      background-color: #74b6cc;
+.filtro_wrapper{
+  float:left;
+  height:300px;
+  width:120px;
+  border-right: 2px solid $list_selected;
+}
+#Tipo_prod, #Procedencia_prod{
+  float:left;
+  width: 120px;
+  table-layout:fixed;
+  th{
+    border-bottom: 2px solid $list_selected;
+  }
+  tr{
+    height: 26px !important;
+    width: 302px;
+    cursor:pointer;
+  }
+  tbody{
+    tr :hover{
+      background-color: $list_even;
     }
   }
-}
-
-.remX {
-  font-size: 25px;
-}
-
-.tipoProd {
-  min-width: 20px !important;
-  max-width: 20px !important;
-  width: 20px !important;
-  text-align: center;
-
-  img { // Para la imagen de lupa
-    width: 20px;
-  }
-
-  select {
-    width: 10px !important;
+  .fill_row{
   }
 }
 
-.regisProd {
-  min-width: 70px;
-  max-width: 70px;
-  width: 70px;
-}
-
-.nombreProd {
-  input {
-    width: 300px;
+#productos_wrapper{
+  border-left: 2px solid $list_selected;
+  tbody{
+    tr{
+      padding:0px;
+      margin:0px;
+    }
+    td{
+      text-align:center;
+    }
   }
 }
 
-.paisProd {
-  min-width: 100px;
-  max-width: 100px;
-  width: 100px;
-}
+#productos_wrapper, #marcas_wrapper {
+  float:left;
+  width: 250px;
+  height:300px;
+  th{
+    border-bottom: 2px solid $list_selected;
+  }
+  tr{
+    height: 26px;
+    width: 302px;
+    cursor:pointer;
+  }
 
-.marcaProd {
-  min-width: 80px;
-  max-width: 80px;
-  width: 80px;
-  input {
-    width: 80px;
+  tbody{
+    tr :hover, tr td.highlighted{
+      background-color:$list_even;
+    }
+  }
+
+  .rs_producto{
+    font-size: 10px;
+  }
+
+  /*Seleccion de filtro de marca*/
+  .row_selected td{
+    border: 3px solid $list_selected;
   }
 }
 
-.dataTables_wrapper {
-  height: 300px;
+#productos_filter, #marcas_filter{
+  margin-top: -38px;
+  input[type="text"]{
+  background: url(find.png) no-repeat scroll 3px 3px;
+  padding-left:30px;
+  width: 250px;
+  height: 20px;
+  }
 }

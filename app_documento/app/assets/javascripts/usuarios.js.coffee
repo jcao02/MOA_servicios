@@ -6,6 +6,7 @@ dataTable_opc =
   bScrollInfinite: true
   bScrollCollapse: true
   bPagination    : false
+  bScrollAutoCss : true
   sScrollY       : "250px"
   oLanguage :
     sSearch      : "Busqueda"
@@ -30,7 +31,7 @@ $(document).ready ->
   #Tipo de datos que se recibe por ajax html o strings
   $.ajaxSetup dataType: "html"
   #Datatables
-  $("#tabla_list_usuario").dataTable(dataTable_opc)
+  $("#tabla_list_usuario").dataTable dataTable_opc
   #Cambiar contraseña con ajax
   $("#cambiar_contr").click ->
     #Se crea funcion para generar el form para cambiarla
