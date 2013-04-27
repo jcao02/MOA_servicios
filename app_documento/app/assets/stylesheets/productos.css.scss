@@ -6,8 +6,27 @@ $list_even     : #5294AA;
 $list_hover    : #74B6CC;
 $list_selected : #396877; 
 
-#food, #wine{
+#food, #wine {
   height: 20px;
+}
+
+.conf_list{
+  ul{
+    li{
+      margin-top:5px;
+    }
+  }
+}
+
+.prod_title_icon {
+  height: 40px;
+  float:right;
+  margin-top: -50px;
+}
+
+.borrar_doc{
+  height: 20px;
+  float: right;
 }
 
 #arrow_proc, #arrow_tipo{

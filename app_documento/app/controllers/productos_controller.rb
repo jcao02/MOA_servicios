@@ -22,6 +22,27 @@ class ProductosController < ApplicationController
     end
   end
 
+  def productos_usuario
+    usuario = Usuario.find(params[:usuario])
+    flash[:title] = "Productos de "+usuario.compania
+    @productos = Producto.where(:usuario_id => usuario.id)
+    @marcas = get_marcas(@productos)
+    flash[:productos] = []
+    4.times { flash[:productos].push(@productos) }
+    @producto = Producto.new
+    render "index"
+  end
+
+  def get_documentos(producto)
+    documentos = Documento.where(:producto_id => producto.id)
+    dicc = TipoDocumento.new
+    tipos = []
+    for elem in documentos
+      tipos.push([elem, dicc.decode_documento(elem.tipo)])
+    end
+    return tipos
+  end
+
   def get_fabricantes(productos)
     fabricantes= []
     #Lista de marcas sin repeticiones
@@ -135,7 +156,9 @@ class ProductosController < ApplicationController
   # GET /productos/1.json
   def show
     @producto = Producto.find(params[:id])
-
+    flash[:producto] = @producto.id
+    flash.keep
+    @documentos = get_documentos(@producto)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @producto }
@@ -147,7 +170,7 @@ class ProductosController < ApplicationController
   def new
     @producto = Producto.new
     @producto.alimento = true   #Para que aparezca un default en el select
-    usuarios = Usuario.all     #Para coleccion del dueño del producto
+    usuarios = Usuario.where(:admin => 0)     #Para coleccion del dueño del producto
     prod = Producto.all
     @marcas = get_marcas(prod)
     @fabricantes = get_fabricantes(prod)

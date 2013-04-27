@@ -66,5 +66,7 @@ gem 'carmen-rails', '~> 1.0.0'
 #gema para subir archivos
 gem "paperclip", "~> 3.0"
 
+#gema para renderizar pdfs
+gem 'wicked_pdf'
 #jquery validations
 #gem 'jquery-validation-rails'

@@ -108,6 +108,9 @@
          <%= image_tag("/assets/delete.png", :class => "cos_icon")%>
          </li>
        <% end %>
+       <li>
+       <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
+       </li>
      </ul>
    </td>
  </tr>

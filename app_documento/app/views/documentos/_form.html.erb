@@ -1,6 +1,39 @@
 <%= semantic_form_for @documento do |f| %>
-  <%= f.input :tipo, :label => "Tipo" %>
-  <%= f.input :fecha_vencimiento, :as => :date, :label => "Fecha de Vencimiento" %>
-  <%= f.input :pdf, :as => :file, :label => "Archivo" %>
-  <%= f.action :submit, :label => "Agregar Documento" %>
+  <ul>
+    <table class="table_forms">
+      <thead>
+        <tr>
+          <td colspan="2">
+            <h1>
+              <%=flash[:accion]%>
+            </h1>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= f.input :tipo, :as => :select, :collection => @tipos, :label => "Tipo" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :pdf, :as => :file, :label => false %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <%= f.action :submit, :label => flash[:accion] %>
+            </center>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ul>
 <% end %>

@@ -2,11 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $background_color : #133a6b;
-
+#tabla_list_usuario{
+}
 #tabla_list_usuario_wrapper {
-  width: 100%;
-  height: 250px;
-
+  .dataTables_scrollBody{
+    height: 250px !important;
+  }
   td, th {
     max-width: 120px;
     /*Puntos suspensivos*/

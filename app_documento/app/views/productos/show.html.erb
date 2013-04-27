@@ -3,6 +3,11 @@
     <td>
       <div class="title_show">
         <h2><%=@producto.nombre %></h2>
+        <% if @producto.alimento %>
+          <%= image_tag "/assets/food.png", :class => "prod_title_icon" %>
+        <% else %>
+          <%= image_tag "/assets/wine.png", :class => "prod_title_icon" %>
+        <% end %>
       </div>
     </td>
     <td>
@@ -90,11 +95,17 @@
     </table>
     </td>
     <td class="conf_list" valign="top">
+      <ul>
+        <% @documentos.each do |d|%>
+          <li>
+          <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
+          <% if current_usuario.admin > 0 %>
+            <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), d[0], :method => :delete, data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
     </td>
   </tr>
 </table>
 <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>
-<%= javascript_tag do %>
-  marcasDisponibles =  <%=raw @marcas.to_json %>
-  fabricantesDisponibles =  <%=raw @fabricantes.to_json %>
-<% end %>
