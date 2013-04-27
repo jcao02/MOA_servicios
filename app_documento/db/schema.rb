@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(:version => 20130426235738) do
     t.string   "codigo_arancelario"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "usuario_id"
   end
 
   create_table "requisitos", :force => true do |t|
