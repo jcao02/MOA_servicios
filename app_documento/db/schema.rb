@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426152435) do
+ActiveRecord::Schema.define(:version => 20130426235738) do
 
   create_table "documentos", :force => true do |t|
     t.integer  "tipo"
@@ -20,8 +20,16 @@ ActiveRecord::Schema.define(:version => 20130426152435) do
     t.date     "fecha_emision"
     t.string   "archivo"
     t.integer  "producto_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "archivo_file_name"
+    t.string   "archivo_content_type"
+    t.integer  "archivo_file_size"
+    t.datetime "archivo_updated_at"
+    t.string   "pdf_file_name"
+    t.string   "pdf_content_type"
+    t.integer  "pdf_file_size"
+    t.datetime "pdf_updated_at"
   end
 
   add_index "documentos", ["producto_id"], :name => "index_documentos_on_producto_id"

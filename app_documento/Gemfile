@@ -63,5 +63,8 @@ gem 'foreigner'
 gem 'country-select'
 gem 'carmen-rails', '~> 1.0.0'
 
+#gema para subir archivos
+gem "paperclip", "~> 3.0"
+
 #jquery validations
 #gem 'jquery-validation-rails'

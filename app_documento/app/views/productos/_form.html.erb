@@ -58,7 +58,5 @@
     </table>
   </ul>
 <% end %>
-<%= javascript_tag do %>
-  marcasDisponibles =  <%=raw @marcas.to_json %>
-  fabricantesDisponibles =  <%=raw @fabricantes.to_json %>
+<%= content_tag :div, :id => "autocomplete", :data => {:marcasDisponibles => @marcas, :fabricantesDisponibles => @fabricantes } do %>
 <% end %>

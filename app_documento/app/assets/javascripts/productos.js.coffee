@@ -36,9 +36,12 @@ eliminar_class = (elem, clase) ->
   elems = "#"+elem.id + " tr td"
   $(elems).removeClass clase
 
+
 $(document).ready ->
   $("#productos").dataTable dataTable_opc 
   $("#marcas").dataTable dataTableM_opc 
+  marcasDisponibles      = $("#autocomplete").data("marcasdisponibles")
+  fabricantesDisponibles = $("#autocomplete").data("fabricantesdisponibles")
   $("#producto_marca").autocomplete source : marcasDisponibles
   $("#producto_fabricante").autocomplete source : fabricantesDisponibles
   #Fltrado
