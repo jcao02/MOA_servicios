@@ -29,7 +29,7 @@
         </tr>
         <tr>
           <td>
-            <%= f.input :pais_elaboracion, :as => :country, :label => "País de origen"%>
+            <%= f.input :pais_elaboracion, :as => :country, :label => "Procedencia"%>
           </td>
           <td>
             <%= f.input :fabricante, :label => "Fabricante"%>
@@ -37,7 +37,7 @@
         </tr>
         <tr>
           <td>
-            <%= f.input :codigo_arancelario, :label => "Código alancelario"%>
+            <%= f.input :codigo_arancelario, :label => "Código Arancelario"%>
           </td>
           <% if flash[:accion] == "Crear Producto"%>
           <td>
@@ -49,9 +49,13 @@
         </tr>
         <tr>
           <td>
-            <%= f.action :submit, :label => flash[:accion] %>
           </td>
           <td>
+            <%= f.action :submit, :label => flash[:accion] %>
+            <button>
+              <%= link_to 'Volver', :back %>
+            </button>
+
           </td>
         </tr>
       </tbody>

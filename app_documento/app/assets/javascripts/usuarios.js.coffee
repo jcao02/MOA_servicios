@@ -9,7 +9,7 @@ dataTable_opc =
   bScrollAutoCss : true
   sScrollY       : "270px"
   oLanguage :
-    sSearch      : "Busqueda"
+    sSearch      : "Búsqueda"
     sInfo        : ""
     sInfoFiltered: ""
     sInfoEmpty   : ""
@@ -59,7 +59,7 @@ $(document).ready ->
       $(this).prepend(error)
     #Si no, se muestra mensaje de error
     else
-      mensaje = '<center><p style="color:green; font-size: 14px; margin-top:170px;">Contraseña cambiada exitosamente </p></center>'
+      mensaje = '<center><p style="color:green; font-size: 14px; margin-top:170px;">Contraseña cambiada exitosamente! </p></center>'
       $(this).html mensaje
   #Funcion en caso de error (no deberia caer nunca aqui)
   ).bind("ajax:error", (xhr, data, status, error) -> alert "Error")

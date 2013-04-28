@@ -10,7 +10,7 @@ dataTable_opc =
   bScrollAutoCss : true
   sScrollY       : "250px"
   oLanguage :
-    sSearch      : "Busqueda"
+    sSearch      : "Búsqueda"
     sInfo        : ""
     sInfoFiltered: ""
     sInfoEmpty   : ""

@@ -23,7 +23,7 @@
 $hover_color      : #718fb0;
 $background_color : #133a6b;
 $border_color     : #555;
-$list_selected : #396877; 
+$list_selected    : #396877; 
 
 body {
   font-family: helvetica !important;
@@ -40,6 +40,15 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+button {
+  padding:4px !important;
+  font-weight: bold !important;
+}
+
+h1, h2, h3 {
+  font-style: italic;
 }
 
 ul {

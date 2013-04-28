@@ -96,33 +96,33 @@ es:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
-      accepted: debe ser acep
-      blank: no puede estar en blanco
-      confirmation: no coincide con la confirmación
-      empty: no puede estar vacío
-      equal_to: debe ser igual a %{count}
-      even: debe ser un número par
-      exclusion: está reservado
-      greater_than: debe ser mayor que %{count}
-      greater_than_or_equal_to: debe ser mayor o igual que %{count}
-      inclusion: no está incluído en la lista
-      invalid: no es válido
-      less_than: debe ser menor que %{count}
-      less_than_or_equal_to: debe ser menor o igual que %{count}
-      not_a_number: no es un número
-      not_an_integer: debe ser un entero
-      odd: debe ser un número impar
-      record_invalid: ! 'La validación falló: %{errors}'
-      taken: ya está en  uso
+      accepted: Campo debe ser aceptado.
+      blank: Campo requerido.
+      confirmation: La confirmación no coincide.
+      empty: Campo no puede estar vacío.
+      equal_to: Debe ser igual a %{count}.
+      even: Debe ser un número par.
+      exclusion: Valor reservado.
+      greater_than: Valor debe ser mayor que %{count}.
+      greater_than_or_equal_to: Valor debe ser mayor o igual que %{count}.
+      inclusion: No está incluído en la lista.
+      invalid: Valor inválido.
+      less_than: Valor debe ser menor que %{count}.
+      less_than_or_equal_to: Valor debe ser menor o igual que %{count}.
+      not_a_number: Campo debe ser un número.
+      not_an_integer: Campo debe ser un entero.
+      odd: Valor debe ser un número impar.
+      record_invalid: ! 'Validación falló: %{errors}'
+      taken: Valor ingresado ya está en uso.
       too_long:
-        one: es demasiado largo (máximo 1 caracter)
-        other: es demasiado largo (máximo %{count} caracteres)
+        one: Valor demasiado largo (máximo 1 caracter)
+        other: Valor demasiado largo (máximo %{count} caracteres)
       too_short:
-        one: es demasiado corto (mínimo 1 caracter)
-        other: es demasiado corto (mínimo %{count} caracteres)
+        one: Valor demasiado corto (mínimo 1 caracter)
+        other: Valor demasiado corto (mínimo %{count} caracteres)
       wrong_length:
-        one: longitud errónea (debe ser de 1 caracter)
-        other: longitud errónea (debe ser de %{count} caracteres)
+        one: Debe ser de 1 caracter.
+        other: Debe ser de %{count} caracteres).
     template:
       body: ! 'Revise que los siguientes campos sean válidos:'
       header:

@@ -1,8 +1,11 @@
 <h1><%=flash[:title]%></h1>
 
 <% if current_usuario.admin > 0 %>
-  <button><%= link_to 'Nuevo producto', new_producto_path %></button>
+  <button>
+    <%= link_to 'Nuevo producto', new_producto_path %>
+  </button>
 <% end %>
+
 <div class="area_filtro" id="area_filtro_prod">
   <div class="filtro_dinamico">
     <div class="filtro_wrapper">

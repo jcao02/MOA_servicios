@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class UsuariosController < ApplicationController
   before_filter :authenticate_usuario! #Para que se requiera estar logueado
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
@@ -99,12 +100,12 @@ class UsuariosController < ApplicationController
           sign_in(@usuario, :bypass => true) #Evita que cierre sesion automaticamente
         end
       elsif !@usuario.valid_password?(oldpass)
-          @usuario.errors[:errorpassword] = "Contrasena actual invalida"
+          @usuario.errors[:errorpassword] = "Contraseña actual inválida."
       else
-          @usuario.errors[:errorpassword] = "Contrasenas no coinciden"
+          @usuario.errors[:errorpassword] = "Contraseñas no coinciden."
       end
       if lengthCondition
-        @usuario.errors[:errorlength] = "Constrasena nueva invalida (debe tener entre 8 y 16 caracteres)"
+        @usuario.errors[:errorlength] = "Constraseña nueva inválida (debe tener entre 8 y 16 caracteres)."
       end
       format.json { render json: @usuario.errors }
     end

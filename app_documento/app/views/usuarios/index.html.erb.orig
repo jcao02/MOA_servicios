@@ -19,11 +19,19 @@
       <tr>
         <td><%= link_to usuario.login, usuario, :title => usuario.login %></td>
         <%= content_tag(:td, usuario.compania, :title => usuario.compania) %>
-        <% if usuario.nombre != nil && usuario.apellido != nil %>
-          <%= content_tag(:td, (usuario.nombre+" "+usuario.apellido), :title => (usuario.nombre+" "+usuario.apellido)) %>
-        <% end %>
+        <%= content_tag(:td, (usuario.nombre+" "+usuario.apellido), :title => (usuario.nombre+" "+usuario.apellido)) %>
         <td>
           <% case usuario.admin
+<<<<<<< HEAD
+            when 0 %>
+            Cliente
+            <%   when 1 %>
+            Admin
+            <%   when 2 %>
+            Super-Admin
+            <%   else   %>
+            Error: Contactar servicio técnico.
+=======
                when 0 %>
                  Cliente
           <%   when 1 %>
@@ -32,6 +40,7 @@
                  S-Admin
           <%   else   %>
                  Contactar servicio
+>>>>>>> 4cbbdbf3c20c253e021dcc61356b552fdb2fecdc
           <% end %>
         </td>
       </tr>

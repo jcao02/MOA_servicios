@@ -87,25 +87,40 @@
            Contactar servicio
          <% end %>
        </td>
+       <tr>
+        <td>
+        <%if current_usuario.admin > 0 %>
+          <button style= Padding:10px>
+            <%= link_to 'Volver', usuarios_path %>
+         </button>
+         <%else %>
+         <button style= Padding:10px>
+            <%= link_to 'Volver', inicio_index_path %>
+         </button>
+         <%end%>
+           
+     </td>
+       </tr>
      </table>
    </td>
    <td class="conf_list" valign="top">
      <ul>
        <% if current_usuario.admin == 2  or  current_usuario.login == @usuario.login %>
          <li>
+         <%= image_tag("/assets/edit.jpg", :class => "cos_icon", :title => "Editar Perfil") %>          
          <%= link_to 'Editar Perfil', edit_usuario_path(@usuario)%>
-         <%=link_to image_tag("/assets/edit.jpg", :class => "cos_icon"), edit_usuario_path(@usuario) %>
          </li>
        <% end %>
        <% if current_usuario.login == @usuario.login%>
          <li>
-         <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> <%= image_tag("/assets/password.png", :class => "cos_icon")%>
+         <%= image_tag("/assets/password.png", :class => "cos_icon")%>
+         <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> 
          </li>
        <%end%>
        <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
          <li>
-         <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Estas seguro que deseas eliminar este usuario?' } %>
-         <%= image_tag("/assets/delete.png", :class => "cos_icon")%>
+         <%= image_tag("/assets/delete.png", :class => "cos_icon", :title => "Eliminar Usuario")%>
+         <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Seguro desea eliminar este usuario?' } %>
          </li>
        <% end %>
        <li>
