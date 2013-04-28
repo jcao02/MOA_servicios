@@ -4,16 +4,13 @@ ol {
   list-style: none !important;
 }
 
-
 form.formtastic {
  /* height: 300px;*/
 }
 
-
 form.formtastic input {
   border-radius: 3px;
 }
-
 
 form.formtastic {
 
@@ -34,7 +31,8 @@ form.formtastic {
     }
 
     input[type="submit"]{
-      padding: 10px;
+      padding: 4px;
+      font-weight: bold;
       margin-bottom: 5px;
     }
     thead {

@@ -53,6 +53,9 @@ gem 'jquery-datatables-rails'
 gem 'formalize-rails'
 gem 'formtastic'
 
+# Para validar fechas en el modelo
+gem 'date_validator'
+
 #jquery ui
 gem "jquery-ui-rails", "~> 4.0.2"
 

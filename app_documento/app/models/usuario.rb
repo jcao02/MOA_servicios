@@ -7,7 +7,7 @@ class Usuario < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, #:registerable,
     :rememberable, :trackable, :authentication_keys => [ :login ]
 
-  # Setup accessible (or protected) attributes for your model
+  # Atributos accesibles para el modelo
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail, :nombre, :rif, :telefono
 
@@ -24,7 +24,7 @@ class Usuario < ActiveRecord::Base
   validates :telefono, presence: true, format: { with: VALID_TELEFONO_REGEX }
 
   #Validaciones rif
-  VALID_RIF_REGEX = /\A[a-zA-Z0-9\-]*\z/
+  VALID_RIF_REGEX = /\A([A-Z]-\d{7}-\d)?\z/
   validates :rif, format: { with: VALID_RIF_REGEX }
 
   #Validaciones login, string SIN espacios

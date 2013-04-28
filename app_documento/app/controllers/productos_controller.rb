@@ -135,7 +135,7 @@ class ProductosController < ApplicationController
   # GET /productos/1.json
   def show
     @producto = Producto.find(params[:id])
-
+    @cliente = Usuario.find(@producto.usuario_id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @producto }
@@ -147,7 +147,7 @@ class ProductosController < ApplicationController
   def new
     @producto = Producto.new
     @producto.alimento = true   #Para que aparezca un default en el select
-    usuarios = Usuario.all     #Para coleccion del dueño del producto
+    usuarios = Usuario.all      #Para coleccion del dueño del producto
     prod = Producto.all
     @marcas = get_marcas(prod)
     @fabricantes = get_fabricantes(prod)
@@ -166,9 +166,14 @@ class ProductosController < ApplicationController
   # GET /productos/1/edit
   def edit
     @producto = Producto.find(params[:id])
+    usuarios = Usuario.all
     prod = Producto.all
     @marcas = get_marcas(prod)
     @fabricantes = get_fabricantes(prod)
+    @companias = []
+    for elem in usuarios do
+      @companias.push([elem.compania, elem.id])
+    end
     flash[:accion] = "Editar Producto"
   end
 

@@ -15,6 +15,16 @@
   <tr>
     <td>
       <table class="tabla_show">
+        <% if current_usuario.admin > 0 %>
+        <tr>
+          <td>
+            <b>Cliente:</b>
+          </td>
+          <td>
+            <%= @cliente.compania %>
+          </td>
+        </tr>
+        <% end %>
         <tr>
           <td>
             <b>Nº Registro:</b>
@@ -77,12 +87,12 @@
         <tr>
           <td>
             <button>
-              <%= link_to 'Editar Producto', edit_producto_path(@producto) %> 
+              <%= link_to 'Editar', edit_producto_path(@producto) %> 
             </button>
           </td>
           <td>
             <button>
-              <%= link_to 'Eliminar Producto', @producto, method: :delete, data: { confirm: '¿Esta seguro de eliminar este producto?'} %> 
+              <%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Esta seguro de eliminar este producto?'} %> 
             </button>
           </td>
         </tr>
