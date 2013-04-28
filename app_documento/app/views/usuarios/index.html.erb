@@ -19,7 +19,9 @@
       <tr>
         <td><%= link_to usuario.login, usuario, :title => usuario.login %></td>
         <%= content_tag(:td, usuario.compania, :title => usuario.compania) %>
-        <%= content_tag(:td, (usuario.nombre+" "+usuario.apellido), :title => (usuario.nombre+" "+usuario.apellido)) %>
+        <% if usuario.nombre != nil && usuario.apellido != nil %>
+          <%= content_tag(:td, (usuario.nombre+" "+usuario.apellido), :title => (usuario.nombre+" "+usuario.apellido)) %>
+        <% end %>
         <td>
           <% case usuario.admin
                when 0 %>
