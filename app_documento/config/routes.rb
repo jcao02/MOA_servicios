@@ -20,6 +20,7 @@ AppDocumento::Application.routes.draw do
       post :prov_filter
       post :type_filter
       post :marca_filter
+      get  :productos_usuario
     end
   end
   

@@ -10,34 +10,26 @@
 <table id="tabla_list_usuario">
   <thead>
       <th>Login</th>
-      <th>Mail</th>
-      <th>Telefono</th>
-      <th>Nombre</th>
-      <th>Apellido</th>
       <th>Compania</th>
-      <th>Rif</th>
+      <th>Nombre</th>
       <th>Permisos</th>
   </thead>
   <tbody>
     <% @usuarios.each do |usuario| %>
       <tr>
-        <td><%= link_to usuario.login, usuario %></td>
-        <td><%= usuario.email %></td>
-        <td><%= usuario.telefono %></td>
-        <td><%= usuario.nombre %></td>
-        <td><%= usuario.apellido %></td>
-        <td><%= usuario.compania %></td>
-        <td><%= usuario.rif %></td>
+        <td><%= link_to usuario.login, usuario, :title => usuario.login %></td>
+        <%= content_tag(:td, usuario.compania, :title => usuario.compania) %>
+        <%= content_tag(:td, (usuario.nombre+" "+usuario.apellido), :title => (usuario.nombre+" "+usuario.apellido)) %>
         <td>
           <% case usuario.admin
-            when 0 %>
-            Cliente
-            <%   when 1 %>
-            Admin
-            <%   when 2 %>
-            Super-Admin
-            <%   else   %>
-            Error: Contactar servicio técnico.
+               when 0 %>
+                 Cliente
+          <%   when 1 %>
+                 Admin
+          <%   when 2 %>
+                 S-Admin
+          <%   else   %>
+                 Contactar servicio
           <% end %>
         </td>
       </tr>

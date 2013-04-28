@@ -123,6 +123,9 @@
          <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Seguro desea eliminar este usuario?' } %>
          </li>
        <% end %>
+       <li>
+       <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
+       </li>
      </ul>
    </td>
  </tr>

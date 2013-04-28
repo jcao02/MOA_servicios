@@ -218,6 +218,15 @@ class ProductosController < ApplicationController
         format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
         format.json { render json: @producto, status: :created, location: @producto }
       else
+        usuarios = Usuario.all      #Para coleccion del dueño del producto
+        prod = Producto.all
+        @marcas = get_marcas(prod)
+        @fabricantes = get_fabricantes(prod)
+        @companias = []
+        for elem in usuarios do
+          @companias.push([elem.compania, elem.id])
+        end
+        
         flash.keep
         format.html { render action: "new" }
         format.json { render json: @producto.errors, status: :unprocessable_entity }

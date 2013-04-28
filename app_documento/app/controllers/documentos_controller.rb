@@ -13,11 +13,11 @@ class DocumentosController < ApplicationController
   # GET /documentos/1
   # GET /documentos/1.json
   def show
-    @documento = Documento.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @documento }
+      format.pdf do
+        render :pdf => @documento.pdf_file_name
+        end
     end
   end
 
@@ -25,6 +25,10 @@ class DocumentosController < ApplicationController
   # GET /documentos/new.json
   def new
     @documento = Documento.new
+    dicc = TipoDocumento.new
+    @tipos = dicc.get_diccionario
+    flash[:accion] = "Agregar Documento"
+    flash.keep
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,11 +45,13 @@ class DocumentosController < ApplicationController
   # POST /documentos.json
   def create
     @documento = Documento.new(params[:documento])
+    @documento.producto_id = flash[:producto]
+    @producto = Producto.find(flash[:producto])
 
     respond_to do |format|
       if @documento.save
-        format.html { redirect_to @documento, notice: 'Documento was successfully created.' }
-        format.json { render json: @documento, status: :created, location: @documento }
+        format.html { redirect_to @producto, notice: 'Documento was successfully created.', :format => :pdf }
+        format.json { render json: @producto, status: :created, location: @documento }
       else
         format.html { render action: "new" }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
@@ -73,10 +79,11 @@ class DocumentosController < ApplicationController
   # DELETE /documentos/1.json
   def destroy
     @documento = Documento.find(params[:id])
+    producto = Producto.find(@documento.producto_id)
     @documento.destroy
 
     respond_to do |format|
-      format.html { redirect_to documentos_url }
+      format.html { redirect_to producto }
       format.json { head :no_content }
     end
   end
