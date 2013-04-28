@@ -22,6 +22,27 @@ class ProductosController < ApplicationController
     end
   end
 
+  def productos_usuario
+    usuario = Usuario.find(params[:usuario])
+    flash[:title] = "Productos de "+usuario.compania
+    @productos = Producto.where(:usuario_id => usuario.id)
+    @marcas = get_marcas(@productos)
+    flash[:productos] = []
+    4.times { flash[:productos].push(@productos) }
+    @producto = Producto.new
+    render "index"
+  end
+
+  def get_documentos(producto)
+    documentos = Documento.where(:producto_id => producto.id)
+    dicc = TipoDocumento.new
+    tipos = []
+    for elem in documentos
+      tipos.push([elem, dicc.decode_documento(elem.tipo)])
+    end
+    return tipos
+  end
+
   def get_fabricantes(productos)
     fabricantes= []
     #Lista de marcas sin repeticiones
@@ -135,7 +156,13 @@ class ProductosController < ApplicationController
   # GET /productos/1.json
   def show
     @producto = Producto.find(params[:id])
+<<<<<<< HEAD
     @cliente = Usuario.find(@producto.usuario_id)
+=======
+    flash[:producto] = @producto.id
+    flash.keep
+    @documentos = get_documentos(@producto)
+>>>>>>> 4cbbdbf3c20c253e021dcc61356b552fdb2fecdc
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @producto }
@@ -147,7 +174,11 @@ class ProductosController < ApplicationController
   def new
     @producto = Producto.new
     @producto.alimento = true   #Para que aparezca un default en el select
+<<<<<<< HEAD
     usuarios = Usuario.all      #Para coleccion del dueño del producto
+=======
+    usuarios = Usuario.where(:admin => 0)     #Para coleccion del dueño del producto
+>>>>>>> 4cbbdbf3c20c253e021dcc61356b552fdb2fecdc
     prod = Producto.all
     @marcas = get_marcas(prod)
     @fabricantes = get_fabricantes(prod)
@@ -187,15 +218,6 @@ class ProductosController < ApplicationController
         format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
         format.json { render json: @producto, status: :created, location: @producto }
       else
-        usuarios = Usuario.all      #Para coleccion del dueño del producto
-        prod = Producto.all
-        @marcas = get_marcas(prod)
-        @fabricantes = get_fabricantes(prod)
-        @companias = []
-        for elem in usuarios do
-          @companias.push([elem.compania, elem.id])
-        end
-        
         flash.keep
         format.html { render action: "new" }
         format.json { render json: @producto.errors, status: :unprocessable_entity }

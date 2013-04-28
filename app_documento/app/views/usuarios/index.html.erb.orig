@@ -1,0 +1,49 @@
+<link href="/assets/dataTables/jquery.dataTables.css?body=1" media="all" rel="stylesheet" type="text/css" />
+<span class="titulos_list">
+  <h1>Usuarios</h1>
+</span>
+
+<button class="new_element">
+  <%= link_to 'Nuevo Usuario', new_usuario_path %>
+</button>
+
+<table id="tabla_list_usuario">
+  <thead>
+      <th>Login</th>
+      <th>Compania</th>
+      <th>Nombre</th>
+      <th>Permisos</th>
+  </thead>
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= link_to usuario.login, usuario, :title => usuario.login %></td>
+        <%= content_tag(:td, usuario.compania, :title => usuario.compania) %>
+        <%= content_tag(:td, (usuario.nombre+" "+usuario.apellido), :title => (usuario.nombre+" "+usuario.apellido)) %>
+        <td>
+          <% case usuario.admin
+<<<<<<< HEAD
+            when 0 %>
+            Cliente
+            <%   when 1 %>
+            Admin
+            <%   when 2 %>
+            Super-Admin
+            <%   else   %>
+            Error: Contactar servicio técnico.
+=======
+               when 0 %>
+                 Cliente
+          <%   when 1 %>
+                 Admin
+          <%   when 2 %>
+                 S-Admin
+          <%   else   %>
+                 Contactar servicio
+>>>>>>> 4cbbdbf3c20c253e021dcc61356b552fdb2fecdc
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
