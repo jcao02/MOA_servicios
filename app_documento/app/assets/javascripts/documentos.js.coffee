@@ -2,5 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+datepickerOpc =
+  minDate    : 0
+  dateFormat : "yy-mm-dd" 
+  changeYear : true
+
 $(document).ready ->
-  $("#documento_fecha_vencimiento").datepicker()
+  $("#documento_fecha_vencimiento").datepicker datepickerOpc

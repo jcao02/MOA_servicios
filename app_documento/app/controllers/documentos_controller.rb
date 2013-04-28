@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class DocumentosController < ApplicationController
   # GET /documentos
   # GET /documentos.json
@@ -53,6 +54,9 @@ class DocumentosController < ApplicationController
         format.html { redirect_to @producto, notice: 'Documento was successfully created.', :format => :pdf }
         format.json { render json: @producto, status: :created, location: @documento }
       else
+        dicc = TipoDocumento.new
+        @tipos = dicc.get_diccionario
+        flash.keep
         format.html { render action: "new" }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end

@@ -62,6 +62,9 @@ $list_selected : #396877;
 }
 
 #productos_wrapper{
+  .dataTables_scrollBody{
+    height: 269px !important;
+  }
   border-left: 2px solid $list_selected;
   tbody{
     tr{

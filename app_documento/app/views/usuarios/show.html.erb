@@ -124,6 +124,7 @@
          </li>
        <% end %>
        <li>
+       <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
        <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
        </li>
      </ul>

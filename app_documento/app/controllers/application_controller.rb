@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class ApplicationController < ActionController::Base
   before_filter :authenticate_usuario!
   before_filter :set_locale

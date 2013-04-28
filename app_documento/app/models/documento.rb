@@ -5,5 +5,5 @@ class Documento < ActiveRecord::Base
 
 
 
-  validates :fecha_vencimiento, :date => {:after => Time.now}
+  validates :fecha_vencimiento, :date => {:after => Date.today}
 end

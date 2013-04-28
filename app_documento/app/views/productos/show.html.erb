@@ -12,7 +12,9 @@
     </td>
     <td>
       <div class="title_show">
+        <% if current_usuario.admin > 0%>
         <button style="float:right;"> <%= link_to 'Agregar Documento', new_documento_path %></button>
+      <% end %>
         <h2>Documentos</h2>
       </div>
     </td>

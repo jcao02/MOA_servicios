@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class ProductosController < ApplicationController
   respond_to :html, :js
   # GET /productos
