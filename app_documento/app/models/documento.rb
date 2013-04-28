@@ -4,4 +4,6 @@ class Documento < ActiveRecord::Base
   has_attached_file :pdf
 
 
+
+  validates :fecha_vencimiento, :date => {:after => Time.now}
 end
