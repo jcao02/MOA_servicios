@@ -6,4 +6,6 @@ class Documento < ActiveRecord::Base
 
 
   validates :fecha_vencimiento, :date => {:after => Date.today}
+  validates :pdf, presence: true
+  validates :tipo, presence: true
 end
