@@ -36,8 +36,8 @@ eliminar_class = (elem, clase) ->
   elems = "#"+elem.id + " tr td"
   $(elems).removeClass clase
 
-
 $(document).ready ->
+  $("#producto_grado_alcoholico_input").hide()
   $("#productos").dataTable dataTable_opc 
   $("#marcas").dataTable dataTableM_opc 
   marcasDisponibles      = $("#autocomplete").data("marcasdisponibles")
@@ -92,3 +92,12 @@ $(document).ready ->
     $("#type_form").submit()
     $("#type_form").bind "ajax:success", (event, data, status, xhr) -> 
       $("#body_prod").html xhr.responseText
+  
+  $("#producto_alimento_true").change ->
+    if $(this).val() == "true"
+      $("#producto_grado_alcoholico_input").hide()
+      $("#producto_grado_alcoholico_input").val 0
+
+  $("#producto_alimento_false").change ->
+    if $(this).val() == "false"
+      $("#producto_grado_alcoholico_input").show()

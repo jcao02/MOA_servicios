@@ -45,7 +45,8 @@ namespace :set do
       :pais_elaboracion   => "VE",
       :fabricante         => "Fabricante X",
       :codigo_arancelario => "100.100",
-      :usuario_id         => 3
+      :usuario_id         => 3,
+      :zona_venta         => "Margarita"
     )
     Producto.create(
       :registro_sanitario => "L-12.346",
@@ -55,7 +56,9 @@ namespace :set do
       :pais_elaboracion   => "VE",
       :fabricante         => "Ron Santa Teresa",
       :codigo_arancelario => "100.101",
-      :usuario_id         => 3
+      :usuario_id         => 3,
+      :zona_venta         => "Tierra Firme",
+      :grado_alcoholico   => "40º"
     )
     Producto.create(
       :registro_sanitario => "A-12.347",
@@ -65,7 +68,8 @@ namespace :set do
       :pais_elaboracion   => "CO",
       :fabricante         => "Fabricante Y",
       :codigo_arancelario => "101.103",
-      :usuario_id         => 3
+      :usuario_id         => 3,
+      :zona_venta         => "Duty Free"
     )
     Producto.create(
       :registro_sanitario => "L-12.348",
@@ -75,7 +79,9 @@ namespace :set do
       :pais_elaboracion   => "CO",
       :fabricante         => "Fabricante Y",
       :codigo_arancelario => "101.107",
-      :usuario_id         => 3
+      :usuario_id         => 3,
+      :zona_venta         => "Tierra Firme",
+      :grado_alcoholico   => "50º"
     )
   end
   
@@ -114,5 +120,5 @@ namespace :set do
   end
 
   desc "Crea 3 usuarios y 4 productos para el usuario Cliente"
-  task :database => [:users, :products]
+  task :database => [:users, :products, :doctype]
 end

@@ -58,4 +58,19 @@ form.formtastic {
 }
 
 
+#producto_zona_venta_input, #producto_grado_alcoholico_input, #producto_pais_elaboracion_input{
+  .label{
+    width: 50%;
+  }
+}
 
+#producto_grado_alcoholico{
+  width: 72%;
+}
+
+#producto_pais_elaboracion_input, #producto_zona_venta_input{
+  select {
+    width: 72%;  
+  }
+  
+}

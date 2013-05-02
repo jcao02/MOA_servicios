@@ -41,12 +41,21 @@
           </td>
           <% if flash[:accion] == "Crear Producto"%>
           <td>
-            <%= f.input :usuario_id, :as => :select, :collection => @companias, :label => "Cliente"%>
+            <%= f.input :usuario_id, :as => :select, :collection => @companias, :selected => @companias[0], :label => "Cliente", :id => "select_cliente"%>
           </td>
         <% else %>
           <td></td>
         <% end %>
-        </tr>
+      </tr>
+      <tr>
+        <td>
+          <%= f.input :zona_venta, :as => :select, :collection => [["Tierra firme"], ["Puerto libre Isla de Margarita"], ["Puerto libre Santa Helena de Uairen"], ["Duty free"]], 
+            :selected => "Tierra firme", :label => "Zona de régimen aduanero"%>
+        </td>
+        <td>
+          <%= f.input :grado_alcoholico, :as => :select, :collection => 1..10, :label => "Grado Alcohólico"%>
+        </td>
+      </tr>
         <tr>
           <td>
           </td>
@@ -55,7 +64,6 @@
             <button>
               <%= link_to 'Volver', :back %>
             </button>
-
           </td>
         </tr>
       </tbody>

@@ -6,7 +6,7 @@ class Producto < ActiveRecord::Base
 
   # Atributos accesibles para el modelo
   attr_accessible :alimento, :codigo_arancelario, :fabricante, :marca, :nombre
-  attr_accessible :pais_elaboracion, :registro_sanitario, :usuario_id
+  attr_accessible :pais_elaboracion, :registro_sanitario, :usuario_id, :grado_alcoholico, :zona_venta
 
   #Validaciones registro sanitario
   VALID_REGSAN_REGEX = /\A[A-Z]-\d{2}\.\d{3}\z/
