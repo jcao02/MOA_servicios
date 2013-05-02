@@ -11,11 +11,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <%= f.input :tipo, :as => :select, :collection => @tipos, :label => "Tipo" %>
-          </td>
-        </tr>
+        <%= f.semantic_fields_for :TipoDocumento do |td| %>
+          <tr>
+            <td>
+              <%= td.input :descripcion, :as => :select, :collection => @tipos, :label => "Tipo" %>
+            </td>
+            <td id="Otro">
+            </td>
+          </tr>
+        <% end %>
         <tr>
           <td>
             <%= f.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>

@@ -36,10 +36,10 @@ class ProductosController < ApplicationController
 
   def get_documentos(producto)
     documentos = Documento.where(:producto_id => producto.id)
-    dicc = TipoDocumento.new
     tipos = []
     for elem in documentos
-      tipos.push([elem, dicc.decode_documento(elem.tipo)])
+      typedoc= TipoDocumento.find(elem.TipoDocumento_id)
+      tipos.push([elem, typedoc.descripcion])
     end
     return tipos
   end
@@ -158,7 +158,7 @@ class ProductosController < ApplicationController
   def show
     @producto = Producto.find(params[:id])
     @cliente = Usuario.find(@producto.usuario_id)
-    flash[:producto] = @producto.id
+    session[:producto] = @producto.id
     flash.keep
     @documentos = get_documentos(@producto)
     respond_to do |format|

@@ -79,6 +79,40 @@ namespace :set do
     )
   end
   
+  desc "Crea la lista inicial de tipos de docmentos"
+  task :doctype => :environment do
+    TipoDocumento.create(
+      :descripcion => "Registro Sanitario"
+    )
+    TipoDocumento.create(
+      :descripcion => "Renovación Registro Sanitario"
+    )
+    TipoDocumento.create(
+      :descripcion => "Cambio razón social de fabricante"
+    )
+    TipoDocumento.create(
+      :descripcion => "Cambio razón social de importador"
+    )
+    TipoDocumento.create(
+      :descripcion => "Cambio de marca"
+    )
+    TipoDocumento.create(
+      :descripcion => "Cambio o inclusión de nueva presentación"
+    )
+    TipoDocumento.create(
+      :descripcion => "Cambio de fabricante"
+    )
+    TipoDocumento.create(
+      :descripcion => "Cambio de lugar de fabricación"
+    )
+    TipoDocumento.create(
+      :descripcion => "Inclusión de Importador"
+    )
+    TipoDocumento.create(
+      :descripcion => "Ajuste de grado alcohólico"
+    )
+  end
+
   desc "Crea 3 usuarios y 4 productos para el usuario Cliente"
   task :database => [:users, :products]
 end

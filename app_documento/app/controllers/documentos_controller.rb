@@ -22,12 +22,21 @@ class DocumentosController < ApplicationController
     end
   end
 
+  def get_tipoDoc
+    typedoc = TipoDocumento.all
+    tipos = []
+    tipos.push("Otro")
+    for type in typedoc do
+      tipos.push(type.descripcion)
+    end
+    return tipos
+  end
   # GET /documentos/new
   # GET /documentos/new.json
   def new
     @documento = Documento.new
-    dicc = TipoDocumento.new
-    @tipos = dicc.get_diccionario
+    @documento.TipoDocumento = TipoDocumento.new
+    @tipos = get_tipoDoc
     flash[:accion] = "Agregar Documento"
     flash.keep
 
@@ -46,16 +55,22 @@ class DocumentosController < ApplicationController
   # POST /documentos.json
   def create
     @documento = Documento.new(params[:documento])
-    @documento.producto_id = flash[:producto]
-    @producto = Producto.find(flash[:producto])
+    doc = TipoDocumento.where(:descripcion => params[:documento][:TipoDocumento_attributes][:descripcion])
+    #Si ya existe un tipo de documento, se usa esa instancia
+    if doc.any?
+      @documento.TipoDocumento_id = doc[0].id
+    end
+    @documento.producto_id = session[:producto]
+    @producto = Producto.find(session[:producto])
 
     respond_to do |format|
       if @documento.save
+        session[:producto] = nil
         format.html { redirect_to @producto, notice: 'Documento was successfully created.', :format => :pdf }
         format.json { render json: @producto, status: :created, location: @documento }
       else
-        dicc = TipoDocumento.new
-        @tipos = dicc.get_diccionario
+        @tipos = get_tipoDoc
+        @documento.TipoDocumento = TipoDocumento.new
         flash.keep
         format.html { render action: "new" }
         format.json { render json: @documento.errors, status: :unprocessable_entity }

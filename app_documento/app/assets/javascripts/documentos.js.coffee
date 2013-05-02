@@ -9,3 +9,9 @@ datepickerOpc =
 
 $(document).ready ->
   $("#documento_fecha_vencimiento").datepicker datepickerOpc
+  $("#documento_TipoDocumento_attributes_descripcion").change ->
+    if $(this).val() == "Otro"
+      input = '<input id="Otro_tipo_input" type="text" maxlength="255" name="documento[TipoDocumento_attributes][descripcion]"/>'
+      $("#Otro").prepend input
+    else
+      $("#Otro_tipo_input").remove()
