@@ -46,6 +46,7 @@ class ImportadorsController < ApplicationController
   def create
     @importador = Importador.new(params[:importador])
     @producto = Producto.find(session[:producto])
+    @importador.productos << @producto
 
     respond_to do |format|
       if @importador.save
@@ -53,7 +54,7 @@ class ImportadorsController < ApplicationController
         format.html { redirect_to @producto, notice: 'Importador was successfully created.' }
         format.json { render json: @importador, status: :created, location: @importador }
       else
-         flash.keep
+        flash.keep
         format.html { render action: "new" }
         format.json { render json: @importador.errors, status: :unprocessable_entity }
       end
@@ -81,9 +82,10 @@ class ImportadorsController < ApplicationController
   def destroy
     @importador = Importador.find(params[:id])
     @importador.destroy
-
+    producto = Producto.find(session[:producto])
+    session[:producto] = nil
     respond_to do |format|
-      format.html { redirect_to importadors_url }
+      format.html { redirect_to producto }
       format.json { head :no_content }
     end
   end

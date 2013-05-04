@@ -82,9 +82,11 @@ class PresentacionsController < ApplicationController
   def destroy
     @presentacion = Presentacion.find(params[:id])
     @presentacion.destroy
+    producto = Producto.find(session[:producto])
 
     respond_to do |format|
-      format.html { redirect_to presentacions_url }
+      session[:producto] = nil
+      format.html { redirect_to producto }
       format.json { head :no_content }
     end
   end
