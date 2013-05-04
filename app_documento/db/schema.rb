@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502124829) do
+ActiveRecord::Schema.define(:version => 20130504042131) do
 
   create_table "documentos", :force => true do |t|
     t.date     "fecha_vencimiento"
@@ -35,8 +35,14 @@ ActiveRecord::Schema.define(:version => 20130502124829) do
     t.string   "pais_origen"
     t.string   "mail"
     t.string   "telefono"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "productos_id"
+  end
+
+  create_table "importadors_productos", :id => false, :force => true do |t|
+    t.integer "importador_id"
+    t.integer "producto_id"
   end
 
   create_table "logs", :force => true do |t|
@@ -57,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20130502124829) do
     t.integer  "peso_escurrido"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "productos_id"
   end
 
   create_table "productos", :force => true do |t|

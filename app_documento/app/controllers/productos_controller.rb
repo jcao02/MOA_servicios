@@ -1,6 +1,7 @@
 #encoding: UTF-8
 class ProductosController < ApplicationController
   respond_to :html, :js
+  before_filter :is_admin, :only => [:new, :create, :edit, :update, :destroy]
   # GET /productos
   # GET /productos.json
   def index
@@ -161,6 +162,8 @@ class ProductosController < ApplicationController
     session[:producto] = @producto.id
     flash.keep
     @documentos = get_documentos(@producto)
+    @presentaciones = Presentacion.where(:productos_id => @producto.id)
+    @importadores = Importador.where(:productos_id => @producto.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @producto }

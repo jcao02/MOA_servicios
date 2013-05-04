@@ -31,10 +31,7 @@ dataTableM_opc =
   oTableTools :
     sRowSelect   : "multi"
 
-#Elimina la clase clase de los td de la tabla elem
-eliminar_class = (elem, clase) ->
-  elems = "#"+elem.id + " tr td"
-  $(elems).removeClass clase
+
 
 $(document).ready ->
   $("#producto_grado_alcoholico_input").hide()
@@ -101,3 +98,5 @@ $(document).ready ->
   $("#producto_alimento_false").change ->
     if $(this).val() == "false"
       $("#producto_grado_alcoholico_input").show()
+
+  $("#tabs").tabs()

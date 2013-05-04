@@ -1,37 +1,48 @@
-<%= form_for(@importador) do |f| %>
-  <% if @importador.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@importador.errors.count, "error") %> prohibited this importador from being saved:</h2>
-
-      <ul>
-      <% @importador.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :rif %><br />
-    <%= f.text_field :rif %>
-  </div>
-  <div class="field">
-    <%= f.label :nombre %><br />
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :pais_origen %><br />
-    <%= f.text_field :pais_origen %>
-  </div>
-  <div class="field">
-    <%= f.label :mail %><br />
-    <%= f.text_field :mail %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono %><br />
-    <%= f.text_field :telefono %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= semantic_form_for @importador do |f| %>
+  <ul>
+    <table class="table_forms">
+      <thead>
+        <tr>
+          <td colspan="2">
+            <h1>
+              <%=flash[:accion]%>
+            </h1>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= f.input :nombre, :label => "Nombre"%>
+          </td>
+          <td>
+            <%= f.input :rif, :label => "RIF"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :pais_origen, :as => :country, :label => "Procedencia"%>
+          </td>
+          <td>
+            <%= f.input :mail, :label => "E-mail"%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :telefono, :label => "Teléfono"%>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <%= f.action :submit, :label => flash[:accion] %>
+            <button>
+              <%= link_to 'Volver', :back %>
+            </button>
+          </td>
+        </tr>
+      </body>
+    </table>
+  </ul>
 <% end %>

@@ -10,114 +10,171 @@
         <% end %>
       </div>
     </td>
-    <td>
-      <div class="title_show">
-        <% if current_usuario.admin > 0%>
-        <button style="float:right;"> <%= link_to 'Agregar Documento', new_documento_path %></button>
-      <% end %>
-        <h2>Documentos</h2>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table class="tabla_show">
-        <% if current_usuario.admin > 0 %>
+    <td class="conf_list" valign="top" rowspan="2">
+
+      <div id="tabs" class="tabs-bottom">
+        <div class="title_show">
+          <ul>
+            <li><a href="#tab-doc">Documentos</a></li>
+            <li><a href="#tab-pre">Presentaciones</a></li>
+            <li><a href="#tab-imp">Importadores</a></li>
+          </ul>
+        </div>
+
+        <div class="tabs-spacer">
+          <div id="tab-doc">
+            <% if current_usuario.admin > 0%>
+              <%= button_to 'Agregar Documento', new_documento_path, :class =>"button-intab", :method => "get"%>
+            <% end %>
+            <ul>
+              <% @documentos.each do |d|%>
+                <li>
+                <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
+                <% if current_usuario.admin > 0 %>
+                  <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), d[0], :method => :delete, 
+                    data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+                  <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+
+            <div id="tab-pre">
+            <% if current_usuario.admin > 0%>
+              <%= button_to 'Agregar presentación', new_presentacion_path, :class =>"button-intab", :method => "get"%>
+            <% end %>
+              <ul>
+                <% @presentaciones.each do |p|%>
+                  <li>
+                  <b>Presentación <%= p.cpe%> </b>
+                  <% if current_usuario.admin > 0 %>
+                    <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), p, :method => :delete, 
+                      data: { confirm: '¿Esta seguro de eliminar esta presentación?'} %>
+                    <% end %><br>
+
+                    Empaque: <%= p.empaque%><br>
+                    Peso neto: <%= p.peso_neto %><br>
+                    Peso escurrido: <%= p.peso_escurrido %><br>
+                    Vence: <%= p.fecha_vencimiento%>
+                    </li>
+                  <% end %> 
+                </ul>
+              </div>
+
+              <div id="tab-imp">
+            <% if current_usuario.admin > 0%>
+                <%= button_to 'Agregar importador', new_importador_path, :class =>"button-intab", :method => "get"%>
+            <% end %>
+                <ul>
+                  <% @importadores.each do |i|%>
+                    <li>
+                    <b><%= i.nombre %></b>
+                    <% if current_usuario.admin > 0 %>
+                      <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), i, :method => :delete, 
+                        data: { confirm: '¿Esta seguro de eliminar este importador?'} %>
+                      <% end %><br>
+
+                      Procedencia: <%= Carmen::Country.coded(i.pais_origen).name %><br>
+                      Correo: <%=i.mail%><br>
+                      Teléfono <%=i.telefono%><br>
+
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </td>
+
+        </tr>
         <tr>
           <td>
-            <b>Cliente:</b>
-          </td>
-          <td>
-            <%= @cliente.compania %>
+            <table class="tabla_show">
+              <% if current_usuario.admin > 0 %>
+                <tr>
+                  <td>
+                    <b>Cliente:</b>
+                  </td>
+                  <td>
+                    <%= @cliente.compania %>
+                  </td>
+                </tr>
+              <% end %>
+              <tr>
+                <td>
+                  <b>Nº Registro:</b>
+                </td>
+                <td>
+                  <%= @producto.registro_sanitario %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Tipo:</b>
+                </td>
+                <td>
+                  <% if @producto.alimento %>
+                    Alimento
+                  <% else %>
+                    Licor
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Marca:</b>
+                </td>
+                <td>
+                  <%= @producto.marca %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Pais elaboracion:</b>
+                </td>
+                <td>
+                  <%= Carmen::Country.coded(@producto.pais_elaboracion).name %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Fabricante:</b>
+                </td>
+                <td>
+                  <%= @producto.fabricante %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Codigo arancelario:</b>
+                </td>
+                <td>
+                  <%= @producto.codigo_arancelario %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+              </tr>
+              <% if current_usuario.admin > 0 %>
+                <tr>
+                  <td>
+                    <button>
+                      <%= link_to 'Editar', edit_producto_path(@producto) %> 
+                    </button>
+                  </td>
+                  <td>
+                    <button>
+                      <%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Esta seguro de eliminar este producto?'} %> 
+                    </button>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
           </td>
         </tr>
-        <% end %>
-        <tr>
-          <td>
-            <b>Nº Registro:</b>
-          </td>
-          <td>
-            <%= @producto.registro_sanitario %>
-          </td>
-        </tr>
-      <tr>
-        <td>
-          <b>Tipo:</b>
-        </td>
-        <td>
-          <% if @producto.alimento %>
-            Alimento
-          <% else %>
-            Licor
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Marca:</b>
-        </td>
-        <td>
-          <%= @producto.marca %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Pais elaboracion:</b>
-        </td>
-        <td>
-          <%= Carmen::Country.coded(@producto.pais_elaboracion).name %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Fabricante:</b>
-        </td>
-        <td>
-          <%= @producto.fabricante %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Codigo arancelario:</b>
-        </td>
-        <td>
-          <%= @producto.codigo_arancelario %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-        <td>
-        </td>
-      </tr>
-      <% if current_usuario.admin > 0 %>
-        <tr>
-          <td>
-            <button>
-              <%= link_to 'Editar', edit_producto_path(@producto) %> 
-            </button>
-          </td>
-          <td>
-            <button>
-              <%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Esta seguro de eliminar este producto?'} %> 
-            </button>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-    </td>
-    <td class="conf_list" valign="top">
-      <ul>
-        <% @documentos.each do |d|%>
-          <li>
-          <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
-          <% if current_usuario.admin > 0 %>
-            <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), d[0], :method => :delete, data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
-          <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </td>
-  </tr>
-</table>
-<div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>
+      </table>
+      <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>

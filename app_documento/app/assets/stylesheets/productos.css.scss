@@ -11,6 +11,7 @@ $list_selected : #396877;
 }
 
 .conf_list{
+  overflow-x: hidden;
   ul{
     li{
       margin-top:5px;
@@ -114,4 +115,42 @@ $list_selected : #396877;
   width: 250px;
   height: 20px;
   }
+}
+
+//Para las tabs
+.conf_list{
+    width: 100%;
+    margin-top: 50px !important;
+    .ui-widget-header{
+        background: white!important;
+        border: none;
+    }
+    .ui-widget-content{
+        border:none;
+    }
+}
+
+#tab-doc, #tab-imp, #tab-pre{
+    max-height: 250px;
+    overflow-y: auto;
+    ul {
+        width:250px !important;
+    }
+
+}
+.ui-tabs{
+    font-size: 11px !important;
+    ul {
+        width:400px !important;
+    }
+}
+
+.ui-tabs-nav .ui-helper-reset .ui-helper-clearfix .ui-widget-header .ui-corner-all{
+    width: 400px !important;
+    margin: 0 !important;
+}
+
+.button-intab{
+    float: right;
+    margin-right: 60px !important;
 }

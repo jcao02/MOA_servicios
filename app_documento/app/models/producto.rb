@@ -1,8 +1,11 @@
+# encoding: UTF-8
 class Producto < ActiveRecord::Base
 
   #Definicion de relaciones de claves foraneas
   belongs_to :usuario
   has_many :documentos
+  has_many :presentacions
+  has_and_belongs_to_many :importadors
 
   # Atributos accesibles para el modelo
   attr_accessible :alimento, :codigo_arancelario, :fabricante, :marca, :nombre

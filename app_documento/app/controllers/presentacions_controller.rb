@@ -1,4 +1,8 @@
+#encoding: UTF-8
 class PresentacionsController < ApplicationController
+  before_filter :authenticate_usuario! #Para que se requiera estar logueado
+  before_filter :is_admin, :except => :show
+  #todavia falta before_filter para que solo el dueño del producto vea la presentacion
   # GET /presentacions
   # GET /presentacions.json
   def index
@@ -25,7 +29,7 @@ class PresentacionsController < ApplicationController
   # GET /presentacions/new.json
   def new
     @presentacion = Presentacion.new
-
+    flash[:accion] = "Nueva Presentación"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @presentacion }
@@ -41,12 +45,16 @@ class PresentacionsController < ApplicationController
   # POST /presentacions.json
   def create
     @presentacion = Presentacion.new(params[:presentacion])
+    @presentacion.productos_id = session[:producto]
+    @producto = Producto.find(session[:producto])
 
     respond_to do |format|
       if @presentacion.save
-        format.html { redirect_to @presentacion, notice: 'Presentacion was successfully created.' }
+          session[:producto] = nil
+        format.html { redirect_to @producto, notice: 'Presentacion was successfully created.' }
         format.json { render json: @presentacion, status: :created, location: @presentacion }
       else
+        flash.keep
         format.html { render action: "new" }
         format.json { render json: @presentacion.errors, status: :unprocessable_entity }
       end

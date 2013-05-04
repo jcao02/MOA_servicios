@@ -12,4 +12,20 @@ class ApplicationController < ActionController::Base
     { :locale => I18n.locale }
   end
 
+  #Metodos helpers para Usuarios
+  helper_method :is_owner
+  def is_owner
+    redirect_to(inicio_index_path) if current_usuario.id.to_s != params[:id]
+  end
+
+  helper_method :is_authorize
+  def is_authorize
+      redirect_to(inicio_index_path) if current_usuario.id.to_s != params[:id] and current_usuario.admin != 2
+  end
+
+  helper_method :is_admin
+  def is_admin
+      redirect_to(inicio_index_path) if current_usuario.admin == 0
+  end
+
 end

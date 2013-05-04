@@ -1,6 +1,8 @@
 #encoding: UTF-8
 class UsuariosController < ApplicationController
   before_filter :authenticate_usuario! #Para que se requiera estar logueado
+  before_filter :is_authorize, :only => [:edit, :update, :show] #Solo se puede editar, modificar o mostrar perfil si eres super admin o eres el usuario
+  before_filter :is_admin, :only => [:new, :create] #Solo admin y super admin pueden crear usuarios
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
   # GET /usuarios

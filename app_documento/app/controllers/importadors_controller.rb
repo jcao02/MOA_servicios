@@ -1,4 +1,8 @@
+#encoding: UTF-8
 class ImportadorsController < ApplicationController
+  before_filter :authenticate_usuario! #Para que se requiera estar logueado
+  before_filter :is_admin, :except => :show
+  #todavia falta before_filter para que solo el dueño del producto vea el importador
   # GET /importadors
   # GET /importadors.json
   def index
@@ -25,7 +29,7 @@ class ImportadorsController < ApplicationController
   # GET /importadors/new.json
   def new
     @importador = Importador.new
-
+    flash[:accion] = "Nuevo importador"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @importador }
@@ -41,12 +45,15 @@ class ImportadorsController < ApplicationController
   # POST /importadors.json
   def create
     @importador = Importador.new(params[:importador])
+    @producto = Producto.find(session[:producto])
 
     respond_to do |format|
       if @importador.save
-        format.html { redirect_to @importador, notice: 'Importador was successfully created.' }
+        session[:producto] = nil
+        format.html { redirect_to @producto, notice: 'Importador was successfully created.' }
         format.json { render json: @importador, status: :created, location: @importador }
       else
+         flash.keep
         format.html { render action: "new" }
         format.json { render json: @importador.errors, status: :unprocessable_entity }
       end
