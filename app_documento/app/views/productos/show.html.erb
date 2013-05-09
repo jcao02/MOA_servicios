@@ -154,6 +154,16 @@
                 </td>
               </tr>
               <tr>
+                <td><b>Zona régimen aduanero</b></td>
+                <td><%=@producto.zona_venta%></td>
+              </tr>
+              <% if not @producto.alimento %>
+              <tr>
+                <td><b>Grado Alcohólico</b></td>
+                <td><%=@producto.grado_alcoholico%></td>
+              </tr>
+            <% end %>
+              <tr>
                 <td>
                 </td>
                 <td>
