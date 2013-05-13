@@ -1,15 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Codigo seguimiento:</b>
-  <%= @tramite.codigo_seguimiento %>
-</p>
-
-<p>
-  <b>Tipo:</b>
-  <%= @tramite.tipo %>
-</p>
-
+<p><%= @tramite.TipoDocumento.descripcion%></p>
 <p>
   <b>Estado:</b>
   <%= @tramite.estado %>
@@ -23,8 +14,15 @@
 <p>
   <b>Observacion:</b>
   <%= @tramite.observacion %>
-</p>
+  </p>
 
+  <ul>
+  <% @tramite.requisitos.each do |r| %>
+    <li>
+    <%= r.TipoRequisito.name %>
+    </li>
+  <% end %>
+  </ul>
 
 <%= link_to 'Edit', edit_tramite_path(@tramite) %> |
 <%= link_to 'Back', tramites_path %>

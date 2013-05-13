@@ -1,37 +1,80 @@
-<%= form_for(@tramite) do |f| %>
-  <% if @tramite.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tramite.errors.count, "error") %> prohibited this tramite from being saved:</h2>
-
-      <ul>
-      <% @tramite.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<table id="new_tramite_table" class="area_show">
+  <tr>
+    <td>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <table id="producto_tramite">
+                <thead>
+                  <th>Mis Productos</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <%= content_tag "div", id: "producto_selected", data: {productos: ""} do %>
+                        [Nuevo producto]
+                      <% end %>
+                    </td>
+                  </tr>
+                  <% @productos.each do |p| %>
+                    <tr>
+                      <td>
+                        <%= content_tag "div", data: {productos: p } do %>
+                          <%=p.nombre%>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <table id="tipo_tramite">
+                <thead>
+                  <th>Tipos de solicitud</th>
+                </thead>
+                <tbody>
+                  <% @tipos.each do |t| %>
+                    <tr>
+                      <td>
+                        <%= content_tag "div", data: {tipo: t} do %>
+                          <%=t.descripcion%>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <center>
+      <%= semantic_form_for @tramite do |f| %>
+        <%= f.input :producto_id, :as => :hidden, :input_html => {:id => "input_producto_tramite"}%>
+        <%= f.input :TipoDocumento_id, :as => :hidden, :input_html => { :id => "input_tipodoc_tramite" }%>
+        <button>
+          <%= f.submit :value => "Enviar solicitud" %>
+        </button>
+        <button>
+          <%= link_to 'Volver', :back %>
+        </button>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+      </center>
+    </td>
+  </tr>
+</table>
 
-  <div class="field">
-    <%= f.label :codigo_seguimiento %><br />
-    <%= f.text_field :codigo_seguimiento %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo %><br />
-    <%= f.number_field :tipo %>
-  </div>
-  <div class="field">
-    <%= f.label :estado %><br />
-    <%= f.number_field :estado %>
-  </div>
-  <div class="field">
-    <%= f.label :fecha_recepcion %><br />
-    <%= f.date_select :fecha_recepcion %>
-  </div>
-  <div class="field">
-    <%= f.label :observacion %><br />
-    <%= f.text_area :observacion %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

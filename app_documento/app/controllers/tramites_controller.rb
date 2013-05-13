@@ -2,7 +2,12 @@ class TramitesController < ApplicationController
   # GET /tramites
   # GET /tramites.json
   def index
-    @tramites = Tramite.all
+    #Seleccion de tramites a mostrar
+    if current_usuario.admin == 0
+        @tramites = Tramite.where(:usuario_id => current_usuario.id)
+    else
+        @tramites = Tramite.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,12 +29,18 @@ class TramitesController < ApplicationController
   # GET /tramites/new
   # GET /tramites/new.json
   def new
-    @tramite = Tramite.new
+      if current_usuario.admin == 0
+          @productos = Producto.where(:usuario_id => current_usuario.id)
+      else
+          @productos = Producto.all
+      end
+      @tipos     = TipoDocumento.all
+      @tramite   = Tramite.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @tramite }
-    end
+      respond_to do |format|
+          format.html # new.html.erb
+          format.json { render json: @tramite }
+      end
   end
 
   # GET /tramites/1/edit
@@ -41,7 +52,13 @@ class TramitesController < ApplicationController
   # POST /tramites.json
   def create
     @tramite = Tramite.new(params[:tramite])
+    if not @tramite.producto_id.is_a? Integer
+        @tramite.producto_id = nil
+    end
 
+    @tramite.estado = "Recibido"
+    @tramite.usuario_id = current_usuario.id
+    crear_requisitos(@tramite.TipoDocumento_id, @tramite)
     respond_to do |format|
       if @tramite.save
         format.html { redirect_to @tramite, notice: 'Tramite was successfully created.' }
@@ -51,6 +68,16 @@ class TramitesController < ApplicationController
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+  #Crea los requisitos dependiendo del tramite
+  def crear_requisitos(documento, tramite)
+      dependencias = Dependencia.where(:tipo_documento_id => documento)
+      dependencias.each do |d|
+        req = Requisito.new(:estado => "Sin recibir", :tramite_id => tramite.id, :TipoRequisito_id => d.tipo_requisito_id)
+        tramite.requisitos << req
+      end
   end
 
   # PUT /tramites/1

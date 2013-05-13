@@ -119,6 +119,214 @@ namespace :set do
     )
   end
 
+  desc "Crea la coleccion inicial de tipos de requisitos"
+  task :reqtype => :environment do
+      TipoRequisito.create(
+          :name => "Registro sanitario/Renovación"
+      )
+      TipoRequisito.create(
+          :name => "Inclusión de importador"
+      )
+      TipoRequisito.create(
+          :name => "Permiso sanitario de la empresa"
+      )
+      TipoRequisito.create(
+          :name => "Evaluacion de las BPF"
+      )
+      TipoRequisito.create(
+          :name => "Autorización empaque"
+      )
+      TipoRequisito.create(
+          :name => "Carta proveedor de empaque"
+      )
+      TipoRequisito.create(
+          :name => "Análisis laboratorio oficial"
+      )
+      TipoRequisito.create(
+          :name => "Análisis laboratorio privado"
+      )
+      TipoRequisito.create(
+          :name => "Análisis país de orígen"
+      )
+      TipoRequisito.create(
+          :name => "Poder al tramitante"
+      )
+      TipoRequisito.create(
+          :name => "Muestra testigo"
+      )
+      TipoRequisito.create(
+          :name => "Rótulos"
+      )
+      TipoRequisito.create(
+          :name => "Rótulo anterior"
+      )
+      TipoRequisito.create(
+          :name => "Registro mercantil fabricante"
+      )
+      TipoRequisito.create(
+          :name => "Registro mercantil importador"
+      )
+      TipoRequisito.create(
+          :name => "Certificado libre venta y consumo"
+      )
+      TipoRequisito.create(
+          :name => "Autorización o poder al importador"
+      )
+      TipoRequisito.create(
+          :name => "Certificado de edad (solo añejamiento)"
+      )
+      TipoRequisito.create(
+          :name => "Certificado de orígen"
+      )
+      TipoRequisito.create(
+          :name => "Declaración jurada fabricante no cambios"
+      )
+      TipoRequisito.create(
+          :name => "Declaración jurada"
+      )
+      TipoRequisito.create(
+          :name => "Documento legal probatorio del cambio"
+      )
+  end
+
+  desc "Crea las dependencias entre documentos y tramites"
+  task :dependencias => :environment do
+      allR = TipoRequisito.all
+      allD = TipoDocumento.all
+      allR.each do |a|
+          case a.name
+
+          when "Registro sanitario/Renovación"
+              docs = allD[1..-1]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Inclusión de importador"
+              docs = allD[1..7] << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Permiso sanitario de la empresa"
+              docs = (allD[0..2] + allD[6..7]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Evaluacion de las BPF"
+              docs = (allD[0..2] + allD[6..7]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Autorización empaque"
+              docs = (allD[0..1] << allD[5]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Carta proveedor de empaque"
+              docs = (allD[0..1] << allD[5]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Análisis laboratorio oficial"
+              docs = [allD[0], allD[7], allD[9]]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Análisis laboratorio privado"
+              docs = [allD[0], allD[7]]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Análisis país de orígen"
+              docs = [allD[0], allD[7], allD[9]]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Poder al tramitante"
+              docs = allD
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Muestra testigo"
+              docs = allD[0]
+              Dependencia.create(:tipo_documento_id => docs.id, :tipo_requisito_id => a.id)
+
+          when "Rótulos"
+              docs = allD
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Rótulo anterior"
+              docs = allD[3..7] << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Registro mercantil fabricante"
+              docs = ((allD[0..2] + allD[6..7]) << allD[4]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Registro mercantil importador"
+              docs = allD[0..4] + allD[6..9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Certificado libre venta y consumo"
+              docs = ((allD[0..2] + allD[6..7]) << allD[4]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Autorización o poder al importador"
+              docs = allD[0..1] + allD[4..9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Certificado de edad (solo añejamiento)"
+              docs = [allD[0],allD[9]]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Certificado de orígen"
+              docs = [allD[0],allD[9]]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Declaración jurada fabricante no cambios"
+              docs = allD[1]
+              Dependencia.create(:tipo_documento_id => docs.id, :tipo_requisito_id => a.id)
+
+          when "Declaración jurada"
+              docs = allD[2..9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          when "Documento legal probatorio del cambio"
+              docs = (allD[4..7] << allD[2]) << allD[9]
+              docs.each do |d|
+                  Dependencia.create(:tipo_documento_id => d.id, :tipo_requisito_id => a.id)
+              end
+
+          end
+      end
+  end
   desc "Crea 3 usuarios y 4 productos para el usuario Cliente"
-  task :database => [:users, :products, :doctype]
+  task :database => [:users, :products, :doctype, :reqtype, :dependencias]
 end

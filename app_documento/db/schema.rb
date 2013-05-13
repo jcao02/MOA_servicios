@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504042131) do
+ActiveRecord::Schema.define(:version => 20130512210520) do
+
+  create_table "dependencia", :force => true do |t|
+    t.integer  "tipo_documento_id"
+    t.integer  "tipo_requisito_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "documentos", :force => true do |t|
     t.date     "fecha_vencimiento"
@@ -86,8 +93,9 @@ ActiveRecord::Schema.define(:version => 20130504042131) do
     t.text     "observacion"
     t.integer  "estado"
     t.integer  "tramite_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "TipoRequisito_id"
   end
 
   add_index "requisitos", ["tramite_id"], :name => "index_requisitos_on_tramite_id"
@@ -108,14 +116,22 @@ ActiveRecord::Schema.define(:version => 20130504042131) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "tipo_requisitos", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "tramites", :force => true do |t|
     t.string   "codigo_seguimiento"
-    t.integer  "tipo"
     t.integer  "estado"
     t.date     "fecha_recepcion"
     t.text     "observacion"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "TipoDocumento_id"
+    t.integer  "usuario_id"
+    t.integer  "producto_id"
   end
 
   create_table "usuarios", :force => true do |t|

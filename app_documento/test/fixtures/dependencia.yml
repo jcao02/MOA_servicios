@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  TipoDocumento_id: 1
+  TipoRequisito_id: 1
+
+two:
+  TipoDocumento_id: 1
+  TipoRequisito_id: 1
