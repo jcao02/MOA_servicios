@@ -1,28 +1,61 @@
-<p id="notice"><%= notice %></p>
-
-<p><%= @tramite.TipoDocumento.descripcion%></p>
-<p>
-  <b>Estado:</b>
-  <%= @tramite.estado %>
-</p>
-
-<p>
-  <b>Fecha recepcion:</b>
-  <%= @tramite.fecha_recepcion %>
-</p>
-
-<p>
-  <b>Observacion:</b>
-  <%= @tramite.observacion %>
-  </p>
-
-  <ul>
-  <% @tramite.requisitos.each do |r| %>
-    <li>
-    <%= r.TipoRequisito.name %>
-    </li>
-  <% end %>
-  </ul>
-
-<%= link_to 'Edit', edit_tramite_path(@tramite) %> |
-<%= link_to 'Back', tramites_path %>
+<table class="area_show">
+  <tr>
+    <td>
+      <div class="title_show">
+        <h2><%= @tramite.TipoDocumento.descripcion %></h2>
+      </div>
+    </td>
+    <td rowspan="2">
+     <table id="requisitos_show">
+       <thead>
+         <th>
+           <h2>Requisitos</h2>
+         </th>
+       </thead>
+       <tbody>
+         <% @tramite.requisitos.each do |r| %>
+         <tr>
+           <td><%= r.TipoRequisito.name %> <canvas class="estados" style=" width="15" height="15"></canvas></td>
+         </tr>
+       <% end %>
+       </tbody>
+     </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table class="tabla_show">
+        <% if not @tramite.producto.nil? %>
+        <tr>
+          <td colspan="2">
+            <b><%= @tramite.producto.nombre %></b>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          <b>Fecha Solicitud:</b>
+        </td>
+        <td>
+          <%= @tramite.fecha_recepcion %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>#Requisitos faltantes:</b>
+        </td>
+        <td>
+          <%= @req_faltantes %>
+        </td>
+      </tr>
+       <tr>
+        <td>
+          <button style= Padding:10px>
+            <%= link_to 'Volver', tramites_path %>
+         </button>
+     </td>
+       </tr>
+     </table>
+   </td>
+ </tr>
+ </table>

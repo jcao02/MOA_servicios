@@ -62,13 +62,11 @@
   </tr>
   <tr>
     <td colspan="2">
-      <center>
       <%= semantic_form_for @tramite do |f| %>
         <%= f.input :producto_id, :as => :hidden, :input_html => {:id => "input_producto_tramite"}%>
         <%= f.input :TipoDocumento_id, :as => :hidden, :input_html => { :id => "input_tipodoc_tramite" }%>
-        <button>
-          <%= f.submit :value => "Enviar solicitud" %>
-        </button>
+      <center>
+        <%= f.submit :value => "Enviar solicitud", :id => "crear_solicitud" %>
         <button>
           <%= link_to 'Volver', :back %>
         </button>

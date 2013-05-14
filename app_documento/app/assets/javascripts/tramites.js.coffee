@@ -17,12 +17,26 @@ dataTable_opc =
     sInfoEmpty    : ""
     sZeroRecords  : "No se encontraron coincidencias"
 
+dataTable_opcS =
+  bScrollInfinite : true
+  bScrollCollapse : true
+  bPagination     : false
+  bScrollAutoCss  : true
+  bFilter         : false
+  sScrollY        : "250px"
+  oLanguage       :
+    sSearch       : ""
+    sInfo         : ""
+    sInfoFiltered : ""
+    sInfoEmpty    : ""
+    sZeroRecords  : "No se encontraron coincidencias"
 
 
 $(document).ready ->
     $("#input_producto_tramite").val()
     $("#producto_tramite").dataTable(dataTable_opc)
     $("#tipo_tramite").dataTable(dataTable_opc)
+    $("#requisitos_show").dataTable(dataTable_opcS)
     $("#producto_tramite tbody").click (event) ->
         seleccion = event.target
         $("#producto_selected").removeAttr("id")
@@ -35,3 +49,10 @@ $(document).ready ->
         $(seleccion).attr("id", "tipo_selected")
         valor = $("#tipo_selected").data('tipo').id
         $("#input_tipodoc_tramite").val valor
+
+    c = document.getElementsByClassName("estados");
+    for i of c
+        ctx=c[i].getContext("2d");
+        ctx.beginPath();
+        ctx.arc(95,50,40,0,2*Math.PI);
+        ctx.stroke();

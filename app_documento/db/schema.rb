@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512210520) do
+ActiveRecord::Schema.define(:version => 20130514155348) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20130512210520) do
     t.integer  "TipoDocumento_id"
     t.integer  "usuario_id"
     t.integer  "producto_id"
+    t.boolean  "recibido"
   end
 
   create_table "usuarios", :force => true do |t|
