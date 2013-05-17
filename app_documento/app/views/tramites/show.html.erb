@@ -27,8 +27,11 @@
       <table class="tabla_show">
         <% if not @tramite.producto.nil? %>
           <tr>
-            <td colspan="2">
-              <b><%= @tramite.producto.nombre %></b>
+            <td>
+              <b>Producto:</b>
+            </td>
+            <td>
+              <%= @tramite.producto.nombre %>
             </td>
           </tr>
         <% end %>
@@ -71,16 +74,17 @@
   <tr>
     <td colspan="2">
       <center>
-        <%= semantic_form_for @tramite, :remote => true, :html => {:class => "accept_form"}, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+        <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
           <%= f.input :recibido, :as => :hidden, :value => true %>
+          <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
           <%= f.action :submit, :label => "Aceptar" %>
         <% end %>
-        <%= semantic_form_for @tramite, :remote => true, :html => {:class => "accept_form"}, :url => check_tramites_path(:id => @tramite.id)  do |f|%>
+        <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
           <%= f.input :recibido, :as => :hidden, :value => false%>
           <%= f.action :submit,  :label => "Rechazar" %>
         <% end %>
-     </center>
-   </td>
- </tr>
- <% end %>
+      </center>
+    </td>
+  </tr>
+<% end %>
  </table>

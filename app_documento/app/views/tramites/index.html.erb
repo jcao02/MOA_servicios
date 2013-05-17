@@ -1,3 +1,8 @@
+<h1><%= flash[:title] %></h1>
+
+<% if current_usuario.admin == 0 %>
+  <%= button_to 'Nueva solicitud', new_tramite_path, :method => :get %>
+<% end %>
 <div class="area_filtro">
   <div class="filtro_wrapper">
     <table id="tipo_tramite_filtro">

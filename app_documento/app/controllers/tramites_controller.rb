@@ -4,8 +4,10 @@ class TramitesController < ApplicationController
   def index
     #Seleccion de tramites a mostrar
     if current_usuario.admin == 0
+        flash[:title] = "Mis solicitudes"
         @tramites = Tramite.where(:usuario_id => current_usuario.id)
     else
+        flash[:title] = "Solicitudes"
         @tramites = Tramite.all
     end
 
@@ -19,6 +21,7 @@ class TramitesController < ApplicationController
   # GET /tramites/1.json
   def show
     @tramite = Tramite.find(params[:id])
+    @req_faltantes = 10
 
     respond_to do |format|
       format.html # show.html.erb
@@ -61,8 +64,8 @@ class TramitesController < ApplicationController
     crear_requisitos(@tramite.TipoDocumento_id, @tramite)
     respond_to do |format|
       if @tramite.save
-        format.html { redirect_to @tramite, notice: 'Tramite was successfully created.' }
-        format.json { render json: @tramite, status: :created, location: @tramite }
+        format.html { redirect_to tramites_path, notice: 'Tramite was successfully created.' }
+        format.json { render json: tramites_path, status: :created, location: @tramite }
       else
         format.html { render action: "new" }
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
@@ -81,9 +84,16 @@ class TramitesController < ApplicationController
 
   #Acepta o rechaza la solicitud de un tramite
   def check
-      puts params
       @tramite = Tramite.find(params[:id])
-      @tramite.update_attributes(params[:tramite])
+      #Si se le dio a rechazar, se elimina.
+      if params[:tramite][:recibido] == "false"
+          @tramite.destroy
+          redirect_to tramites_path
+      #Si se le dio a aceptar, se pone visible
+      else
+          @tramite.update_attributes(params[:tramite])
+          redirect_to @tramite
+      end
   end
 
   # PUT /tramites/1
