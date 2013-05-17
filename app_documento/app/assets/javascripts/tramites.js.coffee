@@ -37,6 +37,8 @@ $(document).ready ->
     $("#producto_tramite").dataTable(dataTable_opc)
     $("#tipo_tramite").dataTable(dataTable_opc)
     $("#requisitos_show").dataTable(dataTable_opcS)
+    $("#solicitud_tramite_filtro").dataTable(dataTable_opcS)
+    $("#tipo_tramite_filtro").dataTable(dataTable_opcS)
     $("#producto_tramite tbody").click (event) ->
         seleccion = event.target
         $("#producto_selected").removeAttr("id")
@@ -50,9 +52,9 @@ $(document).ready ->
         valor = $("#tipo_selected").data('tipo').id
         $("#input_tipodoc_tramite").val valor
 
-    c = document.getElementsByClassName("estados");
-    for i of c
-        ctx=c[i].getContext("2d");
-        ctx.beginPath();
-        ctx.arc(95,50,40,0,2*Math.PI);
-        ctx.stroke();
+    # c = document.getElementsByClassName("estados");
+    # for i of c
+    #     ctx=c[i].getContext("2d");
+    #     ctx.beginPath();
+    #     ctx.arc(95,50,40,0,2*Math.PI);
+    #     ctx.stroke();

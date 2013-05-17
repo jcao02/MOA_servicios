@@ -127,12 +127,12 @@ ActiveRecord::Schema.define(:version => 20130514155348) do
     t.integer  "estado"
     t.date     "fecha_recepcion"
     t.text     "observacion"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "TipoDocumento_id"
     t.integer  "usuario_id"
     t.integer  "producto_id"
-    t.boolean  "recibido"
+    t.boolean  "recibido",           :default => false
   end
 
   create_table "usuarios", :force => true do |t|

@@ -23,6 +23,13 @@ AppDocumento::Application.routes.draw do
       get  :productos_usuario
     end
   end
+
+  #Enrutamiento sobre modelo tramite
+  resources :tramites do 
+      collection do 
+          put :check
+      end
+  end
   
   
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path

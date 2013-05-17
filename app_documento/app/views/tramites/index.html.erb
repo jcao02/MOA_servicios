@@ -1,30 +1,30 @@
-<h1>Listing tramites</h1>
-
-<table>
-  <tr>
-    <th>Codigo seguimiento</th>
-    <th>Tipo</th>
-    <th>Estado</th>
-    <th>Fecha recepcion</th>
-    <th>Observacion</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tramites.each do |tramite| %>
-  <tr>
-    <td><%= tramite.codigo_seguimiento %></td>
-    <td><%= tramite.estado %></td>
-    <td><%= tramite.fecha_recepcion %></td>
-    <td><%= tramite.observacion %></td>
-    <td><%= link_to 'Show', tramite %></td>
-    <td><%= link_to 'Edit', edit_tramite_path(tramite) %></td>
-    <td><%= link_to 'Destroy', tramite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Tramite', new_tramite_path %>
+<div class="area_filtro">
+  <div class="filtro_wrapper">
+    <table id="tipo_tramite_filtro">
+      <thead>
+        <th>Tipo</th>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="filtro_wrapper" id="solicitud_tramite_wrapper">
+    <table id="solicitud_tramite_filtro">
+      <thead>
+        <th>Solicitud</th>
+      </thead>
+      <tbody>
+        <% @tramites.each do |t| %>
+          <tr>
+            <td>
+              <% if t.recibido or current_usuario.admin > 0 %>
+                <%= link_to t.TipoDocumento.descripcion, t %>
+              <% else %>
+                <%= t.TipoDocumento.descripcion %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

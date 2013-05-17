@@ -70,7 +70,6 @@ class TramitesController < ApplicationController
     end
   end
 
-
   #Crea los requisitos dependiendo del tramite
   def crear_requisitos(documento, tramite)
       dependencias = Dependencia.where(:tipo_documento_id => documento)
@@ -78,6 +77,13 @@ class TramitesController < ApplicationController
         req = Requisito.new(:estado => "Sin recibir", :tramite_id => tramite.id, :TipoRequisito_id => d.tipo_requisito_id)
         tramite.requisitos << req
       end
+  end
+
+  #Acepta o rechaza la solicitud de un tramite
+  def check
+      puts params
+      @tramite = Tramite.find(params[:id])
+      @tramite.update_attributes(params[:tramite])
   end
 
   # PUT /tramites/1
