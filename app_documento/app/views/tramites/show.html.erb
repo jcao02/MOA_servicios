@@ -6,18 +6,22 @@
       </div>
     </td>
     <td rowspan="2">
-     <table id="requisitos_show">
+     <table id="requisitos_show" style="height:350px">
        <thead>
          <th>
            <h2>Requisitos</h2>
          </th>
        </thead>
        <tbody>
-         <% @tramite.requisitos.each do |r| %>
-         <tr>
-           <td><%= r.TipoRequisito.name %> <!--<canvas class="estados" style=" width="15" height="15"></canvas>--></td>
-         </tr>
-       <% end %>
+         <% @tramite.requisitos.each_with_index do |r, index| %>
+           <tr>
+             <td>
+               <%= content_tag "span", class: "content-estado", id:"estado"+index.to_s, data: { requisito: r } do %>
+               <%= link_to r.TipoRequisito.name, r %>
+             <% end %>
+             </td>
+           </tr>
+         <% end %>
        </tbody>
      </table>
     </td>
@@ -77,6 +81,7 @@
         <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
           <%= f.input :recibido, :as => :hidden, :value => true %>
           <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
+          <%= f.input :estado, :as => :hidden, :value => 1 %>
           <%= f.action :submit, :label => "Aceptar" %>
         <% end %>
         <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>

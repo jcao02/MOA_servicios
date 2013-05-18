@@ -23,6 +23,7 @@ dataTable_opcS =
   bPagination     : false
   bScrollAutoCss  : true
   bFilter         : false
+  bSort           : false
   sScrollY        : "250px"
   oLanguage       :
     sSearch       : ""
@@ -32,11 +33,56 @@ dataTable_opcS =
     sZeroRecords  : "No se encontraron coincidencias"
 
 
+
+
+#Genera circulos de canvas para estados
+crearCanvas = (clase) ->
+     n = document.getElementsByClassName(clase).length
+     for i in [0...n]
+         elem = $("#estado"+i)
+         req = elem.data('requisito')
+         color = req.estado if req
+         elem.append '<canvas id="canvas-estado'+i+'" class="estados" width="15" height="15"></canvas>'
+         c = document.getElementById "canvas-estado"+i
+         crearCirculo c, color if c
+         
+
+
+     
+
+
+#Crea un circulo dado un canvas y un color
+crearCirculo = (elem, color) ->
+     switch color
+         when 0
+            color = "white"
+         when 1
+            color = "blue"
+         when 2
+            color = "yellow"
+         when 3
+            color = "green"
+         when 4
+            color = "red"
+         else
+            color = "white"
+
+     ctx=elem.getContext("2d");
+     w = elem.width / 2
+     h = elem.height / 2
+     r = Math.min w, h 
+     ctx.beginPath();
+     ctx.arc(w,h,r,0,2*Math.PI);
+     ctx.fillStyle = color
+     ctx.fill()
+     ctx.stroke();
+
+ 
+
 $(document).ready ->
     $("#input_producto_tramite").val()
     $("#producto_tramite").dataTable(dataTable_opc)
     $("#tipo_tramite").dataTable(dataTable_opc)
-    $("#requisitos_show").dataTable(dataTable_opcS)
     $("#solicitud_tramite_filtro").dataTable(dataTable_opcS)
     $("#tipo_tramite_filtro").dataTable(dataTable_opcS)
     $("#producto_tramite tbody").click (event) ->
@@ -51,10 +97,6 @@ $(document).ready ->
         $(seleccion).attr("id", "tipo_selected")
         valor = $("#tipo_selected").data('tipo').id
         $("#input_tipodoc_tramite").val valor
-
-    # c = document.getElementsByClassName("estados");
-    # for i of c
-    #     ctx=c[i].getContext("2d");
-    #     ctx.beginPath();
-    #     ctx.arc(95,50,40,0,2*Math.PI);
-    #     ctx.stroke();
+    
+    crearCanvas "content-estado"
+    crearCanvas "content-tramite"

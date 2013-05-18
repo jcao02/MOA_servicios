@@ -1,4 +1,10 @@
 class TramitesController < ApplicationController
+  #Para los estados:
+  # 0 -> enviado (blanco)
+  # 1 -> recibido (azul)
+  # 2 -> en proceso (amarillo)
+  # 3 -> aceptado (verde)
+  # 4 -> rechazado (no se elimina, solo se pide algun otro requisito) (rojo)
   # GET /tramites
   # GET /tramites.json
   def index
@@ -21,7 +27,10 @@ class TramitesController < ApplicationController
   # GET /tramites/1.json
   def show
     @tramite = Tramite.find(params[:id])
-    @req_faltantes = 10
+    @req_faltantes = 0
+    @tramite.requisitos.each do |r| 
+        @req_faltantes += 1 unless r.estado == 3
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -59,7 +68,7 @@ class TramitesController < ApplicationController
         @tramite.producto_id = nil
     end
 
-    @tramite.estado = "Recibido"
+    @tramite.estado = 0
     @tramite.usuario_id = current_usuario.id
     crear_requisitos(@tramite.TipoDocumento_id, @tramite)
     respond_to do |format|

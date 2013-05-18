@@ -18,13 +18,15 @@
         <th>Solicitud</th>
       </thead>
       <tbody>
-        <% @tramites.each do |t| %>
+        <% @tramites.each_with_index do |t, index| %>
           <tr>
             <td>
-              <% if t.recibido or current_usuario.admin > 0 %>
-                <%= link_to t.TipoDocumento.descripcion, t %>
-              <% else %>
-                <%= t.TipoDocumento.descripcion %>
+              <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s, data: { requisito: t } do %>
+                <% if t.recibido or current_usuario.admin > 0 %>
+                  <%= link_to t.TipoDocumento.descripcion, t %>
+                <% else %>
+                  <%= t.TipoDocumento.descripcion %>
+                <% end %>
               <% end %>
             </td>
           </tr>
