@@ -27,7 +27,8 @@ AppDocumento::Application.routes.draw do
   #Enrutamiento sobre modelo tramite
   resources :tramites do 
       collection do 
-          put :check
+          put  :check
+          post :update_requisitos
       end
   end
   

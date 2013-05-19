@@ -102,3 +102,33 @@ $list_selected : #396877;
     border-bottom: 2px solid $list_selected;
   }
 }
+
+#manejar_requisitos_table{
+    width: 750px;
+    max-height: 300px !important;
+    overflow: auto;
+    margin:auto;
+        list-style:none;
+    tr:nth-child(even) {
+        background-color: #DCEAEE;
+    }
+
+    tr{
+        .boxes{
+            text-align:center;
+
+        }
+    }
+
+    th{
+        border-bottom:1px solid;
+    }
+}
+
+.botones_submit{
+    float:right;
+    margin-right: 75px;
+    li{
+        float:left;
+    }
+}

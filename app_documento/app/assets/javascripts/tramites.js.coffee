@@ -35,6 +35,15 @@ dataTable_opcS =
 
 
 
+#adjunta textarea para observaciones en requisitos rechazados
+addObservacion = (elem, id) ->
+    textarea = '<textarea rows="3" id="'+id+'" class="textarea-obs"">Agregue observacion</textarea>'
+    elem.append textarea
+#elimina textarea para observaciones en requisitos rechazados
+rmvObservacion = (elem) ->
+    $(elem).remove "textarea-obj"
+
+
 #Genera circulos de canvas para estados
 crearCanvas = (clase) ->
      n = document.getElementsByClassName(clase).length
@@ -45,11 +54,6 @@ crearCanvas = (clase) ->
          elem.append '<canvas id="canvas-estado'+i+'" class="estados" width="15" height="15"></canvas>'
          c = document.getElementById "canvas-estado"+i
          crearCirculo c, color if c
-         
-
-
-     
-
 
 #Crea un circulo dado un canvas y un color
 crearCirculo = (elem, color) ->
@@ -100,3 +104,20 @@ $(document).ready ->
     
     crearCanvas "content-estado"
     crearCanvas "content-tramite"
+
+    $(".boxes input").click ->
+        id = "#"+this.name
+        estado = document.getElementsByName "requisito[estado"+this.name+"]"
+        estado[0].value = this.value
+        observacion = document.getElementsByName "requisito[observacion"+this.name+"]"
+        if this.value == "4"
+            $(observacion[0]).show()
+        else if this.value != "4"
+            $(observacion[0]).hide()
+            
+
+    $("#enviar_cambios").click ->
+        $("#form_edit_req").submit()
+
+
+

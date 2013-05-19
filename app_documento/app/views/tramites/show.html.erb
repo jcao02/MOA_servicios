@@ -69,9 +69,16 @@
 </tr>
 <tr>
   <td>
+<% if current_usuario.admin > 0 %>
+    <button style="padding:10px; margin-left: 30px;">
+      <%= link_to 'Editar', edit_tramite_path(@tramite) %>
+    </button>
+<% end %>
     <button style="padding:10px; margin-left: 30px;">
       <%= link_to 'Volver', tramites_path %>
     </button>
+  </td>
+  <td>
   </td>
 </tr>
 <% if current_usuario.admin > 0 and  not @tramite.recibido %>

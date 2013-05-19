@@ -72,5 +72,8 @@ form.formtastic {
   select {
     width: 72%;  
   }
-  
+
+}
+.formtastic .boolean label input {
+    left:-4px !important;
 }

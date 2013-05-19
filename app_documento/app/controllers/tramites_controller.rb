@@ -23,14 +23,20 @@ class TramitesController < ApplicationController
     end
   end
 
+  #Obtiene los requisitos faltantes. (considerar agregar esto a la base de datos)
+  def get_faltantes(tramite)
+    req_faltantes = 0
+    tramite.requisitos.each do |r| 
+        req_faltantes += 1 unless r.estado == 3
+    end
+    return req_faltantes
+  end
+
   # GET /tramites/1
   # GET /tramites/1.json
   def show
     @tramite = Tramite.find(params[:id])
-    @req_faltantes = 0
-    @tramite.requisitos.each do |r| 
-        @req_faltantes += 1 unless r.estado == 3
-    end
+    @req_faltantes = get_faltantes @tramite
 
     respond_to do |format|
       format.html # show.html.erb
@@ -108,6 +114,7 @@ class TramitesController < ApplicationController
   # PUT /tramites/1
   # PUT /tramites/1.json
   def update
+      puts params
     @tramite = Tramite.find(params[:id])
 
     respond_to do |format|
@@ -119,6 +126,33 @@ class TramitesController < ApplicationController
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_requisitos
+    @tramite = Tramite.find(params[:requisito][:id])
+    requisitos = @tramite.requisitos
+    requisitos.each do |r|
+        estado = params[:requisito][("estado"+r.id.to_s).to_sym]
+        observacion = params[:requisito][("observacion"+r.id.to_s).to_sym]
+        #Solo se cambia atributos si tienen valor o no son iguales.
+        if not estado.nil? or estado == r.estado
+            r.update_attribute(:estado, estado)
+        end
+        if not observacion.blank?
+           r.update_attribute(:observacion, observacion)
+        end
+    end
+
+    puts "------------------------------------"
+    puts requisitos.length
+    puts "------------------------------------"
+    @req_faltantes = get_faltantes @tramite
+    if @req_faltantes == 0 
+        @tramite.update_attribute(:estado, 3)
+    elsif @req_faltantes < requisitos.length
+        @tramite.update_attribute(:estado, 2)
+    end
+    redirect_to @tramite
   end
 
   # DELETE /tramites/1

@@ -1,30 +1,39 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Id:</b>
-  <%= @requisito.id %>
-</p>
-
-<p>
-  <b>Descripcion:</b>
-  <%= @requisito.descripcion %>
-</p>
-
-<p>
-  <b>Observacion:</b>
-  <%= @requisito.observacion %>
-</p>
-
-<p>
-  <b>Estado:</b>
-  <%= @requisito.estado %>
-</p>
-
-<p>
-  <b>Tramite:</b>
-  <%= @requisito.tramite %>
-</p>
-
-
-<%= link_to 'Edit', edit_requisito_path(@requisito) %> |
-<%= link_to 'Back', requisitos_path %>
+<table class="area_show">
+  <tr>
+    <td>
+      <h1><%=@requisito.TipoRequisito.name %></h1>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <li><b>Solicitud:</b> <%= @requisito.tramite.TipoDocumento.descripcion%></li>
+        <li><b>Producto:</b> <%= @requisito.tramite.producto.nombre%></li>
+        <li>
+        <b>Estado:</b>
+        <% case @requisito.estado %>
+        <% when 0 %>
+          No recibido
+        <% when 1 %>
+          Recibido
+        <% when 2 %>
+          En proceso
+        <% when 3 %>
+          Aceptado
+        <% when 4 %>
+          Rechazado
+        <% end %>
+        </li>
+        <% if not @requisito.observacion.nil?%>
+          <li>
+          <b>Observación</b>
+          <div id="obs_req"><%= @requisito.observacion %></div>
+          </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><%= button_to 'Volver', @requisito.tramite, :method => :get%></td>
+  </tr>
+</table>
