@@ -8,11 +8,11 @@ class Producto < ActiveRecord::Base
   has_and_belongs_to_many :importadors
 
   # Atributos accesibles para el modelo
-  attr_accessible :alimento, :codigo_arancelario, :fabricante, :marca, :nombre
-  attr_accessible :pais_elaboracion, :registro_sanitario, :usuario_id, :grado_alcoholico, :zona_venta
+  attr_accessible :registro_sanitario, :codigo_arancelario, :alimento, :fabricante, :marca, :nombre
+  attr_accessible :pais_elaboracion, :grado_alcoholico, :zona_venta, :usuario_id
 
   #Validaciones registro sanitario
-  VALID_REGSAN_REGEX = /\A[A-Z]-\d{2}\.\d{3}\z/
+  VALID_REGSAN_REGEX = /\A[A-Z]-\d{1|3}(\.\d{1|3})*\z/
   validates :registro_sanitario, uniqueness: true, presence: true, format: { with: VALID_REGSAN_REGEX }
 
 
@@ -27,7 +27,5 @@ class Producto < ActiveRecord::Base
   validates :marca, presence: true, format: { with: VALID_STRING_REGEX }
   validates :nombre, presence: true, format: { with: VALID_STRING_REGEX }
   validates :pais_elaboracion, presence: true, format: { with: VALID_STRING_REGEX }
-
-  #Validaciones de presencia
 
 end

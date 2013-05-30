@@ -1,13 +1,16 @@
+# encoding: UTF-8
 class Usuario < ActiveRecord::Base
+
   #Definicion de relaciones de claves foraneas
   has_many :productos
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, #:registerable,
     :rememberable, :trackable, :authentication_keys => [ :login ]
 
-  # Atributos accesibles para el modelo
+  #Atributos accesibles para el modelo
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail, :nombre, :rif, :telefono
 
@@ -25,7 +28,7 @@ class Usuario < ActiveRecord::Base
 
   #Validaciones rif
   VALID_RIF_REGEX = /\A([A-Z]-\d{7}-\d)?\z/
-  validates :rif, format: { with: VALID_RIF_REGEX }
+  validates :rif, uniqueness: true, format: { with: VALID_RIF_REGEX }
 
   #Validaciones login, string SIN espacios
   VALID_LOGIN_REGEX = /\A[\w+\-.]*\z/
@@ -39,7 +42,5 @@ class Usuario < ActiveRecord::Base
   validates :password, presence: true, format: { with: VALID_STRING_REGEX }, :length => { :in => 8..16 }, :on => :create,  :on => :update_password
   validates_confirmation_of :password
   validates :nombre, format: { with: VALID_STRING_REGEX }
-
-  #Validaciones de presencia
 
 end
