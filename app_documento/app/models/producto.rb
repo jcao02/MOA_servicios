@@ -12,7 +12,7 @@ class Producto < ActiveRecord::Base
   attr_accessible :pais_elaboracion, :grado_alcoholico, :zona_venta, :usuario_id
 
   #Validaciones registro sanitario
-  VALID_REGSAN_REGEX = /\A[A-Z]-\d{1|3}(\.\d{1|3})*\z/
+  VALID_REGSAN_REGEX = /\A[A-Z]\-\d{1,3}(\.\d{3})*\z/
   validates :registro_sanitario, uniqueness: true, presence: true, format: { with: VALID_REGSAN_REGEX }
 
 
