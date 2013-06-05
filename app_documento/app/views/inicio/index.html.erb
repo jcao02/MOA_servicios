@@ -51,7 +51,7 @@
             <% @tablader.each do |elem| %>
             <!-- NOTE: for de las solicitudes -->
             <tr>
-              <% if not elem.recibido %>
+              <% if not elem.recibido and current_usuario.admin == 0 %>
                 <td><%= elem.TipoDocumento.descripcion %></td>
               <% else %>
                 <td><%= link_to elem.TipoDocumento.descripcion, elem %></td>

@@ -9,13 +9,13 @@ class Tramite < ActiveRecord::Base
   #Atributos accesibles para el modelo
   attr_accessible :codigo_seguimiento, :estado, :fecha_recepcion, :observacion, :TipoDocumento_id, :producto_id, :recibido, :usuario_id, :requisito
 
-  validates :codigo_seguimiento, presence: true, uniqueness: true
-
-  #Validaciones fecha
-  validates :fecha_recepcion, presence: true, :date => {:before_or_equal_to => Date.today}
+  #Consiraciones de quitarlo y dejar el id y ya
+  #validates :codigo_seguimiento, presence: true, uniqueness: true
 
   #Validaciones observacion
   VALID_STRING_REGEX = /\A[\w+\-\ .]*\z/
-  validates :observacion, presence: true, format: { with: VALID_STRING_REGEX }
+  validates :observacion, format: { with: VALID_STRING_REGEX }
+  #Validacion de presencia de tipo de documento
+  validates :TipoDocumento_id, presence: true
 
 end

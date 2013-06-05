@@ -51,7 +51,7 @@ crearCanvas = (clase) ->
          elem = $("#estado"+i)
          req = elem.data('requisito')
          color = req.estado if req
-         elem.append '<canvas id="canvas-estado'+i+'" class="estados" width="15" height="15"></canvas>'
+         elem.append '<canvas id="canvas-estado'+i+'" class="estados" width="16" height="16"></canvas>'
          c = document.getElementById "canvas-estado"+i
          crearCirculo c, color if c
 
@@ -71,12 +71,11 @@ crearCirculo = (elem, color) ->
          else
             color = "white"
 
-     ctx=elem.getContext("2d");
-     w = elem.width / 2
-     h = elem.height / 2
-     r = Math.min w, h 
+     ctx = elem.getContext("2d");
+     w   = elem.width / 2
+     h   = elem.height / 2
      ctx.beginPath();
-     ctx.arc(w,h,r,0,2*Math.PI);
+     ctx.arc(w, h, w, 0, 2 * Math.PI);
      ctx.fillStyle = color
      ctx.fill()
      ctx.stroke();

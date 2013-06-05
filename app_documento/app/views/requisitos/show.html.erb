@@ -8,7 +8,14 @@
     <td>
       <ul>
         <li><b>Solicitud:</b> <%= @requisito.tramite.TipoDocumento.descripcion%></li>
-        <li><b>Producto:</b> <%= @requisito.tramite.producto.nombre%></li>
+        <li><b>Producto:</b> 
+        <% if @requisito.tramite.producto %>
+          <%= @requisito.tramite.producto.nombre%>
+        <% else %>
+          Nuevo producto
+        <% end %>
+          </li>
+
         <li>
         <b>Estado:</b>
         <% case @requisito.estado %>

@@ -27,7 +27,7 @@ class Usuario < ActiveRecord::Base
   validates :telefono, presence: true, format: { with: VALID_TELEFONO_REGEX }
 
   #Validaciones rif
-  VALID_RIF_REGEX = /\A([A-Z]-\d{7}-\d)?\z/
+  VALID_RIF_REGEX = /\A([A-Z]-\d{8}-\d)?\z/
   validates :rif, uniqueness: true, format: { with: VALID_RIF_REGEX }
 
   #Validaciones login, string SIN espacios

@@ -6,15 +6,12 @@ class Requisito < ActiveRecord::Base
   belongs_to :TipoRequisito
 
   #Atributos accesibles para el modelo
-  attr_accessible :descripcion, :estado, :id, :observacion, :tramite_id, :TipoRequisito_id
-
-  #Validaciones id
-  validates :id, uniqueness: true, presence: true
+  attr_accessible :descripcion, :estado, :observacion, :tramite_id, :TipoRequisito_id
 
   #Validaciones descripcion, observacion
   VALID_STRING_REGEX = /\A[\w+\-\ .]*\z/
 
-  validates :descripcion, presence: true, format: { with: VALID_STRING_REGEX }
+  validates :TipoRequisito_id, presence: true
   validates :observacion, format: { with: VALID_STRING_REGEX }
 
 end

@@ -44,14 +44,19 @@ class TramitesController < ApplicationController
     end
   end
 
+  #Obtiene el listado de productos
+  def get_products(usuario)
+      if usuario.admin == 0
+          productos = Producto.where(:usuario_id => current_usuario.id)
+      else
+          productos = Producto.all
+      end
+      return productos
+  end
   # GET /tramites/new
   # GET /tramites/new.json
   def new
-      if current_usuario.admin == 0
-          @productos = Producto.where(:usuario_id => current_usuario.id)
-      else
-          @productos = Producto.all
-      end
+      @productos = get_products(current_usuario)
       @tipos     = TipoDocumento.all
       @tramite   = Tramite.new
 
@@ -82,7 +87,11 @@ class TramitesController < ApplicationController
         format.html { redirect_to tramites_path, notice: 'Tramite was successfully created.' }
         format.json { render json: tramites_path, status: :created, location: @tramite }
       else
-        format.html { render action: "new" }
+        @productos = get_products(current_usuario)
+        @tipos     = TipoDocumento.all
+        @tramite   = Tramite.new
+        flash[:notice] = 'Debe seleccionar un tipo de solicitud'
+        format.html { render action: "new"}
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end

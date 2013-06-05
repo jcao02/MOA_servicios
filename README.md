@@ -15,12 +15,11 @@ Cosas que faltan:
   e) La vista de requisito no esta hecha: Diseñar e implementar.
 
 2) En Admin o S-Admin
-  a) En inicio toda solicitud en la tabla debe ser accesible (incluso si no esta aceptada)
   b) En menu principal, hacer dropdown "productos" y "usuarios" para agregar crear y listar, y cambiar nombre de "listar solicitudes" a "revisar solicitudes" o algo asi
   c) En solicitudes falta el filtro
-  d) En vista de una solicitud, el boton de editar no se debe ver si no se ha aceptado la solicitud
   e) En vista de una solicitud, los botones de aceptar y rechazar no tienen styling
   f) La vista de requisito no esta hecha: Diseñar e implementar.
 
 3) En general
   a) Cuando se modifique alguna solicitud (cambiar su estado, o de algun requisito) se debe enviar un correo al usuario.
+  b) La busqueda en las datatables de inicio renderizan mal cuando se busca, arreglar eso.

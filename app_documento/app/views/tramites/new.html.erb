@@ -1,2 +1,5 @@
 Seleccione el producto y el tipo de solicitud a realizar (Si no es para un producto que este en el sistema, seleccione [Nuevo producto]
+<% if flash[:notice] %>
+<p style="color:red; font-size: 12px;"><%= flash[:notice]%></p>
+<% end %>
 <%= render 'form' %>
