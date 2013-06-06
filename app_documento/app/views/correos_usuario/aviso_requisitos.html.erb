@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2><b>Tramite: </b> <%= @tramite.TipoDocumento.descripcion %></h2>
+    <% if @tramite.producto %>
+      <h3><b>Producto: </b> <%= @tramite.producto.nombre %></h3>
+    <% end %>
+    <p>Requisito<% if @lista.length > 1 %>s<% end %>: </p>
+    <ul>
+    <% @lista.each do |i| %>
+      <li>
+      <p>El requisito <%= i.TipoRequisito.name %> 
+      <% case i.estado %>
+      <% when 1 %>
+        ha sido recibido
+        </p>
+      <% when 2 %>
+        está en revisión
+        </p>
+      <% when 3 %>
+        ha sido aceptado
+        </p>
+      <% when 4 %>
+        ha sido rechazado
+        </p>
+        <div>
+          <u>Observaciones</u>
+          <p><%= i.observacion %></p>
+        </div>
+      <% end %>
+      </li>
+      </br>
+    <% end %>
+  </ul>
+</body>
+</html>

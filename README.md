@@ -21,5 +21,4 @@ Cosas que faltan:
   f) La vista de requisito no esta hecha: Diseñar e implementar.
 
 3) En general
-  a) Cuando se modifique alguna solicitud (cambiar su estado, o de algun requisito) se debe enviar un correo al usuario.
   b) La busqueda en las datatables de inicio renderizan mal cuando se busca, arreglar eso.

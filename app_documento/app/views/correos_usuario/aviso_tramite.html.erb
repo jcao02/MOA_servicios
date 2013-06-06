@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>El tramite <%=@tramite.TipoDocumento.descripcion%> se ha completado!</h1>
+    <% if @tramite.producto %>
+      <p>Ya está disponible en la sección de documentos del producto <%= @tramite.producto.nombre%> el documento generado por este tramite</p>
+    <% else %>
+      <p>Si desea registrar el producto relacionado con este trámite, contáctenos!</p>
+    <% end %>
+    <p></p>
+  </body>
+</html>
