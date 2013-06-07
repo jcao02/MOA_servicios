@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class TramitesController < ApplicationController
   #Para los estados:
   # 0 -> enviado (blanco)
@@ -137,30 +138,36 @@ class TramitesController < ApplicationController
     end
   end
 
+  #Controlador para cambiar estado de requisitos
   def update_requisitos
     @tramite = Tramite.find(params[:requisito][:id])
     requisitos = @tramite.requisitos
+    lista = []
     requisitos.each do |r|
         estado = params[:requisito][("estado"+r.id.to_s).to_sym]
-        observacion = params[:requisito][("observacion"+r.id.to_s).to_sym]
         #Solo se cambia atributos si tienen valor o no son iguales.
-        if not estado.nil? or estado == r.estado
-            r.update_attribute(:estado, estado)
+        if estado.nil? or estado == r.estado.to_s 
+            next
         end
+        observacion = params[:requisito][("observacion"+r.id.to_s).to_sym]
+        lista << r
+        r.update_attribute(:estado, estado)
         if not observacion.blank?
            r.update_attribute(:observacion, observacion)
         end
     end
 
-    puts "------------------------------------"
-    puts requisitos.length
-    puts "------------------------------------"
+    #Se envia correo con requisitos actualizados sobre el tramite.
+    CorreosUsuario.aviso_requisitos(@tramite.usuario, lista, @tramite).deliver
     @req_faltantes = get_faltantes @tramite
+    #Si ya no faltan requisitos, se manda un correo y se pone como listo el tramite
     if @req_faltantes == 0 
+        CorreosUsuario.aviso_tramite(@tramite.usuario, @tramite).deliver
         @tramite.update_attribute(:estado, 3)
     elsif @req_faltantes < requisitos.length
         @tramite.update_attribute(:estado, 2)
     end
+
     redirect_to @tramite
   end
 
