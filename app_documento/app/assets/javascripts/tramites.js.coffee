@@ -117,6 +117,3 @@ $(document).ready ->
 
     $("#enviar_cambios").click ->
         $("#form_edit_req").submit()
-
-
-

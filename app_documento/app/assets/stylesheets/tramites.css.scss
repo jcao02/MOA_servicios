@@ -101,14 +101,23 @@ $list_selected : #396877;
 
 #solicitud_tramite_wrapper{
     width: 616px;
+    margin-top: 10px;
+    margin-left: 130px;
     tr:nth-child(even) {
         background-color: #DCEAEE;
     }
+    td{
+        height: 70px;
+    }
+    border-left: 2px solid $list_selected;
 }
 
 #solicitud_tramite_wrapper, #tipo_tramite_filtro_wrapper{
   th{
     border-bottom: 2px solid $list_selected;
+  }
+  .estados{
+    margin-bottom: 25px;
   }
 }
 

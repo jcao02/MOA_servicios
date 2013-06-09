@@ -18,6 +18,8 @@ class TramitesController < ApplicationController
         @tramites = Tramite.all
     end
 
+    @documentos = TipoDocumento.all
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tramites }

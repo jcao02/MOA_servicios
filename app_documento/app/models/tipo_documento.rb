@@ -11,6 +11,6 @@ class TipoDocumento < ActiveRecord::Base
 
   #Validaciones descripcion
   VALID_STRING_REGEX = /\A[\w+\-\ .]*\z/
-  validates :descripcion, presence: true, uniqueness: true, format: { with: VALID_STRING_REGEX }
+  #validates :descripcion, presence: true, uniqueness: true, format: { with: VALID_STRING_REGEX }
 
 end

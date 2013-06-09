@@ -11,7 +11,8 @@ namespace :set do
       :admin    => 2, 
       :compania => "S-Administradora",
       :nombre   => "S-Admin",
-      :apellido => "istrador"
+      :apellido => "istrador",
+      :rif      => "j-29348792-7"
     )
     Usuario.create(
       :login    => "Admin", 
@@ -22,6 +23,7 @@ namespace :set do
       :compania => "Administradora",
       :nombre   => "Admin",
       :apellido => "istrador",
+      :rif      => "j-29348792-6"
     )
     Usuario.create(
       :login    => "Cliente", 
@@ -31,7 +33,8 @@ namespace :set do
       :admin    => 0, 
       :compania => "Alimentos X",
       :nombre   => "Cliente",
-      :apellido => "la"
+      :apellido => "la",
+      :rif      => "j-29348792-5"
     )
   end
   

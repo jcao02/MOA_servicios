@@ -40,42 +40,60 @@
       <td>
         <table id="mis_solicitudes">
           <thead>
-              <th>Nombre</th>
-              <th>Producto</th>
-              <% if current_usuario.admin > 0 %>
-                <th>Usuario</th>
-              <% end %>
-              <th class="estado">Edo</th>
+            <th>Solicitud</th>
           </thead>
           <tbody>
-            <% @tablader.each do |elem| %>
-              <!-- NOTE: for de las solicitudes -->
+            <% @tablader.each_with_index do |t, index| %>
               <tr>
-                <% if not elem.recibido and current_usuario.admin == 0 %>
-                  <td><%= elem.TipoDocumento.descripcion %></td>
-                <% else %>
-                  <td><%= link_to elem.TipoDocumento.descripcion, elem %></td>
+                <td style="text-align: left; height:70px;">
+                  <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s, data: { requisito: t } do %>
+                    <% if t.recibido or current_usuario.admin > 0 %>
+                      <%= link_to (t) do%>
+                        <ul style="height:0;">
+                          <li>
+                          <%= t.TipoDocumento.descripcion %>
+                          </li>
+                          <li style="font-size:10px; margin-bottom:10px;">
+                          <% if not t.producto.nil? %>
+                            <%=t.producto.nombre%>
+                          <% else %>
+                            nuevo producto
+                          <% end %>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        <ul style="height:0;">
+                          <li>
+                          <%= t.TipoDocumento.descripcion %>
+                          </li>
+                          <li style="font-size:10px; margin-bottom:10px;">
+                          <% if not t.producto.nil? %>
+                            <%=t.producto.nombre%>
+                          <% else %>
+                            nuevo producto
+                          <% end %>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
                 <% end %>
-                <td><%= elem.producto.nombre unless elem.producto.nil? %></td>
-                <% if current_usuario.admin > 0 %>
-                  <td><%= elem.usuario.compania %></td>
-                <% end %>
-                <td class="estado alerta" title="Por enviar" style="background: white">a</td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <table>
-          <tr>
-            <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">Stand-by </div></td>
-            <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado </div></td>
-            <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>
-          </tr>
-         </table>
-      </td>
-  
-    </tr>
-  
-  </table>
+              </tbody>
 
-</center>
+            </table>
+          </td>
+          <table style="width:400px;">
+            <tr>
+              <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">No recibido</div></td>
+              <td><div class="alerta" style="background: blue;float:left">  </div><div style="font-size:x-small">Recibido</div></td>
+              <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado </div></td>
+              <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>
+              <td><div class="alerta" style="background: yellow;float:left">  </div><div style="font-size:x-small">En proceso</div></td>
+            </tr>
+          </table>
+
+        </tr>
+
+      </table>
+
+    </center>

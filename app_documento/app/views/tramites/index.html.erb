@@ -3,15 +3,6 @@
 <% if current_usuario.admin == 0 %>
   <%= button_to 'Nueva solicitud', new_tramite_path, :method => :get %>
 <% end %>
-<div class="area_filtro">
-  <div class="filtro_wrapper">
-    <table id="tipo_tramite_filtro">
-      <thead>
-        <th>Tipo</th>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
   <div class="filtro_wrapper" id="solicitud_tramite_wrapper">
     <table id="solicitud_tramite_filtro">
       <thead>
@@ -23,22 +14,46 @@
             <td>
               <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s, data: { requisito: t } do %>
                 <% if t.recibido or current_usuario.admin > 0 %>
-                  <%= link_to t.TipoDocumento.descripcion, t %>
+                  <%= link_to (t) do%>
+                    <ul style="height:0;">
+                    <li>
+                    <%= t.TipoDocumento.descripcion %>
+                    </li>
+                    <li style="font-size:10px; margin-bottom:10px;">
+                    <% if not t.producto.nil? %>
+                      <%=t.producto.nombre%>
+                    <% else %>
+                      nuevo producto
+                    <% end %>
+                    </li>
+                  <% end %>
                 <% else %>
-                  <%= t.TipoDocumento.descripcion %>
+                  <ul style="height:0;">
+                    <li>
+                    <%= t.TipoDocumento.descripcion %>
+                    </li>
+                    <li style="font-size:10px; margin-bottom:10px;">
+                    <% if not t.producto.nil? %>
+                      <%=t.producto.nombre%>
+                    <% else %>
+                      nuevo producto
+                    <% end %>
+                    </li>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <table style="min-width:250px">
-      <tr>
-        <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">Stand-by </div></td>
-        <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado </div></td>
-        <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>
-      </tr>
-    </table>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <table style="width:100%">
+        <tr>
+          <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">No recibido</div></td>
+          <td><div class="alerta" style="background: blue;float:left">  </div><div style="font-size:x-small">Recibido</div></td>
+          <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado </div></td>
+          <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>
+          <td><div class="alerta" style="background: yellow;float:left">  </div><div style="font-size:x-small">En proceso</div></td>
+        </tr>
+      </table>
+    </div>
   </div>
-</div>
