@@ -22,7 +22,6 @@ dataTable_opcS =
   bScrollCollapse : true
   bPagination     : false
   bScrollAutoCss  : true
-  bFilter         : false
   bSort           : false
   sScrollY        : "250px"
   oLanguage       :
