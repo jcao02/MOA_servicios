@@ -5,6 +5,9 @@ class Documento < ActiveRecord::Base
   belongs_to :producto
   belongs_to :TipoDocumento
 
+  #Para manejo de log del usuario
+  has_paper_trail
+  
   #Atributos accesibles para el modelo
   attr_accessible :alerta, :fecha_emision, :fecha_vencimiento, :producto_id, :pdf, :TipoDocumento_id, :TipoDocumento_attributes
   has_attached_file :pdf

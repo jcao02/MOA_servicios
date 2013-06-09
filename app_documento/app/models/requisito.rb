@@ -5,6 +5,9 @@ class Requisito < ActiveRecord::Base
   belongs_to :tramite
   belongs_to :TipoRequisito
 
+  #Para manejo de log del usuario
+  has_paper_trail
+  
   #Atributos accesibles para el modelo
   attr_accessible :descripcion, :estado, :observacion, :tramite_id, :TipoRequisito_id
 

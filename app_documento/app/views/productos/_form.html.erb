@@ -56,16 +56,16 @@
           <%= f.input :grado_alcoholico, :as => :select, :collection => 1..50, :label => "Grado Alcohólico"%>
         </td>
       </tr>
-        <tr>
-          <td>
-          </td>
-          <td>
+      <tr>
+        <td colspan="2">
+          <div style="margin-left:257px;margin-top:9px">
             <%= f.action :submit, :label => flash[:accion] %>
             <button>
               <%= link_to 'Volver', :back %>
             </button>
-          </td>
-        </tr>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
   </ul>

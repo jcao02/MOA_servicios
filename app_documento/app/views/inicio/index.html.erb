@@ -49,23 +49,33 @@
           </thead>
           <tbody>
             <% @tablader.each do |elem| %>
-            <!-- NOTE: for de las solicitudes -->
-            <tr>
-              <% if not elem.recibido and current_usuario.admin == 0 %>
-                <td><%= elem.TipoDocumento.descripcion %></td>
-              <% else %>
-                <td><%= link_to elem.TipoDocumento.descripcion, elem %></td>
-              <% end %>
-              <td><%= elem.producto.nombre unless elem.producto.nil? %></td>
-              <% if current_usuario.admin > 0 %>
-                <td><%= elem.usuario.compania %></td>
-              <% end %>
-              <td class="estado alerta" title="Por enviar" style="background: white">a</td>
-            </tr>
-          <% end %>
+              <!-- NOTE: for de las solicitudes -->
+              <tr>
+                <% if not elem.recibido and current_usuario.admin == 0 %>
+                  <td><%= elem.TipoDocumento.descripcion %></td>
+                <% else %>
+                  <td><%= link_to elem.TipoDocumento.descripcion, elem %></td>
+                <% end %>
+                <td><%= elem.producto.nombre unless elem.producto.nil? %></td>
+                <% if current_usuario.admin > 0 %>
+                  <td><%= elem.usuario.compania %></td>
+                <% end %>
+                <td class="estado alerta" title="Por enviar" style="background: white">a</td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
+        <table>
+          <tr>
+            <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">Stand-by </div></td>
+            <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado </div></td>
+            <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>
+          </tr>
+         </table>
       </td>
+  
     </tr>
+  
   </table>
+
 </center>

@@ -44,16 +44,31 @@
           <%= link_to content_tag(:li, 'Inicio', :class => "nav"), home_path %>
           <% case current_usuario.admin
                when 0 %>
-             <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
-             <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), tramites_path %>
+
+                <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
+                <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), tramites_path %>
+
+  
+<!--               <ul id="ulid">
+              <li class="drop" id="solicitud" title="Mis Solicitudes">Mis Solicitudes</li>
+                <ul class="dropAppear" id="solicitudAppear">
+
+                <%= link_to content_tag(:li, content_tag(:div, 'Listar Solicitudes'),
+                                        :class => "dropElem"), tramites_path %>
+                <%= link_to content_tag(:li, content_tag(:div, 'Crear Solicitud'),
+                                        :class => "dropElem"), new_requisito_path %>
+                </ul>
+              </ul>
+ -->
 
             <% when 1..2%>
-             <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
-             <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
-             <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
+                <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
+                <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
+                <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
 
           <% end %>
         </ul>
+      </ul>
       <%end%>
     </header>
 

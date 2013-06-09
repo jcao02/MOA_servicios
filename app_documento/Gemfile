@@ -75,3 +75,5 @@ gem 'wicked_pdf'
 #gemas para manejar archivos de ruby en js
 gem 'rabl'
 gem 'gon'
+
+gem 'paper_trail'

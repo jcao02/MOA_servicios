@@ -1,4 +1,4 @@
-<table class="area_show" id="area_tramite">
+<table id="area_tramite">
   <tr>
     <td>
       <div class="title_show">
@@ -6,13 +6,15 @@
       </div>
     </td>
     <td rowspan="2">
-     <table id="requisitos_show" style="height:350px">
+     <table id="requisitos_show" style="height:350px;border-bottom:1px solid black">
        <thead>
          <th>
            <h2>Requisitos</h2>
          </th>
        </thead>
+       
        <tbody>
+        
          <% @tramite.requisitos.each_with_index do |r, index| %>
            <tr>
              <td>
@@ -23,6 +25,13 @@
            </tr>
          <% end %>
        </tbody>
+     </table>
+     <table style="min-width:350px;margin-left:25px">
+      <tr>
+        <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">Stand-by</div></td>
+        <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado</div></td>
+        <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>  
+      </tr>
      </table>
     </td>
   </tr>
@@ -65,38 +74,43 @@
         </tr>
       <% end %>
       </table>
-  </td>
-</tr>
-<tr>
-  <td>
-<% if current_usuario.admin > 0  and @tramite.recibido %>
-    <button style="padding:10px; margin-left: 30px;">
-      <%= link_to 'Editar', edit_tramite_path(@tramite) %>
-    </button>
-<% end %>
-    <button style="padding:10px; margin-left: 30px;">
-      <%= link_to 'Volver', tramites_path %>
-    </button>
-  </td>
-  <td>
-  </td>
-</tr>
-<% if current_usuario.admin > 0 and  not @tramite.recibido %>
+    </td>
   <tr>
-    <td colspan="2">
-      <center>
-        <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
-          <%= f.input :recibido, :as => :hidden, :value => true %>
-          <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
-          <%= f.input :estado, :as => :hidden, :value => 1 %>
-          <%= f.action :submit, :label => "Aceptar" %>
+    <td>
+      <div style="margin-left:30px">
+        <% if current_usuario.admin > 0  and @tramite.recibido %>
+          <button style="padding:10px">
+            <%= link_to 'Editar', edit_tramite_path(@tramite) %>
+          </button>
+          <button style="padding:10px">
+            <%= link_to 'Volver', tramites_path %>
+          </button>
         <% end %>
-        <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
-          <%= f.input :recibido, :as => :hidden, :value => false%>
-          <%= f.action :submit,  :label => "Rechazar" %>
+        
+        <% if current_usuario.admin > 0 and  not @tramite.recibido %>        
+          <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+            <%= f.input :recibido, :as => :hidden, :value => true %>
+            <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
+            <%= f.input :estado, :as => :hidden, :value => 1 %>
+            <%= f.action :submit, :label => "Aceptar", :class => 'area_tramite' %>
+          <% end %>
+          <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+            <%= f.input :recibido, :as => :hidden, :value => false%>
+            <%= f.action :submit,  :label => "Rechazar" %>
+          <% end %>
+          <button style="padding:10px;">
+            <%= link_to 'Volver', tramites_path %>
+          </button>
         <% end %>
-      </center>
+        <%if current_usuario.admin == 0 %>
+          <button style="padding:10px;margin-left:30px;">
+            <%= link_to 'Volver', tramites_path %>
+          </button>
+        <% end %> 
+      </div>
     </td>
   </tr>
-<% end %>
- </table>
+  
+  
+
+</table>

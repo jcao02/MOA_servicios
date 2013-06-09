@@ -4,6 +4,9 @@ class Usuario < ActiveRecord::Base
   #Definicion de relaciones de claves foraneas
   has_many :productos
 
+  #Para manejo de log del usuario
+  has_paper_trail
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
