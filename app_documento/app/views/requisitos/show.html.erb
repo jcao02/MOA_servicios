@@ -1,46 +1,74 @@
-<table class="area_show">
-  <tr>
+<table class="area_show" style="margin-left:230px;">
+  <tr >
     <td>
-      <h1><%=@requisito.TipoRequisito.name %></h1>
+      <div class="title_show">
+        <center><h1><%=@requisito.TipoRequisito.name %></h1></center>
+      </div>
     </td>
   </tr>
   <tr>
     <td>
-      <ul>
-        <li><b>Solicitud:</b> <%= @requisito.tramite.TipoDocumento.descripcion%></li>
-        <li><b>Producto:</b> 
-        <% if @requisito.tramite.producto %>
-          <%= @requisito.tramite.producto.nombre%>
-        <% else %>
-          Nuevo producto
-        <% end %>
-          </li>
-
-        <li>
-        <b>Estado:</b>
-        <% case @requisito.estado %>
-        <% when 0 %>
-          No recibido
-        <% when 1 %>
-          Recibido
-        <% when 2 %>
-          En proceso
-        <% when 3 %>
-          Aceptado
-        <% when 4 %>
-          Rechazado
-        <% end %>
-        </li>
-        <% if not @requisito.observacion.nil?%>
-          <li>
-          <b>Observación</b>
-          <div id="obs_req"><%= @requisito.observacion %></div>
-          </li>
-        <% end %>
-      </ul>
+      <table class="tabla_show" id="arregla" style="margin-left:35px;">
+        <!-- <tr>
+          <tr>
+            <td style="max-width: 40px;">
+              <b>Solicitud:</b> 
+            </td>
+            <td>
+              <%= @requisito.tramite.TipoDocumento.descripcion %>
+            </td>
+          </tr>
+        <tr> -->
+          <td>
+            <b>Producto:</b> 
+          </td>
+          <td>
+            <% if @requisito.tramite.producto %>
+              <%= @requisito.tramite.producto.nombre%>
+            <% else %>
+              Nuevo producto
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Estado:</b>
+          </td>
+          <td>
+            <% case @requisito.estado %>
+              <% when 0 %>
+                No recibido
+              <% when 1 %>
+                Recibido
+              <% when 2 %>
+                En proceso
+              <% when 3 %>
+                Aceptado
+              <% when 4 %>
+                Rechazado
+              <% end %>
+          </td>
+        </tr>
+        <% if not @requisito.observacion.nil? and @requisito.estado != 3%>
+          <tr>
+            <td>
+              <b>Observación:</b>
+            <td>
+          </tr>
+          <tr>
+            <td colspan="2">  
+              <div id="obs_req"><%= @requisito.observacion %></div>
+            </td>
+          </tr>
+          <% end %>
+        <tr>
+          <td colspan="2">
+            <button style= "padding:10px;margin-left: 120px;">
+              <%= link_to 'Volver', @requisito.tramite %>
+            </button>
+          </td>
+        </tr>
+      </table>
     </td>
-  </tr>
-  <tr>
-    <td><%= button_to 'Volver', @requisito.tramite, :method => :get%></td>
   </tr>
 </table>

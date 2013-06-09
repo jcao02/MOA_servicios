@@ -57,6 +57,13 @@ $list_selected : #396877;
     border-radius: 3px;
 }
 
+#arregla {
+    height:200px !important;
+    min-height: 200px !important;
+    max-height: 200px !important;
+    overflow:auto;
+}
+
 #requisitos_show{
     margin-top: 30px;
     min-width: 350px;
