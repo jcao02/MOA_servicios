@@ -6,6 +6,10 @@ class Tramite < ActiveRecord::Base
   has_many :requisitos, :dependent => :delete_all
   accepts_nested_attributes_for :requisitos
 
+  #Log tramite
+  has_many :logtramites
+  has_many :usuarios, :through => :logtramites
+
   #Atributos accesibles para el modelo
   attr_accessible :codigo_seguimiento, :estado, :fecha_recepcion, :observacion, :TipoDocumento_id, :producto_id, :recibido, :usuario_id, :requisito
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608220637) do
+ActiveRecord::Schema.define(:version => 20130703234425) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(:version => 20130608220637) do
     t.integer "producto_id"
   end
 
+  create_table "logdocumentos", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "documento_id"
+    t.string   "tipo"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "logproductos", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "producto_id"
+    t.string   "tipo"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "logs", :force => true do |t|
     t.datetime "fecha_hora"
     t.text     "descripcion"
@@ -61,6 +77,14 @@ ActiveRecord::Schema.define(:version => 20130608220637) do
   end
 
   add_index "logs", ["usuario_id"], :name => "index_logs_on_usuario_id"
+
+  create_table "logtramites", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "tramite_id"
+    t.string   "tipo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "presentacions", :force => true do |t|
     t.string   "cpe"

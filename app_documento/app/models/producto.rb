@@ -3,6 +3,9 @@ class Producto < ActiveRecord::Base
 
   #Definicion de relaciones de claves foraneas
   belongs_to :usuario
+  has_many :logproductos
+  has_many :usuarios, :through => :logproductos
+  
   has_many :documentos
   has_many :presentacions
   has_and_belongs_to_many :importadors

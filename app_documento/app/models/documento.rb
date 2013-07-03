@@ -5,6 +5,10 @@ class Documento < ActiveRecord::Base
   belongs_to :producto
   belongs_to :TipoDocumento
 
+  #Log para documentos
+  has_many :logdocumentos
+  has_many :usuarios, :through => :logdocumentos
+
   #Para manejo de log del usuario
   has_paper_trail
   

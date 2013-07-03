@@ -1,0 +1,27 @@
+<h1>Listing logproductos</h1>
+
+<table>
+  <tr>
+    <th>Usuario</th>
+    <th>Producto</th>
+    <th>Tipo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @logproductos.each do |logproducto| %>
+  <tr>
+    <td><%= logproducto.usuario_id %></td>
+    <td><%= logproducto.producto_id %></td>
+    <td><%= logproducto.tipo %></td>
+    <td><%= link_to 'Show', logproducto %></td>
+    <td><%= link_to 'Edit', edit_logproducto_path(logproducto) %></td>
+    <td><%= link_to 'Destroy', logproducto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Logproducto', new_logproducto_path %>

@@ -66,9 +66,15 @@ class DocumentosController < ApplicationController
 
     respond_to do |format|
       if @documento.save
+        @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Crear')
         session[:producto] = nil
-        format.html { redirect_to @producto, notice: 'Documento was successfully created.', :format => :pdf }
-        format.json { render json: @producto, status: :created, location: @documento }
+        if @logd.save
+          format.html { redirect_to @producto, notice: 'Documento creado. Log actualizado.', :format => :pdf }
+          format.json { render json: @producto, status: :created, location: @documento }
+        else
+          format.html { redirect_to @producto, notice: 'Documento creado. Log no actualizado.', :format => :pdf }
+          format.json { render json: @producto, status: :created, location: @documento }
+        end
       else
         @tipos = get_tipoDoc
         @documento.TipoDocumento = TipoDocumento.new
@@ -83,13 +89,13 @@ class DocumentosController < ApplicationController
   # PUT /documentos/1.json
   def update
     @documento = Documento.find(params[:id])
-
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Actualizar')
     respond_to do |format|
-      if @documento.update_attributes(params[:documento])
-        format.html { redirect_to @documento, notice: 'Documento was successfully updated.' }
+      if @documento.update_attributes(params[:documento]) and @logd.save
+        format.html { redirect_to @documento, notice: 'Documento y Log actualizados.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", notice: 'Documento y/o Log no actualizados.' }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end
@@ -100,11 +106,17 @@ class DocumentosController < ApplicationController
   def destroy
     @documento = Documento.find(params[:id])
     producto = Producto.find(@documento.producto_id)
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Eliminar')
     @documento.destroy
 
     respond_to do |format|
-      format.html { redirect_to producto }
-      format.json { head :no_content }
+      if @logd.save
+        format.html { redirect_to producto }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to producto, notice: 'Log no actualizado'}
+        format.json { head :no_content }
+      end
     end
   end
 end

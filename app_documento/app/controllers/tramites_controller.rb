@@ -87,8 +87,14 @@ class TramitesController < ApplicationController
     crear_requisitos(@tramite.TipoDocumento_id, @tramite)
     respond_to do |format|
       if @tramite.save
-        format.html { redirect_to tramites_path, notice: 'Tramite was successfully created.' }
-        format.json { render json: tramites_path, status: :created, location: @tramite }
+        @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Crear')
+        if @logt.save
+          format.html { redirect_to tramites_path, notice: 'Tramite creado. Log actualizado' }
+          format.json { render json: tramites_path, status: :created, location: @tramite }
+        else
+          format.html { redirect_to tramites_path, notice: 'Tramite creado. Log no actualizado.' }
+          format.json { render json: tramites_path, status: :created, location: @tramite }
+        end
       else
         @productos = get_products(current_usuario)
         @tipos     = TipoDocumento.all
@@ -126,15 +132,15 @@ class TramitesController < ApplicationController
   # PUT /tramites/1
   # PUT /tramites/1.json
   def update
-      puts params
     @tramite = Tramite.find(params[:id])
-
+    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Actualizar')
+    
     respond_to do |format|
-      if @tramite.update_attributes(params[:tramite])
-        format.html { redirect_to @tramite, notice: 'Tramite was successfully updated.' }
+      if @tramite.update_attributes(params[:tramite]) 
+        format.html { redirect_to @tramite, notice: 'Tramite y Log actualizados.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", notice: 'Tramite y/o Log no actualizados.' }
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end
@@ -143,6 +149,8 @@ class TramitesController < ApplicationController
   #Controlador para cambiar estado de requisitos
   def update_requisitos
     @tramite = Tramite.find(params[:requisito][:id])
+    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Actualizar requisitos.')
+    @logt.save
     requisitos = @tramite.requisitos
     lista = []
     requisitos.each do |r|
@@ -177,11 +185,17 @@ class TramitesController < ApplicationController
   # DELETE /tramites/1.json
   def destroy
     @tramite = Tramite.find(params[:id])
+    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Eliminar')    
     @tramite.destroy
 
     respond_to do |format|
-      format.html { redirect_to tramites_url }
-      format.json { head :no_content }
+      if @logt.save
+        format.html { redirect_to tramites_url, notice: 'Log actualizado.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to tramites_url, notice: 'Log no actualizado.' }
+        format.json { head :no_content }
+      end
     end
   end
 end

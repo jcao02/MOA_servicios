@@ -1,4 +1,7 @@
 AppDocumento::Application.routes.draw do
+  resources :logproductos
+
+
   devise_for :usuarios 
 
   get "inicio/index"
