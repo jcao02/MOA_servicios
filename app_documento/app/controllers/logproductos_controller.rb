@@ -15,6 +15,7 @@ class LogproductosController < ApplicationController
   def show
     @logproducto = Logproducto.find(params[:id])
 
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @logproducto }

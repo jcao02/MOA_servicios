@@ -1,10 +1,10 @@
-<h1 style="margin-left: 20px;">Log de Productos</h1>
+<h1 style="margin-left: 20px;">Log de Tramites</h1>
 <div style="margin-left: 40px;margin-bottom: 20px;">
   <button style= Padding:10px>
     <%= link_to 'Log de Documentos', logdocumento_index_path %>
   </button>
   <button style= Padding:10px>
-    <%= link_to 'Log de Tramites', logtramite_index_path %>
+    <%= link_to 'Log de Documentos', logdocumento_index_path %>
   </button>
 </div>
 <table class="dataTable" id="tabla_show_log">
@@ -16,20 +16,20 @@
     
   </tr>
 
-<% @logproductos.each do |logproducto| %>
+<% @logtramites.each do |logtramite| %>
   <tr>
     <td style="width:150px;">
-      <%= logproducto.nusuario %>
+      <%= logtramite.nusuario %>
     </td>
     <td style="width:400px">
-      <%= logproducto.nproducto %>
+      <%= logtramite.nproducto %>
     </td>
     <td style="width:80px">
-      <%= logproducto.tipo %>
+      <%= logtramite.tipo %>
     </td>
     <td>
-      <%= logproducto.created_at.strftime("%I:%M%p")%> 
-      <%= logproducto.created_at.day%>/<%= logproducto.created_at.month%>/<%= logproducto.created_at.year%>
+      <%= logtramite.created_at.strftime("%I:%M%p")%> 
+      <%= logtramite.created_at.day%>/<%= logtramite.created_at.month%>/<%= logtramite.created_at.year%>
     </td>
   </tr>
 <% end %>

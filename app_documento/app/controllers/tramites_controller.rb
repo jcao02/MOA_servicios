@@ -87,7 +87,9 @@ class TramitesController < ApplicationController
     crear_requisitos(@tramite.TipoDocumento_id, @tramite)
     respond_to do |format|
       if @tramite.save
-        @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Crear')
+        @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Creado',
+                           :nusuario => current_usuario.nombre, :nproducto => Producto.find(@tramite.producto_id).nombre, 
+                           :ntipodocumento => TipoDocumento.find(@tramite.TipoDocumento_id).descripcion)
         if @logt.save
           format.html { redirect_to tramites_path, notice: 'Tramite creado. Log actualizado' }
           format.json { render json: tramites_path, status: :created, location: @tramite }
@@ -133,10 +135,12 @@ class TramitesController < ApplicationController
   # PUT /tramites/1.json
   def update
     @tramite = Tramite.find(params[:id])
-    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Actualizar')
+    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Actualizado',
+                           :nusuario => current_usuario.nombre, :nproducto => Producto.find(@tramite.producto_id).nombre, 
+                           :ntipodocumento => TipoDocumento.find(@tramite.TipoDocumento_id).descripcion)
     
     respond_to do |format|
-      if @tramite.update_attributes(params[:tramite]) 
+      if @tramite.update_attributes(params[:tramite]) and @logt.save
         format.html { redirect_to @tramite, notice: 'Tramite y Log actualizados.' }
         format.json { head :no_content }
       else
@@ -185,7 +189,9 @@ class TramitesController < ApplicationController
   # DELETE /tramites/1.json
   def destroy
     @tramite = Tramite.find(params[:id])
-    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Eliminar')    
+    @logt = Logtramite.new(:usuario_id => current_usuario.id, :tramite_id => @tramite.id, :tipo => 'Eliminado',
+                           :nusuario => current_usuario.nombre, :nproducto => Producto.find(@tramite.producto_id).nombre, 
+                           :ntipodocumento => TipoDocumento.find(@tramite.TipoDocumento_id).descripcion)    
     @tramite.destroy
 
     respond_to do |format|

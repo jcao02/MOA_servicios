@@ -1,0 +1,2 @@
+module LogtramiteHelper
+end

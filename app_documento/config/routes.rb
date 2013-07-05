@@ -1,4 +1,10 @@
 AppDocumento::Application.routes.draw do
+  get "logtramite/index"
+
+  get "logsolicitud/index"
+
+  get "logdocumento/index"
+
   resources :logproductos
 
 

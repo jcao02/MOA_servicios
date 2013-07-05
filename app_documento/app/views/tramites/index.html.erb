@@ -1,50 +1,50 @@
 <h1 style="margin-left:20px"><%= flash[:title] %></h1>
 
 <% if current_usuario.admin == 0 %>
-  <div style="margin-left:20px">
+<div style="margin-left:20px">
   <%= button_to 'Nueva solicitud', new_tramite_path, :method => :get %>
 </div>
 <% end %>
-  <div class="filtro_wrapper" id="solicitud_tramite_wrapper">
-    <table id="solicitud_tramite_filtro">
-      <thead>
-        <th>Solicitud</th>
-      </thead>
-      <tbody>
-        <% @tramites.each_with_index do |t, index| %>
-          <tr>
-            <td>
-              <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s, data: { requisito: t } do %>
-                <% if t.recibido or current_usuario.admin > 0 %>
-                  <%= link_to (t) do%>
-                    <ul style="height:0;">
-                    <li>
-                    <%= t.TipoDocumento.descripcion %>
-                    </li>
-                    <li style="font-size:10px; margin-bottom:10px;">
-                    <% if not t.producto.nil? %>
-                      <%=t.producto.nombre%>
-                    <% else %>
-                      nuevo producto
-                    <% end %>
-                    </li>
-                  <% end %>
+<div class="filtro_wrapper" id="solicitud_tramite_wrapper">
+  <table id="solicitud_tramite_filtro">
+    <thead>
+      <th>Solicitud</th>
+    </thead>
+    <tbody>
+      <% @tramites.each_with_index do |t, index| %>
+      <tr>
+        <td>
+          <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s, data: { requisito: t } do %>
+          <% if t.recibido or current_usuario.admin > 0 %>
+          <%= link_to (t) do%>
+          <ul style="height:0;">
+            <li>
+              <%= t.TipoDocumento.descripcion %>
+            </li>
+            <li style="font-size:10px; margin-bottom:10px;">
+              <% if not t.producto.nil? %>
+              <%=t.producto.nombre%>
+              <% else %>
+              nuevo producto
+              <% end %>
+            </li>
+            <% end %>
+            <% else %>
+            <ul style="height:0;">
+              <li>
+                <%= t.TipoDocumento.descripcion %>
+              </li>
+              <li style="font-size:10px; margin-bottom:10px;">
+                <% if not t.producto.nil? %>
+                <%=t.producto.nombre%>
                 <% else %>
-                  <ul style="height:0;">
-                    <li>
-                    <%= t.TipoDocumento.descripcion %>
-                    </li>
-                    <li style="font-size:10px; margin-bottom:10px;">
-                    <% if not t.producto.nil? %>
-                      <%=t.producto.nombre%>
-                    <% else %>
-                      nuevo producto
-                    <% end %>
-                    </li>
-                  <% end %>
+                nuevo producto
                 <% end %>
-              </td>
-            </tr>
+              </li>
+              <% end %>
+              <% end %>
+            </td>
+          </tr>
           <% end %>
         </tbody>
       </table>

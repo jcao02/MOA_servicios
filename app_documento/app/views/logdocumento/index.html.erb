@@ -1,0 +1,40 @@
+<h1 style="margin-left: 20px;">Log de Documentos</h1>
+<div style="margin-left: 40px;margin-bottom: 20px;">
+  <button style= Padding:10px>
+    <%= link_to 'Log de Productos', logproductos_path %>
+  </button>
+  <button style= Padding:10px>
+    <%= link_to 'Log de Tramite', logtramite_index_path %>
+  </button>
+</div>
+<table class="dataTable" id="tabla_show_log">
+  <tr>
+    <th>Usuario</th>
+    <th>Producto</th>
+    <th>Documento</th>
+    <th>Acción</th>
+    <th>Fecha</th>
+    
+  </tr>
+
+  <% @logdocumentos.each do |logdocumento| %>
+  <tr>
+    <td style="width:150px;">
+      <%= logdocumento.nusuario %>
+    </td>
+    <td style="width:200px">
+      <%= logdocumento.nproducto %>
+    </td>
+    <td style="width:200px">
+      <%= logdocumento.ndocumento %>
+    </td>
+    <td style="width:80px">
+      <%= logdocumento.tipo %>
+    </td>
+    <td>
+      <%= logdocumento.created_at.strftime("%I:%M%p")%> 
+      <%= logdocumento.created_at.day%>/<%= logdocumento.created_at.month%>/<%= logdocumento.created_at.year%>
+    </td>
+  </tr>
+  <% end %>
+</table>

@@ -66,7 +66,9 @@ class DocumentosController < ApplicationController
 
     respond_to do |format|
       if @documento.save
-        @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Crear')
+        @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Creado',
+                                 :nusuario => current_usuario.nombre, :ndocumento => TipoDocumento.find(@documento.TipoDocumento_id).descripcion, 
+                                 :nproducto => Producto.find(@documento.producto_id).nombre)
         session[:producto] = nil
         if @logd.save
           format.html { redirect_to @producto, notice: 'Documento creado. Log actualizado.', :format => :pdf }
@@ -89,7 +91,9 @@ class DocumentosController < ApplicationController
   # PUT /documentos/1.json
   def update
     @documento = Documento.find(params[:id])
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Actualizar')
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Actualizado',
+                             :nusuario => current_usuario.nombre, :ndocumento => @documento.TipoDocumento_id, 
+                             :nproducto => Producto.find(@documento.producto_id).nombre)
     respond_to do |format|
       if @documento.update_attributes(params[:documento]) and @logd.save
         format.html { redirect_to @documento, notice: 'Documento y Log actualizados.' }
@@ -106,7 +110,9 @@ class DocumentosController < ApplicationController
   def destroy
     @documento = Documento.find(params[:id])
     producto = Producto.find(@documento.producto_id)
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Eliminar')
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Eliminado',
+                             :nusuario => current_usuario.nombre, :ndocumento => @documento.TipoDocumento_id,
+                             :nproducto => Producto.find(@documento.producto_id).nombre)
     @documento.destroy
 
     respond_to do |format|
