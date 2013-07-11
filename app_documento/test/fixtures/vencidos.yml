@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  usuario_id: 1
+  tipo: MyString
+  producto_id: 1
+  active: false
+  tramite: false
+
+two:
+  usuario_id: 1
+  tipo: MyString
+  producto_id: 1
+  active: false
+  tramite: false

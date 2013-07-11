@@ -36,6 +36,7 @@ GEM
     carmen-rails (1.0.0)
       carmen (~> 1.0.0.beta2)
       rails
+    chronic (0.9.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -151,6 +152,9 @@ GEM
     unicode_utils (1.4.0)
     warden (1.2.1)
       rack (>= 1.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     wicked_pdf (0.9.6)
       rails
 
@@ -181,4 +185,5 @@ DEPENDENCIES
   sqlite3
   therubyracer
   uglifier (>= 1.0.3)
+  whenever
   wicked_pdf

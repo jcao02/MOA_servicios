@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608220637) do
+ActiveRecord::Schema.define(:version => 20130711222318) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -159,6 +159,16 @@ ActiveRecord::Schema.define(:version => 20130608220637) do
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true
   add_index "usuarios", ["reset_password_token"], :name => "index_usuarios_on_reset_password_token", :unique => true
+
+  create_table "vencidos", :force => true do |t|
+    t.integer  "usuario_id"
+    t.string   "tipo"
+    t.integer  "producto_id"
+    t.boolean  "active",      :default => true
+    t.boolean  "tramite",     :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "versions", :force => true do |t|
     t.string   "item_type",  :null => false

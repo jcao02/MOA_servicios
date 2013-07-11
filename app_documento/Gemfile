@@ -76,4 +76,7 @@ gem 'wicked_pdf'
 gem 'rabl'
 gem 'gon'
 
+#Gema para tareas asincronas con cron
+gem 'whenever', :require => false
+
 gem 'paper_trail'
