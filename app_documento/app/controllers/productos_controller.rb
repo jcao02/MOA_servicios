@@ -212,8 +212,10 @@ class ProductosController < ApplicationController
 
     respond_to do |format|
       if @producto.save
-        @logp = Logproducto.new(:usuario_id => current_usuario.id, :producto_id => @producto.id, :tipo => 'Creado',
-                                :nusuario => current_usuario.nombre, :nproducto => @producto.nombre)
+        @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                                :producto_id => @producto.id, :tipo => 'Creado',
+                                :nusuario => current_usuario.nombre, 
+                                :nproducto => @producto.nombre)
         if @logp.save
           format.html { redirect_to @producto, notice: 'Producto creado. Log actualizado.' }
           format.json { render json: @producto, status: :created, location: @producto }
@@ -242,8 +244,10 @@ class ProductosController < ApplicationController
   # PUT /productos/1.json
   def update
     @producto = Producto.find(params[:id])
-    @logp = Logproducto.new(:usuario_id => current_usuario.id, :producto_id => @producto.id, :tipo => 'Actualizado',
-                            :nusuario => current_usuario.nombre, :nproducto => @producto.nombre)
+    @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                            :producto_id => @producto.id, :tipo => 'Actualizado',
+                            :nusuario => current_usuario.nombre, 
+                            :nproducto => @producto.nombre)
 
     respond_to do |format|
       if @producto.update_attributes(params[:producto]) and @logp.save
@@ -261,8 +265,10 @@ class ProductosController < ApplicationController
   # DELETE /productos/1.json
   def destroy
     @producto = Producto.find(params[:id])
-    @logp = Logproducto.new(:usuario_id => current_usuario.id, :producto_id => @producto.id, :tipo => 'Eliminado',
-                            :nusuario => current_usuario.nombre, :nproducto => @producto.nombre)    
+    @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                            :producto_id => @producto.id, :tipo => 'Eliminado',
+                            :nusuario => current_usuario.nombre, 
+                            :nproducto => @producto.nombre)    
     @producto.destroy
 
     respond_to do |format|

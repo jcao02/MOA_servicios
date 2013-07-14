@@ -2,7 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$border_color     : #555;
+$border_color  : #555;
+$list_even     : #5294AA;
+$list_hover    : #74B6CC;
+
+//VINOTINTO
+$border_color  : #555;
+$list_even     : rgba(116,14,0,0.7);
+$list_hover    : rgba(116,14,0,0.5);
 
 p {
     text-align: justify;
@@ -69,23 +76,31 @@ p {
         td{
             width: 50%;
             height: 100%;
-            padding: 5px;
+            padding-bottom: 5px;
 
 
             table {
                 border: 0;
 
                 tbody {
-                    td{
-
+                    td {
                         /*Puntos suspensivos*/
                         white-space: nowrap;
                         overflow: hidden;
+                        text-overflow: ellipsis;
                         -o-text-overflow: ellipsis;
                         -ms-text-overflow: ellipsis;
+                        ul {
+                            li {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                -o-text-overflow: ellipsis;
+                                -ms-text-overflow: ellipsis;
+                            }
+                        }
                     }
                     tr:nth-child(even) {
-                        background-color: #5294aa;
+                        background-color: $list_even;
 
                         td.sorting_1, td.sorting_2, td.sorting_3 {
                             background-color: transparent;
@@ -102,13 +117,12 @@ p {
 
                     td {
                         text-align: left;
-                        min-width: 70px;
-                        max-width: 70px;
-
+                        min-width: 80px;
+                        max-width: 80px;
                     }
 
                     tr:hover {
-                        background-color: #74b6cc;
+                        background-color: $list_hover;
                     }
 
                     .estados{

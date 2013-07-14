@@ -11,7 +11,9 @@ class Tramite < ActiveRecord::Base
   has_many :usuarios, :through => :logtramites
 
   #Atributos accesibles para el modelo
-  attr_accessible :codigo_seguimiento, :estado, :fecha_recepcion, :observacion, :TipoDocumento_id, :producto_id, :recibido, :usuario_id, :requisito
+  attr_accessible :codigo_seguimiento, :estado, :fecha_recepcion, :observacion, 
+                  :TipoDocumento_id, :producto_id, :recibido, :usuario_id, :requisito,
+                  :created_at
 
   #Consiraciones de quitarlo y dejar el id y ya
   #validates :codigo_seguimiento, presence: true, uniqueness: true

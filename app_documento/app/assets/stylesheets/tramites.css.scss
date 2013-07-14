@@ -3,10 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $background_color : #5294aa;
-$list_even     : #5294AA;
-$list_hover    : #74B6CC;
-$list_selected : #396877; 
+$list_even        : #5294AA;
+$list_hover       : #74B6CC;
+$list_selected    : #396877; 
 
+// VINOTINTO
+$background_color : rgba(128,0,0,1);
+$list_even        : rgba(116,14,0,0.7);
+$list_hover       : rgba(116,14,0,0.5);
+$list_selected    : rgba(116,14,0,0.8);
 
 .formtastic {
     list-style:none;
@@ -119,6 +124,7 @@ $list_selected : #396877;
 
 #solicitud_tramite_wrapper{
     width: 616px;
+    height: 400px;
     margin-top: 10px;
     margin-left: 130px;
     tr:nth-child(even) {
@@ -166,5 +172,13 @@ $list_selected : #396877;
     margin-right: 75px;
     li{
         float:left;
+    }
+}
+
+.tabla_show {
+    width:220px;
+    td{
+        text-align: justify;
+        white-space: normal !important;
     }
 }

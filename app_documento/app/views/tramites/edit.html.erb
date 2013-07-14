@@ -1,53 +1,55 @@
 <center>
   <div style="width: 400px;">
     <% if @tramite.producto%> 
-      <h2><%= @tramite.producto.nombre%>: <%= @tramite.TipoDocumento.descripcion %></h2>
+    <h2><%= @tramite.producto.nombre%>: <%= @tramite.TipoDocumento.descripcion %></h2>
     <% else %>
-      <h2> Nuevo producto: <%= @tramite.TipoDocumento.descripcion %></h2>
+    <h2> Nuevo producto: <%= @tramite.TipoDocumento.descripcion %></h2>
     <% end %>
   </div>
 </center>
 <div style="height:300px; overflow:auto;">
-<table class="area_show" id="manejar_requisitos_table">
-  <thead>
-    <th>Requisito</th>
-    <th>Estado</th>
-    <th>Aceptar</th>
-    <th>Rechazar</th>
-    <th>No modificar</th>
-  </thead>
-  <tbody>
-    <%= semantic_form_for :requisito, :url => update_requisitos_tramites_path, :html =>{ :id => "form_edit_req" } do |f| %>
+  <table class="area_show" id="manejar_requisitos_table">
+    <thead>
+      <th>Requisito</th>
+      <th>Estado</th>
+      <th>Aceptar</th>
+      <th>Rechazar</th>
+      <th>No modificar</th>
+    </thead>
+    <tbody>
+      <%= semantic_form_for :requisito, :url => update_requisitos_tramites_path, :html =>{ :id => "form_edit_req" } do |f| %>
       <input type="hidden" name="requisito[id]" value="<%= @tramite.id %>"/>
       <% @tramite.requisitos.each_with_index do |req, i|%>
-        <% if req.estado != 3%>
-        <tr>
-          <td><%= req.TipoRequisito.name%></td>
-          <td class="boxes">
-            <% case req.estado %>
-            <% when 0 %>
-              No leído
-            <% when 4 %>
-              Rechazado
-            <% end %>
-          </td>
-          <td class="boxes"><input type="radio" name="<%=req.id%>" value=3 ></td>
-          <td class="boxes"><input type="radio" name="<%=req.id%>" value=4 ></td>
-          <td class="boxes">
-            <input type="radio" name="<%=req.id%>" value=-1 checked="checked"/>
-            <input type="hidden" name="requisito[estado<%=req.id%>]" value=<%=req.estado%> >
-          </td>
-        </tr>
-        <tr>
-          <td colspan="5" id="obs<%=req.id%>">
-            <textarea style="resize:none; display:none;"id="requisito_observacion66" name="requisito[observacion<%=req.id%>]" rows="4"></textarea>
-          </td>
-        </tr>
+
+      <tr>
+        <td><%= req.TipoRequisito.name%></td>
+        <td class="boxes">
+          <% case req.estado %>
+          <% when 0 %>
+          No leído
+          <% when 3 %>
+          Aceptado
+          <% when 4 %>
+          Rechazado
+          <% end %>
+        </td>
+        <td class="boxes"><input type="radio" name="<%=req.id%>" value=3 ></td>
+        <td class="boxes"><input type="radio" name="<%=req.id%>" value=4 ></td>
+        <td class="boxes">
+          <input type="radio" name="<%=req.id%>" value=-1 checked="checked"/>
+          <input type="hidden" name="requisito[estado<%=req.id%>]" value=<%=req.estado%> >
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5" id="obs<%=req.id%>">
+          <textarea style="resize:none; display:none;"id="requisito_observacion66" name="requisito[observacion<%=req.id%>]" rows="4"></textarea>
+        </td>
+      </tr>
+      
       <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>
 <ul class="botones_submit">
   <li>

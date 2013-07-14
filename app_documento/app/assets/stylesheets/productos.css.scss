@@ -6,6 +6,12 @@ $list_even     : #5294AA;
 $list_hover    : #74B6CC;
 $list_selected : #396877; 
 
+// VINOTINTO
+$list_even        : rgba(116,14,0,0.7);
+$list_hover       : rgba(116,14,0,0.5);
+$list_selected    : rgba(116,14,0,0.8);
+
+
 #food, #wine {
   height: 20px;
 }
@@ -55,7 +61,7 @@ $list_selected : #396877;
   }
   tbody{
     tr :hover{
-      background-color: $list_even;
+      background-color: $list_hover;
     }
   }
   .fill_row{
@@ -83,7 +89,7 @@ $list_selected : #396877;
   width: 250px;
   height:300px;
   th{
-    border-bottom: 2px solid $list_selected;
+    border-bottom: 2px solid $list_hover;
   }
   tr{
     height: 26px;
@@ -93,7 +99,17 @@ $list_selected : #396877;
 
   tbody{
     tr :hover, tr td.highlighted{
-      background-color:$list_even;
+      background-color: $list_even;
+    }
+    tr.even {
+      td {
+        background-color: $list_hover;
+      }
+    }
+    tr.even.hover {
+      td {
+        background-color: $list_hover;
+      }
     }
   }
 

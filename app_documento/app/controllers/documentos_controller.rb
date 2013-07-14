@@ -62,13 +62,28 @@ class DocumentosController < ApplicationController
       @documento.TipoDocumento_id = doc[0].id
     end
     @documento.producto_id = session[:producto]
-    @producto = Producto.find(session[:producto])
+    if params[:producto_id] != nil
+      post '================================'
+      post 'DESDE SOLICITUD'
+      post params[:producto_id]
+      post '================================'
+      @producto = Producto.find(params[:producto_id])
+    else
+      puts '================================'
+      puts 'DESDE PRODUCTO'
+      puts params[:producto_id]
+      puts '================================'
+      @producto = Producto.find(session[:producto])
+    end
 
     respond_to do |format|
       if @documento.save
-        @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Creado',
-                                 :nusuario => current_usuario.nombre, :ndocumento => TipoDocumento.find(@documento.TipoDocumento_id).descripcion, 
-                                 :nproducto => Producto.find(@documento.producto_id).nombre)
+        @logd = Logdocumento.new(:usuario_id => current_usuario.id, 
+                                 :documento_id => @documento.id, :tipo => 'Creado',
+                                 :producto_id => @producto.id,
+                                 :nusuario => current_usuario.nombre, 
+                                 :ndocumento => @documento.TipoDocumento.descripcion, 
+                                 :nproducto => @documento.producto.nombre)
         session[:producto] = nil
         if @logd.save
           format.html { redirect_to @producto, notice: 'Documento creado. Log actualizado.', :format => :pdf }
@@ -91,9 +106,12 @@ class DocumentosController < ApplicationController
   # PUT /documentos/1.json
   def update
     @documento = Documento.find(params[:id])
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Actualizado',
-                             :nusuario => current_usuario.nombre, :ndocumento => @documento.TipoDocumento_id, 
-                             :nproducto => Producto.find(@documento.producto_id).nombre)
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id, 
+                             :documento_id => @documento.id, :tipo => 'Actualizado',
+                             :producto_id => @producto.id,
+                             :nusuario => current_usuario.nombre, 
+                             :ndocumento => @documento.TipoDocumento_id, 
+                             :nproducto => @documento.producto.nombre)
     respond_to do |format|
       if @documento.update_attributes(params[:documento]) and @logd.save
         format.html { redirect_to @documento, notice: 'Documento y Log actualizados.' }
@@ -110,9 +128,12 @@ class DocumentosController < ApplicationController
   def destroy
     @documento = Documento.find(params[:id])
     producto = Producto.find(@documento.producto_id)
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id, :documento_id => @documento.id, :tipo => 'Eliminado',
-                             :nusuario => current_usuario.nombre, :ndocumento => @documento.TipoDocumento_id,
-                             :nproducto => Producto.find(@documento.producto_id).nombre)
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id, 
+                             :documento_id => @documento.id, :tipo => 'Eliminado',
+                             :producto_id => producto.id,
+                             :nusuario => current_usuario.nombre, 
+                             :ndocumento => @documento.TipoDocumento.descripcion,
+                             :nproducto => @documento.producto.nombre)
     @documento.destroy
 
     respond_to do |format|

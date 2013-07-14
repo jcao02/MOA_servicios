@@ -1,7 +1,7 @@
 <h1 style="margin-left:20px"><%= flash[:title] %></h1>
 
 <% if current_usuario.admin == 0 %>
-<div style="margin-left:20px">
+<div class="new_element" style="margin-bottom: 20px;margin-top: -35px;margin-right: 100px;float: right;">
   <%= button_to 'Nueva solicitud', new_tramite_path, :method => :get %>
 </div>
 <% end %>
@@ -11,12 +11,28 @@
       <th>Solicitud</th>
     </thead>
     <tbody>
-      <% @tramites.each_with_index do |t, index| %>
+      <% @tramites.sort {|a,b| b.id <=> a.id }.each_with_index do |t, index| %>
       <tr>
         <td>
           <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s, data: { requisito: t } do %>
           <% if t.recibido or current_usuario.admin > 0 %>
           <%= link_to (t) do%>
+          <ul style="height:0;">
+            <li>
+              <b>#<%= t.id %></b> <%= t.TipoDocumento.descripcion %>
+            </li>
+            <li style="font-size:10px; margin-bottom:10px;">
+              <% if not t.producto.nil? %>
+              <div style="margin-right: 40px;">
+                <%=t.producto.nombre%>
+              </div>
+              <% else %>
+              Nuevo Producto
+              <% end %>
+            </li>
+          </ul>
+          <% end %>
+          <% else %>
           <ul style="height:0;">
             <li>
               <%= t.TipoDocumento.descripcion %>
@@ -25,37 +41,44 @@
               <% if not t.producto.nil? %>
               <%=t.producto.nombre%>
               <% else %>
-              nuevo producto
+              Nuevo Producto
               <% end %>
             </li>
-            <% end %>
-            <% else %>
-            <ul style="height:0;">
-              <li>
-                <%= t.TipoDocumento.descripcion %>
-              </li>
-              <li style="font-size:10px; margin-bottom:10px;">
-                <% if not t.producto.nil? %>
-                <%=t.producto.nombre%>
-                <% else %>
-                nuevo producto
-                <% end %>
-              </li>
-              <% end %>
-              <% end %>
-            </td>
-          </tr>
+          </ul>
           <% end %>
-        </tbody>
-      </table>
-      <table style="width:100%">
-        <tr>
-          <td><div class="alerta" style="background: white;float:left"></div><div style="font-size:x-small">No recibido</div></td>
-          <td><div class="alerta" style="background: blue;float:left">  </div><div style="font-size:x-small">Recibido</div></td>
-          <td><div class="alerta" style="background: green;float:left"></div><div style="font-size:x-small">Aceptado </div></td>
-          <td><div class="alerta" style="background: red;float:left">  </div><div style="font-size:x-small">Rechazado</div></td>
-          <td><div class="alerta" style="background: yellow;float:left">  </div><div style="font-size:x-small">En proceso</div></td>
-        </tr>
-      </table>
-    </div>
-  </div>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table style="width:100%;margin-left:20px;margin-top: 50px;">
+    <tr>
+      <td>
+        <div class="alerta" style="background: white;float:left"></div>
+        <div style="font-size:x-small">No recibido</div>
+      </td>
+      <td>
+        <div class="alerta" style="background: blue;float:left">  </div>
+        <div style="font-size:x-small">Recibido</div>
+      </td>
+      <td>
+        <div class="alerta" style="background: green;float:left"></div>
+        <div style="font-size:x-small">Aceptado </div>
+      </td>
+      <td>
+        <div class="alerta" style="background: red;float:left">  </div>
+        <div style="font-size:x-small">Rechazado</div>
+      </td>
+      <td>
+        <div class="alerta" style="background: yellow;float:left">  </div>
+        <div style="font-size:x-small">En proceso</div>
+      </td>
+    </tr>
+  </table>
+</div>
+<div style="width: 400px;padding-left:40px;margin-top: 450px;">
+  <button style= "padding:10px;">
+    <%= link_to 'Volver', :back %>
+  </button>
+</div>

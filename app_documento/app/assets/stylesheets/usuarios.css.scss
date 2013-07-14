@@ -1,7 +1,15 @@
 // Place all the styles related to the Usuarios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 $background_color : #133a6b;
+$list_even        : #5294aa;
+
+// VINOTINTO
+$background_color : rgba(128,0,0,1);
+$list_even        : rgba(116,14,0,0.7);
+
+
 #tabla_list_usuario_wrapper {
   .dataTables_scrollBody{
     height: 250px !important;
@@ -22,7 +30,7 @@ $background_color : #133a6b;
   }
   tr.even {
     td{
-    background-color: #5294aa !important;
+    background-color: $list_even !important;
     }
   }
   tr.odd {

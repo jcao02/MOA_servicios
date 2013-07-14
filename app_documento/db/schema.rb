@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705180536) do
+ActiveRecord::Schema.define(:version => 20130712005028) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130705180536) do
     t.string   "nusuario"
     t.string   "nproducto"
     t.string   "ndocumento"
+    t.integer  "producto_id"
   end
 
   create_table "logproductos", :force => true do |t|
@@ -89,10 +90,12 @@ ActiveRecord::Schema.define(:version => 20130705180536) do
     t.string   "tipo"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "ntipotocumento"
+    t.string   "ntramite"
     t.string   "nusuario"
     t.string   "nproducto"
-    t.string   "ntramite"
-    t.string   "ntipotocumento"
+    t.string   "ntipodocumento"
+    t.integer  "producto_id"
   end
 
   create_table "presentacions", :force => true do |t|

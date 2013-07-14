@@ -1,10 +1,10 @@
-<h1 style="margin-left: 20px;">Log de Documentos</h1>
+<h1 style="margin-left: 20px;">Log Documentos</h1>
 <div style="margin-left: 40px;margin-bottom: 20px;">
   <button style= Padding:10px>
-    <%= link_to 'Log de Productos', logproductos_path %>
+    <%= link_to 'Log Productos', logproductos_path %>
   </button>
   <button style= Padding:10px>
-    <%= link_to 'Log de Tramite', logtramite_index_path %>
+    <%= link_to 'Log Solicitudes', logtramite_index_path %>
   </button>
 </div>
 <table class="dataTable" id="tabla_show_log">
@@ -20,13 +20,31 @@
   <% @logdocumentos.each do |logdocumento| %>
   <tr>
     <td style="width:150px;">
-      <%= logdocumento.nusuario %>
+      <% if logdocumento.usuario.nil? %>
+        <%= logdocumento.nusuario %>
+      <% else %>
+        <%= link_to (logdocumento.usuario) do %>
+          <%= logdocumento.nusuario %>
+        <% end %>
+      <% end %>
     </td>
     <td style="width:200px">
-      <%= logdocumento.nproducto %>
+      <% if logdocumento.producto.nil? %>
+        <%= logdocumento.nproducto %>
+      <% else %>
+        <%= link_to (logdocumento.producto) do %>
+          <%= logdocumento.nproducto %>
+        <% end %>
+      <% end %>
     </td>
     <td style="width:200px">
-      <%= logdocumento.ndocumento %>
+      <% if logdocumento.documento.nil? %>
+        <%= logdocumento.ndocumento %>
+      <% else %>
+        <%= link_to (logdocumento.documento.pdf.url) do %>
+          <%= logdocumento.ndocumento %>
+        <% end %>
+      <% end %>
     </td>
     <td style="width:80px">
       <%= logdocumento.tipo %>
