@@ -18,7 +18,6 @@ class Usuario < ActiveRecord::Base
   has_many :tramites, :through => :logtramites
   has_many :productos, :through => :logtramites
   has_many :vencidoss
-
   #Para manejo de log del usuario
   has_paper_trail
 
