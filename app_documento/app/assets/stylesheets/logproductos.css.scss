@@ -5,7 +5,7 @@
 $background_color : #5294aa;
 $list_even     : #5294AA;
 $list_hover    : #74B6CC;
-$list_selected : #396877; 
+$list_selected : #396877;
 
 // VINOTINTO
 $hover_color      : rgba(116,14,0,1);
@@ -67,9 +67,9 @@ $border_color     : #555;
 
 #enviar_cambios {
     padding-left:8px !important;
-    padding-right: 8px !important; 
-    padding-top: 2px !important; 
-    padding-bottom: 3px !important; 
+    padding-right: 8px !important;
+    padding-top: 2px !important;
+    padding-bottom: 3px !important;
     margin-right: 3px;
     font-size:small;
 }
@@ -113,7 +113,7 @@ $border_color     : #555;
   input[type="text"]{
         width: 616px;
   }
-    
+
 }
 
 #requisitos_show_filter{
@@ -177,7 +177,7 @@ $border_color     : #555;
     }
 }
 
-#tabla_show_log {
+.log_data_table {
   border-left: 2px solid $list_selected;
   border-right: 2px solid $list_selected;
   width:700px;

@@ -90,8 +90,6 @@ ActiveRecord::Schema.define(:version => 20130712005028) do
     t.string   "tipo"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.string   "ntipotocumento"
-    t.string   "ntramite"
     t.string   "nusuario"
     t.string   "nproducto"
     t.string   "ntipodocumento"

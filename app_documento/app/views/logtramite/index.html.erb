@@ -7,51 +7,53 @@
     <%= link_to 'Log Documentos', logdocumento_index_path %>
   </button>
 </div>
-<table class="dataTable" id="tabla_show_log">
-  <tr>
+<table class="log_data_table" id="tabla_show_log_tram">
+  <thead>
     <th>Usuario</th>
     <th>Producto</th>
     <th>Documento</th>
-    <th>Acción <span style="font-weight: normal;"><br> A-Aceptado <br> R- Rechazado </span></th>
+    <th>Acción</th>
     <th>Fecha</th>
-  </tr>
-  
-  <% @logtramites.each do |logtramite| %>
+  </thead>
+
+  <tbody>
+    <% @logtramites.each do |logtramite| %>
     <tr>
       <td style="width:150px;">
         <% if logtramite.usuario.nil? %>
         <%= logtramite.nusuario %>
-      <% else %>
+        <% else %>
         <%= link_to (logtramite.usuario) do %>
-          <%= logtramite.nusuario %>
+        <%= logtramite.nusuario %>
         <% end %>
-      <% end %>
+        <% end %>
       </td>
       <td style="width:400px">
-      <% if logtramite.producto.nil? %>
+        <% if logtramite.producto.nil? %>
         <%= logtramite.nproducto %>
-      <% else %>
+        <% else %>
         <%= link_to (logtramite.producto) do %>
-          <%= logtramite.nproducto %>
+        <%= logtramite.nproducto %>
         <% end %>
-      <% end %>
+        <% end %>
       </td>
       <td style="width:400px">
         <% if logtramite.tramite.nil? %>
-          <%= logtramite.ntipodocumento %>
+        <%= logtramite.ntipodocumento %>
         <% else %>
-          <%= link_to (logtramite.tramite) do %>
-            <%= logtramite.ntipodocumento %>
-          <% end %>
-        <% end %>        
+        <%= link_to (logtramite.tramite) do %>
+        <%= logtramite.ntipodocumento %>
+        <% end %>
+        <% end %>
       </td>
       <td style="width:80px">
         <%= logtramite.tipo %>
       </td>
       <td>
-        <%= logtramite.created_at.strftime("%I:%M%p")%> 
+        <%= logtramite.created_at.strftime("%I:%M%p")%>
         <%= logtramite.created_at.day%>/<%= logtramite.created_at.month%>/<%= logtramite.created_at.year%>
       </td>
     </tr>
-  <% end %>
+    <% end %>
+  </tbody>
 </table>

@@ -6,18 +6,18 @@ class Usuario < ActiveRecord::Base
 
   #Log para productos
   has_many :logproductos
-  has_many :productos, :through => :logproductos 
+  has_many :productos, :through => :logproductos
 
   #Log para documentos
   has_many :logdocumentos
-  has_many :documentos, :through => :logdocumentos   
+  has_many :documentos, :through => :logdocumentos
   has_many :productos, :through => :logdocumentos
 
   #Log para tramites
   has_many :logtramites
   has_many :tramites, :through => :logtramites
   has_many :productos, :through => :logtramites
-  
+
   #Para manejo de log del usuario
   has_paper_trail
 

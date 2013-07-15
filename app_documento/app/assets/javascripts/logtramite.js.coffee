@@ -4,30 +4,18 @@
 
 #Seteando atributos de la dataTable
 dataTable_opc =
-  bScrollInfinite : true
-  bScrollCollapse : true
-  bPagination     : false
-  bScrollAutoCss  : true
-  bSort           : false
-  sScrollY        : "250px"
-  oLanguage       :
-    sSearch       : ""
-    sInfo         : ""
-    sInfoFiltered : ""
-    sInfoEmpty    : ""
-    sZeroRecords  : "No se encontraron coincidencias"
+  bScrollInfinite: true
+  bScrollCollapse: true
+  bPagination    : false
+  bScrollAutoCss : true
+  sScrollY       : "250px"
+  oLanguage :
+    sSearch      : "Búsqueda"
+    sInfo        : ""
+    sInfoFiltered: ""
+    sInfoEmpty   : ""
+    sZeroRecords : "No se encontraron coincidencias"
 
-dataTable_opcS =
-  bScrollInfinite : true
-  bScrollCollapse : true
-  bPagination     : false
-  bScrollAutoCss  : true
-  bSort           : false
-  sScrollY        : "320px"
-  oLanguage       :
-    sSearch       : ""
-    sInfo         : ""
-    sInfoFiltered : ""
-    sInfoEmpty    : ""
-    sZeroRecords  : "No se encontraron coincidencias"
 
+$(document).ready ->
+  $("#tabla_show_log_tram").dataTable(dataTable_opc)
