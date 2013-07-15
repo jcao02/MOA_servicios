@@ -38,4 +38,17 @@ class CorreosUsuario < ActionMailer::Base
     asunto = "Hola " + usuario.nombre + ", una de tus solicitudes de trámite se ha completado!"
     mail(:to => usuario.email, :subject => asunto)
   end
+
+  #Mail que avisa el vencimineto de un documento
+  def send_notification(vencido)
+      @usuario   = vencido.usuario
+      @producto  = vencido.producto
+      @documento = vencido.tipo
+      actual     = Date.today
+      vence      = vencido.fecha
+      @mes       = (vence.year * 12 + vence.month) - (mesActual.year * 12 + actual.month)
+      asunto     = "Alerta de vencimiento de #{@tipo} del producto #{@producto.nombre}"
+
+      mail(:to => @usuario.email, :subject => asunto)
+  end
 end

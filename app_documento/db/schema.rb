@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711222318) do
+ActiveRecord::Schema.define(:version => 20130715042515) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20130711222318) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.integer  "TipoDocumento_id"
+    t.boolean  "tramite"
   end
 
   add_index "documentos", ["producto_id"], :name => "index_documentos_on_producto_id"
@@ -168,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20130711222318) do
     t.boolean  "tramite",     :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.date     "fecha"
   end
 
   create_table "versions", :force => true do |t|
