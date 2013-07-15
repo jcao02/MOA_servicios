@@ -212,8 +212,17 @@ class ProductosController < ApplicationController
 
     respond_to do |format|
       if @producto.save
-        format.html { redirect_to @producto, notice: 'Producto was successfully created.' }
-        format.json { render json: @producto, status: :created, location: @producto }
+        @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                                :producto_id => @producto.id, :tipo => 'Creado',
+                                :nusuario => current_usuario.nombre, 
+                                :nproducto => @producto.nombre)
+        if @logp.save
+          format.html { redirect_to @producto, notice: 'Producto creado. Log actualizado.' }
+          format.json { render json: @producto, status: :created, location: @producto }
+        else
+          format.html { redirect_to @producto, notice: 'Producto creado. Log no actualizado.' }
+          format.json { render json: @producto, status: :created, location: @producto }
+        end
       else
         usuarios = Usuario.all      #Para coleccion del dueño del producto
         prod = Producto.all
@@ -235,13 +244,17 @@ class ProductosController < ApplicationController
   # PUT /productos/1.json
   def update
     @producto = Producto.find(params[:id])
+    @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                            :producto_id => @producto.id, :tipo => 'Actualizado',
+                            :nusuario => current_usuario.nombre, 
+                            :nproducto => @producto.nombre)
 
     respond_to do |format|
-      if @producto.update_attributes(params[:producto])
-        format.html { redirect_to @producto, notice: 'Producto was successfully updated.' }
+      if @producto.update_attributes(params[:producto]) and @logp.save
+        format.html { redirect_to @producto, notice: 'Producto y Log actualizados.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", notice: "Producto y/o Log no actualizados." }
         format.json { render json: @producto.errors, status: :unprocessable_entity }
       end
     end
@@ -252,11 +265,21 @@ class ProductosController < ApplicationController
   # DELETE /productos/1.json
   def destroy
     @producto = Producto.find(params[:id])
+    @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                            :producto_id => @producto.id, :tipo => 'Eliminado',
+                            :nusuario => current_usuario.nombre, 
+                            :nproducto => @producto.nombre)    
     @producto.destroy
 
     respond_to do |format|
-      format.html { redirect_to productos_url }
-      format.json { head :no_content }
+      if @logp.save
+        format.html { redirect_to productos_url, notice: "Log actualizado."}
+        format.json { head :no_content }
+      else
+        format.html { redirect_to productos_url, notice: "Log no actualizado." }
+        format.json { head :no_content }
+      end
     end
+
   end
 end

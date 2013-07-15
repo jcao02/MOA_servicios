@@ -1,9 +1,9 @@
 <link href="/assets/dataTables/jquery.dataTables.css?body=1" media="all" rel="stylesheet" type="text/css" />
 <span class="titulos_list">
-  <h1>Usuarios</h1>
+  <h1 style="margin-left: 20px;">Usuarios</h1>
 </span>
 
-<button class="new_element">
+<button class="new_element" style="margin-bottom: 20px;float: right;margin-top: -42px;">
   <%= link_to 'Nuevo Usuario', new_usuario_path %>
 </button>
 
@@ -31,7 +31,7 @@
           <%   when 2 %>
                  S-Admin
           <%   else   %>
-                 Contactar servicio
+                 Contactar servicio técnico
           <% end %>
         </td>
       </tr>

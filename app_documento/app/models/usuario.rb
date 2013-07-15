@@ -4,6 +4,21 @@ class Usuario < ActiveRecord::Base
   #Definicion de relaciones de claves foraneas
   has_many :productos
 
+  #Log para productos
+  has_many :logproductos
+  has_many :productos, :through => :logproductos
+
+  #Log para documentos
+  has_many :logdocumentos
+  has_many :documentos, :through => :logdocumentos
+  has_many :productos, :through => :logdocumentos
+
+  #Log para tramites
+  has_many :logtramites
+  has_many :tramites, :through => :logtramites
+  has_many :productos, :through => :logtramites
+  has_many :vencidoss
+
   #Para manejo de log del usuario
   has_paper_trail
 

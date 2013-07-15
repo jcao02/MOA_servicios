@@ -1,0 +1,11 @@
+<%= semantic_form_for @logproducto do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :usuario_id %>
+    <%= f.input :producto_id %>
+    <%= f.input :tipo %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

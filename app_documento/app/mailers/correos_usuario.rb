@@ -41,13 +41,13 @@ class CorreosUsuario < ActionMailer::Base
 
   #Mail que avisa el vencimineto de un documento
   def send_notification(vencido)
-      @usuario   = vencido.usuario
-      @producto  = vencido.producto
-      @documento = vencido.tipo
-      actual     = Date.today
-      vence      = vencido.fecha
-      @mes       = (vence.year * 12 + vence.month) - (mesActual.year * 12 + actual.month)
-      asunto     = "Alerta de vencimiento de #{@tipo} del producto #{@producto.nombre}"
+      @usuario  = Usuario.find(vencido.usuario_id)
+      @producto = Producto.find(vencido.producto_id)
+      @tipo     = vencido.tipo
+      actual    = Date.today
+      vence     = vencido.fecha
+      @mes      = (vence.year * 12 + vence.month) - (actual.year * 12 + actual.month)
+      asunto    = "Alerta de vencimiento de #{@tipo} del producto #{@producto.nombre}"
 
       mail(:to => @usuario.email, :subject => asunto)
   end

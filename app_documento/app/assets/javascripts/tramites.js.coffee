@@ -23,7 +23,7 @@ dataTable_opcS =
   bPagination     : false
   bScrollAutoCss  : true
   bSort           : false
-  sScrollY        : "250px"
+  sScrollY        : "320px"
   oLanguage       :
     sSearch       : ""
     sInfo         : ""

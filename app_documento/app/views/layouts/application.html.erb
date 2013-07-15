@@ -20,7 +20,7 @@
             <li class="drop" id="compania" title="<%= current_usuario.compania %>"><%= current_usuario.compania %></li>
             <ul class="dropAppear" id="companiaAppear">
 
-              <%= link_to content_tag(:li, content_tag(:div, 'Configuración') + image_tag("/assets/settings.png", :class => "dropImg"),
+              <%= link_to content_tag(:li, content_tag(:div, 'Perfil') + image_tag("/assets/settings.png", :class => "dropImg"),
                                       :class => "dropElem"), current_usuario %>
               <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
                                       :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
@@ -65,6 +65,7 @@
                 <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
                 <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
                 <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
+                <%= link_to content_tag(:li, 'Logs', :class => "nav"), logproductos_path %>
 
           <% end %>
         </ul>

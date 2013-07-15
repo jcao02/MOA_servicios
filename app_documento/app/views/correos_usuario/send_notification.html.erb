@@ -1,6 +1,12 @@
 <h2>Hola <%= @usuario.nombre%></h2>
 
-<p>El documento <%= @tipo %> del producto <%= @producto.nombre%> vence en <%= @meses %> meses </p>
-<p>Si desea empezar el trámite para renovar el documento <%= @tipo %>, presione <a>aquí</a></p>
-</br>
-<p>Este correo se envia automñaticamente cada mes. Si desea dejar de recibirlo presione <a>aquí</a></p>
+<p>El documento <b><%= @tipo %></b> del producto <b><%= @producto.nombre%></b> <p>
+<p> de registro sanitario <b><%= @producto.registro_sanitario %></b> vence 
+<% if @mes == 0 %>
+  este mes.
+<% else %>
+  en <%= @mes %> meses. 
+<% end %></p>
+<!-- FALTAN ACCIONES DE DESHABILITAR Y DE GENERAR TRAMITE-->
+<p>Si desea solicitar el trámite para renovar el documento <b><%= @tipo %></b>, presione <a href="">aquí</a></p>
+<p>Este correo se envia automáticamente cada mes. Si desea dejar de recibirlo presione <a href="">aquí</a></p>

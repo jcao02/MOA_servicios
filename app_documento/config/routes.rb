@@ -1,4 +1,13 @@
 AppDocumento::Application.routes.draw do
+  get "logtramite/index"
+
+  get "logsolicitud/index"
+
+  get "logdocumento/index"
+
+  resources :logproductos
+
+
   devise_for :usuarios 
 
   get "inicio/index"
@@ -26,13 +35,13 @@ AppDocumento::Application.routes.draw do
 
   #Enrutamiento sobre modelo tramite
   resources :tramites do 
-      collection do 
-          put  :check
-          post :update_requisitos
-      end
+    collection do 
+        put  :check
+        post :update_requisitos
+        get :tramites_usuario
+    end
   end
-  
-  
+
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path
 
   #Redirecciona locale (en/es) al index

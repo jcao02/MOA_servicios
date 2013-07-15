@@ -1,4 +1,3 @@
-
 <table class="area_show">
   <tr>
     <td>
@@ -23,112 +22,118 @@
             <%= @usuario.login %>
           </td>
         </tr>
-      <tr>
-        <td>
-          <b>Nombre:</b>
-        </td>
-        <td>
-          <%= @usuario.nombre %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Apellido:</b>
-        </td>
-        <td>
-          <%= @usuario.apellido %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Mail:</b>
-        </td>
-        <td>
-          <%= @usuario.email %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Telefono:</b>
-        </td>
-        <td>
-          <%= @usuario.telefono %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Compania:</b>
-        </td>
-        <td>
-          <%= @usuario.compania %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Rif:</b>
-        </td>
-        <td>
-          <%= @usuario.rif %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>Tipo de usuario </b>
-        </td>
-        <td>
-          <% case @usuario.admin
-           when 0 %>
-           Cliente
-         <%   when 1 %>
-           Admin
-         <%   when 2 %>
-           Super-Admin
-         <%   else   %>
-           Contactar servicio técnico.
+        <tr>
+          <td>
+            <b>Nombre:</b>
+          </td>
+          <td>
+            <%= @usuario.nombre %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Apellido:</b>
+          </td>
+          <td>
+            <%= @usuario.apellido %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Mail:</b>
+          </td>
+          <td>
+            <%= @usuario.email %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Telefono:</b>
+          </td>
+          <td>
+            <%= @usuario.telefono %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Compania:</b>
+          </td>
+          <td>
+            <%= @usuario.compania %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Rif:</b>
+          </td>
+          <td>
+            <%= @usuario.rif %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Tipo de usuario </b>
+          </td>
+          <td>
+            <% case @usuario.admin
+             when 0 %>
+             Cliente
+             <%   when 1 %>
+             Admin
+             <%   when 2 %>
+             Super-Admin
+             <%   else   %>
+             Contactar servicio técnico.
+             <% end %>
+           </td>
+           <tr>
+            <td>
+              <%if current_usuario.admin > 0 %>
+              <button style= Padding:10px>
+                <%= link_to 'Volver', usuarios_path %>
+              </button>
+              <% else %>
+              <button style= Padding:10px>
+                <%= link_to 'Volver', inicio_index_path %>
+              </button>
+              <% end %>
+
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td class="conf_list" valign="top">
+       <ul>
+         <% if current_usuario.admin == 2  or  current_usuario.login == @usuario.login %>
+         <li>
+           <%= image_tag("/assets/edit.jpg", :class => "cos_icon", :title => "Editar Perfil") %>          
+           <%= link_to 'Editar Perfil', edit_usuario_path(@usuario)%>
+         </li>
          <% end %>
-       </td>
-       <tr>
-        <td>
-        <%if current_usuario.admin > 0 %>
-          <button style= Padding:10px>
-            <%= link_to 'Volver', usuarios_path %>
-         </button>
-         <%else %>
-         <button style= Padding:10px>
-            <%= link_to 'Volver', inicio_index_path %>
-         </button>
+         <% if current_usuario.login == @usuario.login%>
+         <li>
+           <%= image_tag("/assets/password.png", :class => "cos_icon")%>
+           <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> 
+         </li>
          <%end%>
-           
+         <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
+         <li>
+           <%= image_tag("/assets/delete.png", :class => "cos_icon", :title => "Eliminar Usuario")%>
+           <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Seguro desea eliminar este usuario?' } %>
+         </li>
+         <% end %>
+         <% if @usuario.admin == 0 %>
+           <li>
+             <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
+             <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
+           </li>
+           <li>
+             <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
+             <%= link_to 'Listar sus Solicitudes', tramites_usuario_tramites_path(:usuario => @usuario) %>
+           </li>
+          <% end %>
+       </ul>
      </td>
-       </tr>
-     </table>
-   </td>
-   <td class="conf_list" valign="top">
-     <ul>
-       <% if current_usuario.admin == 2  or  current_usuario.login == @usuario.login %>
-         <li>
-         <%= image_tag("/assets/edit.jpg", :class => "cos_icon", :title => "Editar Perfil") %>          
-         <%= link_to 'Editar Perfil', edit_usuario_path(@usuario)%>
-         </li>
-       <% end %>
-       <% if current_usuario.login == @usuario.login%>
-         <li>
-         <%= image_tag("/assets/password.png", :class => "cos_icon")%>
-         <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> 
-         </li>
-       <%end%>
-       <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
-         <li>
-         <%= image_tag("/assets/delete.png", :class => "cos_icon", :title => "Eliminar Usuario")%>
-         <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Seguro desea eliminar este usuario?' } %>
-         </li>
-       <% end %>
-       <li>
-       <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
-       <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
-       </li>
-     </ul>
-   </td>
- </tr>
+   </tr>
  </table>
  <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>

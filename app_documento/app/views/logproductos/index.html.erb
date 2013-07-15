@@ -1,0 +1,49 @@
+<h1 style="margin-left: 20px;">Log Productos</h1>
+<div style="margin-left: 40px;margin-bottom: 20px;">
+  <button style= Padding:10px>
+    <%= link_to 'Log Documentos', logdocumento_index_path %>
+  </button>
+  <button style= Padding:10px>
+    <%= link_to 'Log Solicitudes', logtramite_index_path %>
+  </button>
+</div>
+<table class="log_data_table" id="tabla_show_log_prod">
+  <thead>
+    <th>Usuario</th>
+    <th>Producto</th>
+    <th>Acción</th>
+    <th>Fecha</th>
+  </thead>
+
+  <tbody>
+    <% @logproductos.each do |logproducto| %>
+    <tr>
+      <td style="width:150px;">
+        <% if logproducto.usuario.nil? %>
+        <%= logproducto.nusuario %>
+        <% else %>
+        <%= link_to (logproducto.usuario) do %>
+        <%= logproducto.nusuario %>
+        <% end %>
+        <% end %>
+      </td>
+      <td style="width:400px">
+        <% if logproducto.producto.nil? %>
+        <%= logproducto.nproducto %>
+        <% else %>
+        <%= link_to (logproducto.producto) do %>
+        <%= logproducto.nproducto %>
+        <% end %>
+        <% end %>
+      </td>
+      <td style="width:80px">
+        <%= logproducto.tipo %>
+      </td>
+      <td>
+        <%= logproducto.created_at.strftime("%I:%M%p")%>
+        <%= logproducto.created_at.day%>/<%= logproducto.created_at.month%>/<%= logproducto.created_at.year%>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,7 +1,7 @@
-<h1><%=flash[:title]%></h1>
+<h1 style="margin-left: 20px;"><%=flash[:title]%></h1>
 
 <% if current_usuario.admin > 0 %>
-  <button>
+  <button style="margin-right: 65px;float: right;margin-bottom: 0px;margin-top: -42px;">
     <%= link_to 'Nuevo producto', new_producto_path %>
   </button>
 <% end %>

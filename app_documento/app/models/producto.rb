@@ -3,9 +3,25 @@ class Producto < ActiveRecord::Base
 
   #Definicion de relaciones de claves foraneas
   belongs_to :usuario
+  #Log para productos
+  has_many :logproductos
+  has_many :usuarios, :through => :logproductos
+
+  #Log para documentos
+  has_many :logdocumentos
+  has_many :documentos, :through => :logdocumentos   
+  has_many :usuarios, :through => :logdocumentos
+  
+  #Log para tramites
+  has_many :logtramites
+  has_many :usuarios, :through => :logtramites
+  has_many :tramites, :through => :logtramites
+  
   has_many :documentos
   has_many :presentacions
+  has_many :vencidoss
   has_and_belongs_to_many :importadors
+  
 
   #Para manejo de log del usuario
   has_paper_trail

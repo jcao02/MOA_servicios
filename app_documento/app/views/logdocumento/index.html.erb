@@ -1,0 +1,60 @@
+<h1 style="margin-left: 20px;">Log Documentos</h1>
+<div style="margin-left: 40px;margin-bottom: 20px;">
+  <button style= Padding:10px>
+    <%= link_to 'Log Productos', logproductos_path %>
+  </button>
+  <button style= Padding:10px>
+    <%= link_to 'Log Solicitudes', logtramite_index_path %>
+  </button>
+</div>
+
+<table class="log_data_table" id="tabla_show_log_doc">
+  <thead>
+    <th>Usuario</th>
+    <th>Producto</th>
+    <th>Documento</th>
+    <th>Acción</th>
+    <th>Fecha</th>
+  </thead>
+
+  <tbody>
+    <% @logdocumentos.each do |logdocumento| %>
+    <tr>
+      <td style="width:150px;">
+        <% if logdocumento.usuario.nil? %>
+        <%= logdocumento.nusuario %>
+        <% else %>
+        <%= link_to (logdocumento.usuario) do %>
+        <%= logdocumento.nusuario %>
+        <% end %>
+        <% end %>
+      </td>
+      <td style="width:200px">
+        <% if logdocumento.producto.nil? %>
+        <%= logdocumento.nproducto %>
+        <% else %>
+        <%= link_to (logdocumento.producto) do %>
+        <%= logdocumento.nproducto %>
+        <% end %>
+        <% end %>
+      </td>
+      <td style="width:200px">
+        <% if logdocumento.documento.nil? %>
+        <%= logdocumento.ndocumento %>
+        <% else %>
+        <%= link_to (logdocumento.documento.pdf.url) do %>
+        <%= logdocumento.ndocumento %>
+        <% end %>
+        <% end %>
+      </td>
+      <td style="width:80px">
+        <%= logdocumento.tipo %>
+      </td>
+      <td>
+        <%= logdocumento.created_at.strftime("%I:%M%p")%>
+        <%= logdocumento.created_at.day%>/<%= logdocumento.created_at.month%>/<%= logdocumento.created_at.year%>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
