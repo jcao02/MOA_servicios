@@ -4,37 +4,40 @@ namespace :set do
   task :users => :environment do 
     Rake::Task['db:reset'].invoke
     Usuario.create(
-      :login    => "S-Admin", 
-      :password => "12345678", 
-      :email    => "s-admin@dominio.com", 
-      :telefono => "12345678", 
-      :admin    => 2, 
-      :compania => "S-Administradora",
-      :nombre   => "S-Admin",
-      :apellido => "istrador",
-      :rif      => "j-29348792-7"
+      :login     => "S-Admin",
+      :password  => "12345678",
+      :email     => "s-admin@dominio.com",
+      :telefono  => "12345678",
+      :admin     => 2,
+      :compania  => "S-Administradora",
+      :nombre    => "S-Admin",
+      :apellido  => "istrador",
+      :rif       => "j-29348792-7",
+      :bloqueado => 0
     )
     Usuario.create(
-      :login    => "Admin", 
-      :password => "12345678", 
-      :email    => "admin@dominio.com", 
-      :telefono => "12345678", 
-      :admin    => 1, 
-      :compania => "Administradora",
-      :nombre   => "Admin",
-      :apellido => "istrador",
-      :rif      => "j-29348792-6"
+      :login     => "Admin",
+      :password  => "12345678",
+      :email     => "admin@dominio.com",
+      :telefono  => "12345678",
+      :admin     => 1,
+      :compania  => "Administradora",
+      :nombre    => "Admin",
+      :apellido  => "istrador",
+      :rif       => "j-29348792-6",
+      :bloqueado => 0
     )
     Usuario.create(
-      :login    => "Cliente", 
-      :password => "12345678", 
-      :email    => "cliente@dominio.com", 
-      :telefono => "12345678", 
-      :admin    => 0, 
-      :compania => "Alimentos X",
-      :nombre   => "Cliente",
-      :apellido => "la",
-      :rif      => "j-29348792-5"
+      :login     => "Cliente",
+      :password  => "12345678",
+      :email     => "cliente@dominio.com",
+      :telefono  => "12345678",
+      :admin     => 0,
+      :compania  => "Alimentos X",
+      :nombre    => "Cliente",
+      :apellido  => "la",
+      :rif       => "j-29348792-5",
+      :bloqueado => 0
     )
   end
   

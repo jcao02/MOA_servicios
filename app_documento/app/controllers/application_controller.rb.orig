@@ -28,15 +28,13 @@ class ApplicationController < ActionController::Base
         redirect_to(inicio_index_path) if current_usuario.admin == 0
     end
 
-    #Metodos helpers para alertas
-
+<<<<<<< HEAD
     helper_method :is_alert_owner
     def is_alert_owner
         alerta = Vencidos.find(params[:id])
         redirect_to(inicio_index_path) if current_usuario.id != alerta.usuario_id
     end
 
-    #Metodos helpers para tramites
     #Crea los requisitos dependiendo del tramite
     helper_method :crear_requisitos
     def crear_requisitos(documento, tramite)
@@ -46,4 +44,11 @@ class ApplicationController < ActionController::Base
             tramite.requisitos << req
         end
     end
+=======
+  #Para verificar que el usuario que va a ser deshabilitado no es Super Admin
+  helper_method :change_s_admin
+  def change_s_admin
+    redirect_to(usuarios_index_path) if Usuarios.find(params[id]).admin == 2
+  end
+>>>>>>> ec070bd4ad164df297f8c219dea0e18b5057a42e
 end

@@ -3,6 +3,7 @@ class UsuariosController < ApplicationController
   before_filter :authenticate_usuario! #Para que se requiera estar logueado
   before_filter :is_authorize, :only => [:edit, :update, :show] #Solo se puede editar, modificar o mostrar perfil si eres super admin o eres el usuario
   before_filter :is_admin, :only => [:new, :create] #Solo admin y super admin pueden crear usuarios
+  before_filter :change_s_admin, :only => [:deshabilitar] #No se puede deshabilitar a un s-admin
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
   # GET /usuarios
@@ -50,10 +51,14 @@ class UsuariosController < ApplicationController
     @usuario = current_usuario
     respond_with(@usuario, :layout => false)
   end
- # POST /usuarios
+ 
+  # POST /usuarios
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(params[:usuario])
+    if not @usuario.bloqueado or @usuario.admin == 2
+      @usuario.bloqueado = 0
+    end
 
     respond_to do |format|
       if @usuario.save
@@ -75,8 +80,19 @@ class UsuariosController < ApplicationController
     params[:usuario].delete :password
     respond_to do |format|
       if @usuario.update_attributes(params[:usuario])
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
-        format.json { head :no_content }
+        if @usuario.admin == 2
+          if @usuario.update_attribute("bloqueado", 0)
+            format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+            format.json { head :no_content }
+          else
+            flash.keep
+            format.html { render action: "edit" }
+            format.json { render json: @usuario.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+          format.json { head :no_content }
+        end
       else
         flash.keep
         format.html { render action: "edit" }
@@ -111,7 +127,6 @@ class UsuariosController < ApplicationController
       end
       format.json { render json: @usuario.errors }
     end
-
   end
 
   #Para ver el form de recuperar contraseña
@@ -155,5 +170,32 @@ class UsuariosController < ApplicationController
       format.html { redirect_to usuarios_url }
       format.json { head :no_content }
     end
+  end
+
+  # bloqueado = 0 -> no esta bloqueado
+  # bloqueado = 1 -> bloqueado
+  def deshabilitar
+    @usuario = Usuario.find(params[:id])
+    respond_to do |format|
+      if @usuario.bloqueado == 0  
+        if @usuario.update_attribute("bloqueado", 1)
+          format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+          format.json { head :no_content }
+        else
+          flash.keep
+          format.html { render action: "edit" }
+          format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        end
+      else @usuario.bloqueado == 1
+        if @usuario.update_attribute("bloqueado", 0)
+          format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+          format.json { head :no_content }
+        else
+          flash.keep
+          format.html { render action: "edit" }
+          format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        end        
+      end
+    end    
   end
 end

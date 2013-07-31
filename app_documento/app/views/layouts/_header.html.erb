@@ -9,15 +9,17 @@
         <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
                                 :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
     </ul>
-    <li class="drop" id="alertas">Alertas<div class="alerta" id="alertas" style="background: green;"></div></li>
-    <ul class="dropAppear" id="alertasAppear">
-      <% session[:alerts].each do |alert|%>
-      <li class="dropElem">
-      <div><%= alert.tipo %></div>
-      <div class="alerta" style="background: red;"></div>
-      </li>
+    <% if current_usuario.admin == 0 %>
+      <li class="drop" id="alertas">Alertas<div class="alerta" id="alertas" style="background: green;"></div></li>
+      <ul class="dropAppear" id="alertasAppear">
+        <% session[:alerts].each do |alert|%>
+          <li class="dropElem">
+          <div><%= alert.tipo %></div>
+          <div class="alerta" style="background: red;"></div>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-    </ul>
     <!-- NOTE: Color depende de alertas (atributo de background #alerta) -->
   </ul>
 <% end %>

@@ -29,7 +29,9 @@ class Usuario < ActiveRecord::Base
 
   #Atributos accesibles para el modelo
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail, :nombre, :rif, :telefono
+  attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail 
+  attr_accessible :nombre, :rif, :telefono, :sign_in_count, :current_sign_in_at
+  attr_accessible :last_sign_in_at, :bloqueado
 
   #Validaciones admin
   VALID_ADMIN_REGEX = /\A[012]\z/
@@ -60,4 +62,13 @@ class Usuario < ActiveRecord::Base
   validates_confirmation_of :password
   validates :nombre, format: { with: VALID_STRING_REGEX }
 
+  #Para impedir que un usuario bloqueado entre al sistema
+  def active_for_authentication?
+    super && bloqueado == 0
+  end
+
+  #Mensaje que indica que el usuario está bloqueado
+  def inactive_message
+    bloqueado == 0 ? super : :bloqueado
+  end
 end

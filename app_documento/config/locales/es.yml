@@ -1,4 +1,7 @@
 es:
+  devise:
+    failure:
+      bloqueado: "Tu cuenta está bloqueada."
   date:
     abbr_day_names:
     - dom

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<<<<<<< HEAD
+  <head>
+    <meta charset="utf-8">
+    <title>Productos Kiwi</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <header>
+      <%= render 'layouts/header' %>
+      <%= render 'layouts/navigation' %>
+      </header>
+
+      <div id="content">
+        <%= yield %>
+=======
+<head>
+  <meta charset="utf-8">
+  <title>Productos Kiwi</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+      <div id="headUp">
+        <%= link_to image_tag("/assets/logo_Moa_fondo_blanco.png", :id => "logo"), home_path %>
+        <% if usuario_signed_in? %>
+          <ul>
+            <li class="drop" id="compania" title="<%= current_usuario.compania %>"><%= current_usuario.compania %></li>
+            <ul class="dropAppear" id="companiaAppear">
+
+              <%= link_to content_tag(:li, content_tag(:div, 'Perfil') + image_tag("/assets/settings.png", :class => "dropImg"),
+                                      :class => "dropElem"), current_usuario %>
+              <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
+                                      :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
+            </ul>
+            <li class="drop" id="alertas">Alertas<div class="alerta" id="alertas" style="background: green;"></div></li>
+            <ul class="dropAppear" id="alertasAppear">
+
+              <li class="dropElem">
+                <div>Alerta super importantisima</div>
+                <div class="alerta" style="background: red;"></div>
+              </li>
+
+            </ul>
+            <!-- NOTE: Color depende de alertas (atributo de background #alerta) -->
+          </ul>
+        <% end %>
+>>>>>>> ec070bd4ad164df297f8c219dea0e18b5057a42e
+      </div>
+
+      <footer>
+      <%= render 'layouts/footer' %>
+      </footer>
+    </div>
+  </body>
+</html>

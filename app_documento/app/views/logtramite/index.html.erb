@@ -7,53 +7,61 @@
     <%= link_to 'Log Documentos', logdocumento_index_path %>
   </button>
 </div>
-<table class="log_data_table" id="tabla_show_log_tram">
-  <thead>
-    <th>Usuario</th>
-    <th>Producto</th>
-    <th>Documento</th>
-    <th>Acción</th>
-    <th>Fecha</th>
-  </thead>
+<div style="border-bottom: 2px solid rgba(116,14,0,0.8);">
+  <table class="log_data_table" id="tabla_show_log_tram">
+    <thead>
+      <th>Usuario</th>
+      <th>Producto</th>
+      <th>Documento</th>
+      <th>Acción</th>
+      <th>Fecha</th>
+    </thead>
 
-  <tbody>
-    <% @logtramites.each do |logtramite| %>
-    <tr>
-      <td style="width:150px;">
-        <% if logtramite.usuario.nil? %>
-        <%= logtramite.nusuario %>
-        <% else %>
-        <%= link_to (logtramite.usuario) do %>
-        <%= logtramite.nusuario %>
-        <% end %>
-        <% end %>
-      </td>
-      <td style="width:400px">
-        <% if logtramite.producto.nil? %>
-        <%= logtramite.nproducto %>
-        <% else %>
-        <%= link_to (logtramite.producto) do %>
-        <%= logtramite.nproducto %>
-        <% end %>
-        <% end %>
-      </td>
-      <td style="width:400px">
-        <% if logtramite.tramite.nil? %>
-        <%= logtramite.ntipodocumento %>
-        <% else %>
-        <%= link_to (logtramite.tramite) do %>
-        <%= logtramite.ntipodocumento %>
-        <% end %>
-        <% end %>
-      </td>
-      <td style="width:80px">
-        <%= logtramite.tipo %>
-      </td>
-      <td>
-        <%= logtramite.created_at.strftime("%I:%M%p")%>
-        <%= logtramite.created_at.day%>/<%= logtramite.created_at.month%>/<%= logtramite.created_at.year%>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @logtramites.each do |logtramite| %>
+      <tr>
+        <td style="width:150px;">
+          <% if logtramite.usuario.nil? %>
+          <%= logtramite.nusuario %>
+          <% else %>
+          <%= link_to (logtramite.usuario) do %>
+          <%= logtramite.nusuario %>
+          <% end %>
+          <% end %>
+        </td>
+        <td style="width:340px">
+          <% if logtramite.producto.nil? %>
+          <%= logtramite.nproducto %>
+          <% else %>
+          <%= link_to (logtramite.producto) do %>
+          <%= logtramite.nproducto %>
+          <% end %>
+          <% end %>
+        </td>
+        <td style="width:340px">
+          <% if logtramite.tramite.nil? %>
+          <%= logtramite.ntipodocumento %>
+          <% else %>
+          <%= link_to (logtramite.tramite) do %>
+          <%= logtramite.ntipodocumento %>
+          <% end %>
+          <% end %>
+        </td>
+        <td style="width:200px">
+          <%= logtramite.tipo %>
+        </td>
+        <td>
+          <%= logtramite.created_at.strftime("%I:%M%p")%>
+          <%= logtramite.created_at.day%>/<%= logtramite.created_at.month%>/<%= logtramite.created_at.year%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="width: 400px;padding-left:40px;">
+  <button style= "padding:10px;">
+    <%= link_to 'Volver', :back %>
+  </button>
+</div>

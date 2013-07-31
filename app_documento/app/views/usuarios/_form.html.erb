@@ -64,7 +64,12 @@
             </button>
 
           </td>
-          <td></td>
+          <td>
+            <% if current_usuario.admin == 2 %>
+              <%= f.input :bloqueado, :label => "Habilitar", :as => :radio, :collection => [["Sí", 0], ["No", 1]]%>
+            
+            <% end %>            
+          </td>
         </tr>
       <% end %>
       </tbody>
