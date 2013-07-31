@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130715042515) do
+ActiveRecord::Schema.define(:version => 20130731045841) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130715042515) do
     t.datetime "pdf_updated_at"
     t.integer  "TipoDocumento_id"
     t.boolean  "tramite"
+    t.integer  "on"
   end
 
   add_index "documentos", ["producto_id"], :name => "index_documentos_on_producto_id"
@@ -91,6 +92,8 @@ ActiveRecord::Schema.define(:version => 20130715042515) do
     t.string   "tipo"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "ntipotocumento"
+    t.string   "ntramite"
     t.string   "nusuario"
     t.string   "nproducto"
     t.string   "ntipodocumento"
@@ -121,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20130715042515) do
     t.integer  "usuario_id"
     t.string   "grado_alcoholico"
     t.string   "zona_venta"
+    t.integer  "on"
   end
 
   create_table "requisitos", :force => true do |t|
@@ -190,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20130715042515) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "bloqueado"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

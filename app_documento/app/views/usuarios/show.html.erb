@@ -2,7 +2,16 @@
   <tr>
     <td>
       <div class="title_show">
-        <h2>Información de usuario</h2>
+        <h2>
+          Información de usuario 
+          <span style="font-weight:bold;font-size:x-small;font-style:italic;">
+            <% if @usuario.bloqueado == 0 %>
+              <span style="color:green;"> Habilitado </span>
+            <% else %>
+              <span style="color:red;"> Deshabilitado </span>
+            <% end %>
+        </h2>
+          
       </div>
     </td>
     <td>
@@ -72,7 +81,7 @@
         </tr>
         <tr>
           <td>
-            <b>Tipo de usuario </b>
+            <b>Tipo de usuario: </b>
           </td>
           <td>
             <% case @usuario.admin

@@ -7,54 +7,61 @@
     <%= link_to 'Log Solicitudes', logtramite_index_path %>
   </button>
 </div>
+<div style="border-bottom: 2px solid rgba(116,14,0,0.8);">
+  <table class="log_data_table" id="tabla_show_log_doc">
+    <thead>
+      <th>Usuario</th>
+      <th>Producto</th>
+      <th>Documento</th>
+      <th>Acción</th>
+      <th>Fecha</th>
+    </thead>
 
-<table class="log_data_table" id="tabla_show_log_doc">
-  <thead>
-    <th>Usuario</th>
-    <th>Producto</th>
-    <th>Documento</th>
-    <th>Acción</th>
-    <th>Fecha</th>
-  </thead>
+    <tbody>
+      <% @logdocumentos.each do |logdocumento| %>
+      <tr>
+        <td style="width:150px;">
+          <% if logdocumento.usuario.nil? %>
+          <%= logdocumento.nusuario %>
+          <% else %>
+          <%= link_to (logdocumento.usuario) do %>
+          <%= logdocumento.nusuario %>
+          <% end %>
+          <% end %>
+        </td>
+        <td style="width:200px">
+          <% if logdocumento.producto.nil? %>
+          <%= logdocumento.nproducto %>
+          <% else %>
+          <%= link_to (logdocumento.producto) do %>
+          <%= logdocumento.nproducto %>
+          <% end %>
+          <% end %>
+        </td>
+        <td style="width:200px">
+          <% if logdocumento.documento.nil? %>
+          <%= logdocumento.ndocumento %>
+          <% else %>
+          <%= link_to (logdocumento.documento.pdf.url) do %>
+          <%= logdocumento.ndocumento %>
+          <% end %>
+          <% end %>
+        </td>
+        <td style="width:80px">
+          <%= logdocumento.tipo %>
+        </td>
+        <td>
+          <%= logdocumento.created_at.strftime("%I:%M%p")%>
+          <%= logdocumento.created_at.day%>/<%= logdocumento.created_at.month%>/<%= logdocumento.created_at.year%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-  <tbody>
-    <% @logdocumentos.each do |logdocumento| %>
-    <tr>
-      <td style="width:150px;">
-        <% if logdocumento.usuario.nil? %>
-        <%= logdocumento.nusuario %>
-        <% else %>
-        <%= link_to (logdocumento.usuario) do %>
-        <%= logdocumento.nusuario %>
-        <% end %>
-        <% end %>
-      </td>
-      <td style="width:200px">
-        <% if logdocumento.producto.nil? %>
-        <%= logdocumento.nproducto %>
-        <% else %>
-        <%= link_to (logdocumento.producto) do %>
-        <%= logdocumento.nproducto %>
-        <% end %>
-        <% end %>
-      </td>
-      <td style="width:200px">
-        <% if logdocumento.documento.nil? %>
-        <%= logdocumento.ndocumento %>
-        <% else %>
-        <%= link_to (logdocumento.documento.pdf.url) do %>
-        <%= logdocumento.ndocumento %>
-        <% end %>
-        <% end %>
-      </td>
-      <td style="width:80px">
-        <%= logdocumento.tipo %>
-      </td>
-      <td>
-        <%= logdocumento.created_at.strftime("%I:%M%p")%>
-        <%= logdocumento.created_at.day%>/<%= logdocumento.created_at.month%>/<%= logdocumento.created_at.year%>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div style="width: 400px;padding-left:40px;margin-top: 10px;">
+  <button style= "padding:10px;">
+    <%= link_to 'Volver', :back %>
+  </button>
+</div>

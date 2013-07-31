@@ -28,4 +28,9 @@ class ApplicationController < ActionController::Base
       redirect_to(inicio_index_path) if current_usuario.admin == 0
   end
 
+  #Para verificar que el usuario que va a ser deshabilitado no es Super Admin
+  helper_method :change_s_admin
+  def change_s_admin
+    redirect_to(usuarios_index_path) if Usuarios.find(params[id]).admin == 2
+  end
 end

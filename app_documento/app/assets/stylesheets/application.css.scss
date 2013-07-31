@@ -27,6 +27,7 @@ $list_selected    : #396877;
 
 // VINOTINTO
 $hover_color      : rgba(116,14,0,1);
+$head_background_color : rgba(0,0,0,0.06);
 $background_color : rgba(128,0,0,1);
 $list_selected    : rgba(116,14,0,0.8);
 $list_even        : rgba(116,14,0,0.7);
@@ -76,8 +77,8 @@ a,a:visited {
 }
 
 #logo {
-  max-height: 80%;
-  max-width: 50%;
+  height: 40px;
+  width: 150px;
   margin-left: 8px;
   margin-top: 6px;
   float: left;
