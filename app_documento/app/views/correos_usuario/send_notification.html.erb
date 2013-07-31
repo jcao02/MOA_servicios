@@ -7,6 +7,8 @@
 <% else %>
   en <%= @mes %> meses. 
 <% end %></p>
-<!-- FALTAN ACCIONES DE DESHABILITAR Y DE GENERAR TRAMITE-->
-<p>Si desea solicitar el trámite para renovar el documento <b><%= @tipo %></b>, presione <a href="">aquí</a></p>
-<p>Este correo se envia automáticamente cada mes. Si desea dejar de recibirlo presione <a href="">aquí</a></p>
+
+<p>Si desea solicitar el trámite para renovar el documento <b><%= @tipo %></b>, 
+presione <%= link_to 'aqui', vencido_tramitar_documento_url(:id => @vencido.id) %></p>
+<p>Este correo se envia automáticamente cada mes. Si desea dejar de recibirlo 
+presione <%= link_to 'aqui', vencido_desactivar_alerta_url(:id => @vencido.id) %> </p>

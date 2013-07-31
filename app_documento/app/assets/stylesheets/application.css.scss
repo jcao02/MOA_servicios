@@ -308,7 +308,25 @@ footer {
 
 }
 
+
 /*Tablas de filtrado*/
+
+.data_filters {
+
+    width: 616px;
+    height: 400px;
+    margin-top: 10px;
+    margin-left: 130px;
+    tr:nth-child(even) {
+        background-color: #DCEAEE;
+    }
+    td{
+        /*height: 70px;*/
+    }
+    border-left: 2px solid $list_selected;
+    border-right: 2px solid $list_selected;
+}
+
 .area_filtro{
   margin: auto;
   margin-top: 40px;

@@ -1,4 +1,18 @@
 AppDocumento::Application.routes.draw do
+  get "vencido/index"
+  
+  post "vencido/tramitar_documento"
+
+  get  "vencido/tramitar_documento"
+  
+  post "vencido/activar_alerta"
+  
+  get "vencido/activar_alerta"
+  
+  post "vencido/desactivar_alerta"
+
+  get "vencido/desactivar_alerta"
+
   get "logtramite/index"
 
   get "logsolicitud/index"

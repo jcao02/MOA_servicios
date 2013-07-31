@@ -41,6 +41,7 @@ class CorreosUsuario < ActionMailer::Base
 
   #Mail que avisa el vencimineto de un documento
   def send_notification(vencido)
+      @vencido  = vencido
       @usuario  = Usuario.find(vencido.usuario_id)
       @producto = Producto.find(vencido.producto_id)
       @tipo     = vencido.tipo

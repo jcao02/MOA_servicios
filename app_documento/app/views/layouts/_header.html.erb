@@ -1,0 +1,25 @@
+<div id="headUp">
+  <%= link_to image_tag("http://placehold.it/450x40/133655/911100.png", :id => "logo"), home_path %>
+  <% if usuario_signed_in? %>
+    <ul>
+      <li class="drop" id="compania" title="<%= current_usuario.compania %>"><%= current_usuario.compania %></li>
+      <ul class="dropAppear" id="companiaAppear">
+        <%= link_to content_tag(:li, content_tag(:div, 'Perfil') + image_tag("/assets/settings.png", :class => "dropImg"),
+                                :class => "dropElem"), current_usuario %>
+        <%= link_to content_tag(:li, content_tag(:div, 'Salir') + image_tag("/assets/exit.png", :class => "dropImg"),
+                                :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
+    </ul>
+    <li class="drop" id="alertas">Alertas<div class="alerta" id="alertas" style="background: green;"></div></li>
+    <ul class="dropAppear" id="alertasAppear">
+      <% session[:alerts].each do |alert|%>
+      <li class="dropElem">
+      <div><%= alert.tipo %></div>
+      <div class="alerta" style="background: red;"></div>
+      </li>
+    <% end %>
+    </ul>
+    <!-- NOTE: Color depende de alertas (atributo de background #alerta) -->
+  </ul>
+<% end %>
+</div>
+

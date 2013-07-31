@@ -1,0 +1,53 @@
+<% if flash[:notice] %>
+  <div><p><%= flash[:notice] %></p></div>
+<% end %>
+<div class="data_filters">
+  <table id="alerts_table" class="data_table">
+    <thead>
+      <th>
+        Producto
+      </th>
+      <th>
+        Documento
+      </th>
+      <th>
+        Fecha Vencimiento
+      </th>
+      <th>
+        Accion
+      </th>
+    </thead>
+    <tbody>
+      <% session[:alerts].each_with_index do |alert, i| %>
+        <tr>
+          <td>
+            <%= Producto.find(alert.producto_id).nombre %>
+          </td>
+          <td>
+            <%= alert.tipo %>
+          </td>
+          <td>
+            <%= alert.fecha %>
+          </td>
+          <td id="alert_state<%=i%>">
+            <% if alert.tramite %>
+              Tramitando...
+            <% elsif alert.active %>
+              <%= form_tag '/vencido/tramitar_documento', :id => "alert_form"+i.to_s do %>
+                <%= hidden_field_tag 'id', alert.id%>
+                <%= submit_tag 'Tramitar' %>
+              <% end %>
+            <% else %>
+              <%= form_tag '/vencido/activar_alerta' do %>
+                <%= hidden_field_tag 'id', alert.id%>
+                <%= submit_tag 'Activar' %>
+              <% end %>
+            <% end %> 
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= content_tag "div", id: "alerts_length", data: { length: session[:alerts].length } do %>
+<%end%>

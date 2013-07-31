@@ -1,0 +1,18 @@
+<% if usuario_signed_in? %>
+  <ul id="headDown">
+    <%= link_to content_tag(:li, 'Inicio', :class => "nav"), home_path %>
+    <% case current_usuario.admin
+      when 0 %>
+      <%= link_to content_tag(:li, 'Mis Productos', :class => "nav"), productos_path %>
+      <%= link_to content_tag(:li, 'Mis Solicitudes', :class => "nav"), tramites_path %>
+      <%= link_to content_tag(:li, 'Alertas', :class => "nav"), vencido_index_path %>
+    <% when 1..2%>
+      <%= link_to content_tag(:li, 'Listar Productos', :class => "nav"), productos_path %>
+      <%= link_to content_tag(:li, 'Listar Solicitudes', :class => "nav"), tramites_path %>
+      <%= link_to content_tag(:li, 'Listar Usuarios', :class => "nav"), usuarios_path %>
+      <%= link_to content_tag(:li, 'Logs', :class => "nav"), logproductos_path %>
+    <% end %>
+  </ul>
+</ul>
+<%end%>
+

@@ -1,0 +1,20 @@
+<ul>
+  <% if usuario_signed_in? %>
+    <li>
+    <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
+      :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank",
+      :style => "color: white !important; font-weight:20;" %>
+    </li>
+  <% else %>
+    <li>
+    <%= link_to image_tag("/assets/chrome.png",
+                          :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
+                          "https://www.google.com/intl/en/chrome/browser", :target => "_blank" %>
+    </li>
+  <% end %>
+  <li style="float: right;">
+  <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
+    "http://www.facebook.com/chamini2", :target => "_blank" %>
+  </li>
+</ul>
+
