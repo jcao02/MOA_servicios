@@ -1,4 +1,15 @@
 AppDocumento::Application.routes.draw do
+  get "sessions/create"
+
+  get "sessions/destroy"
+
+  get "session/create"
+
+  get "session/destroy"
+
+  resources :logsesions
+
+
   get "vencido/index"
   
   post "vencido/tramitar_documento"
@@ -21,8 +32,7 @@ AppDocumento::Application.routes.draw do
 
   resources :logproductos
 
-
-  devise_for :usuarios 
+  devise_for :usuarios, :controllers => { :sessions => :sessions } 
 
   get "inicio/index"
 
