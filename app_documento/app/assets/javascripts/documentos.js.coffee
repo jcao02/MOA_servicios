@@ -8,6 +8,20 @@ datepickerOpc =
   dayNamesMin: ["Do","Lu","Ma","Mie","Jue","Vie","Sab"]
   monthNames : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
   changeYear : true
+dataTable_opc =
+  bScrollInfinite : true
+  bScrollCollapse : true
+  bPagination     : false
+  bScrollAutoCss  : true
+  bSort           : false
+  sScrollY        : "250px"
+  oLanguage       :
+    sSearch       : ""
+    sInfo         : ""
+    sInfoFiltered : ""
+    sInfoEmpty    : ""
+    sZeroRecords  : "No se encontraron coincidencias"
+
 
 $(document).ready ->
   $("#documento_fecha_vencimiento").datepicker datepickerOpc
@@ -17,3 +31,4 @@ $(document).ready ->
       $("#Otro").prepend input
     else
       $("#Otro_tipo_input").remove()
+  $("#show_documentos").dataTable(dataTable_opc)

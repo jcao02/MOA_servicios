@@ -3,6 +3,7 @@ class VencidoController < ApplicationController
 
     #Ver todas las alertas
     def index
+      session[:alerts] = Vencidos.order("fecha").where(:usuario_id => current_usuario.id)
     end
 
     #Tramitar documento vencido

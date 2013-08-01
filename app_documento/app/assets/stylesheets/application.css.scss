@@ -311,16 +311,20 @@ footer {
 
 
 /*Tablas de filtrado*/
-
 .data_filters {
-
     width: 616px;
     height: 400px;
     margin-top: 10px;
     margin-left: 130px;
+
+    th{
+        /*border-bottom: 2px solid $list_selected !important;*/
+    }
+
     tr:nth-child(even) {
         background-color: #DCEAEE;
     }
+
     td{
         /*height: 70px;*/
     }

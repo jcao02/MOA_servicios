@@ -1,4 +1,6 @@
 AppDocumento::Application.routes.draw do
+  get "documentos/index_usuario"
+
   get "vencido/index"
   
   post "vencido/tramitar_documento"
