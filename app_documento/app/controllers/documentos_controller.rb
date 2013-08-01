@@ -32,6 +32,7 @@ class DocumentosController < ApplicationController
     end
     return tipos
   end
+
   # GET /documentos/new
   # GET /documentos/new.json
   def new
@@ -144,6 +145,21 @@ class DocumentosController < ApplicationController
         format.html { redirect_to producto, notice: 'Log no actualizado'}
         format.json { head :no_content }
       end
+    end
+  end
+
+  def ocultar_doc (id)
+    doc = Documento.find(id)
+    if doc.on == 0
+      if doc.update_attribute("on",1)
+        return true
+      else
+        return false
+    elsif doc.on == 1
+      if doc.update_attribute("on",0)
+        return true
+      else
+        return false
     end
   end
 end

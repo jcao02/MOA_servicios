@@ -52,7 +52,8 @@ namespace :set do
       :fabricante         => "Fabricante X",
       :codigo_arancelario => "100.100",
       :usuario_id         => 3,
-      :zona_venta         => "Margarita"
+      :zona_venta         => "Margarita",
+      :on                 => 1
     )
     Producto.create(
       :registro_sanitario => "L-12.346",
@@ -64,7 +65,8 @@ namespace :set do
       :codigo_arancelario => "100.101",
       :usuario_id         => 3,
       :zona_venta         => "Tierra Firme",
-      :grado_alcoholico   => "40º"
+      :grado_alcoholico   => "40º",
+      :on                 => 1
     )
     Producto.create(
       :registro_sanitario => "A-12.347",
@@ -75,7 +77,8 @@ namespace :set do
       :fabricante         => "Fabricante Y",
       :codigo_arancelario => "101.103",
       :usuario_id         => 3,
-      :zona_venta         => "Duty Free"
+      :zona_venta         => "Duty Free",
+      :on                 => 1
     )
     Producto.create(
       :registro_sanitario => "L-12.348",
@@ -87,7 +90,8 @@ namespace :set do
       :codigo_arancelario => "101.107",
       :usuario_id         => 3,
       :zona_venta         => "Tierra Firme",
-      :grado_alcoholico   => "50º"
+      :grado_alcoholico   => "50º",
+      :on                 => 1
     )
   end
   

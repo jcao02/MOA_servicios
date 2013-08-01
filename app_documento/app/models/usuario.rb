@@ -3,7 +3,6 @@ class Usuario < ActiveRecord::Base
 
   #Definicion de relaciones de claves foraneas
   has_many :productos
-  has_many :logsesions
 
   #Log para productos
   has_many :logproductos
