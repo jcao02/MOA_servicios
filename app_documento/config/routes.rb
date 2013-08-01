@@ -1,4 +1,7 @@
-AppDocumento::Application.routes.draw do  get "vencido/index"
+AppDocumento::Application.routes.draw do
+  get "documentos/index_usuario"
+
+  get "vencido/index"
   
   post "productos/ocultar" 
 

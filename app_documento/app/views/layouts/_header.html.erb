@@ -10,7 +10,16 @@
                                 :class => "dropElem"), destroy_usuario_session_path, :method => :delete %>
     </ul>
     <% if current_usuario.admin == 0 %>
-      <li class="drop" id="alertas">Alertas<div class="alerta" id="alertas" style="background: green;"></div></li>
+      <% if session[:alerts].length == 0 %>
+        <li class="drop" id="alertas">
+        0 alertas
+        </li>
+      <% else %>
+        <li class="drop" id="alertas">
+        <%= session[:alerts].length.to_s %> alertas
+        <div class="alerta" id="alertas" style="background: green;"></div>
+        </li>
+      <% end %>
       <ul class="dropAppear" id="alertasAppear">
         <% session[:alerts].each do |alert|%>
           <li class="dropElem">

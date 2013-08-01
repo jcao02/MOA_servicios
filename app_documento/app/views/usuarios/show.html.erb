@@ -140,7 +140,12 @@
              <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
              <%= link_to 'Listar sus Solicitudes', tramites_usuario_tramites_path(:usuario => @usuario) %>
            </li>
-          <% end %>
+         <% end %>
+         <% if current_usuario.admin > 0 %>
+           <li>
+           <%= link_to 'Listar documentos (todos)', documentos_index_usuario_path(:id => @usuario.id) %>
+           </li>
+         <% end %>
        </ul>
      </td>
    </tr>
