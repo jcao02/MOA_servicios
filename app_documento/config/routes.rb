@@ -58,6 +58,12 @@ AppDocumento::Application.routes.draw do
     end
   end
 
+  resources :documentos do
+      collection do
+          post :generar_tramitado
+      end
+  end
+
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path
 
   #Redirecciona locale (en/es) al index

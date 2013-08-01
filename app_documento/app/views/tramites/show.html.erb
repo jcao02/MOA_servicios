@@ -6,46 +6,46 @@
       </div>
     </td>
     <td rowspan="2">
-     <table id="requisitos_show" style="height:350px;border-bottom:1px solid black">
-       <thead>
-         <th>
-           <h2>Requisitos</h2>
-         </th>
-       </thead>
-       <tbody>
-         <% @tramite.requisitos.each_with_index do |r, index| %>
-           <tr>
-             <td style="padding-left: 5px;">
-               <%= content_tag "span", class: "content-estado", id:"estado"+index.to_s, data: { requisito: r } do %>
-               <%= link_to r.TipoRequisito.name, r %>
-             <% end %>
-             </td>
-           </tr>
-         <% end %>
-       </tbody>
-     </table>
-     <table style="min-width:350px;margin-left:25px">
-      <tr>
-        <td>
-          <div class="alerta" style="background: white;float:left"></div>
-          <div style="font-size:x-small">
-            Stand-by
-          </div>
-        </td>
-        <td>
-          <div class="alerta" style="background: green;float:left"></div>
-          <div style="font-size:x-small">
-            Aceptado
-          </div>
-        </td>
-        <td>
-          <div class="alerta" style="background: red;float:left"></div>
-          <div style="font-size:x-small">
-            Rechazado
-          </div>
-        </td>  
-      </tr>
-     </table>
+      <table id="requisitos_show" style="height:350px;border-bottom:1px solid black">
+        <thead>
+          <th>
+            <h2>Requisitos</h2>
+          </th>
+        </thead>
+        <tbody>
+          <% @tramite.requisitos.each_with_index do |r, index| %>
+            <tr>
+              <td style="padding-left: 5px;">
+                <%= content_tag "span", class: "content-estado", id:"estado"+index.to_s, data: { requisito: r } do %>
+                  <%= link_to r.TipoRequisito.name, r %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <table style="min-width:350px;margin-left:25px">
+        <tr>
+          <td>
+            <div class="alerta" style="background: white;float:left"></div>
+            <div style="font-size:x-small">
+              Stand-by
+            </div>
+          </td>
+          <td>
+            <div class="alerta" style="background: green;float:left"></div>
+            <div style="font-size:x-small">
+              Aceptado
+            </div>
+          </td>
+          <td>
+            <div class="alerta" style="background: red;float:left"></div>
+            <div style="font-size:x-small">
+              Rechazado
+            </div>
+          </td>  
+        </tr>
+      </table>
     </td>
   </tr>
   <tr>
@@ -76,63 +76,71 @@
           </tr>
         <% end %>
         <% if @tramite.recibido %>
-        <tr>
-          <td style="padding-top: 10px;">
-            <b>Fecha<br> Solicitud:</b>
-          </td>
-          <td>
-            <%= @tramite.fecha_recepcion %>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding-top: 10px;">
-            <b>#Requisitos<br> faltantes:</b>
-          </td>
-          <td>
-            <%= @req_faltantes %>
-          </td>
-        </tr>
-      <% end %>
+          <tr>
+            <td style="padding-top: 10px;">
+              <b>Fecha<br> Solicitud:</b>
+            </td>
+            <td>
+              <%= @tramite.fecha_recepcion %>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding-top: 10px;">
+              <b>#Requisitos<br> faltantes:</b>
+            </td>
+            <td>
+              <%= @req_faltantes %>
+            </td>
+          </tr>
+        <% end %>
       </table>
     </td>
-  <tr>
-    <td>
-      <div style="margin-left:30px">
-        <% if current_usuario.admin > 0 and @req_faltantes == 0%>
-          <button style="border:3px solid rgba(50,181,115,0.5);margin-top: -1px;">
-            <%= link_to 'Agregar MALasdasd Documento', new_documento_path( :producto_id => @tramite.producto )%>
-          </button>
-        <% end %>
-        <% if current_usuario.admin > 0  and @tramite.recibido %>
-          <button style="padding:10px">
-            <%= link_to 'Editar', edit_tramite_path(@tramite) %>
-          </button>
-          <button style="padding:10px">
-            <%= link_to 'Volver', tramites_path %>
-          </button>
-        <% end %>
-        
-        <% if current_usuario.admin > 0 and  not @tramite.recibido %>        
-          <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
-            <%= f.input :recibido, :as => :hidden, :value => true %>
-            <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
-            <%= f.input :estado, :as => :hidden, :value => 1 %>
-            <%= f.action :submit, :label => "Aceptar", :class => 'area_tramite' %>
+    <tr>
+      <td>
+        <div style="margin-left:30px">
+          <% if current_usuario.admin > 0 and @req_faltantes == 0%>
+            <button style="border:3px solid rgba(50,181,115,0.5);margin-top: -1px;">
+              <%= link_to 'Agregar MALasdasd Documento', new_documento_path( :producto_id => @tramite.producto )%>
+            </button>
           <% end %>
-          <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
-            <%= f.input :recibido, :as => :hidden, :value => false%>
-            <%= f.action :submit,  :label => "Rechazar" %>
+          <% if current_usuario.admin > 0  and @tramite.recibido %>
+            <button style="padding:10px">
+              <%= link_to 'Editar', edit_tramite_path(@tramite) %>
+            </button>
+            <button style="padding:10px">
+              <%= link_to 'Volver', tramites_path %>
+            </button>
           <% end %>
-          <button style="padding:10px;">
-            <%= link_to 'Volver', tramites_path %>
-          </button>
-        <% end %>
-        <%if current_usuario.admin == 0 %>
-          <button style="padding:10px;margin-left:30px;">
-            <%= link_to 'Volver', tramites_path %>
-          </button>
-        <% end %> 
-      </div>
-    </td>
-  </tr>
-</table>
+
+          <% if current_usuario.admin > 0 %>
+            <% if not @tramite.recibido %>        
+              <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+                <%= f.input :recibido, :as => :hidden, :value => true %>
+                <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
+                <%= f.input :estado, :as => :hidden, :value => 1 %>
+                <%= f.action :submit, :label => "Aceptar", :class => 'area_tramite' %>
+              <% end %>
+              <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+                <%= f.input :recibido, :as => :hidden, :value => false%>
+                <%= f.action :submit,  :label => "Rechazar" %>
+              <% end %>
+              <button style="padding:10px;">
+                <%= link_to 'Volver', tramites_path %>
+              </button>
+            <% elsif @tramite.estado == 3 and not @tramite.producto.nil?%>
+              <%= form_tag documentos_generar_tramitado_path, method: :post %>
+              <%= hidden_field_tag :producto_id, @tramite.producto.id %>
+              <%= hidden_field_tag :tipo_id, @tramite.TipoDocumento.id %>
+              <%= submit_tag 'Generar documento' %>
+            <% end %>
+            <% end %>
+          <% end %>
+          <%if current_usuario.admin == 0 %>
+            <button style="padding:10px;margin-left:30px;">
+              <%= link_to 'Volver', tramites_path %>
+            </button>
+          <% end %> 
+        </div>
+      </td>
+    </tr>
+  </table>
