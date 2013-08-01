@@ -14,7 +14,7 @@ class Documento < ActiveRecord::Base
   has_paper_trail
   
   #Atributos accesibles para el modelo
-  attr_accessible :alerta, :fecha_emision, :fecha_vencimiento, :producto_id, 
+  attr_accessible :alerta, :fecha_emision, :fecha_vencimiento, :producto_id
   attr_accessible :pdf, :TipoDocumento_id, :TipoDocumento_attributes, :on
   has_attached_file :pdf
 
