@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731045841) do
+ActiveRecord::Schema.define(:version => 20130801012137) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
