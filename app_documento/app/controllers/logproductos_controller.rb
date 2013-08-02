@@ -10,11 +10,13 @@ class LogproductosController < ApplicationController
     end
   end
 
+  def show_by_user
+      @logs = Logproducto.where(:producto_id => params[:id])
+  end
   # GET /logproductos/1
   # GET /logproductos/1.json
   def show
     @logproducto = Logproducto.find(params[:id])
-
 
     respond_to do |format|
       format.html # show.html.erb

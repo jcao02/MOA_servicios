@@ -1,4 +1,11 @@
 AppDocumento::Application.routes.draw do
+
+  get "logdocumento/show_by_user"
+
+  get "logtramite/show_by_user"
+
+  get "logproductos/show_by_user"
+
   get "documentos/index_usuario"
 
   get "vencido/index"

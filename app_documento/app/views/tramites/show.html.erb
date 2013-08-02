@@ -74,6 +74,13 @@
             <td> <b>Cliente:</b></td>
             <td> <%= @tramite.usuario.compania%></td>
           </tr>
+          <tr>
+            <td>
+              <%= link_to 'Ver registro', logtramite_show_by_user_path(:id => @tramite.id) %>
+            </td>
+            <td>
+            </td>
+          </tr>
         <% end %>
         <% if @tramite.recibido %>
           <tr>
@@ -127,20 +134,14 @@
               <button style="padding:10px;">
                 <%= link_to 'Volver', tramites_path %>
               </button>
-            <% elsif @tramite.estado == 3 and not @tramite.producto.nil?%>
-              <%= form_tag documentos_generar_tramitado_path, method: :post %>
-              <%= hidden_field_tag :producto_id, @tramite.producto.id %>
-              <%= hidden_field_tag :tipo_id, @tramite.TipoDocumento.id %>
-              <%= submit_tag 'Generar documento' %>
             <% end %>
-            <% end %>
-          <% end %>
-          <%if current_usuario.admin == 0 %>
-            <button style="padding:10px;margin-left:30px;">
-              <%= link_to 'Volver', tramites_path %>
-            </button>
-          <% end %> 
-        </div>
-      </td>
-    </tr>
-  </table>
+        <% end %>
+        <%if current_usuario.admin == 0 %>
+          <button style="padding:10px;margin-left:30px;">
+            <%= link_to 'Volver', tramites_path %>
+          </button>
+        <% end %> 
+      </div>
+    </td>
+  </tr>
+</table>
