@@ -81,10 +81,9 @@ class TramitesController < ApplicationController
     if not @tramite.producto_id.is_a? Integer
         @tramite.producto_id = nil
     end
-
     @tramite.estado = 0
     @tramite.usuario_id = current_usuario.id
-    crear_requisitos(@tramite.TipoDocumento_id, @tramite)
+
     respond_to do |format|
       if @tramite.save
         @logt = Logtramite.new(:usuario_id => current_usuario.id, 
@@ -111,15 +110,6 @@ class TramitesController < ApplicationController
     end
   end
 
-  ##Crea los requisitos dependiendo del tramite
-  #def crear_requisitos(documento, tramite)
-      #dependencias = Dependencia.where(:tipo_documento_id => documento)
-      #dependencias.each do |d|
-        #req = Requisito.new(:estado => "Sin recibir", :tramite_id => tramite.id, :TipoRequisito_id => d.tipo_requisito_id)
-        #tramite.requisitos << req
-      #end
-  #end
-
   #Acepta o rechaza la solicitud de un tramite
   def check
       @tramite = Tramite.find(params[:id])
@@ -134,9 +124,10 @@ class TramitesController < ApplicationController
       end
   end
 
+  #Vista solicitudes por usuario
   def tramites_usuario
     usuario = Usuario.find(params[:usuario])
-    flash[:title] = "Solicitudes de "+usuario.compania
+    flash[:title] = "Solicitudes de #{usuario.compania}"
     @tramites = Tramite.where(:usuario_id => usuario.id)
     flash[:tramites] = []
     4.times { flash[:tramites].push(@tramites) }
@@ -174,12 +165,12 @@ class TramitesController < ApplicationController
     lista = []
     req = '' 
     requisitos.each do |r|
-        estado = params[:requisito][("estado"+r.id.to_s).to_sym]
+        estado = params[:requisito][("estado#{r.id.to_s}").to_sym]
         #Solo se cambia atributos si tienen valor o no son iguales.
         if estado.nil? or estado == r.estado.to_s 
             next
         end
-        observacion = params[:requisito][("observacion"+r.id.to_s).to_sym]
+        observacion = params[:requisito][("observacion#{r.id.to_s}").to_sym]
         lista << r
         r.update_attribute(:estado, estado)
         if not observacion.blank?

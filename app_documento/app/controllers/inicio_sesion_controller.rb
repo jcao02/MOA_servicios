@@ -1,2 +1,0 @@
-class InicioSesionController < ApplicationController
-end

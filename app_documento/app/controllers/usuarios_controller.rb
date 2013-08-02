@@ -6,6 +6,7 @@ class UsuariosController < ApplicationController
   before_filter :change_s_admin, :only => [:deshabilitar] #No se puede deshabilitar a un s-admin
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
+
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -177,6 +178,7 @@ class UsuariosController < ApplicationController
     end
   end
 
+  # Deshabilita usuarios
   # bloqueado = 0 -> no esta bloqueado
   # bloqueado = 1 -> bloqueado
   def deshabilitar

@@ -9,6 +9,6 @@ class LogdocumentoController < ApplicationController
   end
 
   def show_by_user
-      @logs = Logdocumento.where(:documento_id => params[:id])
+    @logs = Logdocumento.where(:documento_id => params[:id])
   end
 end

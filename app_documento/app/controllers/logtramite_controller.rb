@@ -9,6 +9,6 @@ class LogtramiteController < ApplicationController
   end
 
   def show_by_user
-      @logs = Logtramite.where(:tramite_id => params[:id])
+    @logs = Logtramite.where(:tramite_id => params[:id])
   end
 end

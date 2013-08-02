@@ -1,40 +1,44 @@
 AppDocumento::Application.routes.draw do
 
-  get "logdocumento/show_by_user"
 
-  get "logtramite/show_by_user"
+  get "documentos/index_usuario" #Documentos por usuario
 
-  get "logproductos/show_by_user"
+  get "vencido/index"  #Alertas
 
-  get "documentos/index_usuario"
+  post "productos/ocultar"  #Ocular producto
 
-  get "vencido/index"
-  
-  post "productos/ocultar" 
-
+  #POST y GET de tramitar documento (para el correo) 
   post "vencido/tramitar_documento"
-
   get  "vencido/tramitar_documento"
-  
-  post "vencido/activar_alerta"
-  
-  get "vencido/activar_alerta"
-  
-  post "vencido/desactivar_alerta"
 
+  post "vencido/activar_alerta"
+
+  #POST y GET de desactivar alerta (para el correo) 
+  post "vencido/desactivar_alerta"
   get "vencido/desactivar_alerta"
 
+
+  #Enrutamiento para los logs
   get "logtramite/index"
 
   get "logsolicitud/index"
 
   get "logdocumento/index"
 
-  resources :logproductos
+  get "logproductos/index"
 
-  devise_for :usuarios 
+  get "logdocumento/show_by_user"
+
+  get "logtramite/show_by_user"
+
+  get "logproductos/show_by_user"
 
   get "inicio/index"
+
+
+  # Autenticacion de usuarios
+  devise_for :usuarios 
+
 
   #Enrutamiento sobre modelo de Usuario
   resources :usuarios do
@@ -60,50 +64,30 @@ AppDocumento::Application.routes.draw do
   #Enrutamiento sobre modelo tramite
   resources :tramites do 
     collection do 
-        put  :check
-        post :update_requisitos
-        get :tramites_usuario
+      put  :check
+      post :update_requisitos
+      get :tramites_usuario
     end
   end
 
+  #Enrutamiento sobre el modelo documento
   resources :documentos do
-      collection do
-          post :generar_tramitado
-      end
+    collection do
+      post :generar_tramitado
+    end
   end
 
+  #Enrutamiento sobre el modelo presentacion
+  resources :presentacions
+
+  #Enrutamiento sobre el modelo importador
+  resources :importadors
+
+  #Enrutamiento sobre el modelo requisito
+  resources :requisitos
+
+  #Root path
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path
-
-  #Redirecciona locale (en/es) al index
-  match '/:locale' => 'inicio#index'
-
-  #Alcance de locale
-  scope "(:locale)", :locale => /en|es/ do
-
-    resources :presentacions
-
-
-    resources :documentos
-
-
-    resources :requisitos
-
-
-    resources :logs
-
-
-    resources :tramites
-
-
-    resources :importadors
-
-
-    resources :productos
-
-
-    resources :usuarios
-
-  end
 
 
   # The priority is based upon order of creation:

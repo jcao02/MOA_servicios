@@ -16,7 +16,9 @@ class Documento < ActiveRecord::Base
     #Atributos accesibles para el modelo
     attr_accessible :alerta, :fecha_emision, :fecha_vencimiento, :producto_id
     attr_accessible :pdf, :TipoDocumento_id, :TipoDocumento_attributes, :on, :ultimo
-    has_attached_file :pdf
+    has_attached_file :pdf, 
+                      :path   => ":rails_root/app/assets/images/documentos/:id/:style/:basename.:extension",
+                      :url    => "documentos/:id/:style/:basename.:extension"
 
     #Validaciones documentos importados
     accepts_nested_attributes_for :TipoDocumento, :reject_if => lambda { |a| a[:descripcion].blank? }

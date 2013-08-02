@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class Tramite < ActiveRecord::Base
+  before_create :crear_requisitos
   belongs_to :TipoDocumento
   belongs_to :producto
   belongs_to :usuario
@@ -23,5 +24,30 @@ class Tramite < ActiveRecord::Base
   validates :observacion, format: { with: VALID_STRING_REGEX }
   #Validacion de presencia de tipo de documento
   validates :TipoDocumento_id, presence: true
+  
+  private
+    #Crea los requisitos antes de crear el tramite
+    def crear_requisitos
+      dependencias = Dependencia.where(:tipo_documento_id => self.TipoDocumento_id)
+      dependencias.each do |d|
+        req = Requisito.new(:estado => "Sin recibir", :tramite_id => self.id, :TipoRequisito_id => d.tipo_requisito_id)
+        self.requisitos << req
+      end
+    end
 
+    #Registra logs sobre tramites
+   # def registrar_accion(user, action)
+      #logt = Logtramite.new(:usuario_id => user.id,
+                            #:tramite_id => self.id, 
+                            #:tipo => action,
+                            #:nusuario => user.nombre, 
+                            #:ntipodocumento => self.TipoDocumento.descripcion,
+                            #:nproducto => self.producto.nombre,
+                            #:producto_id => self.producto.id)
+      #if logt.save
+        #return true
+      #else
+        #return false
+      #end
+    #end
 end

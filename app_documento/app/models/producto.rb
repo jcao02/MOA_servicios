@@ -24,7 +24,7 @@ class Producto < ActiveRecord::Base
   
 
   #Para manejo de log del usuario
-  has_paper_trail
+  #has_paper_trail
   
   # Atributos accesibles para el modelo
   attr_accessible :registro_sanitario, :codigo_arancelario, :alimento, :fabricante, :marca, :nombre
