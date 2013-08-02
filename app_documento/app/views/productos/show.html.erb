@@ -8,6 +8,12 @@
         <% else %>
           <%= image_tag "/assets/wine.png", :class => "prod_title_icon" %>
         <% end %>
+          <span style="font-weight:bold;font-size:x-small;font-style:italic;">
+            <% if @producto.on == 1 %>
+              <span style="color:green;"> Visible </span>
+            <% else %>
+              <span style="color:red;"> Oculto </span>
+            <% end %>
       </div>
     </td>
     <td class="conf_list" valign="top" rowspan="2">
@@ -178,8 +184,19 @@
                   </td>
                   <td>
                     <button>
-                      <%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Esta seguro de eliminar este producto?'} %> 
+                      <%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Seguro desea eliminar este producto?'} %>
                     </button>
+                    <% if @producto.on == 1 %> 
+                      <%= form_tag productos_ocultar_path, method: :post do %>
+                        <%= hidden_field_tag :id, @producto.id %>
+                        <%= submit_tag 'Ocultar', data: { confirm: '¿Seguro desea ocultar este producto?'} %>
+                      <% end %> 
+                    <% elsif @producto.on == 0 %>
+                       <%= form_tag productos_ocultar_path, method: :post do %>
+                        <%= hidden_field_tag :id, @producto.id %>
+                        <%= submit_tag 'Habilitar', data: { confirm: '¿Seguro desea habilitar este producto?'} %>
+                      <% end %> 
+                    <% end %>
                   </td>
                 </tr>
                 <tr>

@@ -283,4 +283,26 @@ class ProductosController < ApplicationController
         end
 
     end
+
+    def ocultar
+        @producto = Producto.find(params[:id])
+        @logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                                :producto_id => @producto.id,
+                                :nusuario => current_usuario.nombre, 
+                                :nproducto => @producto.nombre)
+
+        x = ocultar_prod(@producto.id)
+        if  x == 1
+            @logp.tipo = 'Visible'
+        elsif x == 0
+            @logp.tipo = 'Oculto' 
+        end
+
+        if @logp.save
+            redirect_to @producto, notice: "Log actualizado."
+        else
+            redirect_to @producto, notice: "Log no actualizado."
+        end
+    end
+
 end

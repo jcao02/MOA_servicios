@@ -46,4 +46,41 @@ class ApplicationController < ActionController::Base
             tramite.requisitos << req
         end
     end
+
+    helper_method :ocultar_prod
+    # on == 0 => no muestra <= return 0
+    # on == 1 => muestra <= return 1
+    # error <= return 2
+    def ocultar_prod (id)
+        prod = Producto.find(id)
+        if prod.on == 0
+            if prod.update_attribute("on",1)
+                return 1
+            else
+                return 2
+            end
+        elsif prod.on == 1
+            if prod.update_attribute("on",0)
+                return 0
+            else
+                return 2
+            end
+        end
+    end
+
+    helper_method :ocultar_prod_usr
+    # oculta todos los productos del usuario con id = usr_id
+    # si ocurre algun problema devuelve false
+    # de lo contrario devuelve true
+    def ocultar_prod_usr (usr_id)
+        prod = Producto.where( :usuario_id => usr_id)
+
+        prod.each do |p|
+            if ocultar_prod(p.id) == 2
+                return false
+            end
+        end
+
+        return true
+    end
 end

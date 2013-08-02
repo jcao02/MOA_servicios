@@ -90,8 +90,13 @@ class UsuariosController < ApplicationController
             format.json { render json: @usuario.errors, status: :unprocessable_entity }
           end
         else
-          format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
-          format.json { head :no_content }
+          if ocultar_prod_usr(@usuario.id)
+            format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+            format.json { head :no_content }
+          else
+            format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+            format.json { head :no_content }
+          end
         end
       else
         flash.keep

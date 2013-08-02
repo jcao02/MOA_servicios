@@ -10,6 +10,8 @@ AppDocumento::Application.routes.draw do
 
   get "vencido/index"
   
+  post "productos/ocultar" 
+
   post "vencido/tramitar_documento"
 
   get  "vencido/tramitar_documento"
@@ -29,7 +31,6 @@ AppDocumento::Application.routes.draw do
   get "logdocumento/index"
 
   resources :logproductos
-
 
   devise_for :usuarios 
 

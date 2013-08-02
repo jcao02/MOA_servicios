@@ -166,6 +166,20 @@ class DocumentosController < ApplicationController
         end
     end
 
-    def doc_usuario
+    def ocultar_doc (id)
+        doc = Documento.find(id)
+        if doc.on == 0
+            if doc.update_attribute("on",1)
+                return true
+            else
+                return false
+            end
+        elsif doc.on == 1
+            if doc.update_attribute("on",0)
+                return true
+            else
+                return false
+            end
+        end
     end
 end
