@@ -57,6 +57,7 @@ class UsuariosController < ApplicationController
   def create
     @usuario = Usuario.new(params[:usuario])
     if not @usuario.bloqueado or @usuario.admin == 2
+      #Usuario esta habilitado
       @usuario.bloqueado = 0
     end
 

@@ -1,9 +1,11 @@
 AppDocumento::Application.routes.draw do
+  post "productos/ocultar" 
+
+  post "documentos/ocultar"
+
   get "documentos/index_usuario"
 
   get "vencido/index"
-  
-  post "productos/ocultar" 
 
   post "vencido/tramitar_documento"
 

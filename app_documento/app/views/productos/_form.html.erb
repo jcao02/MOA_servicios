@@ -53,18 +53,21 @@
             :selected => "Tierra firme", :label => "Zona de régimen aduanero"%>
         </td>
         <td>
-          <%= f.input :grado_alcoholico, :as => :select, :collection => 1..50, :label => "Grado Alcohólico"%>
+          <%= f.input :on, :label => "Habilitar", :as => :radio, :collection => [["Sí", 1], ["No", 0]]%>
         </td>
       </tr>
       <tr>
-        <td colspan="2">
-          <div style="margin-left:257px;margin-top:9px">
+        <td>
+          <div style="margin-left:0px;margin-top:9px">
             <%= f.action :submit, :label => flash[:accion] %>
             <button>
               <%= link_to 'Volver', :back %>
             </button>
           </div>
         </td>
+        <td>
+          <%= f.input :grado_alcoholico, :as => :select, :collection => 1..50, :label => "Grado Alcohólico"%>
+        </td> 
       </tr>
       </tbody>
     </table>

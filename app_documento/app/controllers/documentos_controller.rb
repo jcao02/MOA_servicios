@@ -67,6 +67,10 @@ class DocumentosController < ApplicationController
     # POST /documentos.json
     def create
         @documento = Documento.new(params[:documento])
+        if not @documento.on
+            @documento.on = 1
+        end
+        
         doc = TipoDocumento.where(:descripcion => params[:documento][:TipoDocumento_attributes][:descripcion])
         #Si ya existe un tipo de documento, se usa esa instancia
         if doc.any?
@@ -172,6 +176,34 @@ class DocumentosController < ApplicationController
             else
                 return false
             end
+        end
+    end
+
+    def ocultar
+        doc = Documento.find(params[:id])
+        @producto = Producto.find(doc.producto_id)
+
+        @logd = Logdocumento.new(:usuario_id => current_usuario.id,
+                                 :documento_id => doc.id,
+                                 :producto_id => @producto.id,
+                                 :nusuario => current_usuario.nombre,
+                                 :ndocumento => doc.TipoDocumento.descripcion,
+                                 :nproducto => doc.producto.nombre)
+        
+        x = doc.on
+
+        if x == 0
+            doc.update_attribute("on", 1)
+            @logd.tipo = 'Visible'
+        elsif x == 1
+            doc.update_attribute("on", 0)
+            @logd.tipo = 'Oculto'
+        end
+
+        if @logd.save
+            redirect_to @producto, notice: "Log actualizado."
+        else
+            redirect_to @producto, notice: "Log no actualizado."
         end
     end
 end

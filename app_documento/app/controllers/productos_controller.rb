@@ -210,6 +210,9 @@ class ProductosController < ApplicationController
     # POST /productos.json
     def create
         @producto = Producto.new(params[:producto])
+        if not @producto.on
+            @producto.on = 1
+        end
 
         respond_to do |format|
             if @producto.save
@@ -304,5 +307,4 @@ class ProductosController < ApplicationController
             redirect_to @producto, notice: "Log no actualizado."
         end
     end
-
 end
