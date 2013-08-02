@@ -213,6 +213,13 @@
                     <% end %>
                   </td>
                 </tr>
+                <tr>
+                  <td colspan="2">
+                    <button>
+                      <%= link_to 'Ver registro', logproductos_show_by_user_path(:id => @producto.id) %>
+                    </button>
+                  </td>
+                </tr>
               <% end %>
             </table>
           </td>

@@ -58,6 +58,14 @@ class DocumentosController < ApplicationController
         end
     end
 
+    def generar_tramitado
+        @documento = Documento.new
+        @documento.TipoDocumento_id = params[:tipo_id]
+        @documento.producto_id = params[:producto_id]
+        flash[:accion] = "Agregar Documento"
+        flash.keep
+    end
+
     # GET /documentos/1/edit
     def edit
         @documento = Documento.find(params[:id])

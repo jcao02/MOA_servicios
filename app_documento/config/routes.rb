@@ -2,6 +2,12 @@ AppDocumento::Application.routes.draw do
   post "productos/ocultar" 
 
   post "documentos/ocultar"
+  
+  get "logdocumento/show_by_user"
+
+  get "logtramite/show_by_user"
+
+  get "logproductos/show_by_user"
 
   get "documentos/index_usuario"
 
@@ -59,6 +65,12 @@ AppDocumento::Application.routes.draw do
         post :update_requisitos
         get :tramites_usuario
     end
+  end
+
+  resources :documentos do
+      collection do
+          post :generar_tramitado
+      end
   end
 
   root :to => 'inicio#index', :as => :home # Hace posible usar home_path

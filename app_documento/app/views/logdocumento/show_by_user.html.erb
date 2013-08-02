@@ -1,0 +1,51 @@
+<table>
+  <thead>
+    <tr>
+      <th>
+        Usuario
+      </th>
+      <th>
+        Acción
+      </th>
+      <th>
+        Documento
+      </th>
+      <th>
+        Producto
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |l|%>
+      <tr>
+        <% if not l.usuario.nil? %>
+          <td>
+            <%= link_to l.nusuario, l.usuario %>
+          </td>
+        <% else %>
+          <td>
+            <%= l.nusuario %>
+          </td>
+        <% end %>
+        <td>
+          <%= l.tipo %>
+        </td>
+        <%= if not l.producto.nil? %>
+        <td>
+          <%= link_to l.ndocumento, l.documento.pdf.url %>
+        </td>
+        <td>
+          <%= link_to l.nproducto, l.producto %>
+        </td>
+      <% else %>
+        <td>
+          <%= l.ndocumento %>
+        </td>
+        <td>
+          <%= l.nproducto %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</tbody>
+</table>

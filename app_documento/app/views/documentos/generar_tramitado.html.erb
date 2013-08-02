@@ -1,0 +1,41 @@
+<%= semantic_form_for @documento do |f| %>
+  <ul>
+    <table class="table_forms">
+      <thead>
+        <tr>
+          <td colspan="2">
+            <h1>
+              <%=flash[:accion]%>
+            </h1>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= @documento.TipoDocumento.descripcion %>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= f.input :pdf, :as => :file, :label => false %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <%= f.action :submit, :label => flash[:accion] %>
+            </center>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ul>
+<% end %>

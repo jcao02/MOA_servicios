@@ -7,4 +7,8 @@ class LogdocumentoController < ApplicationController
       format.json { render json: @logdocumentos }
     end
   end
+
+  def show_by_user
+      @logs = Logdocumento.where(:documento_id => params[:id])
+  end
 end
