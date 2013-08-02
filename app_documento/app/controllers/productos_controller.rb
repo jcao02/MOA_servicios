@@ -131,7 +131,7 @@ class ProductosController < ApplicationController
     @cliente = Usuario.find(@producto.usuario_id)
     session[:producto] = @producto.id
     flash.keep
-    @documentos = get_documentos(@producto)
+    @documentos = get_documentos(@producto, current_usuario.admin > 0 )
     @presentaciones = Presentacion.where(:productos_id => @producto.id)
     @importadores = Importador.where(:productos_id => @producto.id)
     respond_to do |format|
@@ -182,17 +182,9 @@ class ProductosController < ApplicationController
 
     respond_to do |format|
       if @producto.save
-        @logp = Logproducto.new(:usuario_id => current_usuario.id, 
-                                :producto_id => @producto.id, :tipo => 'Creado',
-                                :nusuario => current_usuario.nombre, 
-                                :nproducto => @producto.nombre)
-        if @logp.save
-          format.html { redirect_to @producto, notice: 'Producto creado. Log actualizado.' }
-          format.json { render json: @producto, status: :created, location: @producto }
-        else
-          format.html { redirect_to @producto, notice: 'Producto creado. Log no actualizado.' }
-          format.json { render json: @producto, status: :created, location: @producto }
-        end
+        format.html { redirect_to @producto, notice: 'Producto creado.' }
+        format.json { render json: @producto, status: :created, location: @producto }
+
       else
         usuarios = Usuario.all      #Para coleccion del dueño del producto
         prod = Producto.all
@@ -214,17 +206,12 @@ class ProductosController < ApplicationController
   # PUT /productos/1.json
   def update
     @producto = Producto.find(params[:id])
-    @logp = Logproducto.new(:usuario_id => current_usuario.id, 
-                            :producto_id => @producto.id, :tipo => 'Actualizado',
-                            :nusuario => current_usuario.nombre, 
-                            :nproducto => @producto.nombre)
-
     respond_to do |format|
-      if @producto.update_attributes(params[:producto]) and @logp.save
-        format.html { redirect_to @producto, notice: 'Producto y Log actualizados.' }
+      if @producto.update_attributes(params[:producto])
+        format.html { redirect_to @producto, notice: 'Producto actualizados.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", notice: "Producto y/o Log no actualizados." }
+        format.html { render action: "edit", notice: "Producto no actualizado." }
         format.json { render json: @producto.errors, status: :unprocessable_entity }
       end
     end
@@ -235,24 +222,16 @@ class ProductosController < ApplicationController
   # DELETE /productos/1.json
   def destroy
     @producto = Producto.find(params[:id])
-    @logp = Logproducto.new(:usuario_id => current_usuario.id, 
-                            :producto_id => @producto.id, :tipo => 'Eliminado',
-                            :nusuario => current_usuario.nombre, 
-                            :nproducto => @producto.nombre)    
     @producto.destroy
 
     respond_to do |format|
-      if @logp.save
-        format.html { redirect_to productos_url, notice: "Log actualizado."}
+        format.html { redirect_to productos_url, notice: "Producto eliminado."}
         format.json { head :no_content }
-      else
-        format.html { redirect_to productos_url, notice: "Log no actualizado." }
-        format.json { head :no_content }
-      end
     end
-
   end
 
+
+  # FALTA VER SI MODIFICAR EL OBSERVER PARA AGREGAR ESTE CALLBACK
   #Oculta un producto en vez de eliminarlo
   def ocultar
     @producto = Producto.find(params[:id])
@@ -279,12 +258,12 @@ class ProductosController < ApplicationController
   #Metodos privados del controlador
   private
 
-    def get_documentos(producto)
+    def get_documentos(producto, admin)
       docs = TipoDocumento.all
       tipos = []
       docs.each do |td|
-        documento = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => td.id).first
-        next if documento.nil?
+        documento = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => td.id, :producto_id => producto.id).first
+        next if documento.nil? or (documento.on == 0 and not admin)
         tipos.push([documento, td.descripcion])
       end
       return tipos

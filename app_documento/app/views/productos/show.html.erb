@@ -35,11 +35,25 @@
             <ul>
               <% @documentos.each do |d|%>
                 <li>
-                <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
-                <% if current_usuario.admin > 0 %>
-                  <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), d[0], :method => :delete, 
-                    data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+                  <% if current_usuario.admin == 0 %>
+                    <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
                   <% end %>
+                <% if current_usuario.admin > 0 %>
+                <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
+                  <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), d[0], :method => :delete, 
+                    data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+                  <% if d[0].on == 1 %> 
+                    <%= form_tag documentos_ocultar_path, method: :post do %>
+                      <%= hidden_field_tag :id, d[0].id %>
+                      <%= image_submit_tag("/assets/eye-open.png", :class => "borrar_doc", :title => "Ocultar documento")%>
+                    <% end %>
+                  <% else %>
+                     <%= form_tag documentos_ocultar_path, method: :post do %>
+                      <%= hidden_field_tag :id, d[0].id %>
+                      <%= image_submit_tag("/assets/eye-close.png", :class => "borrar_doc", :title => "Mostrar documento")%>
+                    <% end %>
+                  <% end %>
+                <% end %>
                   </li>
                 <% end %>
               </ul>
@@ -54,7 +68,7 @@
                   <li>
                   <b>Presentación <%= p.cpe%> </b>
                   <% if current_usuario.admin > 0 %>
-                    <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), p, :method => :delete, 
+                    <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar presentacion"), p, :method => :delete, 
                       data: { confirm: '¿Esta seguro de eliminar esta presentación?'} %>
                     <% end %><br>
 
@@ -76,7 +90,7 @@
                     <li>
                     <b><%= i.nombre %></b>
                     <% if current_usuario.admin > 0 %>
-                      <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), i, :method => :delete, 
+                      <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar importador"), i, :method => :delete, 
                         data: { confirm: '¿Esta seguro de eliminar este importador?'} %>
                       <% end %><br>
 

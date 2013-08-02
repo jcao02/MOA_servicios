@@ -1,9 +1,13 @@
 #encoding: UTF-8
 class ApplicationController < ActionController::Base
   before_filter :authenticate_usuario!
+  before_filter :set_current_usuario
   protect_from_forgery
 
   #Metodos para Usuarios
+  def set_current_usuario
+    Usuario.current = current_usuario
+  end
   def is_owner
     redirect_to(inicio_index_path) if current_usuario.id.to_s != params[:id]
   end
@@ -16,12 +20,12 @@ class ApplicationController < ActionController::Base
     redirect_to(inicio_index_path) if current_usuario.admin == 0
   end
 
-  #Metodos helpers para alertas
-
   def is_alert_owner
     alerta = Vencidos.find(params[:id])
     redirect_to(inicio_index_path) if current_usuario.id != alerta.usuario_id
   end
+
+
 
   # on == 0 => no muestra <= return 0
   # on == 1 => muestra <= return 1
@@ -57,4 +61,6 @@ class ApplicationController < ActionController::Base
 
     return true
   end
+
+
 end

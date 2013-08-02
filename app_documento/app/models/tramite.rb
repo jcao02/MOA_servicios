@@ -1,6 +1,5 @@
 # encoding: UTF-8
 class Tramite < ActiveRecord::Base
-  before_create :crear_requisitos
   belongs_to :TipoDocumento
   belongs_to :producto
   belongs_to :usuario
@@ -13,41 +12,40 @@ class Tramite < ActiveRecord::Base
 
   #Atributos accesibles para el modelo
   attr_accessible :codigo_seguimiento, :estado, :fecha_recepcion, :observacion, 
-                  :TipoDocumento_id, :producto_id, :recibido, :usuario_id, :requisito,
-                  :created_at
+    :TipoDocumento_id, :producto_id, :recibido, :usuario_id, :requisito,
+    :created_at
 
   #Consiraciones de quitarlo y dejar el id y ya
   #validates :codigo_seguimiento, presence: true, uniqueness: true
 
   #Validaciones observacion
   VALID_STRING_REGEX = /\A[\w+\-\ .]*\z/
-  validates :observacion, format: { with: VALID_STRING_REGEX }
+    validates :observacion, format: { with: VALID_STRING_REGEX }
   #Validacion de presencia de tipo de documento
   validates :TipoDocumento_id, presence: true
-  
-  private
-    #Crea los requisitos antes de crear el tramite
-    def crear_requisitos
-      dependencias = Dependencia.where(:tipo_documento_id => self.TipoDocumento_id)
-      dependencias.each do |d|
-        req = Requisito.new(:estado => "Sin recibir", :tramite_id => self.id, :TipoRequisito_id => d.tipo_requisito_id)
-        self.requisitos << req
-      end
-    end
 
-    #Registra logs sobre tramites
-   # def registrar_accion(user, action)
-      #logt = Logtramite.new(:usuario_id => user.id,
-                            #:tramite_id => self.id, 
-                            #:tipo => action,
-                            #:nusuario => user.nombre, 
-                            #:ntipodocumento => self.TipoDocumento.descripcion,
-                            #:nproducto => self.producto.nombre,
-                            #:producto_id => self.producto.id)
-      #if logt.save
-        #return true
-      #else
-        #return false
-      #end
-    #end
+
+  # METODOS
+
+  # Metodo para crear requisitos sobre el tramite
+  def crear_requisitos
+    dependencias = Dependencia.where(:tipo_documento_id => self.TipoDocumento_id)
+    dependencias.each do |d|
+      req = Requisito.new(:estado => "Sin recibir", :tramite_id => self.id, :TipoRequisito_id => d.tipo_requisito_id)
+      self.requisitos << req
+    end
+  end
+
+  # Metodo que registra el log de creacion de tramite
+  def registrar_log(tipo)
+    logt = Logtramite.new(:usuario_id => self.usuario_id,
+                          :tramite_id => self.id, 
+                          :tipo => tipo, 
+                          :nusuario => self.usuario.nombre, 
+                          :ntipodocumento => self.TipoDocumento.descripcion, 
+                          :nproducto => self.producto.nombre, 
+                          :producto_id => self.producto_id)
+
+    return logt.save
+  end
 end

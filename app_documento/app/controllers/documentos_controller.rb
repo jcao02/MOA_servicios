@@ -91,20 +91,9 @@ class DocumentosController < ApplicationController
 
     respond_to do |format|
       if @documento.save
-        @logd = Logdocumento.new(:usuario_id => current_usuario.id, 
-                                 :documento_id => @documento.id, :tipo => 'Creado',
-                                 :producto_id => @producto.id,
-                                 :nusuario => current_usuario.nombre, 
-                                 :ndocumento => @documento.TipoDocumento.descripcion, 
-                                 :nproducto => @documento.producto.nombre)
         session[:producto] = nil
-        if @logd.save
-          format.html { redirect_to @producto, notice: 'Documento creado. Log actualizado.', :format => :pdf }
+          format.html { redirect_to @producto, notice: 'Documento creado', :format => :pdf }
           format.json { render json: @producto, status: :created, location: @documento }
-        else
-          format.html { redirect_to @producto, notice: 'Documento creado. Log no actualizado.', :format => :pdf }
-          format.json { render json: @producto, status: :created, location: @documento }
-        end
       else
         @tipos = get_tipoDoc
         @documento.TipoDocumento = TipoDocumento.new
@@ -119,18 +108,12 @@ class DocumentosController < ApplicationController
   # PUT /documentos/1.json
   def update
     @documento = Documento.find(params[:id])
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id, 
-                             :documento_id => @documento.id, :tipo => 'Actualizado',
-                             :producto_id => @producto.id,
-                             :nusuario => current_usuario.nombre, 
-                             :ndocumento => @documento.TipoDocumento_id, 
-                             :nproducto => @documento.producto.nombre)
     respond_to do |format|
-      if @documento.update_attributes(params[:documento]) and @logd.save
-        format.html { redirect_to @documento, notice: 'Documento y Log actualizados.' }
+      if @documento.update_attributes(params[:documento])
+        format.html { redirect_to @documento, notice: 'Documento actualizados.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", notice: 'Documento y/o Log no actualizados.' }
+        format.html { render action: "edit", notice: 'Documento no actualizado.' }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end
@@ -141,55 +124,75 @@ class DocumentosController < ApplicationController
   def destroy
     @documento = Documento.find(params[:id])
     producto = Producto.find(@documento.producto_id)
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id, 
-                             :documento_id => @documento.id, :tipo => 'Eliminado',
-                             :producto_id => producto.id,
-                             :nusuario => current_usuario.nombre, 
-                             :ndocumento => @documento.TipoDocumento.descripcion,
-                             :nproducto => @documento.producto.nombre)
     @documento.destroy
 
     respond_to do |format|
-      if @logd.save
-        format.html { redirect_to producto }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to producto, notice: 'Log no actualizado'}
-        format.json { head :no_content }
-      end
+      format.html { redirect_to producto }
+      format.json { head :no_content }
+    end
+  end
+
+
+  # FALTA MODIFICAR CALLBACKS DE OBSERVERRR---------------
+  #Oculta un documento en vez de eliminarlo
+  def ocultar
+    doc = Documento.find(params[:id])
+    @producto = Producto.find(doc.producto_id)
+
+    @logd = Logdocumento.new(:usuario_id => current_usuario.id,
+                             :documento_id => doc.id,
+                             :producto_id => @producto.id,
+                             :nusuario => current_usuario.nombre,
+                             :ndocumento => doc.TipoDocumento.descripcion,
+                             :nproducto => doc.producto.nombre)
+
+    x = doc.on
+
+    if x == 0
+      doc.update_attribute("on", 1)
+      @logd.tipo = 'Visible'
+    elsif x == 1
+      doc.update_attribute("on", 0)
+      @logd.tipo = 'Oculto'
+    end
+
+    if @logd.save
+      redirect_to @producto, notice: "Log actualizado."
+    else
+      redirect_to @producto, notice: "Log no actualizado."
     end
   end
 
   private 
 
-    # Ocula un documento dado su id
-    def ocultar_doc (id)
-      doc = Documento.find(id)
-      if doc.on == 0
-        if doc.update_attribute("on",1)
-          return true
-        else
-          return false
-        end
-      elsif doc.on == 1
-        if doc.update_attribute("on",0)
-          return true
-        else
-          return false
-        end
+  # Ocula un documento dado su id
+  def ocultar_doc (id)
+    doc = Documento.find(id)
+    if doc.on == 0
+      if doc.update_attribute("on",1)
+        return true
+      else
+        return false
+      end
+    elsif doc.on == 1
+      if doc.update_attribute("on",0)
+        return true
+      else
+        return false
       end
     end
+  end
 
-    # Obtiene todos los tipos de documentos en la base de datos
-    def get_tipoDoc
-      typedoc = TipoDocumento.all
-      tipos = []
-      tipos.push("Otro")
-      for type in typedoc do
-        tipos.push(type.descripcion)
-      end
-      return tipos
+  # Obtiene todos los tipos de documentos en la base de datos
+  def get_tipoDoc
+    typedoc = TipoDocumento.all
+    tipos = []
+    tipos.push("Otro")
+    for type in typedoc do
+      tipos.push(type.descripcion)
     end
+    return tipos
+  end
 
 
 end

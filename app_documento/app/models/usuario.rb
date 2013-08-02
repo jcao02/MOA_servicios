@@ -71,4 +71,14 @@ class Usuario < ActiveRecord::Base
   def inactive_message
     bloqueado == 0 ? super : :bloqueado
   end
+
+  #METODOS
+  def self.current
+    Thread.current[:usuario]
+  end
+
+  def self.current=(usuario)
+    Thread.current[:usuario] = usuario
+  end
+
 end

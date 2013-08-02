@@ -79,26 +79,15 @@ class TramitesController < ApplicationController
   def create
     @tramite = Tramite.new(params[:tramite])
     if not @tramite.producto_id.is_a? Integer
-        @tramite.producto_id = nil
+      @tramite.producto_id = nil
     end
     @tramite.estado = 0
     @tramite.usuario_id = current_usuario.id
 
     respond_to do |format|
       if @tramite.save
-        @logt = Logtramite.new(:usuario_id => current_usuario.id, 
-                               :tramite_id => @tramite.id, :tipo => 'Creado',
-                               :nusuario => current_usuario.nombre, 
-                               :ntipodocumento => @tramite.TipoDocumento.descripcion,
-                               :nproducto => @tramite.producto.nombre,
-                               :producto_id => @tramite.producto.id)
-        if @logt.save
-          format.html { redirect_to tramites_path, notice: 'Tramite creado. Log actualizado' }
-          format.json { render json: tramites_path, status: :created, location: @tramite }
-        else
-          format.html { redirect_to tramites_path, notice: 'Tramite creado. Log no actualizado.' }
-          format.json { render json: tramites_path, status: :created, location: @tramite }
-        end
+        format.html { redirect_to tramites_path, notice: 'Tramite creado' }
+        format.json { render json: tramites_path, status: :created, location: @tramite }
       else
         @productos = get_products(current_usuario)
         @tipos     = TipoDocumento.all
@@ -139,15 +128,8 @@ class TramitesController < ApplicationController
   # PUT /tramites/1.json
   def update
     @tramite = Tramite.find(params[:id])
-    @logt = Logtramite.new(:usuario_id => current_usuario.id, 
-                           :tramite_id => @tramite.id, :tipo => 'Actualizado',
-                           :nusuario => current_usuario.nombre, 
-                           :ntipodocumento => @tramite.TipoDocumento.descripcion,
-                           :nproducto => @tramite.producto.nombre,
-                           :producto_id => @tramite.producto.id)
-    
     respond_to do |format|
-      if @tramite.update_attributes(params[:tramite]) and @logt.save
+      if @tramite.update_attributes(params[:tramite])
         format.html { redirect_to @tramite, notice: 'Tramite y Log actualizados.' }
         format.json { head :no_content }
       else
@@ -186,6 +168,8 @@ class TramitesController < ApplicationController
 
     if not req.blank?
       req[-1]= ''
+
+      ########## SE PUEDE ELIMINAR O MODIFICAR EL OBSERVER
       @logt = Logtramite.new(:usuario_id => current_usuario.id, 
                              :tramite_id => @tramite.id, 
                              :tipo => 'Requisitos Actualizados'+req,

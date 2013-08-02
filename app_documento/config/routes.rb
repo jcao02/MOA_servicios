@@ -1,11 +1,14 @@
 AppDocumento::Application.routes.draw do
+  post "productos/ocultar" 
 
 
   get "documentos/index_usuario" #Documentos por usuario
 
   get "vencido/index"  #Alertas
 
-  post "productos/ocultar"  #Ocular producto
+  post "productos/ocultar"  #Ocultar producto
+
+  post "documentos/ocultar" #Ocultar documentos
 
   #POST y GET de tramitar documento (para el correo) 
   post "vencido/tramitar_documento"

@@ -47,4 +47,16 @@ class Producto < ActiveRecord::Base
   validates :nombre, presence: true, format: { with: VALID_STRING_REGEX }
   validates :pais_elaboracion, presence: true, format: { with: VALID_STRING_REGEX }
 
+  # METODOS
+  # Metodo que registra el log de creacion de tramite
+  def registrar_log(tipo)
+    logp = Logproducto.new(:usuario_id => self.usuario_id, 
+                           :producto_id => self.id, 
+                           :tipo => tipo, 
+                           :nusuario => self.usuario.nombre, 
+                           :nproducto => self.nombre)
+    return logp.save
+  end
+
+
 end
