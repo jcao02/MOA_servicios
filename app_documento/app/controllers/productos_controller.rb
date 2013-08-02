@@ -10,7 +10,7 @@ class ProductosController < ApplicationController
             @productos = Producto.all
         else
             flash[:title] = "Mis Productos"
-            @productos = Producto.where(:usuario_id => current_usuario.id)
+            @productos = Producto.where(:usuario_id => current_usuario.id, :on => 1)
         end
         @marcas = get_marcas(@productos)
         #Conjuntos de filtrado
@@ -26,7 +26,7 @@ class ProductosController < ApplicationController
 
     def productos_usuario
         usuario = Usuario.find(params[:usuario])
-        flash[:title] = "Productos de "+usuario.compania
+        flash[:title] = "Productos de #{usuario.compania}"
         @productos = Producto.where(:usuario_id => usuario.id)
         @marcas = get_marcas(@productos)
         flash[:productos] = []
@@ -133,7 +133,7 @@ class ProductosController < ApplicationController
         if marca.empty?()
             filtro = todo
         else
-            for index, elem in marca
+            marca.each do |elem|
                 filtro += todo.select{ |x| x.marca == elem }
             end
         end

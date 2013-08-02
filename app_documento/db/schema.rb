@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130801012137) do
+ActiveRecord::Schema.define(:version => 20130802003510) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -86,13 +86,6 @@ ActiveRecord::Schema.define(:version => 20130801012137) do
 
   add_index "logs", ["usuario_id"], :name => "index_logs_on_usuario_id"
 
-  create_table "logsesions", :force => true do |t|
-    t.integer  "usuario_id"
-    t.string   "tipo"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "logtramites", :force => true do |t|
     t.integer  "usuario_id"
     t.integer  "tramite_id"
@@ -124,12 +117,12 @@ ActiveRecord::Schema.define(:version => 20130801012137) do
     t.string   "pais_elaboracion"
     t.string   "fabricante"
     t.string   "codigo_arancelario"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "usuario_id"
     t.string   "grado_alcoholico"
     t.string   "zona_venta"
-    t.integer  "on"
+    t.integer  "on",                 :default => 1
   end
 
   create_table "requisitos", :force => true do |t|
