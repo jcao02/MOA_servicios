@@ -21,6 +21,7 @@
     <td style="border-left: 3px #555 solid;padding-bottom: 100px;">
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
         <h2>Iniciar Sesión</h2>
+        <span style="color:red;"><%= flash[:alert] %></span>
         <div><%= f.label :Login %><br />
         <%= f.text_field :login, :autofocus => true %></div>
 
