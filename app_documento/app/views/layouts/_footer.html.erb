@@ -1,24 +1,24 @@
 <div id="footer">
-<div  class="row">
-  <div class="span1"></div>
-  <% if usuario_signed_in? %>
-    <div class="span2" style="margin-top: 17px;">
-    <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
-      :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank",
-      :style => "color: white !important; font-weight:20;" %>
+  <div class="row">
+    <div class="span1"></div>
+    <% if usuario_signed_in? %>
+      <div class="span2" style="margin-top: 17px;">
+      <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
+        :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank",
+        :style => "color: white !important; font-weight:20;" %>
+      </div>
+    <% else %>
+      <div class="span2" style="margin-top: 17px;">
+      <%= link_to image_tag("/assets/chrome.png",
+                            :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
+                            "https://www.google.com/intl/en/chrome/browser", :target => "_blank" %>
+      </div>
+    <% end %>
+    <div class="span6"></div>
+    <div class="span2">
+      <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
+        "http://www.facebook.com/chamini2", :target => "_blank" %>
     </div>
-  <% else %>
-    <div class="span2" style="margin-top: 17px;">
-    <%= link_to image_tag("/assets/chrome.png",
-                          :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
-                          "https://www.google.com/intl/en/chrome/browser", :target => "_blank" %>
-    </div>
-  <% end %>
-  <div class="span6"></div>
-  <div class="span2">
-    <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
-      "http://www.facebook.com/chamini2", :target => "_blank" %>
+    <div class="span1"></div>
   </div>
-  <div class="span1"></div>
-</div>
 </div>

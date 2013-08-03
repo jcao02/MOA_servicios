@@ -1,64 +1,88 @@
-<% if usuario_signed_in? %>
 <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><%= link_to 'Inicio', home_path %></li>
-              <% case current_usuario.admin
-                when 0 %>
-                <li><%= link_to  'Mis productos', productos_path %></li>
-                <li><%= link_to  'Mis solicitudes', tramites_path %></li>
-                <li><%= link_to  'Alertas', vencido_index_path %></li>
-              <% when 1..2%>
-                <li class="dropdown">
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown">Productos</a>
-                <ul class="dropdown-menu">
-                  <li>
-                  <%= link_to  'Nuevo producto', new_producto_path %>
-                  </li>
-                  <li>
-                  <%= link_to  'Listar todos', productos_path %>
-                  </li>
-                </ul>
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><%= link_to 'Inicio', home_path %></li>
+            <% case current_usuario.admin
+              when 0 %>
+              <li><%= link_to  'Mis productos', productos_path %></li>
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Mis Solicitudes</a>
+              <ul class="dropdown-menu">
+                <li>
+                <%= link_to  'Nuevo solicitud', new_tramite_path %>
                 </li>
-
-                <li><%= link_to  'Solicitudes', tramites_path %></li>
-                <li class="dropdown">
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuarios</a>
-                <ul class="dropdown-menu">
-                  <li>
-                  <%= link_to  'Nuevo usuario', new_usuario_path %>
-                  </li>
-                  <li>
-                  <%= link_to  'Listar todos', usuarios_path %>
-                  </li>
-                </ul>
+                <li>
+                <%= link_to  'Listar todas', tramites_path %>
                 </li>
-                <li><%= link_to  'Documentos', documentos_path%></li>
-                <li class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">Registros</a>
-                <ul class="dropdown-menu">
-                  <li>
-                  <%= link_to  'Productos', logproductos_index_path %>
-                  </li>
-                  <li>
-                  <%= link_to  'Solicitudes', logtramite_index_path %>
-                  </li>
-                  <li>
-                  <%= link_to  'Documentos', logdocumento_index_path %>
-                  </li>
-                </ul>
+              </ul>
+              </li>
+              <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                Alertas
+                <span class="badge"><%= session[:alerts].length %></span>
+              </a>
+              <ul class="dropdown-menu">
+              <% session[:alerts].each do |a| %>
+                <li>
+                <%= a.producto.nombre%> - <%= a.tipo%>
                 </li>
               <% end %>
+              <li>
+              <%= link_to  'Ver todas', vencido_index_path %>
+              </li>
             </ul>
-          </div>
+            </li>
+
+            <% when 1..2%>
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Productos</a>
+              <ul class="dropdown-menu">
+                <li>
+                <%= link_to  'Nuevo producto', new_producto_path %>
+                </li>
+                <li>
+                <%= link_to  'Listar todos', productos_path %>
+                </li>
+              </ul>
+              </li>
+
+              <li><%= link_to  'Solicitudes', tramites_path %></li>
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuarios</a>
+              <ul class="dropdown-menu">
+                <li>
+                <%= link_to  'Nuevo usuario', new_usuario_path %>
+                </li>
+                <li>
+                <%= link_to  'Listar todos', usuarios_path %>
+                </li>
+              </ul>
+              </li>
+              <li><%= link_to  'Documentos', documentos_path%></li>
+              <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Registros</a>
+              <ul class="dropdown-menu">
+                <li>
+                <%= link_to  'Productos', logproductos_index_path %>
+                </li>
+                <li>
+                <%= link_to  'Solicitudes', logtramite_index_path %>
+                </li>
+                <li>
+                <%= link_to  'Documentos', logdocumento_index_path %>
+                </li>
+              </ul>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
-<% end %>
+  </div>

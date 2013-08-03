@@ -1,112 +1,102 @@
-<center>
-  <table id="tablas_inicio" >
-    <tr>
+<div class="span1"></div>
+<div class="span5 divider">
+    <h3>
+    <% if current_usuario.admin > 0 %>
+      Registros
+    <% else %>
+      Mis productos
+    <% end %>
+    </h3>
+  <table id="mis_productos" class="table table-hover table-striped">
+    <thead>
       <% if current_usuario.admin == 0 %>
-      <td class="titulos_inicio">Mis productos</td>
-      <td class="titulos_inicio">Mis Solicitudes</td>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Registro</th>
       <% else %>
-      <td class="titulos_inicio">Registro de Actividades</td>
-      <td class="titulos_inicio">Solicitudes Pendientes</td>
+        <th>Usuario</th>
+        <th>Actividad</th>
+        <th>Fecha</th>
       <% end %>
-    </tr>
-    <tr>
-      <td>
-        <table id="mis_productos">
-          <thead>
-            <% if current_usuario.admin == 0 %>
-              <th>Nombre</th>
-              <th>Marca</th>
-              <th>Registro</th>
-            <% else %>
-              <th>Usuario</th>
-              <th>Actividad</th>
-              <th>Fecha</th>
-            <% end %>
-          </thead>
-          <tbody>
-            <% if current_usuario.admin == 0%>
-              <!-- NOTE: for de los productos/registros -->
-              <% @productos.each do |p|%>
-                <tr>
-                  <td><%= link_to p.nombre, p%></td>
-                  <td><%=p.marca %></td>
-                  <td><%=p.registro_sanitario%></td>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-      <td>
-        <table id="mis_solicitudes">
-          <thead>
-            <th>Solicitud</th>
-          </thead>
-          <tbody>
-            <% @tablader.each_with_index do |t, index| %>
-
-                <tr>
-                  <td style="text-align: left; height:70px;padding-left: -20px important;">
-                    <%= content_tag "span", class: "content-tramite", id:"estado"+index.to_s,
-                        data: { requisito: t } do %>
-
-                      <% if t.recibido or current_usuario.admin > 0 %>
-                        <%= link_to (t) do%>
-                          <ul style="height:0;">
-                            <li style="width:285px;">
-                              <b>#<%=t.id %></b>
-                              <%= t.TipoDocumento.descripcion %>
-                            </li>
-                            <li style="font-size:10px; margin-bottom:10px;margin-right: 50px;">
-                              <% if not t.producto.nil? %>
-                              <%=t.producto.nombre%>
-                              <% else %>
-                              nuevo producto
-                              <% end %>
-                            </li>
-                        <% end %>
-                      <% else %>
-                        <ul style="height:0;">
-                          <li>
-                            <b>#<%=t.id %></b>
-                            <%= t.TipoDocumento.descripcion %>
-                          </li>
-                          <li style="font-size:10px; margin-bottom:10px;margin-right: 50px;">
-                            <% if not t.producto.nil? %>
-                              <%=t.producto.nombre%>
-                            <% else %>
-                              nuevo producto
-                            <% end %>
-                          </li>
-                        <% end %>
-                      <% end %>
-                    </td>
-                  </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-
-      <table style="width:400px;">
+    </thead>
+    <tbody>
+      <% if current_usuario.admin == 0%>
+        <!-- NOTE: for de los productos/registros -->
+        <% @productos.each do |p|%>
+          <tr>
+            <td><%= link_to p.nombre, p%></td>
+            <td><%=p.marca %></td>
+            <td><%=p.registro_sanitario%></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="span5">
+    <h3>
+    <% if current_usuario.admin > 0 %>
+      Todas las solicitudes
+    <% else %>
+      Mis solicitudes
+    <% end %>
+    </h3>
+  <table id="mis_solicitudes" class="table table-hover table-striped">
+    <thead>
+      <th>Solicitud</th>
+    </thead>
+    <tbody>
+      <% @tablader.each_with_index do |t, index| %>
         <tr>
           <td>
-            <div class="alerta" style="background: white;float:left"></div>
-            <div style="font-size:x-small">No recibido</div>
-          </td>
-          <td>
-            <div class="alerta" style="background: blue;float:left"></div>
-            <div style="font-size:x-small">Recibido</div></td>
-          <td>
-            <div class="alerta" style="background: green;float:left"></div>
-            <div style="font-size:x-small">Aceptado </div></td>
-          <td>
-            <div class="alerta" style="background: red;float:left"></div>
-            <div style="font-size:x-small">Rechazado</div></td>
-          <td>
-            <div class="alerta" style="background: yellow;float:left"></div>
-            <div style="font-size:x-small">En proceso</div></td>
+              <div class="pull-right">
+              <% case t.estado 
+                  when 0 %>
+                  <span class="label">enviado</span>
+                <% when 1%>
+                  <span class="label label-info">recibido</span>
+                <% when 2%>
+                  <span class="label label-warning">procesando</span>
+                <% when 3%>
+                  <span class="label label-success">terminado</span>
+                <% when 4%>
+                  <span class="label label-danger">rechazado</span>
+              <% end %>
+              </div>
+
+              <div class="list-group">
+              <% if t.recibido or current_usuario.admin > 0 %>
+                <%= link_to (t) do%>
+                  <h5 class="list-group.item-heading">
+                    <b>#<%=t.id %></b>
+                    <%= t.TipoDocumento.descripcion %>
+                  </h5>
+                  <p class="list-group-item-text">
+                  <% if not t.producto.nil? %>
+                    <%=t.producto.nombre%>
+                  <% else %>
+                    nuevo producto
+                  <% end %>
+                  </p>
+                <% end %>
+              <% else %>
+                <h5 class="list-group.item-heading">
+                  <b>#<%=t.id %></b>
+                  <%= t.TipoDocumento.descripcion %>
+                </h5>
+                <p class="list-group-item-text">
+                <% if not t.producto.nil? %>
+                  <%=t.producto.nombre%>
+                <% else %>
+                  nuevo producto
+                <% end %>
+                </p>
+              <% end %>
+              </div>
+            </td>
         </tr>
-      </table>
-    </tr>
+      <% end %>
+    </tbody>
   </table>
-</center>
+</div>
+<div class="span1"></div>

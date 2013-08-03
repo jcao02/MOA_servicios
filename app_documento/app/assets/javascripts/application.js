@@ -19,7 +19,7 @@
 //= require jquery.ui.all
 
 $(document).ready(function() {
-  $('body').css("background-image", "url(/assets/fondo" + (Math.round(2 * Math.random())) + ".png)");
+  $('body').css("background-image", "url(/assets/fondo" + (Math.round(1 * Math.random())) + ".png)");
 })
 
 //Toggle menus de usuario
