@@ -1,100 +1,99 @@
-<h1 style="margin-left: 20px;"><%=flash[:title]%></h1>
-
+<div class="span1"></div>
 <% if current_usuario.admin > 0 %>
   <button style="margin-right: 65px;float: right;margin-bottom: 0px;margin-top: -42px;">
     <%= link_to 'Nuevo producto', new_producto_path %>
   </button>
 <% end %>
-
-<div class="area_filtro" id="area_filtro_prod">
-  <div class="filtro_dinamico">
-    <div class="filtro_wrapper">
-      <table id="Procedencia_prod">
-        <thead>
-          <th>Procedencia</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              Todo
-              <%= image_tag("flecha_select.png", :id => "arrow_proc") %>
-            </td>
-          </tr>
-          <tr>
-            <td>Nacional</td>
-          </tr>
-          <tr>
-            <td>Importado</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <%= semantic_form_for @producto, :html => { :id => "proc_form"},:remote => true, :url => prov_filter_productos_path do |f| %>
-      <%= f.input :pais_elaboracion, :as => :hidden, :input_html => { :id => 'proc_input' } %>
-    <% end %>
-    <div class="filtro_wrapper">
-      <table id="Tipo_prod">
-        <thead>
-          <th>Tipo</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              Todo
-              <%= image_tag("flecha_select.png", :id => "arrow_tipo") %>
-            </td>
-          </tr>
-          <tr>
-            <td>Alimento</td>
-          </tr>
-          <tr>
-            <td>Licor</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <%= semantic_form_for @producto, :html => { :id => "type_form"},:remote => true, :url => type_filter_productos_path do |f| %>
-      <%= f.input :alimento, :as => :hidden, :input_html => { :id => 'type_input' } %>
-    <% end %>
-    <table id="marcas">
-      <thead>
-        <th class="regisProd">Marcas</th>
-      </thead>
-      <tbody>
-        <% @marcas.each do |marca| %>
-          <tr>
-            <td>
-              <%=marca%>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= form_tag marca_filter_productos_path, :id => "marca_form", :remote => true do %>
-      <div id="marca_inputs"></div>
-    <% end %>
-    <table id="productos">
-      <thead>
-        <th class="regisProd">Productos</th>
-      </thead>
-      <tbody id="body_prod">
-        <% @productos.each do |producto| %>
-          <tr>
-            <td>
-              <% if producto.alimento %>
-                <%= image_tag("food.png", :id => "food", :class => "foodwine", :title => "Alimento") %>
-              <% else %>
-                <%= image_tag("wine.png", :id => "wine", :class => "foodwine", :title => "Licor") %>
-              <% end %>
-              <%= link_to "#{producto.nombre} </br> <span style='font-size:10px;'>#{producto.registro_sanitario}</span>".html_safe, producto %> </br>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+<div class="span2">
+  <table id="Procedencia_prod" class="table table-hover table-striped table-bordered">
+    <thead>
+      <th>Procedencia</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Todo
+          <%= image_tag("flecha_select.png", :id => "arrow_proc") %>
+        </td>
+      </tr>
+      <tr>
+        <td>Nacional</td>
+      </tr>
+      <tr>
+        <td>Importado</td>
+      </tr>
+    </tbody>
+  </table>
+  <%= semantic_form_for @producto, :html => { :id => "proc_form"},:remote => true, :url => prov_filter_productos_path do |f| %>
+    <%= f.input :pais_elaboracion, :as => :hidden, :input_html => { :id => 'proc_input' } %>
+  <% end %>
+</div>
+<div class="span2">
+  <table id="Tipo_prod" class="table table-hover table-striped table-bordered">
+    <thead>
+      <th>Tipo</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Todo
+          <%= image_tag("flecha_select.png", :id => "arrow_tipo") %>
+        </td>
+      </tr>
+      <tr>
+        <td>Alimento</td>
+      </tr>
+      <tr>
+        <td>Licor</td>
+      </tr>
+    </tbody>
+  </table>
+  <%= semantic_form_for @producto, :html => { :id => "type_form"},:remote => true, :url => type_filter_productos_path do |f| %>
+    <%= f.input :alimento, :as => :hidden, :input_html => { :id => 'type_input' } %>
+  <% end %>
+</div>
+<div id="marcas" class="span3">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <th class="regisProd">Marcas</th>
+    </thead>
+    <tbody>
+      <% @marcas.each do |marca| %>
+        <tr>
+          <td>
+            <%=marca%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= form_tag marca_filter_productos_path, :id => "marca_form", :remote => true do %>
+    <div id="marca_inputs"></div>
+  <% end %>
+</div>
+<div class="span3">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+      <th class="regisProd">Productos</th>
+    </thead>
+    <tbody id="body_prod">
+      <% @productos.each do |producto| %>
+        <tr>
+          <td>
+            <% if producto.alimento %>
+              <%= image_tag("food.png", :id => "food", :class => "foodwine", :title => "Alimento") %>
+            <% else %>
+              <%= image_tag("wine.png", :id => "wine", :class => "foodwine", :title => "Licor") %>
+            <% end %>
+            <%= link_to "#{producto.nombre} </br> <span style='font-size:10px;'>#{producto.registro_sanitario}</span>".html_safe, producto %> </br>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 <%= javascript_tag do %>
   marcasDisponibles =  <%=raw @marcas.to_json %>
   fabricantesDisponibles =  <%=raw @fabricantes.to_json %>
 <% end %>
+<div class="span1"></div>

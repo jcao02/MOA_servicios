@@ -99,13 +99,15 @@ class ProductosController < ApplicationController
     todo = flash[:productos][0]
     filtro = []
 
+
     if marca.empty?()
       filtro = todo
     else
-      marca.each do |elem|
+      marca.values.each do |elem|
         filtro += todo.select{ |x| x.marca == elem }
       end
     end
+
 
     #En este caso no se modifica el cjto de marcas.
     prod = flash[:productos][0]
@@ -120,6 +122,7 @@ class ProductosController < ApplicationController
     for i in 1..3
       @productos = @productos & flash[:productos][i]
     end
+
     flash.keep
     render "prov_filter", :layout => false
   end

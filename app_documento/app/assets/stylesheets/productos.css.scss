@@ -47,32 +47,10 @@ $list_selected    : rgba(116,14,0,0.8);
   width:120px;
   border-right: 2px solid $list_selected;
 }
-#Tipo_prod, #Procedencia_prod{
-  float:left;
-  width: 120px;
-  table-layout:fixed;
-  th{
-    border-bottom: 2px solid $list_selected;
-  }
-  tr{
-    height: 26px !important;
-    width: 302px;
-    cursor:pointer;
-  }
-  tbody{
-    tr :hover{
-      background-color: $list_hover;
-    }
-  }
-  .fill_row{
-  }
-}
-
 #productos_wrapper{
   .dataTables_scrollBody{
     height: 269px !important;
   }
-  border-left: 2px solid $list_selected;
   tbody{
     tr{
       padding:0px;
@@ -88,29 +66,10 @@ $list_selected    : rgba(116,14,0,0.8);
   float:left;
   width: 250px;
   height:300px;
-  th{
-    border-bottom: 2px solid $list_hover;
-  }
   tr{
     height: 26px;
     width: 302px;
     cursor:pointer;
-  }
-
-  tbody{
-    tr :hover, tr td.highlighted{
-      background-color: $list_even;
-    }
-    tr.even {
-      td {
-        background-color: $list_hover;
-      }
-    }
-    tr.even.hover {
-      td {
-        background-color: $list_hover;
-      }
-    }
   }
 
   .rs_producto{
@@ -128,7 +87,7 @@ $list_selected    : rgba(116,14,0,0.8);
   input[type="text"]{
   background: url(find.png) no-repeat scroll 3px 3px;
   padding-left:30px;
-  width: 250px;
+  width: 210px;
   height: 20px;
   }
 }

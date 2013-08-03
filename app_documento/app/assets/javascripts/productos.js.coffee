@@ -36,17 +36,16 @@ dataTableM_opc =
 $(document).ready ->
   $("#producto_grado_alcoholico_input").hide()
   $("#productos").dataTable dataTable_opc 
-  $("#marcas").dataTable dataTableM_opc 
   marcasDisponibles      = $("#autocomplete").data("marcasdisponibles")
   fabricantesDisponibles = $("#autocomplete").data("fabricantesdisponibles")
   $("#producto_marca").autocomplete source : marcasDisponibles
   $("#producto_fabricante").autocomplete source : fabricantesDisponibles
   #Fltrado
   #Por marca
-  $("#marcas tr").click ->
-    $(this).toggleClass "row_selected"
+  $("#marcas tbody tr").click ->
+    $(this).toggleClass "success"
     
-    coleccion = document.getElementsByClassName "row_selected"
+    coleccion = document.getElementsByClassName "success"
     if (coleccion.length == 0)
       inputs = document.getElementsByClassName "producto_marca"
       for index, elem of inputs
