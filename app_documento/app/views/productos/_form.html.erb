@@ -1,77 +1,47 @@
 <%= semantic_form_for @producto do |f| %>
-  <ul>
-    <table class="table_forms">
-      <thead>
-        <tr>
-          <td colspan="2">
-            <h1>
-              <%=flash[:accion]%>
-            </h1>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <%= f.input :registro_sanitario, :label => "Registro Sanitario" %>
-          </td>
-          <td>
-            <%= f.input :alimento, :as => :radio, :collection => [["Alimento", true], ["Licor", false]], :label => "Tipo"%>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= f.input :nombre, :label => "Nombre"%>
-          </td>
-          <td>
-            <%= f.input :marca, :label => "Marca"%>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= f.input :pais_elaboracion, :as => :country, :label => "Procedencia"%>
-          </td>
-          <td>
-            <%= f.input :fabricante, :label => "Fabricante"%>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= f.input :codigo_arancelario, :label => "Código Arancelario"%>
-          </td>
+  <table>
+    <tbody>
+      <tr>
+          <td><%= f.input :registro_sanitario, :label => "Registro Sanitario" %></td>
+          <td><%= f.input :alimento, :as => :radio, :collection => [["Alimento", true], ["Licor", false]], :label => "Tipo"%></td>
+      </tr>
+      <tr>
+          <td><%= f.input :nombre, :label => "Nombre"%></td>
+          <td><%= f.input :marca, :label => "Marca"%></td>
+      </tr>
+      <tr>
+          <td><%= f.input :pais_elaboracion, :as => :country, :label => "Procedencia"%></td>
+          <td><%= f.input :fabricante, :label => "Fabricante"%></td>
+      </tr>
+      <tr>
+          <td><%= f.input :codigo_arancelario, :label => "Código Arancelario"%></td>
           <% if flash[:accion] == "Crear Producto"%>
-          <td>
-            <%= f.input :usuario_id, :as => :select, :collection => @companias, :selected => @companias[0], :label => "Cliente", :id => "select_cliente"%>
-          </td>
-        <% else %>
-          <td></td>
-        <% end %>
+            <td><%= f.input :usuario_id, 
+                        :as => :select, 
+                        :collection => @companias, 
+                        :selected => @companias[0], 
+                        :label => "Cliente" %></td>
+          <% else %>
+            <td></td>
+          <% end %>
       </tr>
       <tr>
-        <td>
-          <%= f.input :zona_venta, :as => :select, :collection => [["Tierra firme"], ["Puerto libre Isla de Margarita"], ["Puerto libre Santa Helena de Uairen"], ["Duty free"]], 
-            :selected => "Tierra firme", :label => "Zona de régimen aduanero"%>
-        </td>
-        <td>
-          <%= f.input :on, :label => "Habilitar", :as => :radio, :collection => [["Sí", 1], ["No", 0]]%>
-        </td>
+        <td><%= f.input :zona_venta, 
+                    :as => :select, 
+                    :collection => [["Tierra firme"], ["Puerto libre Isla de Margarita"], ["Puerto libre Santa Helena de Uairen"], ["Duty free"]], 
+                    :selected => "Tierra firme", 
+                    :label => "Zona de régimen aduanero"%>
+          <td><%= f.input :on, :label => "Status", :as => :radio, :collection => [["Habilitado", 1], ["Deshabilitado", 0]]%></td>
+      <tr>
+        <td><%= f.input :grado_alcoholico, :as => :select, :collection => 1..50, :label => "Grado Alcohólico"%></td>
+        <td></td>
       </tr>
       <tr>
-        <td>
-          <div style="margin-left:0px;margin-top:9px">
-            <%= f.action :submit, :label => flash[:accion] %>
-            <button>
-              <%= link_to 'Volver', :back %>
-            </button>
-          </div>
-        </td>
-        <td>
-          <%= f.input :grado_alcoholico, :as => :select, :collection => 1..50, :label => "Grado Alcohólico"%>
-        </td> 
+          <td><%= f.action :submit, :label => flash[:accion] %></td>
+          <td><button type="button" class="btn btn-default"><%= link_to 'Volver', :back %></button></td>
       </tr>
-      </tbody>
-    </table>
-  </ul>
+    </tbody>
+  </table>
 <% end %>
 <%= content_tag :div, :id => "autocomplete", :data => {:marcasDisponibles => @marcas, :fabricantesDisponibles => @fabricantes } do %>
 <% end %>

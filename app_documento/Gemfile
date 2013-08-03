@@ -21,6 +21,7 @@ group :assets do
 
   gem 'twitter-bootstrap-rails'
   gem "less-rails"
+  gem 'formtastic-bootstrap'
 end
 
 gem 'jquery-rails'
