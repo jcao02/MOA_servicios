@@ -11,19 +11,16 @@
   </head>
 
   <body>
-    <div id="wrapper">
-      <header>
-      <%= render 'layouts/header' %>
-      <%= render 'layouts/navigation' %>
-      </header>
-
-      <div id="content">
+      <div id="wrapper" class ="container">
+        <div class="row">
+          <div class="span3 logo"><%= image_tag 'logo_Moa.png'%></div> 
+          <div class="span9">
+            <%= render 'layouts/header' %>
+            <%= render 'layouts/navigation' %>
+          </div>
+        </div>
         <%= yield %>
+        <%= render 'layouts/footer' %>
       </div>
-
-      <footer>
-      <%= render 'layouts/footer' %>
-      </footer>
-    </div>
   </body>
 </html>

@@ -1,20 +1,24 @@
-<ul>
+<div id="footer">
+<div  class="row">
+  <div class="span1"></div>
   <% if usuario_signed_in? %>
-    <li>
+    <div class="span2" style="margin-top: 17px;">
     <%= link_to 'Contáctanos', "mailto:marthaovalles@gmail.com",
       :title => "Envia un e-mail para comunicarte con nosotros.", :target => "_blank",
       :style => "color: white !important; font-weight:20;" %>
-    </li>
+    </div>
   <% else %>
-    <li>
+    <div class="span2" style="margin-top: 17px;">
     <%= link_to image_tag("/assets/chrome.png",
                           :title => "Para esta pagina se recomienda usar el explorador Google Chrome."),
                           "https://www.google.com/intl/en/chrome/browser", :target => "_blank" %>
-    </li>
+    </div>
   <% end %>
-  <li style="float: right;">
-  <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
-    "http://www.facebook.com/chamini2", :target => "_blank" %>
-  </li>
-</ul>
-
+  <div class="span6"></div>
+  <div class="span2">
+    <%= link_to image_tag("/assets/kiwi.png", :title => "Elaborado por Kiwi Systems"),
+      "http://www.facebook.com/chamini2", :target => "_blank" %>
+  </div>
+  <div class="span1"></div>
+</div>
+</div>
