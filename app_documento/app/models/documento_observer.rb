@@ -4,7 +4,12 @@ class DocumentoObserver < ActiveRecord::Observer
   end
 
   def after_update(documento)
-    documento.registrar_log('Actualizado')
+    if documento.changed.include? "on"
+      tipo = "Visibilidad cambiada"
+    else
+      tipo = "Actualizado"
+    end
+    documento.registrar_log(tipo)
   end
 
   def after_destroy(documento)

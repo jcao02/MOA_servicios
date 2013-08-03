@@ -133,66 +133,54 @@ class DocumentosController < ApplicationController
   end
 
 
-  # FALTA MODIFICAR CALLBACKS DE OBSERVERRR---------------
   #Oculta un documento en vez de eliminarlo
   def ocultar
     doc = Documento.find(params[:id])
     @producto = Producto.find(doc.producto_id)
 
-    @logd = Logdocumento.new(:usuario_id => current_usuario.id,
-                             :documento_id => doc.id,
-                             :producto_id => @producto.id,
-                             :nusuario => current_usuario.nombre,
-                             :ndocumento => doc.TipoDocumento.descripcion,
-                             :nproducto => doc.producto.nombre)
-
     x = doc.on
-
     if x == 0
-      doc.update_attribute("on", 1)
-      @logd.tipo = 'Visible'
+      on = 1
     elsif x == 1
-      doc.update_attribute("on", 0)
-      @logd.tipo = 'Oculto'
+      on = 0
     end
-
-    if @logd.save
-      redirect_to @producto, notice: "Log actualizado."
+    if doc.update_attribute("on", on)
+      redirect_to @producto, notice: "Visibilidad cambiada"
     else
-      redirect_to @producto, notice: "Log no actualizado."
+      redirect_to @producto, notice: "No se puede cambiar la visibilidad"
     end
   end
 
   private 
 
-  # Ocula un documento dado su id
-  def ocultar_doc (id)
-    doc = Documento.find(id)
-    if doc.on == 0
-      if doc.update_attribute("on",1)
-        return true
-      else
-        return false
-      end
-    elsif doc.on == 1
-      if doc.update_attribute("on",0)
-        return true
-      else
-        return false
+    # Ocula un documento dado su id
+    def ocultar_doc (id)
+      doc = Documento.find(id)
+      if doc.on == 0
+        if doc.update_attribute("on",1)
+          return true
+        else
+          return false
+        end
+      elsif doc.on == 1
+        if doc.update_attribute("on",0)
+          return true
+        else
+          return false
+        end
       end
     end
-  end
 
-  # Obtiene todos los tipos de documentos en la base de datos
-  def get_tipoDoc
-    typedoc = TipoDocumento.all
-    tipos = []
-    tipos.push("Otro")
-    for type in typedoc do
-      tipos.push(type.descripcion)
+    # Obtiene todos los tipos de documentos en la base de datos
+    def get_tipoDoc
+      typedoc = TipoDocumento.all
+      tipos = []
+      tipos.push("Otro")
+      for type in typedoc do
+        tipos.push(type.descripcion)
+      end
+      return tipos
     end
-    return tipos
-  end
 
 
 end

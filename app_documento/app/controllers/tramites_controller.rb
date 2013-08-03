@@ -130,10 +130,10 @@ class TramitesController < ApplicationController
     @tramite = Tramite.find(params[:id])
     respond_to do |format|
       if @tramite.update_attributes(params[:tramite])
-        format.html { redirect_to @tramite, notice: 'Tramite y Log actualizados.' }
+        format.html { redirect_to @tramite, notice: 'Tramite actualizado.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", notice: 'Tramite y/o Log no actualizados.' }
+        format.html { render action: "edit", notice: 'Tramite no actualizado.' }
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end
@@ -145,50 +145,30 @@ class TramitesController < ApplicationController
 
     requisitos = @tramite.requisitos
     lista = []
-    req = '' 
     requisitos.each do |r|
-        estado = params[:requisito][("estado#{r.id.to_s}").to_sym]
-        #Solo se cambia atributos si tienen valor o no son iguales.
-        if estado.nil? or estado == r.estado.to_s 
-            next
-        end
-        observacion = params[:requisito][("observacion#{r.id.to_s}").to_sym]
-        lista << r
-        r.update_attribute(:estado, estado)
-        if not observacion.blank?
-           r.update_attribute(:observacion, observacion)
-        end
-        if r.estado == 3
-          req = req+' A-'+r.TipoRequisito_id.to_s+','
-        elsif r.estado == 4
-          req = req+' R-'+r.TipoRequisito_id.to_s+','
-        end
+      estado = params[:requisito][("estado#{r.id.to_s}").to_sym]
+      #Solo se cambia atributos si tienen valor o no son iguales.
+      if estado.nil? or estado == r.estado.to_s 
+        next
+      end
+      observacion = params[:requisito][("observacion#{r.id.to_s}").to_sym]
+      lista << r
+      r.update_attribute(:estado, estado)
+      if not observacion.blank?
+        r.update_attribute(:observacion, observacion)
+      end
     end
 
-
-    if not req.blank?
-      req[-1]= ''
-
-      ########## SE PUEDE ELIMINAR O MODIFICAR EL OBSERVER
-      @logt = Logtramite.new(:usuario_id => current_usuario.id, 
-                             :tramite_id => @tramite.id, 
-                             :tipo => 'Requisitos Actualizados'+req,
-                             :nusuario => current_usuario.nombre, 
-                             :ntipodocumento => @tramite.TipoDocumento.descripcion,
-                             :nproducto => @tramite.producto.nombre,
-                             :producto_id => @tramite.producto.id)
-      @logt.save
-    end
 
     #Se envia correo con requisitos actualizados sobre el tramite.
     # CorreosUsuario.aviso_requisitos(@tramite.usuario, lista, @tramite).deliver
     @req_faltantes = get_faltantes @tramite
     #Si ya no faltan requisitos, se manda un correo y se pone como listo el tramite
     if @req_faltantes == 0 
-        # CorreosUsuario.aviso_tramite(@tramite.usuario, @tramite).deliver
-        @tramite.update_attribute(:estado, 3)
+      # CorreosUsuario.aviso_tramite(@tramite.usuario, @tramite).deliver
+      @tramite.update_attribute(:estado, 3)
     elsif @req_faltantes < requisitos.length
-        @tramite.update_attribute(:estado, 2)
+      @tramite.update_attribute(:estado, 2)
     end
 
     redirect_to @tramite
@@ -198,22 +178,11 @@ class TramitesController < ApplicationController
   # DELETE /tramites/1.json
   def destroy
     @tramite = Tramite.find(params[:id])
-    @logt = Logtramite.new(:usuario_id => current_usuario.id, 
-                           :tramite_id => @tramite.id, :tipo => 'Eliminado',
-                           :nusuario => current_usuario.nombre, 
-                           :ntipodocumento => @tramite.TipoDocumento.descripcion,
-                           :nproducto => @tramite.producto.nombre,
-                           :producto_id => @tramite.producto.id)
     @tramite.destroy
 
     respond_to do |format|
-      if @logt.save
-        format.html { redirect_to tramites_url, notice: 'Log actualizado.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to tramites_url, notice: 'Log no actualizado.' }
-        format.json { head :no_content }
-      end
+      format.html { redirect_to tramites_url, notice: 'Tramite destruido.' }
+      format.json { head :no_content }
     end
   end
 end

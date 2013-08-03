@@ -32,20 +32,15 @@ class ApplicationController < ActionController::Base
   # error <= return 2
   def ocultar_prod (id)
     prod = Producto.find(id)
-    if prod.on == 0
-      if prod.update_attribute("on",1)
-        return 1
-      else
-        return 2
-      end
-    elsif prod.on == 1
-      if prod.update_attribute("on",0)
-        return 0
-      else
-        return 2
-      end
+    on = 1
+    on = 0 unless prod.on == 0
+    if prod.update_attribute("on",on)
+      return 0
+    else
+      return 2
     end
   end
+
 
   # oculta todos los productos del usuario con id = usr_id
   # si ocurre algun problema devuelve false

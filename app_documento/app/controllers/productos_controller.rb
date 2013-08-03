@@ -242,16 +242,11 @@ class ProductosController < ApplicationController
 
     x = ocultar_prod(@producto.id)
     if  x == 1
-      @logp.tipo = 'Visible'
-    elsif x == 0
-      @logp.tipo = 'Oculto' 
+      redirect_to @producto, notice: "Producto cambiada visibilidad"
+    elsif x == 2
+      redirect_to @producto, notice: "No se puedo cambiar visibilidad"
     end
 
-    if @logp.save
-      redirect_to @producto, notice: "Log actualizado."
-    else
-      redirect_to @producto, notice: "Log no actualizado."
-    end
   end
 
 

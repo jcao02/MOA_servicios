@@ -4,7 +4,12 @@ class ProductoObserver < ActiveRecord::Observer
   end
 
   def after_update(producto)
-    producto.registrar_log('Actualizado')
+    if producto.changed.include? "on"
+      tipo = "Visibilidad cambiada"
+    else
+      tipo = "Actualizado"
+    end
+    producto.registrar_log(tipo)
   end
 
   def after_destroy(producto)
