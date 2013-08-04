@@ -1,8 +1,10 @@
+<div class="span2"></div>
+<div class="span8">
 <% if flash[:notice] %>
   <div><p><%= flash[:notice] %></p></div>
 <% end %>
 <div class="data_filters">
-  <table id="alerts_table" class="data_table">
+  <table id="alerts_table" class="data_table table table-hover table-striped">
     <thead>
       <th>
         Producto
@@ -33,14 +35,14 @@
             <% if alert.tramite %>
               Tramitando...
             <% elsif alert.active %>
-              <%= form_tag '/vencido/tramitar_documento', :id => "alert_form"+i.to_s do %>
+              <%= form_tag '/vencido/tramitar_documento', :id => "alert_form#{i}" do %>
                 <%= hidden_field_tag 'id', alert.id%>
-                <%= submit_tag 'Tramitar' %>
+                <%= submit_tag 'Tramitar', :class => "btn btn-default"%>
               <% end %>
             <% else %>
               <%= form_tag '/vencido/activar_alerta' do %>
                 <%= hidden_field_tag 'id', alert.id%>
-                <%= submit_tag 'Activar' %>
+                <%= submit_tag 'Activar', :class => "btn btn-default" %>
               <% end %>
             <% end %> 
           </td>
@@ -51,3 +53,5 @@
 </div>
 <%= content_tag "div", id: "alerts_length", data: { length: session[:alerts].length } do %>
 <%end%>
+</div>
+<div class="span2"></div>

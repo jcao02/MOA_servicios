@@ -9,7 +9,7 @@ dataTable_opc =
   bSort           : false
   sScrollY        : "250px"
   oLanguage       :
-    sSearch       : ""
+    sSearch       : "Búsqueda "
     sInfo         : ""
     sInfoFiltered : ""
     sInfoEmpty    : ""

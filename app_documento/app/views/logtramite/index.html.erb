@@ -1,14 +1,8 @@
-<h1 style="margin-left: 20px;">Log Solicitudes</h1>
-<div style="margin-left: 40px;margin-bottom: 20px;">
-  <button style= Padding:10px>
-    <%= link_to 'Log Productos', logproductos_index_path %>
-  </button>
-  <button style= Padding:10px>
-    <%= link_to 'Log Documentos', logdocumento_index_path %>
-  </button>
-</div>
-<div style="border-bottom: 2px solid rgba(116,14,0,0.8);">
-  <table class="log_data_table" id="tabla_show_log_tram">
+<div class="span1"></div>
+<div class="span10">
+<h3>Log Solicitudes</h3>
+<div>
+  <table class="table table-striped" id="tabla_show_log_tram">
     <thead>
       <th>Usuario</th>
       <th>Producto</th>
@@ -59,9 +53,5 @@
     </tbody>
   </table>
 </div>
-
-<div style="width: 400px;padding-left:40px;">
-  <button style= "padding:10px;">
-    <%= link_to 'Volver', :back %>
-  </button>
 </div>
+<div class="span1"></div>
