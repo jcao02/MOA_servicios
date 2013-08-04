@@ -1,13 +1,7 @@
-<link href="/assets/dataTables/jquery.dataTables.css?body=1" media="all" rel="stylesheet" type="text/css" />
-<span class="titulos_list">
-  <h1 style="margin-left: 20px;">Usuarios</h1>
-</span>
-
-<button class="new_element" style="margin-bottom: 20px;float: right;margin-top: -42px;">
-  <%= link_to 'Nuevo Usuario', new_usuario_path %>
-</button>
-
-<table id="tabla_list_usuario">
+<div class="span1"></div>
+<div class="span10">
+<h3>Usuarios</h3>
+<table id="tabla_list_usuario" class="table table-striped">
   <thead>
       <th>Login</th>
       <th>Compania</th>
@@ -38,3 +32,6 @@
     <% end %>
   </tbody>
 </table>
+</div>
+<div class="span1"></div>
+

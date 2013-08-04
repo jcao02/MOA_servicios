@@ -1,153 +1,139 @@
-<table class="area_show">
-  <tr>
-    <td>
-      <div class="title_show">
-        <h2>
-          Información de usuario 
-          <span style="font-weight:bold;font-size:x-small;font-style:italic;">
-            <% if @usuario.bloqueado == 0 %>
-              <span style="color:green;"> Habilitado </span>
-            <% else %>
-              <span style="color:red;"> Deshabilitado </span>
-            <% end %>
-        </h2>
-          
-      </div>
-    </td>
-    <td>
-      <div class="title_show">
-        <h2>Configuración</h2>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table class="tabla_show">
-        <tr>
-          <td>
-            <b>Usuario:</b>
-          </td>
-          <td>
-            <%= @usuario.login %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Nombre:</b>
-          </td>
-          <td>
-            <%= @usuario.nombre %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Apellido:</b>
-          </td>
-          <td>
-            <%= @usuario.apellido %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Mail:</b>
-          </td>
-          <td>
-            <%= @usuario.email %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Telefono:</b>
-          </td>
-          <td>
-            <%= @usuario.telefono %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Compania:</b>
-          </td>
-          <td>
-            <%= @usuario.compania %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Rif:</b>
-          </td>
-          <td>
-            <%= @usuario.rif %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Tipo de usuario: </b>
-          </td>
-          <td>
-            <% case @usuario.admin
-             when 0 %>
-             Cliente
-             <%   when 1 %>
-             Admin
-             <%   when 2 %>
-             Super-Admin
-             <%   else   %>
-             Contactar servicio técnico.
-             <% end %>
-           </td>
-           <tr>
-            <td>
-              <%if current_usuario.admin > 0 %>
-              <button style= Padding:10px>
-                <%= link_to 'Volver', usuarios_path %>
-              </button>
-              <% else %>
-              <button style= Padding:10px>
-                <%= link_to 'Volver', inicio_index_path %>
-              </button>
-              <% end %>
-
-            </td>
-          </tr>
-        </table>
+<div class="span1"></div>
+<div class="span4">
+  <h3>
+    Información de usuario 
+    <span style="font-weight:bold;font-size:x-small;font-style:italic;">
+      <% if @usuario.bloqueado == 0 %>
+        <span style="color:green;"> Habilitado </span>
+      <% else %>
+        <span style="color:red;"> Deshabilitado </span>
+      <% end %>
+  </h3>
+  <table class="table">
+    <tr>
+      <td>
+        <b>Usuario:</b>
       </td>
-      <td class="conf_list" valign="top">
-       <ul>
-         <% if current_usuario.admin == 2  or  current_usuario.login == @usuario.login %>
-         <li>
-           <%= image_tag("/assets/edit.jpg", :class => "cos_icon", :title => "Editar Perfil") %>          
-           <%= link_to 'Editar Perfil', edit_usuario_path(@usuario)%>
-         </li>
+      <td>
+        <%= @usuario.login %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Nombre:</b>
+      </td>
+      <td>
+        <%= @usuario.nombre %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Apellido:</b>
+      </td>
+      <td>
+        <%= @usuario.apellido %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Mail:</b>
+      </td>
+      <td>
+        <%= @usuario.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Telefono:</b>
+      </td>
+      <td>
+        <%= @usuario.telefono %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Compania:</b>
+      </td>
+      <td>
+        <%= @usuario.compania %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Rif:</b>
+      </td>
+      <td>
+        <%= @usuario.rif %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Tipo de usuario: </b>
+      </td>
+      <td>
+        <% case @usuario.admin
+         when 0 %>
+         Cliente
+         <%   when 1 %>
+         Admin
+         <%   when 2 %>
+         Super-Admin
+         <%   else   %>
+         Contactar servicio técnico.
          <% end %>
-         <% if current_usuario.login == @usuario.login%>
-         <li>
-           <%= image_tag("/assets/password.png", :class => "cos_icon")%>
-           <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> 
-         </li>
-         <%end%>
-         <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
-         <li>
-           <%= image_tag("/assets/delete.png", :class => "cos_icon", :title => "Eliminar Usuario")%>
-           <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Seguro desea eliminar este usuario?' } %>
-         </li>
-         <% end %>
-         <% if @usuario.admin == 0 %>
-           <li>
-             <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
-             <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
-           </li>
-           <li>
-             <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
-             <%= link_to 'Listar sus Solicitudes', tramites_usuario_tramites_path(:usuario => @usuario) %>
-           </li>
-         <% end %>
-         <% if current_usuario.admin > 0 %>
-           <li>
-           <%= link_to 'Listar documentos (todos)', documentos_index_usuario_path(:id => @usuario.id) %>
-           </li>
-         <% end %>
-       </ul>
-     </td>
-   </tr>
- </table>
+       </td>
+     </tr>
+  </table>
+</div>
+<div class="span2"></div>
+<div class="span4">
+  <h3>Configuración</h3>
+  <table>
+    <% if current_usuario.admin == 2  or  current_usuario.login == @usuario.login %>
+    <tr>
+      <td>
+         <%= image_tag("/assets/edit.jpg", :class => "cos_icon", :title => "Editar Perfil") %>          
+         <%= link_to 'Editar Perfil', edit_usuario_path(@usuario)%>
+      </td>
+    </tr>
+    <% end %>
+    <% if current_usuario.login == @usuario.login%>
+    <tr>
+      <td>
+         <%= image_tag("/assets/password.png", :class => "cos_icon")%>
+         <%=link_to 'Cambiar Contraseña', edit_password_usuarios_path, :remote => true, :id => "cambiar_contr"  %> 
+      </td>
+    </tr>
+    <% end %>
+    <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
+    <tr>
+      <td>
+         <%= image_tag("/assets/delete.png", :class => "cos_icon", :title => "Eliminar Usuario")%>
+         <%= link_to 'Eliminar Usuario', @usuario, method: :delete, data: { confirm: '¿Seguro desea eliminar este usuario?' } %>
+      </td>
+    </tr>
+    <% end %>
+    <% if current_usuario.admin > 0 %>
+    <tr>
+      <td>
+         <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
+         <%= link_to 'Listar sus Productos', productos_usuario_productos_path(:usuario => @usuario) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
+         <%= link_to 'Listar sus Solicitudes', tramites_usuario_tramites_path(:usuario => @usuario) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>
+         <%= link_to 'Listar documentos (todos)', documentos_index_usuario_path(:id => @usuario.id) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
  <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>
+</div>
+<div class="span1"></div>

@@ -1,15 +1,13 @@
+<div class="span3"></div>
+<div class="span6">
+  <legend>
+    <h3>
+      <%=flash[:accion]%>
+    </h3>
+  </legend>
 <%= semantic_form_for @usuario do |f| %>
   <ul>
-    <table class="table_forms">
-      <thead>
-        <tr>
-          <td colspan="2">
-            <h1>
-              <%=flash[:accion]%>
-            </h1>
-          </td>
-        </tr>
-      </thead>
+    <table>
       <tbody>
         <tr>
           <td>
@@ -43,10 +41,7 @@
             <% else %>
               <%= f.input :admin, :as => :hidden, :input_html => { :value => 0 } %>
                 <%= f.action :submit, :label => flash[:accion] %>
-              <button style= Padding:10px>
-                <%= link_to 'Volver', @usuario %>
-              </button>
-            <% end %>
+           <% end %>
           </td>
           <td>
               <%= f.input :rif, :label => "RIF"%>
@@ -59,14 +54,11 @@
             <center>
               <%= f.action :submit, :label => flash[:accion] %>
             </center>
-            <button style= Padding:10px>
-              <%= link_to 'Volver', @usuario %>
-            </button>
 
           </td>
           <td>
             <% if current_usuario.admin == 2 %>
-              <%= f.input :bloqueado, :label => "Habilitar", :as => :radio, :collection => [["Sí", 0], ["No", 1]]%>
+              <%= f.input :bloqueado, :label => "Status", :as => :radio, :collection => [["Habilitado", 0], ["Deshabilitado", 1]]%>
             
             <% end %>            
           </td>
@@ -76,3 +68,5 @@
     </table>
   </ul>
 <% end %>
+</div>
+<div class="span3"></div>

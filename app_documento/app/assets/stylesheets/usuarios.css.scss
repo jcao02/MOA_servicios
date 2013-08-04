@@ -10,35 +10,6 @@ $background_color : rgba(128,0,0,1);
 $list_even        : rgba(116,14,0,0.7);
 
 
-#tabla_list_usuario_wrapper {
-  .dataTables_scrollBody{
-    height: 250px !important;
-  }
-  td, th {
-    max-width: 120px;
-    /*Puntos suspensivos*/
-    white-space: nowrap;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-  }
-
-  thead {
-    th{
-    }
-  }
-  tr.even {
-    td{
-    background-color: $list_even !important;
-    }
-  }
-  tr.odd {
-    td{
-    background-color: #FFF !important;
-    }
-  }
-}
 
 .title_show {
   width: 300px;
