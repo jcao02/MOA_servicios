@@ -30,9 +30,9 @@
               </a>
               <ul class="dropdown-menu">
               <% session[:alerts].each do |a| %>
-                <li>
-                <%= a.producto.nombre%> - <%= a.tipo%>
-                </li>
+                <li><a>
+                <%= Producto.find(a.producto_id).nombre%> - <%= a.tipo%>
+              </a></li>
               <% end %>
               <li>
               <%= link_to  'Ver todas', vencido_index_path %>
