@@ -92,6 +92,13 @@ $list_selected    : rgba(116,14,0,0.8);
   }
 }
 
+.extra-table {
+  max-height: 300px;
+  overflow: auto;
+}
+
+
+
 //Para las tabs
 .conf_list{
     width: 100%;

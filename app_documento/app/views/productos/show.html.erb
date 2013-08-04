@@ -1,228 +1,128 @@
-<table class="area_show">
-  <tr>
-    <td>
-      <div class="title_show">
-        <h2><%=@producto.nombre %></h2>
-        <% if @producto.alimento %>
-          <%= image_tag "/assets/food.png", :class => "prod_title_icon" %>
-        <% else %>
-          <%= image_tag "/assets/wine.png", :class => "prod_title_icon" %>
-        <% end %>
-          <span style="font-weight:bold;font-size:x-small;font-style:italic;">
-            <% if @producto.on == 1 %>
-              <span style="color:green;"> Visible </span>
-            <% else %>
-              <span style="color:red;"> Oculto </span>
-            <% end %>
+<div class="span1"></div>
+<div class="span4">
+    <div class="media">
+      <h3 class="media-heading"><%=@producto.nombre %></h3>
+      <% if @producto.alimento %>
+        <%= image_tag "/assets/food.png", :class => "prod_title_icon media-object" %>
+      <% else %>
+        <%= image_tag "/assets/wine.png", :class => "prod_title_icon media-object" %>
+      <% end %>
+    </div>
+    <span style="font-weight:bold;font-size:x-small;font-style:italic;">
+      <% if @producto.on == 1 %>
+        <span style="color:green;"> Visible </span>
+      <% else %>
+        <span style="color:red;"> Oculto </span>
+      <% end %>
+  <table class="table">
+    <% if current_usuario.admin > 0 %>
+      <tr>
+        <td><b>Cliente:</b></td>
+        <td><%= @cliente.compania %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><b>Nº Registro:</b></td>
+      <td><%= @producto.registro_sanitario %></td>
+    </tr>
+    <tr>
+      <td><b>Tipo:</b></td>
+      <td>
+      <% if @producto.alimento %>
+        Alimento
+      <% else %>
+        Licor
+      <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Marca:</b></td>
+      <td><%= @producto.marca %></td>
+    </tr>
+    <tr>
+      <td><b>Pais elaboracion:</b></td>
+      <td><%= Carmen::Country.coded(@producto.pais_elaboracion).name %></td>
+    </tr>
+    <tr>
+      <td><b>Fabricante:</b></td>
+      <td><%= @producto.fabricante %></td>
+    </tr>
+    <tr>
+      <td><b>Codigo arancelario:</b></td>
+      <td><%= @producto.codigo_arancelario %></td>
+    </tr>
+    <tr>
+      <td><b>Zona régimen aduanero</b></td>
+      <td><%=@producto.zona_venta%></td>
+    </tr>
+    <% if not @producto.alimento %>
+      <tr>
+        <td><b>Grado Alcohólico</b></td>
+        <td><%=@producto.grado_alcoholico%></td>
+      </tr>
+    <% end %>
+  </table>
+    <% if current_usuario.admin > 0 %>
+      <div class="btn-group pull-left">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Acciones
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to 'Editar', edit_producto_path(@producto) %></li> 
+          <li> 
+          <a href="#" onclick="$('#hide-form').submit()">
+          <% if @producto.on == 1 %> 
+            Ocultar
+          <% elsif @producto.on == 0 %>
+            Mostrar
+          <% end %>
+          </a></li>
+          <li><%= link_to 'Ver registro', logproductos_show_by_user_path(:id => @producto.id) %></li>
+          <li><%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Seguro desea eliminar este producto?'} %></li>
+        </ul>
       </div>
-    </td>
-    <td class="conf_list" valign="top" rowspan="2">
+      <%= form_tag productos_ocultar_path, method: :post, :id => "hide-form" do %>
+      <%= hidden_field_tag :id, @producto.id %>
+      <% end %> 
+    <% end %>
+  </div>
 
-      <div id="tabs" class="tabs-bottom">
-        <div class="title_show">
-          <ul>
-            <li><a href="#tab-doc">Documentos</a></li>
-            <li><a href="#tab-pre">Presentaciones</a></li>
-            <li><a href="#tab-imp">Importadores</a></li>
-          </ul>
-        </div>
+  <div class="span2"></div>
 
-        <div class="tabs-spacer">
-          <div id="tab-doc">
-            <% if current_usuario.admin > 0%>
-              <%= button_to 'Agregar Documento', new_documento_path, :class =>"button-intab", :method => "get"%>
-            <% end %>
-            <ul>
-              <% @documentos.each do |d|%>
-                <li>
-                  <% if current_usuario.admin == 0 %>
-                    <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
-                  <% end %>
-                <% if current_usuario.admin > 0 %>
-                <%= link_to d[1], d[0].pdf.url, :target => "_blank" %> 
-                  <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar documento"), d[0], :method => :delete, 
-                    data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
-                  <% if d[0].on == 1 %> 
-                    <%= form_tag documentos_ocultar_path, method: :post do %>
-                      <%= hidden_field_tag :id, d[0].id %>
-                      <%= image_submit_tag("/assets/eye-open.png", :class => "borrar_doc", :title => "Ocultar documento")%>
-                    <% end %>
-                  <% else %>
-                     <%= form_tag documentos_ocultar_path, method: :post do %>
-                      <%= hidden_field_tag :id, d[0].id %>
-                      <%= image_submit_tag("/assets/eye-close.png", :class => "borrar_doc", :title => "Mostrar documento")%>
-                    <% end %>
-                  <% end %>
-                <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-
-            <div id="tab-pre">
-            <% if current_usuario.admin > 0%>
-              <%= button_to 'Agregar presentación', new_presentacion_path, :class =>"button-intab", :method => "get"%>
-            <% end %>
-              <ul>
-                <% @presentaciones.each do |p|%>
-                  <li>
-                  <b>Presentación <%= p.cpe%> </b>
-                  <% if current_usuario.admin > 0 %>
-                    <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar presentacion"), p, :method => :delete, 
-                      data: { confirm: '¿Esta seguro de eliminar esta presentación?'} %>
-                    <% end %><br>
-
-                    Empaque: <%= p.empaque%><br>
-                    Peso neto: <%= p.peso_neto %><br>
-                    Peso escurrido: <%= p.peso_escurrido %><br>
-                    Vence: <%= p.fecha_vencimiento%>
-                    </li>
-                  <% end %> 
-                </ul>
-              </div>
-
-              <div id="tab-imp">
-            <% if current_usuario.admin > 0%>
-                <%= button_to 'Agregar importador', new_importador_path, :class =>"button-intab", :method => "get"%>
-            <% end %>
-                <ul>
-                  <% @producto.importadors.each do |i|%>
-                    <li>
-                    <b><%= i.nombre %></b>
-                    <% if current_usuario.admin > 0 %>
-                      <%=link_to image_tag("/assets/delete.png", :class => "borrar_doc", :title => "Borrar importador"), i, :method => :delete, 
-                        data: { confirm: '¿Esta seguro de eliminar este importador?'} %>
-                      <% end %><br>
-
-                      Procedencia: <%= Carmen::Country.coded(i.pais_origen).name %><br>
-                      Correo: <%=i.mail%><br>
-                      Teléfono <%=i.telefono%><br>
-
-                      </li>
-                    <% end %>
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-          </td>
-
-        </tr>
-        <tr>
-          <td>
-            <table class="tabla_show">
-              <% if current_usuario.admin > 0 %>
-                <tr>
-                  <td>
-                    <b>Cliente:</b>
-                  </td>
-                  <td>
-                    <%= @cliente.compania %>
-                  </td>
-                </tr>
+  <div id="extra-productos" class="span4">
+    <!-- AJAX AQUI -->
+    <button class="btn btn-default pull-right">Importadores</button>
+    <button class="btn btn-default pull-right">Presentaciones</button>
+    <h4>Documentos</h4> 
+    <table class="table extra-table table-hover">
+      <tr>
+        <td>
+      <% @documentos.each do |d|%>
+          <% if current_usuario.admin > 0 %>
+            <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
+            <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar documento"), d[0], :method => :delete, 
+              data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+              <%= form_tag documentos_ocultar_path, method: :post, :class => "nh-form" do %>
+              <%= hidden_field_tag :id, d[0].id %>
+              <% if d[0].on == 1 %> 
+                <%= image_submit_tag("/assets/eye-open.png", :class => "borrar_doc pull-right", :title => "Ocultar documento")%>
+              <% else %>
+                <%= image_submit_tag("/assets/eye-close.png", :class => "borrar_doc pull-right", :title => "Mostrar documento")%>
               <% end %>
-              <tr>
-                <td>
-                  <b>Nº Registro:</b>
-                </td>
-                <td>
-                  <%= @producto.registro_sanitario %>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Tipo:</b>
-                </td>
-                <td>
-                  <% if @producto.alimento %>
-                    Alimento
-                  <% else %>
-                    Licor
-                  <% end %>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Marca:</b>
-                </td>
-                <td>
-                  <%= @producto.marca %>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Pais elaboracion:</b>
-                </td>
-                <td>
-                  <%= Carmen::Country.coded(@producto.pais_elaboracion).name %>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Fabricante:</b>
-                </td>
-                <td>
-                  <%= @producto.fabricante %>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Codigo arancelario:</b>
-                </td>
-                <td>
-                  <%= @producto.codigo_arancelario %>
-                </td>
-              </tr>
-              <tr>
-                <td><b>Zona régimen aduanero</b></td>
-                <td><%=@producto.zona_venta%></td>
-              </tr>
-              <% if not @producto.alimento %>
-              <tr>
-                <td><b>Grado Alcohólico</b></td>
-                <td><%=@producto.grado_alcoholico%></td>
-              </tr>
             <% end %>
-              <tr>
-                <td>
-                </td>
-                <td>
-                </td>
-              </tr>
-              <% if current_usuario.admin > 0 %>
-                <tr>
-                  <td>
-                    <button>
-                      <%= link_to 'Editar', edit_producto_path(@producto) %> 
-                    </button>
-                  </td>
-                  <td>
-                    <button>
-                      <%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Seguro desea eliminar este producto?'} %>
-                    </button>
-                    <% if @producto.on == 1 %> 
-                      <%= form_tag productos_ocultar_path, method: :post do %>
-                        <%= hidden_field_tag :id, @producto.id %>
-                        <%= submit_tag 'Ocultar', data: { confirm: '¿Seguro desea ocultar este producto?'} %>
-                      <% end %> 
-                    <% elsif @producto.on == 0 %>
-                       <%= form_tag productos_ocultar_path, method: :post do %>
-                        <%= hidden_field_tag :id, @producto.id %>
-                        <%= submit_tag 'Habilitar', data: { confirm: '¿Seguro desea habilitar este producto?'} %>
-                      <% end %> 
-                    <% end %>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2">
-                    <button>
-                      <%= link_to 'Ver registro', logproductos_show_by_user_path(:id => @producto.id) %>
-                    </button>
-                  </td>
-                </tr>
-              <% end %>
-            </table>
-          </td>
-        </tr>
-      </table>
-      <div id="dialog_contr" style="display:none;" style="margin:0; padding:0; height: 300px;"></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+      <% end %>
+        </td>
+      </tr>
+    </table>
+    <% if current_usuario.admin > 0 %>
+      <button class="btn btn-default">
+        <%= link_to 'Agregar documento', new_documento_path %>
+      </button>
+    <% end %>
+  </div>
+<div class="span1"></div>

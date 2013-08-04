@@ -246,7 +246,7 @@ class ProductosController < ApplicationController
     x = ocultar_prod(@producto.id)
     if  x == 1
       redirect_to @producto, notice: "Producto cambiada visibilidad"
-    elsif x == 2
+    else
       redirect_to @producto, notice: "No se puedo cambiar visibilidad"
     end
 

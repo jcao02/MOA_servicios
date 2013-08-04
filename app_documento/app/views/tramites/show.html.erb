@@ -1,147 +1,122 @@
-<table id="area_tramite" style="margin-left: 40px;">
-  <tr>
-    <td>
-      <div class="title_show">
-        <h2><%= @tramite.TipoDocumento.descripcion %></h2>
-      </div>
-    </td>
-    <td rowspan="2">
-      <table id="requisitos_show" style="height:350px;border-bottom:1px solid black">
-        <thead>
-          <th>
-            <h2>Requisitos</h2>
-          </th>
-        </thead>
-        <tbody>
-          <% @tramite.requisitos.each_with_index do |r, index| %>
-            <tr>
-              <td style="padding-left: 5px;">
-                <%= content_tag "span", class: "content-estado", id:"estado"+index.to_s, data: { requisito: r } do %>
-                  <%= link_to r.TipoRequisito.name, r %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <table style="min-width:350px;margin-left:25px">
-        <tr>
-          <td>
-            <div class="alerta" style="background: white;float:left"></div>
-            <div style="font-size:x-small">
-              Stand-by
-            </div>
-          </td>
-          <td>
-            <div class="alerta" style="background: green;float:left"></div>
-            <div style="font-size:x-small">
-              Aceptado
-            </div>
-          </td>
-          <td>
-            <div class="alerta" style="background: red;float:left"></div>
-            <div style="font-size:x-small">
-              Rechazado
-            </div>
-          </td>  
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top">
-      <table class="tabla_show" style="widht:75;margin-left: 25px;padding-right: 60px;">
-        <% if not @tramite.producto.nil? %>
-          <tr>
-            <td style="width:25%;padding-right: 10px;">
-              <b>#Solicitud:</b>
-            </td>
-            <td>
-              <%= @tramite.id %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>Producto:</b>
-            </td>
-            <td>
-              <%= @tramite.producto.nombre %>
-            </td>
-          </tr>
-        <% end %>
-        <% if current_usuario.admin > 0 %>
-          <tr>
-            <td> <b>Cliente:</b></td>
-            <td> <%= @tramite.usuario.compania%></td>
-          </tr>
-          <tr>
-            <td>
-              <%= link_to 'Ver registro', logtramite_show_by_user_path(:id => @tramite.id) %>
-            </td>
-            <td>
-            </td>
-          </tr>
-        <% end %>
-        <% if @tramite.recibido %>
-          <tr>
-            <td style="padding-top: 10px;">
-              <b>Fecha<br> Solicitud:</b>
-            </td>
-            <td>
-              <%= @tramite.fecha_recepcion %>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding-top: 10px;">
-              <b>#Requisitos<br> faltantes:</b>
-            </td>
-            <td>
-              <%= @req_faltantes %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </td>
+<div class="span1"></div>
+<div class="span4">
+  <h3><%= @tramite.TipoDocumento.descripcion %></h3>
+  <table class="table">
     <tr>
+      <td style="width:25%;padding-right: 10px;">
+        <b>#Solicitud:</b>
+      </td>
       <td>
-        <div style="margin-left:30px">
-          <% if current_usuario.admin > 0 and @req_faltantes == 0%>
-            <button style="border:3px solid rgba(50,181,115,0.5);margin-top: -1px;">
+        <%= @tramite.id %>
+      </td>
+    </tr>
+    <% if not @tramite.producto.nil? %>
+      <tr>
+        <td>
+          <b>Producto:</b>
+        </td>
+        <td>
+          <%= @tramite.producto.nombre %>
+        </td>
+      </tr>
+    <% end %>
+    <% if current_usuario.admin > 0 %>
+      <tr>
+        <td> <b>Cliente:</b></td>
+        <td> <%= @tramite.usuario.compania%></td>
+      </tr>
+    <% end %>
+    <% if @tramite.recibido %>
+      <tr>
+        <td style="padding-top: 10px;">
+          <b>Fecha<br> Solicitud:</b>
+        </td>
+        <td>
+          <%= @tramite.fecha_recepcion %>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 10px;">
+          <b>#Requisitos<br> faltantes:</b>
+        </td>
+        <td>
+          <%= @req_faltantes %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <% if current_usuario.admin > 0 %>
+    <table>
+      <% if not @tramite.recibido %>       
+        <tr>
+          <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+            <%= f.input :recibido, :as => :hidden, :value => true %>
+            <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
+            <%= f.input :estado, :as => :hidden, :value => 1 %>
+            <td>
+              <%= f.action :submit, :label => "Aceptar", :class => 'pull-left' %>
+            </td>
+          <% end %>
+          <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
+            <%= f.input :recibido, :as => :hidden, :value => false%>
+            <td>
+            <%= f.action :submit,  :label => "Rechazar"%>
+          </td>
+        </tr>
+          <% end %>
+      <% else %>
+        <tr>
+            <td>
+              <button>
+                <%= link_to 'Editar', edit_tramite_path(@tramite) %>
+              </button>
+            </td>
+        <% if @req_faltantes == 0 %>
+          <td>
+            <button>
               <%= link_to 'Agregar MALasdasd Documento', new_documento_path( :producto_id => @tramite.producto )%>
             </button>
-          <% end %>
-          <% if current_usuario.admin > 0  and @tramite.recibido %>
-            <button style="padding:10px">
-              <%= link_to 'Editar', edit_tramite_path(@tramite) %>
-            </button>
-            <button style="padding:10px">
-              <%= link_to 'Volver', tramites_path %>
-            </button>
-          <% end %>
-
-          <% if current_usuario.admin > 0 %>
-            <% if not @tramite.recibido %>        
-              <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
-                <%= f.input :recibido, :as => :hidden, :value => true %>
-                <%= f.input :fecha_recepcion , :as => :hidden, :value => Date.today %>
-                <%= f.input :estado, :as => :hidden, :value => 1 %>
-                <%= f.action :submit, :label => "Aceptar", :class => 'area_tramite' %>
-              <% end %>
-              <%= semantic_form_for @tramite, :url => check_tramites_path(:id => @tramite.id) do |f| %>
-                <%= f.input :recibido, :as => :hidden, :value => false%>
-                <%= f.action :submit,  :label => "Rechazar" %>
-              <% end %>
-              <button style="padding:10px;">
-                <%= link_to 'Volver', tramites_path %>
-              </button>
-            <% end %>
+          </td>
+        <% else %>
+          <td>
+          </td>
         <% end %>
-        <%if current_usuario.admin == 0 %>
-          <button style="padding:10px;margin-left:30px;">
-            <%= link_to 'Volver', tramites_path %>
-          </button>
-        <% end %> 
-      </div>
-    </td>
-  </tr>
-</table>
+        </tr>
+        <% end %>
+    </table>
+    <% end %>
+  </div>
+  <div class="span2"></div>
+  <div class="span4">
+    <h3>Requisitos</h3>
+    <table class="table table-hover table-striped">
+      <% @tramite.requisitos.each do |r| %>
+        <tr>
+          <td>
+            <div class="pull-right">
+              <% case r.estado 
+                when 0 %>
+                  <span class="label">no recibido</span>
+                <% when 3%>
+                  <span class="label label-success">aceptado</span>
+                <% when 4%>
+                  <span class="label label-danger">rechazado</span>
+                <% end %>
+            </div>
+            <%= link_to r.TipoRequisito.name, r %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<div class="span1"></div>
+<% if current_usuario.admin > 0 and @req_faltantes == 0%>
+<% end %>
+<% if current_usuario.admin > 0  and @tramite.recibido %>
+<% end %>
+
+                  <%if current_usuario.admin == 0 %>
+                    <button style="padding:10px;margin-left:30px;">
+                      <%= link_to 'Volver', tramites_path %>
+                    </button>
+                  <% end %> 

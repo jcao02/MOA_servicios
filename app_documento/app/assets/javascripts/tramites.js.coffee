@@ -89,14 +89,18 @@ $(document).ready ->
     $("#tipo_tramite_filtro").dataTable(dataTable_opcS)
     $("#producto_tramite tbody").click (event) ->
         seleccion = event.target
+        $("#producto_selected").closest('tr').removeAttr("class")
         $("#producto_selected").removeAttr("id")
         $(seleccion).attr("id", "producto_selected")
+        $(seleccion).closest('tr').attr("class", "success")
         valor = $("#producto_selected").data('productos').id
         $("#input_producto_tramite").val valor
     $("#tipo_tramite tbody").click (event) ->
         seleccion = event.target
+        $("#tipo_selected").closest('tr').removeAttr("class")
         $("#tipo_selected").removeAttr("id")
         $(seleccion).attr("id", "tipo_selected")
+        $(seleccion).closest('tr').attr("class", "success")
         valor = $("#tipo_selected").data('tipo').id
         $("#input_tipodoc_tramite").val valor
     

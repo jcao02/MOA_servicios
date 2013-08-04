@@ -1,11 +1,9 @@
-<% if usuario_signed_in? %>
-  <div id="settings" class="btn-group pull-right">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      <%= current_usuario.compania %>
-    </button>
-    <ul class="dropdown-menu">
-      <li><%= link_to 'Perfil', current_usuario%></li>
-      <li><%= link_to 'Salir', destroy_usuario_session_path, :method => :delete %></li>
-    </ul>
-  </div>
-<% end %>
+<div id="settings" class="btn-group pull-right">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <%= current_usuario.compania %>
+  </button>
+  <ul class="dropdown-menu">
+    <li><%= link_to 'Perfil', current_usuario%></li>
+    <li><%= link_to 'Salir', destroy_usuario_session_path, :method => :delete %></li>
+  </ul>
+</div>

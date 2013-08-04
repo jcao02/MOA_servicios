@@ -1,4 +1,6 @@
-<center>
+<div class="span2"></div>
+<div class="span8">
+  <center>
   <div style="width: 400px;">
     <% if @tramite.producto%> 
     <h2><%= @tramite.producto.nombre%>: <%= @tramite.TipoDocumento.descripcion %></h2>
@@ -8,7 +10,7 @@
   </div>
 </center>
 <div style="height:300px; overflow:auto;">
-  <table class="area_show" id="manejar_requisitos_table">
+  <table class="table table-striped">
     <thead>
       <th>Requisito</th>
       <th>Estado</th>
@@ -42,7 +44,7 @@
       </tr>
       <tr>
         <td colspan="5" id="obs<%=req.id%>">
-          <textarea style="resize:none; display:none;"id="requisito_observacion66" name="requisito[observacion<%=req.id%>]" rows="4"></textarea>
+          <textarea style="width: 100%;resize:none; display:none;"id="requisito_observacion66" name="requisito[observacion<%=req.id%>]" rows="4"></textarea>
         </td>
       </tr>
       
@@ -51,11 +53,11 @@
     </tbody>
   </table>
 </div>
-<ul class="botones_submit">
-  <li>
-    <button id="enviar_cambios">Enviar</button>
-  </li>
-  <li>
-    <%= button_to 'Volver', @tramite, :method => :get %>
-  </li>
-</ul>
+<button class="btn btn-default" id="enviar_cambios">
+  Enviar
+</button>
+<button class="btn btn-default">
+  <%= link_to 'Volver', @tramite%>
+</button>
+</div>
+<div class="span2"></div>

@@ -1,28 +1,25 @@
-<table id="new_tramite_table" class="area_show">
-  <thead>
-        <tr style="background:#133a6b;color:white">
-          <td colspan="2">
-            
-              <h1 style="margin-left:20px">
-                Nueva Solicitud
-              </h1>
-            
-          </td>
-        </tr>
-
-      </thead>
-  <tr>
+<div class="span2"></div>
+<div class="span8">
+<h3 style="margin-left:20px">
+  Nueva Solicitud
+</h3>
+<% if flash[:notice] %>
+  <p style="color:red; font-size: 12px;"><%= flash[:notice]%></p>
+<% end %>
+<p>Debe seleccionar un producto y un tipo de solicitud. Si la solicitud no tiene producto asociado, seleccione [Nuevo producto]</p>
+<table id="new_tramite_table">
+   <tr>
     <td>
       <table>
         <tbody>
           <tr>
             <td>
-              <table id="producto_tramite">
+              <table id="producto_tramite" class="table">
                 <thead>
                   <th>Mis Productos</th>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr class="success">
                     <td>
                       <%= content_tag "div", id: "producto_selected", data: {productos: ""} do %>
                         [Nuevo producto]
@@ -50,7 +47,7 @@
         <tbody>
           <tr>
             <td>
-              <table id="tipo_tramite">
+              <table id="tipo_tramite" class="table">
                 <thead>
                   <th>Tipos de solicitud</th>
                 </thead>
@@ -78,12 +75,11 @@
         <%= f.input :producto_id, :as => :hidden, :input_html => {:id => "input_producto_tramite"}%>
         <%= f.input :TipoDocumento_id, :as => :hidden, :input_html => { :id => "input_tipodoc_tramite" }%>
       
-        <center style='font-size:x-small'>*Si desea realizar una solicitud para un producto que no esté en sistema, seleccione [Nuevo producto]</center>
 
         <div style="margin-left:257px;margin-top:9px">
-          <%= f.submit :value => "Enviar solicitud", :id => "crear_solicitud" %>
+          <%= f.submit :value => "Enviar solicitud", :class => "btn btn-default" %>
         
-          <button style="margin-left:4px">
+          <button class="btn btn-default">
             <%= link_to 'Volver', :back %>
           </button>
         </div>
@@ -91,4 +87,6 @@
     </td>
   </tr>
 </table>
+</div>
+<div class="span2"></div>
 
