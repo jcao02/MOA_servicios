@@ -1,74 +1,40 @@
-<table class="area_show" style="margin-left:150px;width:500px">
+<h5><%=@requisito.TipoRequisito.name %></h5>
+<table class="table">
   <tr>
-    <td style="text-align: center;">
-      <div class="title_show">
-        <center><h1><%=@requisito.TipoRequisito.name %></h1></center>
-      </div>
+    <td>
+      <b>Solicitud:</b> 
+      <%= @requisito.tramite.TipoDocumento.descripcion %>
     </td>
   </tr>
   <tr>
     <td>
-      <table id="arregla" style="margin-left:35px;">
-        <tr>
-          <tr>
-            <td style="max-width: 40px;">
-              <b>Solicitud:</b> 
-            </td>
-            <td>
-              <%= @requisito.tramite.TipoDocumento.descripcion %>
-            </td>
-          </tr>
-        <tr>
-          <td>
-            <b>Producto:</b> 
-          </td>
-          <td>
-            <% if @requisito.tramite.producto %>
-              <%= @requisito.tramite.producto.nombre%>
-            <% else %>
-              Nuevo producto
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>Estado:</b>
-          </td>
-          <td>
-            <% case @requisito.estado %>
-              <% when 0 %>
-                No recibido
-              <% when 1 %>
-                Recibido
-              <% when 2 %>
-                En proceso
-              <% when 3 %>
-                Aceptado
-              <% when 4 %>
-                Rechazado
-              <% end %>
-          </td>
-        </tr>
-        <% if not @requisito.observacion.nil? and @requisito.estado != 3%>
-          <tr>
-            <td>
-              <b>Observación:</b>
-            <td>
-          </tr>
-          <tr>
-            <td colspan="2">  
-              <div id="obs_req"><%= @requisito.observacion %></div>
-            </td>
-          </tr>
-          <% end %>
-        <tr>
-          <td colspan="2">
-            <button style= "padding:10px;margin-left: 120px;">
-              <%= link_to 'Volver', @requisito.tramite %>
-            </button>
-          </td>
-        </tr>
-      </table>
+      <b>Producto:</b> 
+      <% if @requisito.tramite.producto %>
+        <%= @requisito.tramite.producto.nombre%>
+      <% else %>
+        Nuevo producto
+      <% end %>
     </td>
   </tr>
+  <tr>
+    <td>
+      <b>Estado:</b>
+      <% case @requisito.estado 
+      when 0 %>
+        <span class="label">no recibido</span>
+      <% when 3%>
+        <span class="label label-success">aceptado</span>
+      <% when 4%>
+        <span class="label label-danger">rechazado</span>
+      <% end %>
+    </td>
+  </tr>
+  <% if not @requisito.observacion.nil? and @requisito.estado != 3%>
+    <tr>
+      <td>
+        <b>Observación:</b>
+        <div id="obs_req"><%= @requisito.observacion %></div>
+      </td>
+    </tr>
+  <% end %>
 </table>

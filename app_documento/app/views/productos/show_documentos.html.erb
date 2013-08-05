@@ -1,0 +1,35 @@
+<button class="btn btn-default pull-right" onclick="$('#show-importadores').submit()">Importadores</button>
+<button class="btn btn-default pull-right" onclick="$('#show-presentaciones').submit()">Presentaciones</button>
+<button class="btn btn-default active pull-right">Documentos</button>
+<div class="tableContainer">
+<table class="table extra-table table-hover">
+<tr>
+  <td>
+    <% @documentos.each do |d|%>
+    <% if current_usuario.admin > 0 %>
+      <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
+      <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar documento"), d[0], :method => :delete, 
+        data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+        <%= form_tag documentos_ocultar_path, method: :post, :class => "nh-form" do %>
+        <%= hidden_field_tag :id, d[0].id %>
+        <% if d[0].on == 1 %> 
+          <%= image_submit_tag("/assets/eye-open.png", :class => "borrar_doc pull-right", :title => "Ocultar documento")%>
+        <% else %>
+          <%= image_submit_tag("/assets/eye-close.png", :class => "borrar_doc pull-right", :title => "Mostrar documento")%>
+        <% end %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>
+<tr>
+  <td>
+<% end %>
+  </td>
+</tr>
+</table>
+</div>
+<% if current_usuario.admin > 0 %>
+  <button class="btn btn-default add-stuff">
+    <%= link_to 'Agregar documento', new_documento_path %>
+  </button>
+<% end %>

@@ -1,4 +1,10 @@
 AppDocumento::Application.routes.draw do
+
+  #Ruta de ajax para tabs de show producto
+  post "productos/show_documentos"
+  post "productos/show_importadores"
+  post "productos/show_presentaciones"
+
   post "productos/ocultar" 
 
 

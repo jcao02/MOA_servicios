@@ -32,8 +32,6 @@ dataTable_opcS =
     sZeroRecords  : "No se encontraron coincidencias"
 
 
-
-
 #adjunta textarea para observaciones en requisitos rechazados
 addObservacion = (elem, id) ->
     textarea = '<textarea rows="3" id="'+id+'" class="textarea-obs"">Agregue observacion</textarea>'
@@ -120,3 +118,6 @@ $(document).ready ->
 
     $("#enviar_cambios").click ->
         $("#form_edit_req").submit()
+
+
+    

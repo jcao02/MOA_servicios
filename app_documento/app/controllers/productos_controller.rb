@@ -134,7 +134,7 @@ class ProductosController < ApplicationController
     @cliente = Usuario.find(@producto.usuario_id)
     session[:producto] = @producto.id
     flash.keep
-    @documentos = get_documentos(@producto, current_usuario.admin > 0 )
+    @documentos = get_documentos(@producto.id, current_usuario.admin > 0 )
     @presentaciones = Presentacion.where(:productos_id => @producto.id)
     @importadores = Importador.where(:productos_id => @producto.id)
     respond_to do |format|
@@ -252,6 +252,26 @@ class ProductosController < ApplicationController
 
   end
 
+  def show_documentos
+    producto = params[:id]
+    if current_usuario.admin > 0 
+      @documentos = get_documentos(producto, true)
+    else
+      @documentos = get_documentos(producto, false)
+    end
+    render :layout => false
+  end
+
+  def show_importadores
+    @importadores = Importador.where(:productos_id => params[:id])
+    render :layout => false
+  end
+
+  def show_presentaciones
+    @presentaciones = Presentacion.where(:productos_id => params[:id])
+    render :layout => false
+  end
+
 
   #Metodos privados del controlador
   private
@@ -260,7 +280,7 @@ class ProductosController < ApplicationController
       docs = TipoDocumento.all
       tipos = []
       docs.each do |td|
-        documento = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => td.id, :producto_id => producto.id).first
+        documento = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => td.id, :producto_id => producto).first
         next if documento.nil? or (documento.on == 0 and not admin)
         tipos.push([documento, td.descripcion])
       end

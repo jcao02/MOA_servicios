@@ -1,16 +1,10 @@
-<%= semantic_form_for @documento do |f| %>
-  <ul>
-    <table class="table_forms">
-      <thead>
-        <tr>
-          <td colspan="2">
-            <h1>
-              <%=flash[:accion]%>
-            </h1>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
+<div class="span3"></div>
+<div class="span5">
+  <%= semantic_form_for @documento do |f| %>
+    <legend>
+      <%=flash[:accion]%>
+    </legend>
+    <table>
         <%= f.semantic_fields_for :TipoDocumento do |td| %>
           <tr>
             <td>
@@ -24,24 +18,23 @@
           <td>
             <%= f.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>
           </td>
+          <td>
+          </td>
         </tr>
         <tr>
           <td>
             <%= f.input :pdf, :as => :file, :label => false %>
           </td>
-        </tr>
-        <tr>
           <td>
           </td>
         </tr>
         <tr>
           <td>
-            <center>
               <%= f.action :submit, :label => flash[:accion] %>
-            </center>
           </td>
+          <td></td>
         </tr>
-      </tbody>
     </table>
-  </ul>
 <% end %>
+</div>
+<div class="span4"></div>

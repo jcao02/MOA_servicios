@@ -20,3 +20,18 @@
   margin-bottom: 50px;
   padding-bottom: 50px;
 }
+
+div.tableContainer {
+  clear:both;
+  height: 300px;
+  overflow: auto;
+}
+
+html>body div.tableContainer {
+  overflow: auto;
+}
+
+.add-stuff {
+  margin-top: 30px;
+}
+

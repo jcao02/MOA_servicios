@@ -87,13 +87,23 @@
     <% end %>
   </div>
 
-  <div class="span2"></div>
+  <div class="span2">
+  <%= form_tag '/productos/show_importadores', :method => :post, :remote => true, :id => "show-importadores" do %>
+    <%= hidden_field_tag :id, @producto.id %>
+  <% end %>
+  <%= form_tag '/productos/show_presentaciones', :method => :post, :remote => true, :id => "show-presentaciones" do %>
+    <%= hidden_field_tag :id, @producto.id %>
+  <% end %>
+  <%= form_tag '/productos/show_documentos', :method => :post, :remote => true, :id => "show-documentos" do %>
+    <%= hidden_field_tag :id, @producto.id %>
+  <% end %>
+  </div>
 
   <div id="extra-productos" class="span4">
-    <!-- AJAX AQUI -->
-    <button class="btn btn-default pull-right">Importadores</button>
-    <button class="btn btn-default pull-right">Presentaciones</button>
-    <h4>Documentos</h4> 
+    <button class="btn btn-default pull-right" onclick="$('#show-importadores').submit()">Importadores</button>
+    <button class="btn btn-default pull-right" onclick="$('#show-presentaciones').submit()">Presentaciones</button>
+    <button class="btn btn-default active pull-right">Documentos</button>
+    <div class="tableContainer">
     <table class="table extra-table table-hover">
       <tr>
         <td>
@@ -119,8 +129,9 @@
         </td>
       </tr>
     </table>
+  </div>
     <% if current_usuario.admin > 0 %>
-      <button class="btn btn-default">
+      <button class="btn btn-default add-stuff">
         <%= link_to 'Agregar documento', new_documento_path %>
       </button>
     <% end %>

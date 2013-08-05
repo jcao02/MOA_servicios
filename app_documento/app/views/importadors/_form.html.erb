@@ -1,48 +1,41 @@
+<div class="span3"></div>
+<div class="span5">
+<legend>
+  <%=flash[:accion]%>
+</legend>
 <%= semantic_form_for @importador do |f| %>
-  <ul>
-    <table class="table_forms">
-      <thead>
-        <tr>
-          <td colspan="2">
-            <h1>
-              <%=flash[:accion]%>
-            </h1>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <%= f.input :nombre, :label => "Nombre"%>
-          </td>
-          <td>
-            <%= f.input :rif, :label => "RIF"%>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= f.input :pais_origen, :as => :country, :label => "Procedencia"%>
-          </td>
-          <td>
-            <%= f.input :mail, :label => "E-mail"%>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= f.input :telefono, :label => "Teléfono"%>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
+  <table>
+      <tr>
+        <td>
+          <%= f.input :nombre, :label => "Nombre"%>
+        </td>
+        <td>
+          <%= f.input :rif, :label => "RIF"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.input :pais_origen, :as => :country, :label => "Procedencia"%>
+        </td>
+        <td>
+          <%= f.input :mail, :label => "E-mail"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.input :telefono, :label => "Teléfono"%>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <center>
             <%= f.action :submit, :label => flash[:accion] %>
-            <button>
-              <%= link_to 'Volver', :back %>
-            </button>
-          </td>
-        </tr>
-      </body>
-    </table>
-  </ul>
+          </center>
+        </td>
+      </tr>
+  </table>
 <% end %>
+</div>
+<div class="span3"></div>

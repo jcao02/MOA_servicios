@@ -1,0 +1,46 @@
+<button class="btn btn-default active pull-right">Importadores</button>
+<button class="btn btn-default pull-right" onclick="$('#show-presentaciones').submit()">Presentaciones</button>
+<button class="btn btn-default pull-right" onclick="$('#show-documentos').submit()">Documentos</button>
+<div class="tableContainer">
+<table class="table extra-table table-hover table-size">
+  <tbody>
+  <tr>
+    <td>
+      <% @importadores.each do |i|%>
+        <% if current_usuario.admin > 0 %>
+          <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar importador"), i, :method => :delete, 
+            data: { confirm: '¿Esta seguro de eliminar este importador?'} %>
+        <% end %>
+          <div class="list-group">
+            <h5 class="list-group.item-heading">
+              Nombre: <%= i.nombre %>
+            </h5>
+            <p class="list-group-item-text">
+            <b>RIF:</b> <%= i.rif %>
+            </p>
+            <p class="list-group-item-text">
+            <b>Pais de procedencia:</b> <%= i.pais_origen %>
+            </p>
+            <p class="list-group-item-text">
+            <b>Correo:</b> <%= i.mail %>
+            </p>
+            <p class="list-group-item-text">
+            <b>Teléfono:</b> <%= i.telefono %>
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+      <% end %>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<% if current_usuario.admin > 0 %>
+  <button class="btn btn-default add-stuff">
+    <%= link_to 'Agregar importador', new_importador_path %>
+  </button>
+<% end %>
+

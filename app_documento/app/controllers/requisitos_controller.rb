@@ -14,11 +14,7 @@ class RequisitosController < ApplicationController
   # GET /requisitos/1.json
   def show
     @requisito = Requisito.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @requisito }
-    end
+    render :layout => false
   end
 
   # GET /requisitos/new

@@ -27,8 +27,13 @@ $(document).ready ->
   $("#documento_fecha_vencimiento").datepicker datepickerOpc
   $("#documento_TipoDocumento_attributes_descripcion").change ->
     if $(this).val() == "Otro"
-      input = '<input id="Otro_tipo_input" type="text" maxlength="255" name="documento[TipoDocumento_attributes][descripcion]"/>'
-      $("#Otro").prepend input
+      input = '<div class="string input required stringish control-group" '
+      input += 'id="documento_TipoDocumento_attributes_descripcion_input">'
+      input += '<label class=" control-label" for="Otro_tipo_input">Otro</label>'
+      input += '<div class="controls">'
+      input += '<input id="Otro_tipo_input" type="text" maxlength="255" name="documento[TipoDocumento_attributes][descripcion]"/>'
+      input += '</div></div>'
+      $("#Otro").html input
     else
-      $("#Otro_tipo_input").remove()
+      $("#Otro").html ''
   $("#show_documentos").dataTable(dataTable_opc)

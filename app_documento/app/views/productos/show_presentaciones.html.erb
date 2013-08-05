@@ -1,0 +1,43 @@
+<button class="btn btn-default pull-right" onclick="$('#show-importadores').submit()">Importadores</button>
+<button class="btn btn-default active pull-right">Presentaciones</button>
+<button class="btn btn-default pull-right" onclick="$('#show-documentos').submit()">Documentos</button>
+<div class="tableContainer">
+<table class="table extra-table table-hover">
+  <tr>
+    <td>
+      <% @presentaciones.each do |p|%>
+        <% if current_usuario.admin > 0 %>
+          <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar presentación"), p, :method => :delete, 
+            data: { confirm: '¿Esta seguro de eliminar esta presentación?'} %>
+        <% end %>
+          <div class="list-group">
+            <h5 class="list-group.item-heading">
+              CPE: <%= p.cpe %>
+            </h5>
+            <p class="list-group-item-text">
+            <b>Empaque:</b><%= p.empaque %>
+            </p>
+            <p class="list-group-item-text">
+            <b>Vencimiento:</b><%= p.fecha_vencimiento %>
+            </p>
+            <p class="list-group-item-text">
+            <b>Peso neto:</b><%= p.peso_neto %>
+            </p>
+            <p class="list-group-item-text">
+            <b>Peso escurrido:</b><%= p.peso_escurrido %>
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+       <td>
+      <% end %>
+   </td>
+  </tr>
+</table>
+</div>
+<% if current_usuario.admin > 0 %>
+  <button class="btn btn-default add-stuff">
+    <%= link_to 'Agregar presentación', new_presentacion_path %>
+  </button>
+<% end %>

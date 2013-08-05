@@ -98,4 +98,10 @@ $(document).ready ->
     if $(this).val() == "false"
       $("#producto_grado_alcoholico_input").show()
 
-  $("#tabs").tabs()
+  #AJAX para pestañas en show
+  $("#show-importadores").bind "ajax:success", (event, data, status, xhr) -> 
+    $("#extra-productos").html xhr.responseText
+  $("#show-documentos").bind "ajax:success", (event, data, status, xhr) -> 
+    $("#extra-productos").html xhr.responseText
+  $("#show-presentaciones").bind "ajax:success", (event, data, status, xhr) -> 
+    $("#extra-productos").html xhr.responseText
