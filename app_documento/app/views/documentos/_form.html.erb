@@ -5,15 +5,27 @@
       <%=flash[:accion]%>
     </legend>
     <table>
-        <%= f.semantic_fields_for :TipoDocumento do |td| %>
+      <%= f.semantic_fields_for :TipoDocumento do |td| %>
           <tr>
             <td>
-              <%= td.input :descripcion, :as => :select, :collection => @tipos, :label => "Tipo" %>
+              <% if @tramitando %>
+                <%= td.input :descripcion, :as => :string, :input_html => {:value => @descripcion, :readonly => true},  :label => "Tipo" %>
+              <% else %>
+                <%= td.input :descripcion, :as => :select, :collection => @tipos, :label => "Tipo"%>
+              <% end %>
             </td>
             <td id="Otro">
             </td>
           </tr>
         <% end %>
+      <% if flash[:accion] == "Agregar Documento" %>
+          <tr>
+            <td>
+              <%= f.input :producto_id, :as => :hidden, :input_html => { :value => @producto_id } %>
+            </td>
+          </tr>
+        <% end %>
+
         <tr>
           <td>
             <%= f.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>
@@ -30,7 +42,7 @@
         </tr>
         <tr>
           <td>
-              <%= f.action :submit, :label => flash[:accion] %>
+            <%= f.action :submit, :label => flash[:accion],:button_html => { :disable_with => "Enviando..."} %>
           </td>
           <td></td>
         </tr>

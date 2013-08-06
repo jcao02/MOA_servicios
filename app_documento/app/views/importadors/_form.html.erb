@@ -5,6 +5,13 @@
 </legend>
 <%= semantic_form_for @importador do |f| %>
   <table>
+    <% if flash[:accion] == "Nuevo importador"%>
+    <tr>
+      <td>
+        <%= f.input :productos_id, :as => :hidden, :value => @productos_id%>
+      </td>
+    </tr>
+    <% end %>
       <tr>
         <td>
           <%= f.input :nombre, :label => "Nombre"%>

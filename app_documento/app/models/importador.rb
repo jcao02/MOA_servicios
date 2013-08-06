@@ -5,7 +5,7 @@ class Importador < ActiveRecord::Base
   has_and_belongs_to_many :productos
 
   #Atributos accesibles para el modelo
-  attr_accessible :mail, :nombre, :pais_origen, :rif, :telefono
+  attr_accessible :mail, :nombre, :pais_origen, :rif, :telefono, :productos_id
 
   #Validaciones email
   VALID_MAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

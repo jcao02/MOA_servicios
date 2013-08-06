@@ -29,6 +29,7 @@ class PresentacionsController < ApplicationController
   # GET /presentacions/new.json
   def new
     @presentacion = Presentacion.new
+    @productos_id = params[:producto_id]
     flash[:accion] = "Nueva Presentación"
     respond_to do |format|
       format.html # new.html.erb
@@ -45,15 +46,14 @@ class PresentacionsController < ApplicationController
   # POST /presentacions.json
   def create
     @presentacion = Presentacion.new(params[:presentacion])
-    @presentacion.productos_id = session[:producto]
-    @producto = Producto.find(session[:producto])
+    @producto = Producto.find(params[:presentacion][:productos_id])
 
     respond_to do |format|
       if @presentacion.save
-          session[:producto] = nil
         format.html { redirect_to @producto, notice: 'Presentacion was successfully created.' }
         format.json { render json: @presentacion, status: :created, location: @presentacion }
       else
+        @productos_id = @producto.id
         flash.keep
         format.html { render action: "new" }
         format.json { render json: @presentacion.errors, status: :unprocessable_entity }

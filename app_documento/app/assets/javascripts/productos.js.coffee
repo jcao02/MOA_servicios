@@ -105,3 +105,9 @@ $(document).ready ->
     $("#extra-productos").html xhr.responseText
   $("#show-presentaciones").bind "ajax:success", (event, data, status, xhr) -> 
     $("#extra-productos").html xhr.responseText
+
+  #Importador existente
+  $("#importador-existente-form").bind "ajax:success", (event, data, status, xhr) -> 
+    $("#extra-productos").html xhr.responseText
+  $("#importador-existente-form").submit -> 
+    $("#importador-existente").dialog "close"

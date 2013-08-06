@@ -1,7 +1,7 @@
 #encoding: UTF-8
 class ProductosController < ApplicationController
   respond_to :html, :js
-  before_filter :is_admin, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :is_admin, :only => [:new, :create, :edit, :update, :destroy, :ocultar]
   # GET /productos
   # GET /productos.json
   def index
@@ -132,11 +132,10 @@ class ProductosController < ApplicationController
   def show
     @producto = Producto.find(params[:id])
     @cliente = Usuario.find(@producto.usuario_id)
-    session[:producto] = @producto.id
     flash.keep
     @documentos = get_documentos(@producto.id, current_usuario.admin > 0 )
     @presentaciones = Presentacion.where(:productos_id => @producto.id)
-    @importadores = Importador.where(:productos_id => @producto.id)
+    @importadores_todos = Importador.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @producto }
@@ -234,7 +233,6 @@ class ProductosController < ApplicationController
   end
 
 
-  # FALTA VER SI MODIFICAR EL OBSERVER PARA AGREGAR ESTE CALLBACK
   #Oculta un producto en vez de eliminarlo
   def ocultar
     @producto = Producto.find(params[:id])
@@ -253,21 +251,23 @@ class ProductosController < ApplicationController
   end
 
   def show_documentos
-    producto = params[:id]
+    @producto = Producto.find(params[:id])
     if current_usuario.admin > 0 
-      @documentos = get_documentos(producto, true)
+      @documentos = get_documentos(@producto.id, true)
     else
-      @documentos = get_documentos(producto, false)
+      @documentos = get_documentos(@producto.id, false)
     end
     render :layout => false
   end
 
   def show_importadores
-    @importadores = Importador.where(:productos_id => params[:id])
+    @producto = Producto.find(params[:id])
+    @importadores = @producto.importadors
     render :layout => false
   end
 
   def show_presentaciones
+    @producto = Producto.find(params[:id])
     @presentaciones = Presentacion.where(:productos_id => params[:id])
     render :layout => false
   end

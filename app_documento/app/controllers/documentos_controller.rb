@@ -1,6 +1,6 @@
 #encoding: UTF-8
 class DocumentosController < ApplicationController
-  before_filter :is_admin, :only => [:new, :create, :destroy, :index, :index_usuario]
+  before_filter :is_admin, :only => [:new, :create, :destroy, :index, :index_usuario, :generar_tramitado]
   # GET /documentos
   # GET /documentos.json
   def index
@@ -42,6 +42,8 @@ class DocumentosController < ApplicationController
     @documento = Documento.new
     @documento.TipoDocumento = TipoDocumento.new
     @tipos = get_tipoDoc
+
+    @producto_id = params[:producto_id]
     flash[:accion] = "Agregar Documento"
     flash.keep
 
@@ -53,11 +55,18 @@ class DocumentosController < ApplicationController
 
   # Accion para generar un documento sobre una solicitud
   def generar_tramitado
-    @documento = Documento.new
-    @documento.TipoDocumento_id = params[:tipo_id]
-    @documento.producto_id = params[:producto_id]
+    @documento               = Documento.new
+    @documento.TipoDocumento = TipoDocumento.new
+
+    @tramite = Tramite.find(params[:tramite_id])
+    @tramite.update_attribute("documento", true)
+    @producto_id             = params[:producto_id]
+    @tramitando              = true
+    @descripcion             = TipoDocumento.find(params[:tipo_id]).descripcion
+    puts @tramitado
     flash[:accion] = "Agregar Documento"
     flash.keep
+    render :action => :new
   end
 
   # GET /documentos/1/edit
@@ -74,29 +83,16 @@ class DocumentosController < ApplicationController
     if doc.any?
       @documento.TipoDocumento_id = doc[0].id
     end
-    @documento.producto_id = session[:producto]
-    if params[:producto_id] != nil
-      post '================================'
-      post 'DESDE SOLICITUD'
-      post params[:producto_id]
-      post '================================'
-      @producto = Producto.find(params[:producto_id])
-    else
-      puts '================================'
-      puts 'DESDE PRODUCTO'
-      puts params[:producto_id]
-      puts '================================'
-      @producto = Producto.find(session[:producto])
-    end
 
+    @producto = Producto.find(@documento.producto_id)
     respond_to do |format|
       if @documento.save
-        session[:producto] = nil
           format.html { redirect_to @producto, notice: 'Documento creado', :format => :pdf }
           format.json { render json: @producto, status: :created, location: @documento }
       else
         @tipos = get_tipoDoc
         @documento.TipoDocumento = TipoDocumento.new
+        @producto_id = @producto.id
         flash.keep
         format.html { render action: "new" }
         format.json { render json: @documento.errors, status: :unprocessable_entity }

@@ -4,6 +4,7 @@ AppDocumento::Application.routes.draw do
   post "productos/show_documentos"
   post "productos/show_importadores"
   post "productos/show_presentaciones"
+  post "importadors/seleccionar_existente"
 
   post "productos/ocultar" 
 

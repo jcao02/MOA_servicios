@@ -38,6 +38,6 @@
 </div>
 <% if current_usuario.admin > 0 %>
   <button class="btn btn-default add-stuff">
-    <%= link_to 'Agregar presentación', new_presentacion_path %>
+    <%= link_to 'Agregar presentación', new_presentacion_path(:producto_id => @producto.id) %>
   </button>
 <% end %>

@@ -67,14 +67,14 @@
       <% else %>
         <tr>
             <td>
-              <button>
+              <button class="btn btn-default">
                 <%= link_to 'Editar', edit_tramite_path(@tramite) %>
               </button>
             </td>
-        <% if @req_faltantes == 0 %>
+        <% if @req_faltantes == 0 and not @tramite.producto.nil? and not @tramite.documento%>
           <td>
-            <button>
-              <%= link_to 'Agregar MALasdasd Documento', new_documento_path( :producto_id => @tramite.producto )%>
+            <button class="btn btn-default" onclick="$('#generar-tramitado-form').submit()">
+              Agregar documento asociado
             </button>
           </td>
         <% else %>
@@ -86,7 +86,13 @@
     </table>
     <% end %>
   </div>
-  <div class="span2"></div>
+  <div class="span2">
+    <%= form_tag '/documentos/generar_tramitado', :method => :post, :id => "generar-tramitado-form" do %>
+      <%= hidden_field_tag :tipo_id, @tramite.TipoDocumento.id %>
+      <%= hidden_field_tag :producto_id, @tramite.producto.id %>
+      <%= hidden_field_tag :tramite_id, @tramite.id %>
+    <% end %>
+  </div>
   <div class="span4">
     <h3>Requisitos</h3>
     <table class="table table-hover table-striped">

@@ -18,7 +18,7 @@ class ImportadorsController < ApplicationController
   # GET /importadors/1.json
   def show
     @importador = Importador.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @importador }
@@ -29,6 +29,7 @@ class ImportadorsController < ApplicationController
   # GET /importadors/new.json
   def new
     @importador = Importador.new
+    @productos_id = params[:producto_id]
     flash[:accion] = "Nuevo importador"
     respond_to do |format|
       format.html # new.html.erb
@@ -44,16 +45,15 @@ class ImportadorsController < ApplicationController
   # POST /importadors
   # POST /importadors.json
   def create
+    @producto   = Producto.find(params[:importador][:productos_id])
     @importador = Importador.new(params[:importador])
-    @producto = Producto.find(session[:producto])
-    @importador.productos << @producto
-
     respond_to do |format|
       if @importador.save
-        session[:producto] = nil
+        @producto.importadors << @importador
         format.html { redirect_to @producto, notice: 'Importador was successfully created.' }
         format.json { render json: @importador, status: :created, location: @importador }
       else
+        @productos_id = @producto.id
         flash.keep
         format.html { render action: "new" }
         format.json { render json: @importador.errors, status: :unprocessable_entity }
@@ -88,5 +88,17 @@ class ImportadorsController < ApplicationController
       format.html { redirect_to producto }
       format.json { head :no_content }
     end
+  end
+
+  # Selecciona un importador existente para un producto
+  def seleccionar_existente
+    importador = Importador.find(params[:importador_id])
+    @producto  = Producto.find(params[:producto_id])
+    @producto.importadors << importador
+
+    @importadores = @producto.importadors
+
+    render "productos/show_importadores", :layout => false
+
   end
 end

@@ -4,7 +4,14 @@
   <%=flash[:accion]%>
 </legend>
 <%= semantic_form_for @presentacion do |f| %>
-    <table>
+  <table>
+    <% if flash[:accion] == "Nueva Presentación" %>
+    <tr>
+      <td>
+        <%= f.input :productos_id, :as => :hidden, :value => @productos_id %>
+      </td>
+    </tr>
+    <% end %> 
         <tr>
           <td>
             <%= f.input :cpe, :label => "Nº CPE"%>

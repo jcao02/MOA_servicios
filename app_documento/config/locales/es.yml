@@ -110,6 +110,7 @@ es:
       greater_than_or_equal_to: Valor debe ser mayor o igual que %{count}.
       inclusion: No está incluído en la lista.
       invalid: Valor inválido.
+      not_a_date: Fecha inválida
       less_than: Valor debe ser menor que %{count}.
       less_than_or_equal_to: Valor debe ser menor o igual que %{count}.
       not_a_number: Campo debe ser un número.

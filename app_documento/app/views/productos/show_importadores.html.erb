@@ -40,7 +40,8 @@
 </div>
 <% if current_usuario.admin > 0 %>
   <button class="btn btn-default add-stuff">
-    <%= link_to 'Agregar importador', new_importador_path %>
+    <%= link_to 'Agregar nuevo importador', new_importador_path(:producto_id => @producto.id) %>
   </button>
+  <button class="btn btn-default add-stuff" onclick='$("#importador-existente").dialog({"title":"Importadores"})'>Agregar importador existente</button>
 <% end %>
 

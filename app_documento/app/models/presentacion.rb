@@ -5,7 +5,7 @@ class Presentacion < ActiveRecord::Base
   belongs_to :producto
 
   #Atributos accesibles para el modelo  
-  attr_accessible :cpe, :empaque, :fecha_vencimiento, :peso_escurrido, :peso_neto
+  attr_accessible :cpe, :empaque, :fecha_vencimiento, :peso_escurrido, :peso_neto, :productos_id
 
   #Validaciones cpe
   validates :cpe, presence: true, uniqueness: true

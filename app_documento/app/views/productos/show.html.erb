@@ -132,8 +132,17 @@
   </div>
     <% if current_usuario.admin > 0 %>
       <button class="btn btn-default add-stuff">
-        <%= link_to 'Agregar documento', new_documento_path %>
+        <%= link_to 'Agregar documento', new_documento_path(:producto_id => @producto.id) %>
       </button>
     <% end %>
   </div>
-<div class="span1"></div>
+  <div class="span1">
+    <div id="importador-existente" style="display:none;">
+      <%= form_tag '/importadors/seleccionar_existente', :method => :post, :remote => true, :id => "importador-existente-form" do %>
+        <%= hidden_field_tag :producto_id, @producto.id %>
+        <%= select_tag :importador_id, options_for_select(@importadores_todos.map{|x| [x.nombre, x.id] })%>
+        <%= submit_tag "Enviar", :button_html =>  {:disable_with => "Enviando"} %>
+      <% end %>
+    </div>
+
+  </div>
