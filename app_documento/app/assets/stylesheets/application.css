@@ -8,6 +8,20 @@
  *= require_tree .
 */
 
+* {
+    font-family: 'segoe print';
+}
+
+button {
+    font-family: 'segoe print' !important;
+
+}
+.serious-text,
+.label {
+    font-family: helvetica;
+}
+
+
 #wrapper {
   background-color: white;
   -webkit-box-shadow: 0 0 30px;
@@ -35,3 +49,18 @@ html>body div.tableContainer {
   margin-top: 30px;
 }
 
+.dataTables_scrollBody {
+  height: 300px !important;
+
+}
+
+.table {
+  max-height: 300px;
+}
+
+/*FONT*/
+
+@font-face {
+    font-family: segoe print;
+    src: url('Segoe\ Print.ttf') format('truetype');
+}

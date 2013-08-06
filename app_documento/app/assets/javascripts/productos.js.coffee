@@ -64,7 +64,7 @@ $(document).ready ->
       $("#body_prod").html xhr.responseText
   
   #Por procedencia
-  $("#Procedencia_prod").click (event) ->
+  $("#Procedencia_prod tbody").click (event) ->
     $("#arrow_proc").remove()
     imagen = '<img id="arrow_proc" src="/assets/flecha_select.png"/>'
     $(event.target).append imagen
@@ -78,7 +78,7 @@ $(document).ready ->
       $("#body_prod").html xhr.responseText
 
   #Por tipo
-  $("#Tipo_prod").click (event) ->
+  $("#Tipo_prod tbody").click (event) ->
     $("#arrow_tipo").remove()
     imagen = '<img id="arrow_tipo" src="/assets/flecha_select.png"/>'
     $(event.target).append imagen

@@ -17,11 +17,11 @@
       <legend>Iniciar Sesión</legend>
       <span style="color:red;"><%= flash[:alert] %></span>
       <div class="form-group">
-        <%= f.label :Login %>
+        <%= f.label :Usuario %>
         <%= f.text_field :login, :autofocus => true, :class => "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :Contrasena %>
+        <%= f.label :Contraseña %>
         <%= f.password_field :password %>
       </div>
       <% if devise_mapping.rememberable? -%>
@@ -30,7 +30,7 @@
           <%= f.label :recordarme %>
         </div>
       <% end -%>
-      <%= f.submit "Iniciar Sesion", :class => "btn btn-defaulbtn btn-defaultt" %>
+      <%= f.submit "Iniciar Sesión", :class => "btn btn-defaulbtn btn-defaultt" %>
       <div><%= link_to '¿Olvidaste tu contraseña?', ask_password_usuarios_path, :remote => true, :id => 'ask_password'%></div>
       <div id="dialog_recover" style="display:none;"></div>
     </fieldset>

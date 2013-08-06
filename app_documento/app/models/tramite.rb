@@ -38,12 +38,17 @@ class Tramite < ActiveRecord::Base
 
   # Metodo que registra el log de creacion de tramite
   def registrar_log(tipo)
+    if self.producto.nil? 
+      nombre = "Producto no registrado"
+    else
+      nombre = self.producto.nombre
+    end
     logt = Logtramite.new(:usuario_id => self.usuario_id,
                           :tramite_id => self.id, 
                           :tipo => tipo, 
                           :nusuario => self.usuario.nombre, 
                           :ntipodocumento => self.TipoDocumento.descripcion, 
-                          :nproducto => self.producto.nombre, 
+                          :nproducto => nombre, 
                           :producto_id => self.producto_id)
 
     return logt.save

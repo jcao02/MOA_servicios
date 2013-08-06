@@ -19,7 +19,7 @@
             <b>RIF:</b> <%= i.rif %>
             </p>
             <p class="list-group-item-text">
-            <b>Pais de procedencia:</b> <%= i.pais_origen %>
+            <b>Pais de procedencia:</b> <%= Carmen::Country.coded(i.pais_origen).name %>
             </p>
             <p class="list-group-item-text">
             <b>Correo:</b> <%= i.mail %>

@@ -22,10 +22,9 @@ class VencidoController < ApplicationController
 
     if tramite.save and alerta.update_attributes({:tramite => true})            
       session[:alerts] = Vencidos.order("fecha").where(:usuario_id => current_usuario.id)
-      render :index
+      render :layout => false
     else
       flash[:notice] = "No se pudo generar el tramite sobre la alerta, intente más tarde"
-      render :index
     end
 
   end

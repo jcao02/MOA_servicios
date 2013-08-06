@@ -35,7 +35,7 @@
             <% if alert.tramite %>
               Tramitando...
             <% elsif alert.active %>
-              <%= form_tag '/vencido/tramitar_documento', :id => "alert_form#{i}" do %>
+              <%= form_tag '/vencido/tramitar_documento', :remote => true, :method => :post, :id => "alert_form#{i}" do %>
                 <%= hidden_field_tag 'id', alert.id%>
                 <%= submit_tag 'Tramitar', :class => "btn btn-default"%>
               <% end %>
