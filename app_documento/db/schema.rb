@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130805203300) do
+ActiveRecord::Schema.define(:version => 20130806023734) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -204,10 +204,11 @@ ActiveRecord::Schema.define(:version => 20130805203300) do
     t.string   "tipo"
     t.integer  "producto_id"
     t.boolean  "active",      :default => true
-    t.boolean  "tramite",     :default => false
+    t.boolean  "tramitando",  :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.date     "fecha"
+    t.integer  "tramite_id"
   end
 
   create_table "versions", :force => true do |t|

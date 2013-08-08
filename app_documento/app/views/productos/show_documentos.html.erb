@@ -3,9 +3,9 @@
 <button class="btn btn-default active pull-right">Documentos</button>
 <div class="tableContainer">
 <table class="table extra-table table-hover">
+    <% @documentos.each do |d|%>
 <tr>
   <td>
-    <% @documentos.each do |d|%>
     <% if current_usuario.admin > 0 %>
       <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
       <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar documento"), d[0], :method => :delete, 
@@ -21,11 +21,7 @@
     <% end %>
   </td>
 </tr>
-<tr>
-  <td>
 <% end %>
-  </td>
-</tr>
 </table>
 </div>
 <% if current_usuario.admin > 0 %>

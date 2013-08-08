@@ -20,11 +20,12 @@ class VencidoController < ApplicationController
       :TipoDocumento_id => tipodoc_id
     )
 
-    if tramite.save and alerta.update_attributes({:tramite => true})            
+    if tramite.save and alerta.update_attributes({:tramitando => true, :tramite_id => tramite.id})            
       session[:alerts] = Vencidos.order("fecha").where(:usuario_id => current_usuario.id)
       render :layout => false
     else
       flash[:notice] = "No se pudo generar el tramite sobre la alerta, intente más tarde"
+      render :layout => false
     end
 
   end
@@ -32,12 +33,13 @@ class VencidoController < ApplicationController
   #Activar alerta (si estaba desactivada)
   def activar_alerta
     alerta = Vencidos.find(params[:id])
+    @alertaid = params[:id]
     if alerta.update_attributes({:active => true})
       session[:alerts] = Vencidos.order("fecha").where(:usuario_id => current_usuario.id)
-      render :index
+      render :layout => false
     else
       flash[:notice] = "No se pudo activar la alerta, intenta mas tarde"
-      render :index
+      render :layout => false
     end
   end
 

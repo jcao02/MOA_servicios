@@ -87,7 +87,7 @@
     <% end %>
   </div>
 
-  <div class="span2">
+  <div class="span1">
   <%= form_tag '/productos/show_importadores', :method => :post, :remote => true, :id => "show-importadores" do %>
     <%= hidden_field_tag :id, @producto.id %>
   <% end %>
@@ -99,15 +99,15 @@
   <% end %>
   </div>
 
-  <div id="extra-productos" class="span4">
+  <div id="extra-productos" class="span5">
     <button class="btn btn-default pull-right" onclick="$('#show-importadores').submit()">Importadores</button>
     <button class="btn btn-default pull-right" onclick="$('#show-presentaciones').submit()">Presentaciones</button>
     <button class="btn btn-default active pull-right">Documentos</button>
     <div class="tableContainer">
     <table class="table extra-table table-hover">
+      <% @documentos.each do |d|%>
       <tr>
         <td>
-      <% @documentos.each do |d|%>
           <% if current_usuario.admin > 0 %>
             <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
             <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar documento"), d[0], :method => :delete, 
@@ -123,8 +123,6 @@
           <% end %>
         </td>
       </tr>
-      <tr>
-        <td>
       <% end %>
         </td>
       </tr>

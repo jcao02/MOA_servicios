@@ -32,15 +32,19 @@
             <%= alert.fecha %>
           </td>
           <td id="alert_state<%=i%>">
-            <% if alert.tramite %>
-              Tramitando...
+            <% if alert.tramitando %>
+              <% if Tramite.find(alert.tramite_id).estado == 3 %>
+                Tramitado
+              <% else %>
+                Tramitando...
+              <% end %>
             <% elsif alert.active %>
               <%= form_tag '/vencido/tramitar_documento', :remote => true, :method => :post, :id => "alert_form#{i}" do %>
                 <%= hidden_field_tag 'id', alert.id%>
                 <%= submit_tag 'Tramitar', :class => "btn btn-default"%>
               <% end %>
             <% else %>
-              <%= form_tag '/vencido/activar_alerta' do %>
+              <%= form_tag '/vencido/activar_alerta', :remote => true, :method => :post, :id => "activate_form#{i}" do %>
                 <%= hidden_field_tag 'id', alert.id%>
                 <%= submit_tag 'Activar', :class => "btn btn-default" %>
               <% end %>

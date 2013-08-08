@@ -1,0 +1,4 @@
+<%= form_tag '/vencido/tramitar_documento', :remote => true, :method => :post, :id => "alert_form#{i}" do %>
+  <%= hidden_field_tag 'id', @alertid%>
+  <%= submit_tag 'Tramitar', :class => "btn btn-default"%>
+<% end %>
