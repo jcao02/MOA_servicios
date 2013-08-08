@@ -52,7 +52,7 @@
         <tr>
           <td>
             <center>
-              <%= f.action :submit, :label => flash[:accion] %>
+              <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."} %>
             </center>
 
           </td>

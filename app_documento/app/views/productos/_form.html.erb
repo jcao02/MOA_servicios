@@ -37,8 +37,14 @@
         <td></td>
       </tr>
       <tr>
-          <td><%= f.action :submit, :label => flash[:accion] %></td>
-          <td><button type="button" class="btn btn-default"><%= link_to 'Volver', :back %></button></td>
+          <td>
+            <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."} %>
+          </td>
+          <td>
+            <button type="button" class="btn btn-default">
+              <%= link_to 'Volver', :back %>
+            </button>
+          </td>
       </tr>
     </tbody>
   </table>

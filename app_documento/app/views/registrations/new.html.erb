@@ -52,7 +52,7 @@
     <%= f.select :admin, [['Cliente', 0 ], ['Admin', 1], ['Super-Admin', 2]] %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit, :disable_with => "Enviando..." %>
   </div>
 <% end %>
 <%= render "devise/shared/links" %>

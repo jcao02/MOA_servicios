@@ -30,7 +30,7 @@
           <%= f.label :recordarme %>
         </div>
       <% end -%>
-      <%= f.submit "Iniciar Sesión", :class => "btn btn-defaulbtn btn-defaultt" %>
+      <%= f.submit "Iniciar Sesión", :class => "btn btn-defaulbtn btn-defaultt", :disable_with => "Conectando..." %>
       <div><%= link_to '¿Olvidaste tu contraseña?', ask_password_usuarios_path, :remote => true, :id => 'ask_password'%></div>
       <div id="dialog_recover" style="display:none;"></div>
     </fieldset>

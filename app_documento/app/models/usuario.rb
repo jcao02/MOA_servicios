@@ -21,8 +21,8 @@ class Usuario < ActiveRecord::Base
   
   #Log para usuarios
   has_many :logsesions
-  has_many :usuarios, :through => :logsesions, :source => :superu 
   has_many :usuarios, :through => :logsesions, :source => :usuario
+  has_many :usuarios, :through => :logsesions, :source => :superu 
   
 
   # Include default devise modules. Others available are:
@@ -88,11 +88,20 @@ class Usuario < ActiveRecord::Base
   # METODOS
   # Metodo que registra el log de creacion de usuario
   def registrar_log(tipo)
+    if Usuario.current.nil? 
+      nombre = "Script"
+      superu = nil
+    else
+      nombre = Usuario.current.nombre
+      superu = Usuario.current.id
+    end
+  
     logs = Logsesion.new(:usuario_id => self.id, 
-                         :superu_id => Usuario.current.id,
+                         :superu_id => superu,
                          :tipo => tipo, 
                          :nusuario => self.nombre, 
-                         :nsuperu => Usuario.current.nombre)
+                         :nsuperu => nombre)
+
     return logs.save
   end
 
