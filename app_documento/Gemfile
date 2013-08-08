@@ -84,4 +84,4 @@ gem 'gon'
 #Gema para tareas asincronas con cron
 gem 'whenever', :require => false
 
-gem 'paper_trail'
+gem "nested_form"

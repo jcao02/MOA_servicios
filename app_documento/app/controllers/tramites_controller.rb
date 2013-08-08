@@ -18,7 +18,8 @@ class TramitesController < ApplicationController
         @tramites = Tramite.all
     end
 
-    @documentos = TipoDocumento.all
+    @documentos = TipoDocumento.order('id DESC').all
+    @documentos = @documentos.take(30)
 
     respond_to do |format|
       format.html # index.html.erb

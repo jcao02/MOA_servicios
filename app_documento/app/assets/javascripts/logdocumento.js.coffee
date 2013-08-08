@@ -9,6 +9,7 @@ dataTable_opc =
   bPagination    : false
   bScrollAutoCss : true
   sScrollY       : "310px"
+  bSort           : false
   oLanguage :
     sSearch      : "Búsqueda"
     sInfo        : ""
