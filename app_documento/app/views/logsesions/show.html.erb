@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Usuario:</b>
+  <%= @logsesion.usuario_id %>
+</p>
+
+<p>
+  <b>Super:</b>
+  <%= @logsesion.super_id %>
+</p>
+
+<p>
+  <b>Tipo:</b>
+  <%= @logsesion.tipo %>
+</p>
+
+<p>
+  <b>Nusuario:</b>
+  <%= @logsesion.nusuario %>
+</p>
+
+<p>
+  <b>Nsuper:</b>
+  <%= @logsesion.nsuper %>
+</p>
+
+
+<%= link_to 'Edit', edit_logsesion_path(@logsesion) %> |
+<%= link_to 'Back', logsesions_path %>

@@ -1,0 +1,51 @@
+<div class="span1"></div>
+<div class="span10">
+<h3> Usuario: <%= @usuario.login %></h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Administrador
+      </th>
+      <th>
+        Usuario
+      </th>
+      <th style="text-align: center;">
+        Acción
+      </th>
+      <th style="text-align: center;">
+        Fecha
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |l|%>
+      <tr>
+        <td>
+          <% if not Usuario.find(l.superu_id).nil? %>
+            <%= link_to Usuario.find(l.superu_id).nombre, Usuario.find(l.superu_id) %>
+          <% else %>
+            <%= l.nsuperu %>
+          <% end %>
+        </td>
+        <td>
+          <% if not l.usuario.nil? %>
+            <%= link_to l.nusuario, l.usuario %>
+          <% else %>
+            <%= l.nusuario %>
+          <% end %>
+        </td>
+        <td style="text-align: center; width:80px">
+          <%= l.tipo %>
+        </td>
+        <td style="text-align: center;">
+          <%= l.created_at.strftime("%I:%M%p")%>
+          <%= l.created_at.day %>/<%= l.created_at.month %>/<%= l.created_at.year %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<button type="button" class="btn btn-default"><%= link_to 'Volver', :back %></button>
+</div>
+<div class="span1"></div>

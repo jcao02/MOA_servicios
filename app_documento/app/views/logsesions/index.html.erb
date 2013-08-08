@@ -1,0 +1,42 @@
+<div class="span1"></div>
+<div class="span10">
+<h3>Registro Usuarios</h3>
+<div>
+  <table class="table table-striped" id="tabla_show_log_doc">
+    <thead>
+      <th>Administrador</th>
+      <th>Usuario</th>
+      <th style="text-align: center;">Acción</th>
+      <th style="text-align: center;">Fecha</th>
+    </thead>
+    <tbody>
+      <% @logsesions.each do |l| %>
+          <tr>
+            <td style="width:300px">
+              <% if l.superu_id.nil? %>
+                  <%= l.nsuperu %>
+              <% else %>
+                  <%= link_to l.nsuperu, (Usuario.find(l.superu_id))%>
+              <% end %>
+            </td>
+            <td style="width:300px">
+              <% if l.usuario.nil? %>
+                  <%= l.nusuario %>
+              <% else %>
+                  <%= link_to l.nusuario, Usuario.find(l.usuario_id) %>
+              <% end %>
+            </td>
+            <td style="width:80px;text-align: center;">
+              <%= l.tipo %>
+            </td>
+            <td style="text-align: center;">
+              <%= l.created_at.strftime("%I:%M%p")%>
+              <%= l.created_at.day%>/<%= l.created_at.month%>/<%= l.created_at.year%>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="span1"></div>
