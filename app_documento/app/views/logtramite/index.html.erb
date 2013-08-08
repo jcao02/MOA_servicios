@@ -1,14 +1,14 @@
 <div class="span1"></div>
 <div class="span10">
-<h3>Log Solicitudes</h3>
+<h3>Registro Solicitudes</h3>
 <div>
   <table class="table table-striped" id="tabla_show_log_tram">
     <thead>
       <th>Usuario</th>
       <th>Producto</th>
       <th>Documento</th>
-      <th>Acción</th>
-      <th>Fecha</th>
+      <th style="text-align: center;">Acción</th>
+      <th style="text-align: center;">Fecha</th>
     </thead>
 
     <tbody>
@@ -41,10 +41,10 @@
           <% end %>
           <% end %>
         </td>
-        <td style="width:200px">
+        <td style="width:200px;text-align: center;">
           <%= logtramite.tipo %>
         </td>
-        <td>
+        <td style="text-align: center;">
           <%= logtramite.created_at.strftime("%I:%M%p")%>
           <%= logtramite.created_at.day%>/<%= logtramite.created_at.month%>/<%= logtramite.created_at.year%>
         </td>

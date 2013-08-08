@@ -48,7 +48,7 @@ class Producto < ActiveRecord::Base
   validates :pais_elaboracion, presence: true, format: { with: VALID_STRING_REGEX }
 
   # METODOS
-  # Metodo que registra el log de creacion de tramite
+  # Metodo que registra el log de creacion de producto
   def registrar_log(tipo)
     logp = Logproducto.new(:usuario_id => self.usuario_id, 
                            :producto_id => self.id, 

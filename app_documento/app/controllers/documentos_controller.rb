@@ -177,6 +177,4 @@ class DocumentosController < ApplicationController
       end
       return tipos
     end
-
-
 end

@@ -29,6 +29,8 @@ AppDocumento::Application.routes.draw do
 
 
   #Enrutamiento para los logs
+  get "logsesions/index"
+
   get "logtramite/index"
 
   get "logsolicitud/index"
@@ -36,6 +38,8 @@ AppDocumento::Application.routes.draw do
   get "logdocumento/index"
 
   get "logproductos/index"
+
+  get "logsesions/show_by_user"
 
   get "logdocumento/show_by_user"
 
