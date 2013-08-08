@@ -7,10 +7,9 @@
       <th>Usuario</th>
       <th>Producto</th>
       <th>Documento</th>
-      <th>Acción</th>
-      <th>Fecha</th>
+      <th style="text-align: center;">Acción</th>
+      <th style="text-align: center;">Fecha</th>
     </thead>
-
     <tbody>
       <% @logdocumentos.each do |logdocumento| %>
       <tr>
@@ -23,7 +22,7 @@
           <% end %>
           <% end %>
         </td>
-        <td style="width:200px">
+        <td style="width:250px">
           <% if logdocumento.producto.nil? %>
           <%= logdocumento.nproducto %>
           <% else %>
@@ -32,7 +31,7 @@
           <% end %>
           <% end %>
         </td>
-        <td style="width:200px">
+        <td style="width:250px">
           <% if logdocumento.documento.nil? %>
           <%= logdocumento.ndocumento %>
           <% else %>
@@ -41,10 +40,10 @@
           <% end %>
           <% end %>
         </td>
-        <td style="width:80px">
+        <td style="width:80px;text-align: center;">
           <%= logdocumento.tipo %>
         </td>
-        <td>
+        <td style="text-align: center;">
           <%= logdocumento.created_at.strftime("%I:%M%p")%>
           <%= logdocumento.created_at.day%>/<%= logdocumento.created_at.month%>/<%= logdocumento.created_at.year%>
         </td>

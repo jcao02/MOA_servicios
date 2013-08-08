@@ -1,13 +1,13 @@
 <div class="span1"></div>
 <div class="span10">
-<h3>Log Productos</h3>
+<h3>Registro Productos</h3>
 <div>
   <table class="table table-striped" id="tabla_show_log_prod">
     <thead>
-      <th>Usuario</th>
-      <th>Producto</th>
-      <th>Acción</th>
-      <th>Fecha</th>
+      <th style="width:150px">Usuario</th>
+      <th style="width:530px">Producto</th>
+      <th style="width:80px;text-align: center;">Acción</th>
+      <th style="text-align: center;">Fecha</th>
     </thead>
 
     <tbody style="height:320">
@@ -22,7 +22,7 @@
           <% end %>
           <% end %>
         </td>
-        <td style="width:400px">
+        <td style="width:530;">
           <% if logproducto.producto.nil? %>
           <%= logproducto.nproducto %>
           <% else %>
@@ -31,10 +31,10 @@
           <% end %>
           <% end %>
         </td>
-        <td style="width:80px">
+        <td style="width:80px; text-align: center;">
           <%= logproducto.tipo %>
         </td>
-        <td>
+        <td style="text-align: center;">
           <%= logproducto.created_at.strftime("%I:%M%p")%>
           <%= logproducto.created_at.day%>/<%= logproducto.created_at.month%>/<%= logproducto.created_at.year%>
         </td>

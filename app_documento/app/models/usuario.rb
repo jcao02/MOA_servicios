@@ -18,8 +18,12 @@ class Usuario < ActiveRecord::Base
   has_many :tramites, :through => :logtramites
   has_many :productos, :through => :logtramites
   has_many :vencidoss
-  #Para manejo de log del usuario
-  has_paper_trail
+  
+  #Log para usuarios
+  has_many :logsesions
+  has_many :usuarios, :through => :logsesions, :source => :usuario
+  has_many :usuarios, :through => :logsesions, :source => :superu 
+  
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -79,6 +83,26 @@ class Usuario < ActiveRecord::Base
 
   def self.current=(usuario)
     Thread.current[:usuario] = usuario
+  end
+  
+  # METODOS
+  # Metodo que registra el log de creacion de usuario
+  def registrar_log(tipo)
+    if Usuario.current.nil? 
+      nombre = "Script"
+      superu = nil
+    else
+      nombre = Usuario.current.nombre
+      superu = Usuario.current.id
+    end
+  
+    logs = Logsesion.new(:usuario_id => self.id, 
+                         :superu_id => superu,
+                         :tipo => tipo, 
+                         :nusuario => self.nombre, 
+                         :nsuperu => nombre)
+
+    return logs.save
   end
 
 end

@@ -1,5 +1,6 @@
 <div class="span1"></div>
 <div class="span10">
+<h3> Producto: <%= @logs.first.nproducto %></h3>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,40 +8,44 @@
         Usuario
       </th>
       <th>
-        Accion
-      </th>
-      <th>
         Producto
+      </th>
+      <th style="text-align: center;">
+        Acción
+      </th>
+      <th style="text-align: center;">
+        Fecha
       </th>
     </tr>
   </thead>
   <tbody>
     <% @logs.each do |l|%>
       <tr>
-        <% if not l.usuario.nil? %>
-          <td>
+          <td style="width:150px">
+          <% if not l.usuario.nil? %>
             <%= link_to l.nusuario, l.usuario %>
-          </td>
-        <% else %>
-          <td>
+          <% else %>
             <%= l.nusuario %>
-          </td>
-        <% end %>
-        <td>
+          <% end %>
+        </td>
+        <td style="width:530px">
+          <% if not l.producto.nil? %>
+            <%= link_to l.nproducto, l.producto %>
+          <% else %>
+            <%= l.nproducto %>
+          <% end %>
+        </td>
+        <td style="text-align: center; width:80px">
           <%= l.tipo %>
         </td>
-        <% if not l.producto.nil? %>
-          <td>
-            <%= link_to l.nproducto, l.producto %>
-          </td>
-        <% else %>
-          <td>
-            <%= l.nproducto %>
-          </td>
-        <% end %>
+        <td style="text-align: center;">
+          <%= l.created_at.strftime("%I:%M%p")%>
+          <%= l.created_at.day %>/<%= l.created_at.month %>/<%= l.created_at.year %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<button type="button" class="btn btn-default"><%= link_to 'Volver', :back %></button>
 </div>
 <div class="span1"></div>

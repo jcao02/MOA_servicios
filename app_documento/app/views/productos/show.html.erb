@@ -48,7 +48,7 @@
       <td><%= @producto.fabricante %></td>
     </tr>
     <tr>
-      <td><b>Codigo arancelario:</b></td>
+      <td><b>Código arancelario:</b></td>
       <td><%= @producto.codigo_arancelario %></td>
     </tr>
     <tr>
@@ -57,7 +57,7 @@
     </tr>
     <% if not @producto.alimento %>
       <tr>
-        <td><b>Grado Alcohólico</b></td>
+        <td><b>Grado Alcohólico:</b></td>
         <td><%=@producto.grado_alcoholico%></td>
       </tr>
     <% end %>
@@ -80,6 +80,7 @@
           <li><%= link_to 'Ver registro', logproductos_show_by_user_path(:id => @producto.id) %></li>
           <li><%= link_to 'Eliminar', @producto, method: :delete, data: { confirm: '¿Seguro desea eliminar este producto?'} %></li>
         </ul>
+        <button type="button" class="btn btn-default"><%= link_to 'Volver', :back %></button>
       </div>
       <%= form_tag productos_ocultar_path, method: :post, :id => "hide-form" do %>
       <%= hidden_field_tag :id, @producto.id %>

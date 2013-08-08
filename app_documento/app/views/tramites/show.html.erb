@@ -89,7 +89,7 @@
   <div class="span2">
     <%= form_tag '/documentos/generar_tramitado', :method => :post, :id => "generar-tramitado-form" do %>
       <%= hidden_field_tag :tipo_id, @tramite.TipoDocumento.id %>
-      <%= hidden_field_tag :producto_id, @tramite.producto.id %>
+      <%= hidden_field_tag :producto_id, @tramite.producto_id  %>
       <%= hidden_field_tag :tramite_id, @tramite.id %>
     <% end %>
   </div>
