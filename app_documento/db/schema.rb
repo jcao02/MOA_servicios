@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(:version => 20130807121800) do
     t.string   "nproducto"
   end
 
+  create_table "logs", :force => true do |t|
+    t.datetime "fecha_hora"
+    t.text     "descripcion"
+    t.integer  "usuario_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "logs", ["usuario_id"], :name => "index_logs_on_usuario_id"
+
   create_table "logsesions", :force => true do |t|
     t.integer  "usuario_id"
     t.integer  "superu_id"
