@@ -1,48 +1,25 @@
 <div class="span3"></div>
 <div class="span5">
-<legend>
-  <%=flash[:accion]%>
-</legend>
-<%= semantic_form_for @importador do |f| %>
-  <table>
-    <% if flash[:accion] == "Nuevo importador"%>
-    <tr>
-      <td>
+    <legend>
+      <%=flash[:accion]%>
+    </legend>
+    <%= semantic_form_for @importador, :html => { :class => "form-horizontal" } do |f| %>
+      <% if flash[:accion] == "Nuevo importador"%>
         <%= f.input :productos_id, :as => :hidden, :value => @productos_id%>
-      </td>
-    </tr>
+      <% end %>
+        <%= f.input :nombre, :label => "Nombre"%>
+        <%= f.input :rif, :label => "RIF"%>
+        <%= f.input :pais_origen, :as => :country, :label => "Procedencia"%>
+        <%= f.input :mail, :label => "E-mail"%>
+        <%= f.input :telefono, :label => "Teléfono"%>
+        <%= f.semantic_fields_for :documentos do |d| %>
+          <%= d.input :TipoDocumento_id, :as => :hidden, :input_html => { :value => 9 } %>
+          <%= d.input :producto_id, :as => :hidden, :value => @productos_id%>
+          <%= d.input :pdf, :as => :file, :label => "Inclusión de importador (Documento)" %>
+          <%= d.input :fecha_vencimiento, :as => :string, :class => "date_picker", :id => "vencimiento_inclusion", :label => "Vence" %>
+        <% end %>
+        <%= f.action :submit, :label => flash[:accion], 
+          :button_html => { :disable_with => "Enviando...", :class => "btn btn-default pull-right"} %>
     <% end %>
-      <tr>
-        <td>
-          <%= f.input :nombre, :label => "Nombre"%>
-        </td>
-        <td>
-          <%= f.input :rif, :label => "RIF"%>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.input :pais_origen, :as => :country, :label => "Procedencia"%>
-        </td>
-        <td>
-          <%= f.input :mail, :label => "E-mail"%>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.input :telefono, :label => "Teléfono"%>
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          <center>
-            <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."} %>
-          </center>
-        </td>
-      </tr>
-  </table>
-<% end %>
-</div>
-<div class="span3"></div>
+  </div>
+<div class="span4"></div>

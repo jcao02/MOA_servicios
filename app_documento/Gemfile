@@ -23,6 +23,7 @@ group :assets do
   gem "less-rails"
   gem 'formtastic-bootstrap'
   gem 'jquery-ui-bootstrap-rails'
+  gem 'bootstrap_forms'
 end
 
 gem 'jquery-rails'
@@ -85,3 +86,4 @@ gem 'gon'
 gem 'whenever', :require => false
 
 gem "nested_form"
+gem "cocoon"

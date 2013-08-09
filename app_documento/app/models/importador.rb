@@ -3,9 +3,12 @@ class Importador < ActiveRecord::Base
 
   #Definicion de relaciones de claves foraneas
   has_and_belongs_to_many :productos
+  has_many :documentos
+
+  accepts_nested_attributes_for :documentos, :reject_if => lambda { |x| x[:pdf].blank? or x[:fecha_vencimiento].blank? }
 
   #Atributos accesibles para el modelo
-  attr_accessible :mail, :nombre, :pais_origen, :rif, :telefono, :productos_id
+  attr_accessible :mail, :nombre, :pais_origen, :rif, :telefono, :productos_id, :documentos_attributes
 
   #Validaciones email
   VALID_MAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

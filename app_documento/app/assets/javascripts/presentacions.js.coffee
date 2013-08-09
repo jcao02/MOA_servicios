@@ -10,3 +10,4 @@ datepickerOpc =
 
 $(document).ready ->
   $("#presentacion_fecha_vencimiento").datepicker datepickerOpc
+  $("#presentacion_documentos_attributes_0_fecha_vencimiento").datepicker datepickerOpc

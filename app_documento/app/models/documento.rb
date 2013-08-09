@@ -4,6 +4,8 @@ class Documento < ActiveRecord::Base
     #Definicion de relaciones de claves foraneas
     belongs_to :producto
     belongs_to :TipoDocumento
+    belongs_to :importador
+    belongs_to :presentacion
 
     #Log para documentos
     has_many :logdocumentos

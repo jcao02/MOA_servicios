@@ -26,6 +26,14 @@
             <p class="list-group-item-text">
             <b>Peso escurrido:</b><%= p.peso_escurrido %>
             </p>
+            <p class="list-group-item-text">
+            <b>Inclusiones:</b>
+            </p>
+            <% p.documentos.each do |dp| %>
+            <p class="list-group-item-text">
+              * <%= link_to dp.fecha_vencimiento, dp.pdf.url, :target => "_blank" %>
+            </p>
+            <% end %>
           </div>
         </td>
       </tr>

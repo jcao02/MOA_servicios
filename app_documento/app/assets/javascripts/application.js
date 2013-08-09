@@ -17,6 +17,8 @@
 //= require jquery.formalize
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
+//= require jquery_nested_form
+//= require cocoon
 //= require jquery.ui.all
 
 $(document).ready(function() {

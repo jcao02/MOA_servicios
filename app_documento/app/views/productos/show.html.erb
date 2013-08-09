@@ -137,11 +137,11 @@
   </div>
   <div class="span1">
     <div id="importador-existente" style="display:none;">
+      <p>Debe agregar la inclusión de este importador manualmente en la sección de documentos de este producto</p>
       <%= form_tag '/importadors/seleccionar_existente', :method => :post, :remote => true, :id => "importador-existente-form" do %>
         <%= hidden_field_tag :producto_id, @producto.id %>
         <%= select_tag :importador_id, options_for_select(@importadores_todos.map{|x| [x.nombre, x.id] })%>
-        <%= submit_tag "Enviar", :button_html =>  {:disable_with => "Enviando"} %>
+        <%= submit_tag "Enviar", :button_html =>  {:disable_with => "Enviando"} , :class => "btn btn-default"%>
       <% end %>
     </div>
-
   </div>

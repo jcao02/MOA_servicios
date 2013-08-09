@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807121800) do
+ActiveRecord::Schema.define(:version => 20130809034212) do
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20130807121800) do
     t.integer  "TipoDocumento_id"
     t.boolean  "tramite"
     t.integer  "on",                :default => 1
+    t.integer  "importador_id"
+    t.integer  "presentacion_id"
   end
 
   add_index "documentos", ["producto_id"], :name => "index_documentos_on_producto_id"

@@ -29,6 +29,7 @@ class ImportadorsController < ApplicationController
   # GET /importadors/new.json
   def new
     @importador = Importador.new
+    @importador.documentos.build
     @productos_id = params[:producto_id]
     flash[:accion] = "Nuevo importador"
     respond_to do |format|

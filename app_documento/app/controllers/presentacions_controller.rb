@@ -29,6 +29,7 @@ class PresentacionsController < ApplicationController
   # GET /presentacions/new.json
   def new
     @presentacion = Presentacion.new
+    @presentacion.documentos.build
     @productos_id = params[:producto_id]
     flash[:accion] = "Nueva Presentación"
     respond_to do |format|

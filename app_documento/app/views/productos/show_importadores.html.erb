@@ -27,6 +27,15 @@
             <p class="list-group-item-text">
             <b>Teléfono:</b> <%= i.telefono %>
             </p>
+            <p class="list-group-item-text">
+            <b>Inclusiones:</b>
+            </p>
+            </p>
+            <% i.documentos.each do |di| %>
+              <p class="list-group-item-text">
+              * <%= link_to di.fecha_vencimiento, di.pdf.url, :target => "_blank" %>
+              </p>
+            <% end %>
           </div>
         </td>
       </tr>

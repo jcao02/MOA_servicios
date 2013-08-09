@@ -3,9 +3,13 @@ class Presentacion < ActiveRecord::Base
 
   #Definicion de relaciones de claves foraneas
   belongs_to :producto
+  has_many :documentos
+
+  accepts_nested_attributes_for :documentos, :reject_if => lambda{ |x| x[:pdf].blank? or x[:fecha_vencimiento].blank? }
 
   #Atributos accesibles para el modelo  
-  attr_accessible :cpe, :empaque, :fecha_vencimiento, :peso_escurrido, :peso_neto, :productos_id
+  attr_accessible :cpe, :empaque, :fecha_vencimiento, :peso_escurrido, :peso_neto, 
+                  :productos_id, :documentos_attributes
 
   #Validaciones cpe
   validates :cpe, presence: true, uniqueness: true
