@@ -84,8 +84,5 @@ gem 'gon'
 #Gema para tareas asincronas con cron
 gem 'whenever', :require => false
 
-<<<<<<< HEAD
 gem 'nested_form'
-=======
-gem "nested_form"
->>>>>>> 69c775e32db18a47cb2d508b1b77d94b4a8e898c
+

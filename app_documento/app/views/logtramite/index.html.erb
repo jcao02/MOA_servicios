@@ -16,11 +16,11 @@
       <tr>
         <td style="width:150px;">
           <% if logtramite.usuario.nil? %>
-          <%= logtramite.nusuario %>
+            <%= logtramite.nusuario %>
           <% else %>
-          <%= link_to (logtramite.usuario) do %>
-          <%= logtramite.nusuario %>
-          <% end %>
+            <%= link_to (logtramite.usuario) do %>
+              <%= logtramite.nusuario %>
+            <% end %>
           <% end %>
         </td>
         <td style="width:340px">
