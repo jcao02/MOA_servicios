@@ -8,34 +8,18 @@ dataTable_opc =
   bScrollCollapse: true
   bPagination    : false
   bScrollAutoCss : true
-  sScrollY       : "269px"
+  sScrollY       : "300px"
   oLanguage :
     sSearch      : ""
     sInfo        : ""
     sInfoFiltered: ""
     sInfoEmpty   : ""
     sZeroRecords : "No se encontraron coincidencias"
-
-dataTableM_opc =
-  bScrollInfinite: true
-  bScrollCollapse: true
-  bPagination    : false
-  bScrollAutoCss : true
-  sScrollY       : "269px"
-  oLanguage :
-    sSearch      : ""
-    sInfo        : ""
-    sInfoFiltered: ""
-    sInfoEmpty   : ""
-    sZeroRecords : "No se encontraron coincidencias"
-  oTableTools :
-    sRowSelect   : "multi"
-
-
 
 $(document).ready ->
   $("#producto_grado_alcoholico_input").hide()
   $("#productos").dataTable dataTable_opc 
+  $("#marcas").dataTable dataTable_opc
   marcasDisponibles      = $("#autocomplete").data("marcasdisponibles")
   fabricantesDisponibles = $("#autocomplete").data("fabricantesdisponibles")
   $("#producto_marca").autocomplete source : marcasDisponibles

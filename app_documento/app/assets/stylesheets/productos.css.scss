@@ -48,91 +48,23 @@ $list_selected    : rgba(116,14,0,0.8);
   border-right: 2px solid $list_selected;
 }
 #productos_wrapper{
-  .dataTables_scrollBody{
-    height: 269px !important;
-  }
   tbody{
-    tr{
-      padding:0px;
-      margin:0px;
-    }
-    td{
+   td{
       text-align:center;
     }
   }
 }
 
-#productos_wrapper, #marcas_wrapper {
-  float:left;
-  width: 250px;
-  height:300px;
-  tr{
-    height: 26px;
-    width: 302px;
-    cursor:pointer;
-  }
 
-  .rs_producto{
-    font-size: 10px;
-  }
-
-  /*Seleccion de filtro de marca*/
-  .row_selected td{
-    border: 3px solid $list_selected;
-  }
-}
 
 #productos_filter, #marcas_filter{
-  margin-top: -38px;
   input[type="text"]{
   background: url(find.png) no-repeat scroll 3px 3px;
-  padding-left:30px;
-  width: 210px;
-  height: 20px;
+  width: 225px;
   }
 }
 
 .extra-table {
   max-height: 300px;
   overflow: auto;
-}
-
-
-
-//Para las tabs
-.conf_list{
-    width: 100%;
-    margin-top: 50px !important;
-    .ui-widget-header{
-        background: white!important;
-        border: none;
-    }
-    .ui-widget-content{
-        border:none;
-    }
-}
-
-#tab-doc, #tab-imp, #tab-pre{
-    max-height: 250px;
-    overflow-y: auto;
-    ul {
-        width:250px !important;
-    }
-
-}
-.ui-tabs{
-    font-size: 11px !important;
-    ul {
-        width:400px !important;
-    }
-}
-
-.ui-tabs-nav .ui-helper-reset .ui-helper-clearfix .ui-widget-header .ui-corner-all{
-    width: 400px !important;
-    margin: 0 !important;
-}
-
-.button-intab{
-    float: right;
-    margin-right: 60px !important;
 }
