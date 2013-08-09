@@ -16,10 +16,10 @@ class RegistrationsController < Devise::RegistrationsController
 
     respond_to do |format|
       if @usuario.save
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
+        format.html { redirect_to @usuario, notice: 'Usuario creado exitosamente.' }
         format.json { render json: @usuario, status: :created, location: @usuario }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", alert: 'Usuario no pudo ser creado.' }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end

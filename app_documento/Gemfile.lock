@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/jclay/bootstrap-notify-gem.git
+  revision: 061eccf7fb0cf6105cee2622a93db513e595fbdf
+  specs:
+    bootstrap_notify (1.0.1)
+      bootstrap-sass
+      jquery-rails
+      rails (~> 3.2.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +39,8 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-sass (2.3.2.1)
+      sass (~> 3.2)
     builder (3.0.4)
     carmen (1.0.0)
       unicode_utils (~> 1.4.0)
@@ -175,6 +186,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
+  bootstrap_notify!
   carmen-rails (~> 1.0.0)
   coffee-rails (~> 3.2.1)
   country-select

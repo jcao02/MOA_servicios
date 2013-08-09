@@ -87,14 +87,14 @@ class DocumentosController < ApplicationController
     @producto = Producto.find(@documento.producto_id)
     respond_to do |format|
       if @documento.save
-          format.html { redirect_to @producto, notice: 'Documento creado', :format => :pdf }
+          format.html { redirect_to @producto, notice: 'Documento creado exitosamente.', :format => :pdf }
           format.json { render json: @producto, status: :created, location: @documento }
       else
         @tipos = get_tipoDoc
         @documento.TipoDocumento = TipoDocumento.new
         @producto_id = @producto.id
         flash.keep
-        format.html { render action: "new" }
+        format.html { render action: "new", alert: 'Documento no pudo ser creado.' }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end
@@ -106,10 +106,10 @@ class DocumentosController < ApplicationController
     @documento = Documento.find(params[:id])
     respond_to do |format|
       if @documento.update_attributes(params[:documento])
-        format.html { redirect_to @documento, notice: 'Documento actualizados.' }
+        format.html { redirect_to @documento, notice: 'Documento actualizado exitosamente.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", notice: 'Documento no actualizado.' }
+        format.html { render action: "edit", alert: 'Documento no pudo ser actualizado.' }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end
@@ -123,7 +123,7 @@ class DocumentosController < ApplicationController
     @documento.destroy
 
     respond_to do |format|
-      format.html { redirect_to producto }
+      format.html { redirect_to producto, notice: 'Documento eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end
@@ -141,9 +141,9 @@ class DocumentosController < ApplicationController
       on = 0
     end
     if doc.update_attribute("on", on)
-      redirect_to @producto, notice: "Visibilidad cambiada"
+      redirect_to @producto, notice: "Visibilidad cambiada."
     else
-      redirect_to @producto, notice: "No se puede cambiar la visibilidad"
+      redirect_to @producto, alert: "Visibilidad no cambiada."
     end
   end
 

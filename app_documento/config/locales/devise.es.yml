@@ -20,10 +20,6 @@ es:
         invalid_token: 'Token de autenticación incorrecto.'
         timeout: 'Su sesión ha expirado, por favor acceda de nuevo para continuar.'
         inactive: 'Su cuenta no ha sido activada.'
-    sessions:
-      usuario:
-        signed_in: 'Sesion iniciada.'
-        signed_out: 'Ha salido correctamente.'
     passwords:
       send_instructions: 'Recibirá un email con instrucciones para cambiar su contraseña en pocos minutos.'
       updated: 'Su contraseña ha sido modificada. Ya ha accedido a su cuenta.'

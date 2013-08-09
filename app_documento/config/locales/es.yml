@@ -2,6 +2,10 @@ es:
   devise:
     failure:
       bloqueado: "Tu cuenta está bloqueada."
+  successful:
+    messages:
+      created: "%{model} creado exitosamente."
+      updated: "%{model} actualizado exitosamente."
   date:
     abbr_day_names:
     - dom

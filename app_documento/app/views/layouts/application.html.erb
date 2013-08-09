@@ -19,6 +19,11 @@
           <div class="span9">
             <%= render 'layouts/header' %>
             <%= render 'layouts/navigation' %>
+            <div id="deletesuccess" style="text-align:center;color:white;width:350px">
+              <p class="notice" style="background:rgba(68,217,74,0.8);padding-left: 60px;">
+                <%= notice %>
+              </p>
+            </div>
           </div>
         </div>
       <% end %>

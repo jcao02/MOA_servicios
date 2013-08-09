@@ -22,10 +22,6 @@ class Producto < ActiveRecord::Base
   has_many :vencidoss
   has_and_belongs_to_many :importadors
   
-
-  #Para manejo de log del usuario
-  #has_paper_trail
-  
   # Atributos accesibles para el modelo
   attr_accessible :registro_sanitario, :codigo_arancelario, :alimento, :fabricante, :marca, :nombre
   attr_accessible :pais_elaboracion, :grado_alcoholico, :zona_venta, :usuario_id, :on

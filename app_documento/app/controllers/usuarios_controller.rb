@@ -65,11 +65,11 @@ class UsuariosController < ApplicationController
     respond_to do |format|
       if @usuario.save
         CorreosUsuario.enviar_contrasena(@usuario, flash[:contrasena], 1).deliver
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.'}
+        format.html { redirect_to @usuario, notice: 'Usuario creado exitosamente.'}
         format.json { render json: @usuario, status: :created, location: @usuario }
       else
         flash.keep
-        format.html { render action: "new" }
+        format.html { render action: "new", alert: 'Usuario no pudo ser creado.' }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
@@ -84,25 +84,25 @@ class UsuariosController < ApplicationController
       if @usuario.update_attributes(params[:usuario])
         if @usuario.admin == 2
           if @usuario.update_attribute("bloqueado", 0)
-            format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+            format.html { redirect_to @usuario, notice: 'Usuario actualizado exitosamente.' }
             format.json { head :no_content }
           else
             flash.keep
-            format.html { render action: "edit" }
+            format.html { render action: "edit", alert: 'Usuario no pudo ser actualizado.' }
             format.json { render json: @usuario.errors, status: :unprocessable_entity }
           end
         else
           if ocultar_prod_usr(@usuario.id)
-            format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+            format.html { redirect_to @usuario, notice: 'Usuario actualizado exitosamente.' }
             format.json { head :no_content }
           else
-            format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+            format.html { redirect_to @usuario, notice: 'Usuario actualizado exitosamente.' }
             format.json { head :no_content }
           end
         end
       else
         flash.keep
-        format.html { render action: "edit" }
+        format.html { render action: "edit", alert: 'Usuario no pudo ser actualizado.' }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
@@ -174,7 +174,7 @@ class UsuariosController < ApplicationController
     @usuario.destroy
 
     respond_to do |format|
-      format.html { redirect_to usuarios_url }
+      format.html { redirect_to usuarios_url, notice: 'Usuario eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

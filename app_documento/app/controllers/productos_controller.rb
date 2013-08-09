@@ -198,7 +198,7 @@ class ProductosController < ApplicationController
         end
 
         flash.keep
-        format.html { render action: "new" }
+        format.html { render action: "new", alert: 'Producto no pudo ser creado exitosamente.' }
         format.json { render json: @producto.errors, status: :unprocessable_entity }
       end
     end
@@ -210,10 +210,10 @@ class ProductosController < ApplicationController
     @producto = Producto.find(params[:id])
     respond_to do |format|
       if @producto.update_attributes(params[:producto])
-        format.html { redirect_to @producto, notice: 'Producto actualizados.' }
+        format.html { redirect_to @producto, notice: 'Producto actualizado exitosamente.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", notice: "Producto no actualizado." }
+        format.html { render action: "edit", alert: 'Producto no pudo ser actualizado.' }
         format.json { render json: @producto.errors, status: :unprocessable_entity }
       end
     end
@@ -227,7 +227,7 @@ class ProductosController < ApplicationController
     @producto.destroy
 
     respond_to do |format|
-        format.html { redirect_to productos_url, notice: "Producto eliminado."}
+        format.html { redirect_to productos_url, notice: 'Producto eliminado exitosamente.'}
         format.json { head :no_content }
     end
   end
@@ -243,9 +243,9 @@ class ProductosController < ApplicationController
 
     x = ocultar_prod(@producto.id)
     if  x == 1
-      redirect_to @producto, notice: "Producto cambiada visibilidad"
+      redirect_to @producto, notice: 'Visibilidad cambiada.'
     else
-      redirect_to @producto, notice: "No se puedo cambiar visibilidad"
+      redirect_to @producto, notice: 'Visibilidad no cambiada.'
     end
 
   end

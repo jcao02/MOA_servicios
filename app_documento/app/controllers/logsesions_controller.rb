@@ -3,7 +3,6 @@ class LogsesionsController < ApplicationController
   # GET /logsesions.json
   def index
     @logsesions = Logsesion.order('created_at DESC').all
-    # @logsesions = @logsesions.take(1)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @logsesions }
