@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery.formalize
 //= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require jquery.ui.all
 
 $(document).ready(function() {

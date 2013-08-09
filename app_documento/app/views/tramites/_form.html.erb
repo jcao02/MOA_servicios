@@ -1,92 +1,99 @@
+<div class="row">
+  <div class="span1"></div>
+  <div class="span10">
+    <h3 style="margin-left:20px">
+      Nueva Solicitud
+    </h3>
+    <% if flash[:notice] %>
+      <p style="color:red; font-size: 12px;"><%= flash[:notice]%></p>
+    <% end %>
+    <p>Debe seleccionar un producto y un tipo de solicitud. Si la solicitud no tiene producto asociado, seleccione [Nuevo producto]</p>
+  </div>
+  <div class="span1"></div>
+</div>
+<div class="row">
 <div class="span2"></div>
 <div class="span8">
-<h3 style="margin-left:20px">
-  Nueva Solicitud
-</h3>
-<% if flash[:notice] %>
-  <p style="color:red; font-size: 12px;"><%= flash[:notice]%></p>
-<% end %>
-<p>Debe seleccionar un producto y un tipo de solicitud. Si la solicitud no tiene producto asociado, seleccione [Nuevo producto]</p>
-<table id="new_tramite_table">
-   <tr>
-    <td>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <table id="producto_tramite" class="table">
-                <thead>
-                  <th>Mis Productos</th>
-                </thead>
-                <tbody>
-                  <tr class="success">
-                    <td>
-                      <%= content_tag "div", id: "producto_selected", data: {productos: ""} do %>
-                        [Nuevo producto]
-                      <% end %>
-                    </td>
-                  </tr>
-                  <% @productos.each do |p| %>
-                    <tr>
+    <table id="new_tramite_table">
+     <tr>
+      <td>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <table id="producto_tramite" class="table">
+                  <thead>
+                    <th>Mis Productos</th>
+                  </thead>
+                  <tbody>
+                    <tr class="success">
                       <td>
-                        <%= content_tag "div", data: {productos: p } do %>
-                          <%=p.nombre%>
+                        <%= content_tag "div", id: "producto_selected", data: {productos: ""} do %>
+                          [Nuevo producto]
                         <% end %>
                       </td>
                     </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </td>
-    <td>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <table id="tipo_tramite" class="table">
-                <thead>
-                  <th>Tipos de solicitud</th>
-                </thead>
-                <tbody>
-                  <% @tipos.each do |t| %>
-                    <tr>
-                      <td>
-                        <%= content_tag "div", data: {tipo: t} do %>
-                          <%=t.descripcion%>
-                        <% end %>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <%= semantic_form_for @tramite do |f| %>
-        <%= f.input :producto_id, :as => :hidden, :input_html => {:id => "input_producto_tramite"}%>
-        <%= f.input :TipoDocumento_id, :as => :hidden, :input_html => { :id => "input_tipodoc_tramite" }%>
-      
-
-        <div style="margin-left:257px;margin-top:9px">
-          <%= f.submit :value => "Enviar solicitud", :class => "btn btn-default", :disable_with => "Enviando..." %>
+                    <% @productos.each do |p| %>
+                      <tr>
+                        <td>
+                          <%= content_tag "div", data: {productos: p } do %>
+                            <%=p.nombre%>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <table id="tipo_tramite" class="table">
+                  <thead>
+                    <th>Tipos de solicitud</th>
+                  </thead>
+                  <tbody>
+                    <% @tipos.each do |t| %>
+                      <tr>
+                        <td>
+                          <%= content_tag "div", data: {tipo: t} do %>
+                            <%=t.descripcion%>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= semantic_form_for @tramite do |f| %>
+          <%= f.input :producto_id, :as => :hidden, :input_html => {:id => "input_producto_tramite"}%>
+          <%= f.input :TipoDocumento_id, :as => :hidden, :input_html => { :id => "input_tipodoc_tramite" }%>
         
-          <button class="btn btn-default">
-            <%= link_to 'Volver', :back %>
-          </button>
-        </div>
-      <% end %>
-    </td>
-  </tr>
-</table>
+
+          <div style="margin-left:257px;margin-top:9px">
+            <%= f.submit :value => "Enviar solicitud", :class => "btn btn-default", :disable_with => "Enviando..." %>
+          
+            <button class="btn btn-default">
+              <%= link_to 'Volver', :back %>
+            </button>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 </div>
 <div class="span2"></div>
-
+</div>
