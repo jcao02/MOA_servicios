@@ -51,12 +51,12 @@ class ImportadorsController < ApplicationController
     respond_to do |format|
       if @importador.save
         @producto.importadors << @importador
-        format.html { redirect_to @producto, notice: 'Importador was successfully created.' }
+        format.html { redirect_to @producto, notice: 'Importador creado exitosamente.' }
         format.json { render json: @importador, status: :created, location: @importador }
       else
         @productos_id = @producto.id
         flash.keep
-        format.html { render action: "new" }
+        format.html { render action: "new", alert: 'Importador no pudo ser creado.' }
         format.json { render json: @importador.errors, status: :unprocessable_entity }
       end
     end
@@ -69,10 +69,10 @@ class ImportadorsController < ApplicationController
 
     respond_to do |format|
       if @importador.update_attributes(params[:importador])
-        format.html { redirect_to @importador, notice: 'Importador was successfully updated.' }
+        format.html { redirect_to @importador, notice: 'Importador actualizado exitosamente.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", alert: 'Importador no pudo ser actualizado.' }
         format.json { render json: @importador.errors, status: :unprocessable_entity }
       end
     end
@@ -86,7 +86,7 @@ class ImportadorsController < ApplicationController
     producto = Producto.find(session[:producto])
     session[:producto] = nil
     respond_to do |format|
-      format.html { redirect_to producto }
+      format.html { redirect_to producto, notice: 'Importador eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

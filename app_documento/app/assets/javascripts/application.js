@@ -52,3 +52,7 @@ $('html').click(function(event) {
     $('#alertasAppear').toggle(false);
   }
 });
+
+$(document).ready( function() {
+  $('#deletesuccess').delay(5000).fadeOut();
+});

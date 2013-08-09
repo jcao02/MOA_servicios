@@ -87,14 +87,14 @@ class TramitesController < ApplicationController
 
     respond_to do |format|
       if @tramite.save
-        format.html { redirect_to tramites_path, notice: 'Tramite creado' }
+        format.html { redirect_to tramites_path, notice: 'Tramite creado.' }
         format.json { render json: tramites_path, status: :created, location: @tramite }
       else
         @productos = get_products(current_usuario)
         @tipos     = TipoDocumento.all
         @tramite   = Tramite.new
         flash[:notice] = 'Debe seleccionar un tipo de solicitud'
-        format.html { render action: "new"}
+        format.html { render action: "new", alert: 'Tramite no creado.'}
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end
@@ -134,7 +134,7 @@ class TramitesController < ApplicationController
         format.html { redirect_to @tramite, notice: 'Tramite actualizado.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", notice: 'Tramite no actualizado.' }
+        format.html { render action: "alert", notice: 'Tramite no actualizado.' }
         format.json { render json: @tramite.errors, status: :unprocessable_entity }
       end
     end
@@ -182,7 +182,7 @@ class TramitesController < ApplicationController
     @tramite.destroy
 
     respond_to do |format|
-      format.html { redirect_to tramites_url, notice: 'Tramite destruido.' }
+      format.html { redirect_to tramites_url, notice: 'Tramite eliminado.' }
       format.json { head :no_content }
     end
   end

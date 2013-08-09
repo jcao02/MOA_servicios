@@ -89,18 +89,18 @@ class Usuario < ActiveRecord::Base
   # Metodo que registra el log de creacion de usuario
   def registrar_log(tipo)
     if Usuario.current.nil? 
-      nombre = "Script"
+      snombre = "Script"
       superu = nil
     else
-      nombre = Usuario.current.nombre
+      snombre = Usuario.current.login
       superu = Usuario.current.id
     end
   
     logs = Logsesion.new(:usuario_id => self.id, 
                          :superu_id => superu,
                          :tipo => tipo, 
-                         :nusuario => self.nombre, 
-                         :nsuperu => nombre)
+                         :nusuario => self.login, 
+                         :nsuperu => snombre)
 
     return logs.save
   end

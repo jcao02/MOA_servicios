@@ -51,12 +51,12 @@ class PresentacionsController < ApplicationController
 
     respond_to do |format|
       if @presentacion.save
-        format.html { redirect_to @producto, notice: 'Presentacion was successfully created.' }
+        format.html { redirect_to @producto, notice: 'Presentación creada exitosamente.' }
         format.json { render json: @presentacion, status: :created, location: @presentacion }
       else
         @productos_id = @producto.id
         flash.keep
-        format.html { render action: "new" }
+        format.html { render action: "new", alert: 'Presentación no pudo ser creada.' }
         format.json { render json: @presentacion.errors, status: :unprocessable_entity }
       end
     end
@@ -69,10 +69,10 @@ class PresentacionsController < ApplicationController
 
     respond_to do |format|
       if @presentacion.update_attributes(params[:presentacion])
-        format.html { redirect_to @presentacion, notice: 'Presentacion was successfully updated.' }
+        format.html { redirect_to @presentacion, notice: 'Presentación actualizada exitosamente.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", alert: 'Presentación no pudo ser actualizada.' }
         format.json { render json: @presentacion.errors, status: :unprocessable_entity }
       end
     end
@@ -87,7 +87,7 @@ class PresentacionsController < ApplicationController
 
     respond_to do |format|
       session[:producto] = nil
-      format.html { redirect_to producto }
+      format.html { redirect_to producto, notice: 'Presentación eliminada exitosamente.' }
       format.json { head :no_content }
     end
   end
