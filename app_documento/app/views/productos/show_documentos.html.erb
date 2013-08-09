@@ -6,20 +6,37 @@
     <% @documentos.each do |d|%>
 <tr>
   <td>
-    <% if current_usuario.admin > 0 %>
-      <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
-      <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar documento"), d[0], :method => :delete, 
-        data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
+    <div class="list-group">
+      <h5 class="list-group-item-heading">
+        <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
+      </h5>
+      <% if not d[0].importador.nil? %>
+        <p class="list-group-item-text">
+        <b>Importador:</b><%= d[0].importador.nombre %>
+        </p>
+      <% elsif not d[0].presentacion.nil? %>
+        <p class="list-group-item-text">
+        <b>Presentación:</b><%= d[0].presentacion.empaque %>
+        </p>
+      <% end%>
+      <p class="list-group-item-text">
+      <b>Vence:</b><%= d[0].fecha_vencimiento %>
+      </p>
+      <% if current_usuario.admin > 0 %>
+        <%= link_to image_tag("/assets/delete.png", :class => "borrar_doc pull-right", :title => "Borrar documento"), 
+                            d[0], :method => :delete, 
+                            data: { confirm: '¿Esta seguro de eliminar este documento?'} %>
         <%= form_tag documentos_ocultar_path, method: :post, :class => "nh-form" do %>
-        <%= hidden_field_tag :id, d[0].id %>
-        <% if d[0].on == 1 %> 
-          <%= image_submit_tag("/assets/eye-open.png", :class => "borrar_doc pull-right", :title => "Ocultar documento")%>
-        <% else %>
-          <%= image_submit_tag("/assets/eye-close.png", :class => "borrar_doc pull-right", :title => "Mostrar documento")%>
+          <%= hidden_field_tag :id, d[0].id %>
+          <% if d[0].on == 1 %> 
+            <%= image_submit_tag("/assets/eye-open.png", :class => "borrar_doc pull-right", :title => "Ocultar documento")%>
+          <% else %>
+            <%= image_submit_tag("/assets/eye-close.png", :class => "borrar_doc pull-right", :title => "Mostrar documento")%>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </td>
+    </div>
+   </td>
 </tr>
 <% end %>
 </table>

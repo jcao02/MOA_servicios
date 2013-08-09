@@ -263,12 +263,14 @@ class ProductosController < ApplicationController
   def show_importadores
     @producto = Producto.find(params[:id])
     @importadores = @producto.importadors
+    @inclusion = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => 9, :producto_id => @producto.id).first
     render :layout => false
   end
 
   def show_presentaciones
     @producto = Producto.find(params[:id])
     @presentaciones = Presentacion.where(:productos_id => params[:id])
+    @inclusion = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => 6, :producto_id => @producto.id).first
     render :layout => false
   end
 
@@ -280,9 +282,21 @@ class ProductosController < ApplicationController
       docs = TipoDocumento.all
       tipos = []
       docs.each do |td|
-        documento = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => td.id, :producto_id => producto).first
-        next if documento.nil? or (documento.on == 0 and not admin)
-        tipos.push([documento, td.descripcion])
+        documento_set = Documento.order("fecha_vencimiento DESC").where(:TipoDocumento_id => td.id, :producto_id => producto)
+        next unless documento_set.any?
+        if td.id == 6 or td.id == 9 
+          documento_set.each do |documento|
+            binary = tipos.map{ |x| x[0].TipoDocumento_id == documento.TipoDocumento_id \
+                              and (x[0].importador_id == documento.importador_id or x[0].presentacion_id == documento.presentacion_id )}
+            vencido = binary.inject(false){ |result, x| result or x }
+            next if vencido  or (documento.on == 0 and not admin) 
+            tipos.push([documento, td.descripcion])
+          end
+        else
+          documento = documento_set.first
+          next if documento.on == 0 and not admin
+          tipos.push([documento, td.descripcion])
+        end
       end
       return tipos
     end

@@ -11,7 +11,7 @@
             data: { confirm: '¿Esta seguro de eliminar esta presentación?'} %>
         <% end %>
           <div class="list-group">
-            <h5 class="list-group.item-heading">
+            <h5 class="list-group-item-heading">
               CPE: <%= p.cpe %>
             </h5>
             <p class="list-group-item-text">
@@ -27,13 +27,11 @@
             <b>Peso escurrido:</b><%= p.peso_escurrido %>
             </p>
             <p class="list-group-item-text">
-            <b>Inclusiones:</b>
+            <b>Inclusion:</b>
             </p>
-            <% p.documentos.each do |dp| %>
             <p class="list-group-item-text">
-              * <%= link_to dp.fecha_vencimiento, dp.pdf.url, :target => "_blank" %>
+              * <%= link_to @inclusion.fecha_vencimiento, @inclusion.pdf.url, :target => "_blank" %>
             </p>
-            <% end %>
           </div>
         </td>
       </tr>

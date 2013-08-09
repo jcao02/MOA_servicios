@@ -12,7 +12,7 @@
             data: { confirm: '¿Esta seguro de eliminar este importador?'} %>
         <% end %>
           <div class="list-group">
-            <h5 class="list-group.item-heading">
+            <h5 class="list-group-item-heading">
               Nombre: <%= i.nombre %>
             </h5>
             <p class="list-group-item-text">
@@ -28,14 +28,12 @@
             <b>Teléfono:</b> <%= i.telefono %>
             </p>
             <p class="list-group-item-text">
-            <b>Inclusiones:</b>
+            <b>Inclusion:</b>
             </p>
             </p>
-            <% i.documentos.each do |di| %>
-              <p class="list-group-item-text">
-              * <%= link_to di.fecha_vencimiento, di.pdf.url, :target => "_blank" %>
-              </p>
-            <% end %>
+            <p class="list-group-item-text">
+            * <%= link_to @inclusion.fecha_vencimiento, @inclusion.pdf.url, :target => "_blank" %>
+            </p>
           </div>
         </td>
       </tr>
