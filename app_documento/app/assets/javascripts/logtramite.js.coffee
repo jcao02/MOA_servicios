@@ -17,6 +17,3 @@ dataTable_opc =
     sInfoEmpty   : ""
     sZeroRecords : "No se encontraron coincidencias"
 
-
-$(document).ready ->
-  $("#tabla_show_log_tram").dataTable(dataTable_opc)

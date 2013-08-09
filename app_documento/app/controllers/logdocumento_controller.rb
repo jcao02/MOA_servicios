@@ -2,7 +2,7 @@ class LogdocumentoController < ApplicationController
   before_filter :actualizar_alertas
   before_filter :is_admin
   def index
-    @logdocumentos = Logdocumento.all
+    @logdocumentos = Logdocumento.order('created_at DESC').all
 
     respond_to do |format|
       format.html # index.html.erb

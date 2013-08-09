@@ -4,7 +4,7 @@ class LogproductosController < ApplicationController
   # GET /logproductos
   # GET /logproductos.json
   def index
-    @logproductos = Logproducto.all
+    @logproductos = Logproducto.order('created_at DESC').all
 
     respond_to do |format|
       format.html # index.html.erb

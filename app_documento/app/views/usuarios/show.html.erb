@@ -113,7 +113,7 @@
       </td>
     </tr>
     <% end %>
-    <% if current_usuario.admin > 0 %>
+    <% if current_usuario.admin > 0 and @usuario.admin == 0%>
     <tr>
       <td>
          <%= image_tag("/assets/listar.png", :class => "cos_icon", :title => "Listar Productos")%>

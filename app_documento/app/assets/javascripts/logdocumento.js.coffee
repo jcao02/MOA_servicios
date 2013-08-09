@@ -20,3 +20,4 @@ dataTable_opc =
 
 $(document).ready ->
   $("#tabla_show_log_doc").dataTable(dataTable_opc)
+  $("#tabla_log_tram").dataTable(dataTable_opc)
