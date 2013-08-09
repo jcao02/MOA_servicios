@@ -13,7 +13,8 @@ class Documento < ActiveRecord::Base
     has_many :productos, :through => :logdocumentos
 
     #Atributos accesibles para el modelo
-    attr_accessible :alerta, :fecha_emision, :fecha_vencimiento, :producto_id
+    attr_accessible :alerta, :fecha_emision, :fecha_vencimiento, :producto_id, :importador_id,
+                    :presentacion_id
     attr_accessible :pdf, :TipoDocumento_id, :TipoDocumento_attributes, :on, :ultimo, 
                     :created_by, :updated_by
     has_attached_file :pdf, 

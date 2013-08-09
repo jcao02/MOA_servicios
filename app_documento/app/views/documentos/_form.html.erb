@@ -42,10 +42,25 @@
         </tr>
         <tr>
           <td>
+            <div id="presentacion_id">
+              <%= f.input :presentacion_id, :as => :select, :collection => @presentaciones.map{|x| [x.empaque, x.id] },
+                :input_html => { :disable => true, :id => "presentacion_id_input" }, :label => "Presentación"%>
+            </div>
+            <div id="importador_id">
+              <%= f.input :importador_id, :as => :select, :collection => @importadores.map{|x| [x.nombre, x.id] },
+                :input_html => { :disable => true, :id => "importador_id_input" }, :label => "Importador" %>
+            </div>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td>
             <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."} %>
           </td>
           <td></td>
         </tr>
+
     </table>
 <% end %>
 </div>

@@ -42,6 +42,8 @@ class DocumentosController < ApplicationController
     @documento = Documento.new
     @documento.TipoDocumento = TipoDocumento.new
     @tipos = get_tipoDoc
+    @presentaciones = Presentacion.where(:productos_id => params[:producto_id])
+    @importadores = Importador.where(:productos_id => params[:producto_id])
 
     @producto_id = params[:producto_id]
     flash[:accion] = "Agregar Documento"
