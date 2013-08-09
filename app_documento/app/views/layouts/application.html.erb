@@ -13,6 +13,11 @@
   <body>
     <div id="wrapper" class ="container">
 
+      <div id="loading">
+        <%= image_tag 'loading.gif' %>
+        <p>Cargando...</p>
+      </div>
+
       <% if usuario_signed_in? %>
         <div class="row">
           <div class="span3 logo"><%= image_tag 'logo_Moa.png'%></div> 

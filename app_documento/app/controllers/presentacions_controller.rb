@@ -55,6 +55,7 @@ class PresentacionsController < ApplicationController
         format.json { render json: @presentacion, status: :created, location: @presentacion }
       else
         @productos_id = @producto.id
+        @presentacion.documentos.build
         flash.keep
         format.html { render action: "new", alert: 'Presentación no pudo ser creada.' }
         format.json { render json: @presentacion.errors, status: :unprocessable_entity }

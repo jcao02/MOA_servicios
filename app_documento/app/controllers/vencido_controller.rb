@@ -5,6 +5,8 @@ class VencidoController < ApplicationController
   #Ver todas las alertas
   def index
     session[:alerts] = Vencidos.order("fecha").where(:usuario_id => current_usuario.id)
+    arraySum = session[:alerts].map{|x| if x.tramitando then 0 else 1 end}
+    session[:alerts_length] = arraySum.inject(0){ |sum,x| sum + x}
   end
 
   #Tramitar documento vencido

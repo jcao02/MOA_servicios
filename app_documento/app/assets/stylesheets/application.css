@@ -58,6 +58,15 @@ html>body div.tableContainer {
   max-height: 300px;
 }
 
+/*Loading icon*/
+#loading {
+  position: absolute;
+  top: 30%;
+  left: 45%;
+  z-index: 90;
+  background-color: white;
+}
+
 /*FONT*/
 
 @font-face {

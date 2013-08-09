@@ -286,10 +286,10 @@ class ProductosController < ApplicationController
         next unless documento_set.any?
         if td.id == 6 or td.id == 9 
           documento_set.each do |documento|
-            binary = tipos.map{ |x| x[0].TipoDocumento_id == documento.TipoDocumento_id \
-                              and (x[0].importador_id == documento.importador_id or x[0].presentacion_id == documento.presentacion_id )}
-            vencido = binary.inject(false){ |result, x| result or x }
-            next if vencido  or (documento.on == 0 and not admin) 
+            same = tipos.select{ |x| x[0].TipoDocumento_id == documento.TipoDocumento_id }
+            vencido = same.select{ |x| (not x[0].importador_id.nil? and x[0].importador_id == documento.importador_id) \
+                                  or (not x[0].presentacion_id.nil? and x[0].presentacion_id == documento.presentacion_id)}
+            next if vencido.any?  or (documento.on == 0 and not admin) 
             tipos.push([documento, td.descripcion])
           end
         else

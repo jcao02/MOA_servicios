@@ -55,6 +55,7 @@ class ImportadorsController < ApplicationController
         format.json { render json: @importador, status: :created, location: @importador }
       else
         @productos_id = @producto.id
+        @importador.documentos.build
         flash.keep
         format.html { render action: "new", alert: 'Importador no pudo ser creado.' }
         format.json { render json: @importador.errors, status: :unprocessable_entity }

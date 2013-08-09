@@ -28,7 +28,9 @@ $(document).ready ->
     for i in [0..alertSize + 1]
         $("#alert_form" + i).on "ajax:success", (event,data,status,xhr) ->
           $(this).closest('td').html xhr.responseText
+          $("#loading").hide()
         $("#activate_form" + i).on "ajax:success", (event,data,status,xhr) ->
           $(this).closest('td').html xhr.responseText
+          $("#loading").hide()
 
     return

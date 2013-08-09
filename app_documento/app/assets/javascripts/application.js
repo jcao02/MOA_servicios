@@ -27,31 +27,14 @@ $(document).ready(function() {
 
 //Toggle menus de usuario
 $(document).ready(function() {
-  $('#compania').click(function () {
-    $('#companiaAppear').toggle();
-  });
-  $('#alertas').click(function () {
-    $('#alertasAppear').toggle();
-  });
+  $("#loading").hide();
+  $('form').submit(function() {
+    $("#loading").show();
+  })
+  $('form').bind("ajax:complete", function() {
+    $("#loading").hide();
+  })
 })
-
-//Si presiona una tecla
-$(document).keyup(function(e) {
-  if (e.keyCode == 27) {  //esc
-    $('#companiaAppear').toggle(false);
-    $('#alertasAppear').toggle(false);
-  }
-});
-
-//Toggle si clickea otro sitio
-$('html').click(function(event) {
-  if (event.target.id != 'compania') {
-    $('#companiaAppear').toggle(false);
-  }
-  if (event.target.id != 'alertas') {
-    $('#alertasAppear').toggle(false);
-  }
-});
 
 $(document).ready( function() {
   $('#deletesuccess').delay(5000).fadeOut();
