@@ -2,6 +2,7 @@
 class ProductosController < ApplicationController
   respond_to :html, :js
   before_filter :is_admin, :only => [:new, :create, :edit, :update, :destroy, :ocultar]
+  before_filter :actualizar_alertas
   # GET /productos
   # GET /productos.json
   def index

@@ -1,4 +1,6 @@
 class LogtramiteController < ApplicationController
+  before_filter :actualizar_alertas
+  before_filter :is_admin
   def index
     @logtramites = Logtramite.all
 

@@ -2,6 +2,7 @@
 class PresentacionsController < ApplicationController
   before_filter :authenticate_usuario! #Para que se requiera estar logueado
   before_filter :is_admin, :except => :show
+  before_filter :actualizar_alertas
   #todavia falta before_filter para que solo el dueño del producto vea la presentacion
   # GET /presentacions
   # GET /presentacions.json

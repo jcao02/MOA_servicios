@@ -4,6 +4,7 @@ class UsuariosController < ApplicationController
   before_filter :is_authorize, :only => [:edit, :update, :show] #Solo se puede editar, modificar o mostrar perfil si eres super admin o eres el usuario
   before_filter :is_admin, :only => [:new, :create] #Solo admin y super admin pueden crear usuarios
   before_filter :change_s_admin, :only => [:deshabilitar] #No se puede deshabilitar a un s-admin
+  before_filter :actualizar_alertas
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
 

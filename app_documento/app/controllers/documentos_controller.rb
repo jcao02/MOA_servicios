@@ -1,6 +1,7 @@
 #encoding: UTF-8
 class DocumentosController < ApplicationController
   before_filter :is_admin, :only => [:new, :create, :destroy, :index, :index_usuario, :generar_tramitado]
+  before_filter :actualizar_alertas
   # GET /documentos
   # GET /documentos.json
   def index

@@ -51,7 +51,7 @@ AppDocumento::Application.routes.draw do
 
 
   # Autenticacion de usuarios
-  devise_for :usuarios 
+  devise_for :usuarios
 
 
   #Enrutamiento sobre modelo de Usuario

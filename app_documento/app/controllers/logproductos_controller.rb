@@ -1,4 +1,6 @@
 class LogproductosController < ApplicationController
+  before_filter :actualizar_alertas
+  before_filter :is_admin
   # GET /logproductos
   # GET /logproductos.json
   def index

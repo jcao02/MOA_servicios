@@ -2,6 +2,7 @@
 class ImportadorsController < ApplicationController
   before_filter :authenticate_usuario! #Para que se requiera estar logueado
   before_filter :is_admin, :except => :show
+  before_filter :actualizar_alertas
   #todavia falta before_filter para que solo el dueño del producto vea el importador
   # GET /importadors
   # GET /importadors.json

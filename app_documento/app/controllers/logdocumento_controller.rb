@@ -1,4 +1,6 @@
 class LogdocumentoController < ApplicationController
+  before_filter :actualizar_alertas
+  before_filter :is_admin
   def index
     @logdocumentos = Logdocumento.all
 

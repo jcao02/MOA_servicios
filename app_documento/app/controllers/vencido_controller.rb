@@ -1,6 +1,7 @@
 #encoding: UTF-8
 class VencidoController < ApplicationController
   before_filter :is_alert_owner, :only => [:tramitar_documentos, :activar_alerta, :desactivar_alerta]
+  before_filter :actualizar_alertas
 
   #Ver todas las alertas
   def index

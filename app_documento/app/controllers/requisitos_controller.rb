@@ -1,4 +1,5 @@
 class RequisitosController < ApplicationController
+  before_filter :actualizar_alertas
   # GET /requisitos
   # GET /requisitos.json
   def index

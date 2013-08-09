@@ -1,4 +1,6 @@
 class LogsesionsController < ApplicationController
+  before_filter :actualizar_alertas
+  before_filter :is_admin
   # GET /logsesions
   # GET /logsesions.json
   def index

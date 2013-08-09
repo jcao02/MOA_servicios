@@ -2,7 +2,6 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate_usuario!
   before_filter :set_current_usuario
-  before_filter :actualizar_alertas
   protect_from_forgery
 
   #Metodos para Usuarios
@@ -28,6 +27,7 @@ class ApplicationController < ActionController::Base
 
   #Actualizacion de alertas
   def actualizar_alertas
+    puts params[:controller]
     session[:alerts] = Vencidos.order("fecha").where(:usuario_id => current_usuario.id)
     arraySum = session[:alerts].map{|x| if x.tramitando then 0 else 1 end}
     session[:alerts_length] = arraySum.inject(0){ |sum,x| sum + x}

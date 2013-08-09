@@ -1,5 +1,6 @@
 #encoding: UTF-8
 class TramitesController < ApplicationController
+  before_filter :actualizar_alertas
   #Para los estados:
   # 0 -> enviado (blanco)
   # 1 -> recibido (azul)
