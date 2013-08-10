@@ -20,6 +20,7 @@ es:
         invalid_token: 'Token de autenticación incorrecto.'
         timeout: 'Su sesión ha expirado, por favor acceda de nuevo para continuar.'
         inactive: 'Su cuenta no ha sido activada.'
+        not_found_in_database: 'Contraseña o Login incorrecto.'
     sessions:
       usuario:
         signed_in: 'Sesión iniciada.'

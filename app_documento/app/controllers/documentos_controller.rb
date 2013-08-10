@@ -66,6 +66,8 @@ class DocumentosController < ApplicationController
     @producto_id             = params[:producto_id]
     @tramitando              = true
     @descripcion             = TipoDocumento.find(params[:tipo_id]).descripcion
+    @presentaciones          = Presentacion.where(:productos_id => @producto_id)
+    @importadores = Importador.where(:productos_id => @producto_id)
     puts @tramitado
     flash[:accion] = "Agregar Documento"
     flash.keep

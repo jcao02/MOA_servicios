@@ -43,8 +43,13 @@
         <tr>
           <td>
             <div id="presentacion_id_form">
-              <%= f.input :presentacion_id, :as => :select, :collection => @presentaciones.map{|x| [x.empaque, x.id] },
+              <% if not @presentaciones.nil? %>
+                <%= f.input :presentacion_id, :as => :select, :collection => @presentaciones.map{|x| [x.empaque, x.id] },
                 :input_html => { :disable => true, :id => "presentacion_id_input" }, :label => "Presentación"%>
+              <% else %>
+                <p> No existen presentaciones asociadas a a este producto</p>
+                <%= link_to 'Registrar presentación', new_presentacion_path %>
+              <% end %>
             </div>
             <div id="importador_id_form">
               <%= f.input :importador_id, :as => :select, :collection => @importadores.map{|x| [x.nombre, x.id] },
