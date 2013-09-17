@@ -21,8 +21,11 @@ class Usuario < ActiveRecord::Base
   
   #Log para usuarios
   has_many :logsesions
-  has_many :usuarios, :through => :logsesions, :source => :usuario
-  has_many :usuarios, :through => :logsesions, :source => :superu 
+  has_many :clientes
+  has_many :usuarios, :through => :clientes, :source => :encargado
+  has_many :usuarios, :through => :clientes, :source => :cliente
+  #has_many :usuarios, :through => :logsesions, :source => :usuario
+  #has_many :usuarios, :through => :logsesions, :source => :superu 
   
 
   # Include default devise modules. Others available are:
@@ -35,7 +38,7 @@ class Usuario < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail 
   attr_accessible :nombre, :rif, :telefono, :sign_in_count, :current_sign_in_at
-  attr_accessible :last_sign_in_at, :bloqueado
+  attr_accessible :last_sign_in_at, :bloqueado, :transcriptor, :responsable
 
   #Validaciones admin
   VALID_ADMIN_REGEX = /\A[012]\z/

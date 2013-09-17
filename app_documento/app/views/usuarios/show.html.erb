@@ -83,6 +83,23 @@
          <% end %>
        </td>
      </tr>
+     <% if @usuario.admin == 1 %>
+       <tr>
+         <td>
+           <b>Roles:</b>
+         </td>
+         <td>
+           <ul>
+             <% if @usuario.transcriptor %>
+               <li> Transcriptor </li>
+             <% end %>
+             <% if @usuario.responsable %>
+               <li>Responsable de cuenta</li>
+             <% end %>
+           </ul>
+         </td>
+       </tr>
+     <% end %>
   </table>
 </div>
 <div class="span2"></div>

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130809034212) do
+ActiveRecord::Schema.define(:version => 20130917200856) do
+
+  create_table "clientes", :force => true do |t|
+    t.integer  "responsable_id"
+    t.integer  "cliente_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "dependencia", :force => true do |t|
     t.integer  "tipo_documento_id"
@@ -183,10 +190,10 @@ ActiveRecord::Schema.define(:version => 20130809034212) do
     t.string   "compania"
     t.string   "rif"
     t.integer  "admin"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -196,6 +203,8 @@ ActiveRecord::Schema.define(:version => 20130809034212) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "bloqueado"
+    t.boolean  "transcriptor",           :default => true
+    t.boolean  "responsable",            :default => false
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

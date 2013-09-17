@@ -34,6 +34,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios/new.json
   def new
     @usuario = Usuario.new
+    @usuario.admin = 0
+    @usuario.bloqueado = 0
+    @usuario.transcriptor = true
     flash[:accion] = "Crear Usuario"
     flash[:contrasena] = SecureRandom.hex(4)
     respond_to do |format|
@@ -64,6 +67,12 @@ class UsuariosController < ApplicationController
     end
 
     respond_to do |format|
+      if not @usuario.transcriptor and not @usuario.responsable
+        flash.keep
+        format.html { render action: "new", alert: 'El administrador debe ser transcriptor y/o responsable' }
+        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+      end 
+
       if @usuario.save
         CorreosUsuario.enviar_contrasena(@usuario, flash[:contrasena], 1).deliver
         format.html { redirect_to @usuario, notice: 'Usuario creado exitosamente.'}
@@ -207,4 +216,21 @@ class UsuariosController < ApplicationController
       end
     end    
   end
+
+  #Asigna clientes a un responsable
+  def asignar_cliente
+    @responsable = params[:responsable]
+    @clientes    = params[:clientes]
+    respond_to do |format|
+      if @responsable.responable? 
+        for cliente in @clientes.values
+          @responsable.clientes << cliente
+        end  
+        format.html { redirect_to @responsable, notice: 'Clientes asignados satisfactoriamente'}
+      else 
+        format.html { redirect_to update_usuario_path, notice: 'Error en servidor. Intente más tarde' }
+      end
+    end
+  end
+
 end

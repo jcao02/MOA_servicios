@@ -81,3 +81,15 @@ $(document).ready ->
       Aceptar: ->
         $( this ).dialog "close"
   ).bind("ajax:error", (xhr, data, status, error) -> alert "Error")
+
+
+  $(".tipo_admin").closest('div').hide()
+
+  $("#usuario_admin").change -> 
+    value = $(this).val()
+    if value == "1"
+      $(".tipo_admin").closest('div').show()
+      $("#pista1").show()
+    else
+      $(".tipo_admin").closest('div').hide()
+      $("#pista1").hide()

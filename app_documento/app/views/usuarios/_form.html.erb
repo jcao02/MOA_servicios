@@ -1,14 +1,16 @@
-<div class="span3"></div>
-<div class="span6">
+<div class="span2"></div>
+<div class="span7">
   <legend>
     <h3>
       <%=flash[:accion]%>
     </h3>
   </legend>
 <%= semantic_form_for @usuario do |f| %>
-  <ul>
-    <table>
+  <ul> <table class="forms_tables">
       <tbody>
+        <% if alert %>
+          <tr><td><p><%= alert %></p></td>
+        <% end %>
         <tr>
           <td>
             <%= f.input :login, :label => "Usuario" %>
@@ -37,31 +39,38 @@
         <tr>
           <td>
             <% if current_usuario.admin == 2 %>
-              <%= f.input :admin, :label => "Permisos", :as => :radio, :collection => [["Cliente", 0], ["Admin", 1], ["Super-Admin", 2]]%>
+              <%= f.input :admin, :label => "Permisos", :as => :select, :collection => [["Cliente", 0], ["Admin", 1], ["Super-Admin", 2]], :include_blank => false %>
+              </td>
+              <td>
+                <p style="color:red; display:none;" id="pista1">Si no selecciona un tipo, el usuario será transcriptor por defecto</p>
+                <%= f.input :transcriptor, :label => "Transcriptor", :as => :boolean, :input_html => { :class => "tipo_admin" }%>
+                <%= f.input :responsable, :label => "Responsable", :as => :boolean, :input_html => { :class => "tipo_admin" }%>
+              </td>
             <% else %>
               <%= f.input :admin, :as => :hidden, :input_html => { :value => 0 } %>
-                <%= f.action :submit, :label => flash[:accion] %>
+              <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."}  %>
+            </td>
            <% end %>
+        </tr>
+        <tr>
+          <td>
+            <% if current_usuario.admin == 2 %>
+              <%= f.input :bloqueado, :label => "Status", :as => :radio, :collection => [["Habilitado", 0], ["Deshabilitado", 1]]%>
+            <% end %>            
           </td>
           <td>
               <%= f.input :rif, :label => "RIF"%>
           </td>
-          
         </tr>
         <% if current_usuario.admin == 2 %> 
         <tr>
           <td>
             <center>
-              <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."} %>
+              <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando...", :id => "new_usuario_button" } %>
             </center>
 
           </td>
-          <td>
-            <% if current_usuario.admin == 2 %>
-              <%= f.input :bloqueado, :label => "Status", :as => :radio, :collection => [["Habilitado", 0], ["Deshabilitado", 1]]%>
-            
-            <% end %>            
-          </td>
+          <td></td>
         </tr>
       <% end %>
       </tbody>
