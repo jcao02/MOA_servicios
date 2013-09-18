@@ -87,7 +87,3 @@ gem 'whenever', :require => false
 
 gem "nested_form"
 gem "cocoon"
-
-#Gema para el manejo de autenticaciond e usuarios
-gem "cancan"
-
