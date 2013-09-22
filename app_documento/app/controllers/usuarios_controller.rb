@@ -22,7 +22,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
-    @usuario = Usuario.find(params[:id])
+    @usuario    = Usuario.find(params[:id])
+    clientesIds = Cliente.where(:responsable_id => params[:id])
+    @clientes   = clientesIds.map{|c| Usuario.find(c.cliente_id)}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -217,16 +219,23 @@ class UsuariosController < ApplicationController
     end    
   end
 
+  #Genera una nueva asignacion de clientes
+  def new_asignar_cliente
+    @usuario = Usuario.find(params[:format])
+    @clientes = Usuario.where(:admin => 0)
+  end
+
   #Asigna clientes a un responsable
   def asignar_cliente
-    @responsable = params[:responsable]
-    @clientes    = params[:clientes]
+    @usuario  = Usuario.find(params[:responsable])
+    @clientes = params[:cliente]
     respond_to do |format|
-      if @responsable.responable? 
+      if @usuario.responsable? or @usuario.transcriptor?
         for cliente in @clientes.values
-          @responsable.clientes << cliente
+          nuevo = Cliente.create(:responsable_id => @usuario.id, :cliente_id => cliente)
+          @usuario.clientes << nuevo
         end  
-        format.html { redirect_to @responsable, notice: 'Clientes asignados satisfactoriamente'}
+        format.html { redirect_to @usuario, notice: 'Clientes asignados satisfactoriamente'}
       else 
         format.html { redirect_to update_usuario_path, notice: 'Error en servidor. Intente más tarde' }
       end

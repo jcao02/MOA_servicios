@@ -59,9 +59,11 @@ AppDocumento::Application.routes.draw do
     collection do 
       put :update_password
       post :recover_password
+      post :asignar_cliente
       get :edit_password
       get :ask_password
       get :send_password
+      get :new_asignar_cliente
     end
   end
 

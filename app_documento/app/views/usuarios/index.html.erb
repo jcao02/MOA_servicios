@@ -7,6 +7,9 @@
       <th>Compania</th>
       <th>Nombre</th>
       <th>Permisos</th>
+      <% if current_usuario.admin == 2 %>
+        <th></th>
+      <% end %>
   </thead>
   <tbody>
     <% @usuarios.each do |usuario| %>
@@ -28,6 +31,11 @@
                  Contactar servicio técnico
           <% end %>
         </td>
+        <% if usuario.admin == 1 and current_usuario.admin == 2%>
+          <td><%= link_to 'Asignar clientes', new_asignar_cliente_usuarios_path(usuario.id) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

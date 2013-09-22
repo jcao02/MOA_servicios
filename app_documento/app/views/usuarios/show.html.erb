@@ -99,6 +99,16 @@
            </ul>
          </td>
        </tr>
+       <tr>
+         <td><b>Clientes:</b></td>
+         <td>
+           <ul>
+             <% @clientes.each do |c| %>
+               <li><%= c.compania %></li>
+             <% end %>
+           </ul>
+         </td>
+       </tr>
      <% end %>
   </table>
 </div>
@@ -123,6 +133,10 @@
     </tr>
     <% end %>
     <% if current_usuario.admin == 2 and current_usuario.login != @usuario.login %>
+      <tr><td>
+        <%= image_tag("/assets/assign.png", :class => "cos_icon", :title => "Asignar clientes")%>
+        <%= link_to 'Asignar clientes' %>
+      </td></tr>
     <tr>
       <td>
          <%= image_tag("/assets/delete.png", :class => "cos_icon", :title => "Eliminar Usuario")%>

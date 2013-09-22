@@ -93,3 +93,8 @@ $(document).ready ->
     else
       $(".tipo_admin").closest('div').hide()
       $("#pista1").hide()
+
+
+  #$().click ->
+    #selects = document.getElementsByTagName "select"
+    #n = selects.length

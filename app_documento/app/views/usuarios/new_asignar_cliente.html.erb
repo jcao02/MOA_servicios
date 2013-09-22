@@ -1,0 +1,15 @@
+<div class="span4"></div>
+<div class="span5">
+  <h3>Asignación de clientes </h3>
+  <h4>Usuario: <%= @usuario.login %> </h4>
+  </br>
+  </br>
+  <%= form_tag asignar_cliente_usuarios_path, :method => :post, :multiple => true do %>
+    <%= hidden_field_tag "responsable", @usuario.id%>
+    <ul style="list-style: none;" >
+      <li><%= select("cliente", "cliente0", options_from_collection_for_select(@clientes, "id", "compania")) %></li>
+      <li><%= submit_tag "Enviar", :html_button => { :disable_with => "Enviando..."}, :class => "btn btn-default"%></li>
+    </ul>
+  <% end %>
+</div>
+<div class="span3"></div>

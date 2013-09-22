@@ -1,9 +1,9 @@
 #encoding: UTF-8
 namespace :set do
-  desc "Crea 3 usuarios: S-Admin, Admin y Cliente"
+  desc "Crea 4 usuarios: S-Admin, responsable, transcriptor y Cliente"
   task :users => :environment do 
     Rake::Task['db:reset'].invoke
-    Usuario.create(
+    puts 'Creado S-Admin' unless not Usuario.create(
       :login     => "S-Admin",
       :password  => "12345678",
       :email     => "s-admin@dominio.com",
@@ -15,19 +15,54 @@ namespace :set do
       :rif       => "j-29348792-7",
       :bloqueado => 0
     )
-    Usuario.create(
-      :login     => "Admin",
+    puts 'Creado Responsable' unless not Usuario.create(
+      :login        => "Responsable",
+      :password     => "12345678",
+      :email        => "resp@dominio.com",
+      :telefono     => "12345678",
+      :admin        => 1,
+      :compania     => "Responsabilidad",
+      :nombre       => "Respon",
+      :apellido     => "sable",
+      :rif          => "j-29348792-6",
+      :bloqueado    => 0,
+      :transcriptor => false,
+      :responsable  => true
+
+    )
+    puts 'Creado Transcriptor' unless not Usuario.create(
+      :login     => "Transcriptor",
       :password  => "12345678",
-      :email     => "admin@dominio.com",
+      :email     => "trans@dominio.com",
       :telefono  => "12345678",
       :admin     => 1,
-      :compania  => "Administradora",
-      :nombre    => "Admin",
-      :apellido  => "istrador",
-      :rif       => "j-29348792-6",
-      :bloqueado => 0
+      :compania  => "Transcriptora",
+      :nombre    => "trans",
+      :apellido  => "criptor",
+      :rif       => "j-29348792-5",
+      :bloqueado => 0,
+      :transcriptor => true,
+      :responsable  => false
+
     )
-    Usuario.create(
+
+     puts 'Creado Transcriptor/Responsable' unless not Usuario.create(
+      :login     => "RespTrans",
+      :password  => "12345678",
+      :email     => "trans@resp.com",
+      :telefono  => "12345678",
+      :admin     => 1,
+      :compania  => "RespTranscriptora",
+      :nombre    => "trans",
+      :apellido  => "sable",
+      :rif       => "j-29348792-4",
+      :bloqueado => 0,
+      :transcriptor => true,
+      :responsable  => true
+
+    )
+   
+    puts 'Creado cliente' unless not Usuario.create(
       :login     => "Cliente",
       :password  => "12345678",
       :email     => "cliente@dominio.com",
@@ -36,7 +71,7 @@ namespace :set do
       :compania  => "Alimentos X",
       :nombre    => "Cliente",
       :apellido  => "la",
-      :rif       => "j-29348792-5",
+      :rif       => "j-29348792-3",
       :bloqueado => 0
     )
   end
