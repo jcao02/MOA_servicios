@@ -16,6 +16,13 @@ dataTable_opc =
     sInfoEmpty   : ""
     sZeroRecords : "No se encontraron coincidencias"
 
+datepickerOpc =
+  minDate    : 0
+  dateFormat : "yy-mm-dd" 
+  dayNamesMin: ["Do","Lu","Ma","Mie","Jue","Vie","Sab"]
+  monthNames : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+  changeYear : true
+
 $(document).ready ->
   $("#producto_grado_alcoholico_input").hide()
   $("#productos").dataTable dataTable_opc 

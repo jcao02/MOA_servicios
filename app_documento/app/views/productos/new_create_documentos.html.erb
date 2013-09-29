@@ -1,0 +1,23 @@
+<div class="span3"</div>
+<div class="span5">
+  <%= semantic_nested_form_for @producto do |f| %>
+    <%= f.semantic_fields_for :documentos do |d| %>
+      <%= d.input :TipoDocumento_id, :as => :select, :collection => @tipos.map{|x| [x.descripcion, x.id]}%>
+      <%= d.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>
+      <%= d.input :pdf, :as => :file, :label => false %>
+      <% if not @presentaciones.nil? %>
+        <%= d.input :presentacion_id, :as => :select, :collection => @presentaciones.map{|x| [x.empaque, x.id] },
+          :input_html => { :disable => true, :readonly => true }, :label => "Presentación"%>
+      <% else %>
+        <p> No existen presentaciones asociadas a a este producto</p>
+        <%= link_to 'Registrar presentación', new_presentacion_path %>
+      <% end %>
+      <%= d.input :importador_id, :as => :select, :collection => @importadores.map{|x| [x.nombre, x.id] },
+        :input_html => { :disable => true, :readonly => true }, :label => "Importador" %>
+      <%= d.link_to_remove "Eliminar documento" %>
+    <% end %>
+    <%= f.link_to_add "Agregar documento", :documentos %>
+    <%= f.action :submit, :label => 'Agregar documentos', :button_html => { :disable_with => "Enviando..."} %>
+  <% end %>
+</div>
+<div class="span4"></div>

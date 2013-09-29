@@ -26,6 +26,8 @@ class Producto < ActiveRecord::Base
   attr_accessible :registro_sanitario, :codigo_arancelario, :alimento, :fabricante, :marca, :nombre
   attr_accessible :pais_elaboracion, :grado_alcoholico, :zona_venta, :usuario_id, :on
 
+  accepts_nested_attributes_for :documentos
+
   #Validaciones registro sanitario
   VALID_REGSAN_REGEX = /\A[A-Z]\-\d{1,3}(\.\d{3})*\z/
   validates :registro_sanitario, uniqueness: true, presence: true, format: { with: VALID_REGSAN_REGEX }

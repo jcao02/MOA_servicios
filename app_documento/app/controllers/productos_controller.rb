@@ -7,8 +7,21 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
     if current_usuario.admin != 0
+
       flash[:title] = "Productos"
-      @productos = Producto.all
+      clientes      = Cliente.where(:responsable_id => current_usuario.id)
+      clientesIds   = clientes.map{ |x| x.cliente_id }
+      productosT    = Producto.all
+
+      if current_usuario.admin == 2
+        @productos = productosT
+      else
+        @productos = []
+        productosT.each do |p|
+          @productos << p unless not clientesIds.include? p.usuario.id 
+        end 
+      end 
+      
     else
       flash[:title] = "Mis Productos"
       @productos = Producto.where(:usuario_id => current_usuario.id, :on => 1)
@@ -275,6 +288,28 @@ class ProductosController < ApplicationController
     render :layout => false
   end
 
+
+  def new_create_documentos
+    @producto       = Producto.find( params[:producto_id] )
+    @presentaciones = Presentacion.where(:productos_id => params[:producto_id])
+    @importadores   = Importador.where(:productos_id => params[:producto_id])
+    @tipos          = TipoDocumento.all
+    @producto.documentos.build
+  end
+
+  def create_documentos
+    @producto = Producto.find(params[:id])
+    respond_to do |format|
+      if @producto.update_attributes(params[:producto])
+        format.html { redirect_to @producto, notice: 'Producto actualizado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit", alert: 'Producto no pudo ser actualizado.' }
+        format.json { render json: @producto.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
 
   #Metodos privados del controlador
   private

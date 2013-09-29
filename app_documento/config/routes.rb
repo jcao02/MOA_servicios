@@ -73,7 +73,9 @@ AppDocumento::Application.routes.draw do
       post :prov_filter
       post :type_filter
       post :marca_filter
+      post :create_documentos
       get  :productos_usuario
+      get  :new_create_documentos
     end
   end
 
