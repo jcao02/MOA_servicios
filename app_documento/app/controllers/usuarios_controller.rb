@@ -222,6 +222,7 @@ class UsuariosController < ApplicationController
   #Genera una nueva asignacion de clientes
   def new_asignar_cliente
     @usuario = Usuario.find(params[:format])
+    @usuario.clientes.build
     @clientes = Usuario.where(:admin => 0)
   end
 

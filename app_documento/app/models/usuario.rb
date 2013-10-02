@@ -26,7 +26,8 @@ class Usuario < ActiveRecord::Base
   has_many :usuarios, :through => :clientes, :source => :cliente
   #has_many :usuarios, :through => :logsesions, :source => :usuario
   #has_many :usuarios, :through => :logsesions, :source => :superu 
-  
+ 
+  accepts_nested_attributes_for :clientes
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

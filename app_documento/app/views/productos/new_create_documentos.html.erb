@@ -1,23 +1,59 @@
-<div class="span3"</div>
-<div class="span5">
-  <%= semantic_nested_form_for @producto do |f| %>
-    <%= f.semantic_fields_for :documentos do |d| %>
-      <%= d.input :TipoDocumento_id, :as => :select, :collection => @tipos.map{|x| [x.descripcion, x.id]}%>
-      <%= d.input :fecha_vencimiento, :as => :string, :class=> "date_picker", :label => "Vence" %>
-      <%= d.input :pdf, :as => :file, :label => false %>
-      <% if not @presentaciones.nil? %>
-        <%= d.input :presentacion_id, :as => :select, :collection => @presentaciones.map{|x| [x.empaque, x.id] },
-          :input_html => { :disable => true, :readonly => true }, :label => "Presentación"%>
-      <% else %>
-        <p> No existen presentaciones asociadas a a este producto</p>
-        <%= link_to 'Registrar presentación', new_presentacion_path %>
-      <% end %>
-      <%= d.input :importador_id, :as => :select, :collection => @importadores.map{|x| [x.nombre, x.id] },
-        :input_html => { :disable => true, :readonly => true }, :label => "Importador" %>
-      <%= d.link_to_remove "Eliminar documento" %>
+<div class="span3">
+  <script>
+    function agregarSelect(obj){
+      var val = $(obj).val();
+      /*Falta deshabilitar los selects*/
+      if (val == '6') {
+        $(obj).parent().find('.importador_div').hide();
+        $(obj).parent().find('.presentacion_div').show();
+      } else if (val == '9') {
+        $(obj).parent().find('.presentacion_div').hide();
+        $(obj).parent().find('.importador_div').show();
+      } else {
+        $(obj).parent().find('.presentacion_div').hide();
+        $(obj).parent().find('.importador_div').hide();
+      }
+    }
+  </script>
+</div>
+<div class="span6">
+  <h3>Documentación</h3>
+  <h4>Expendiente: <%= @producto.nombre%></h4>
+  </br>
+  <%= nested_form_for @producto do |f| %>
+    <%= f.fields_for :documentos do |d| %>
+      <div>
+        <h5 style="text-decoration:underline;">Nuevo documento:</h5>
+        <%= d.label :TipoDocumento_id, "Tipo" %>
+        <%= d.select :TipoDocumento_id, @tipos.map{|x| [x.descripcion, x.id]}, { },{ :class => "tipo_doc", :onchange => "agregarSelect(this)" }%>
+        <%= d.link_to_remove "Eliminar" %>
+        <div class="presentacion_div" style="display:none;">
+          <% if not @presentaciones.empty? %>
+              <%= d.label :presentacion_id, "Presentación"%>
+              <%= d.select( :presentacion_id, @presentaciones.map{|x| [x.empaque, x.id] } ) %>
+          <% else %>
+            <p>No existen presentaciones asociadas a este producto</p>
+            <p>Si quieres regitrar una nueva haz click <%= link_to 'aqui', new_presentacion_path %> </p>
+          <% end %>
+        </div>
+        <div class="importador_div" style="display:none;">
+          <% if not @importadores.empty? %>
+            <%= d.label :importador_id, "Importador"  %>
+            <%= d.select( :importador_id, @importadores.map{|x| [x.nombre, x.id] } ) %>
+          <% else %>
+            <p>No existen importadores asociados a este producto</p>
+            <p>Si quieres regitrar uno nuevo haz click <%= link_to 'aqui', new_importador_path %> </p>
+          <% end %>
+        </div>
+
+        <%= d.label :fecha_vencimiento, "Vence"%>
+        <%= d.text_field :fecha_vencimiento, :class => "vence_documento" %>
+        <%= d.label :pdf, "Documento" %>
+        <%= d.file_field :pdf, :as => :file, :label => false %>
+      </div>
     <% end %>
-    <%= f.link_to_add "Agregar documento", :documentos %>
-    <%= f.action :submit, :label => 'Agregar documentos', :button_html => { :disable_with => "Enviando..."} %>
+    <%= f.link_to_add "Agregar", :documentos %>
+    <%= f.submit 'Enviar', :class => "btn btn-default" %>
   <% end %>
 </div>
-<div class="span4"></div>
+<div class="span3"></div>

@@ -23,6 +23,7 @@ datepickerOpc =
   monthNames : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
   changeYear : true
 
+  
 $(document).ready ->
   $("#producto_grado_alcoholico_input").hide()
   $("#productos").dataTable dataTable_opc 
@@ -31,6 +32,7 @@ $(document).ready ->
   fabricantesDisponibles = $("#autocomplete").data("fabricantesdisponibles")
   $("#producto_marca").autocomplete source : marcasDisponibles
   $("#producto_fabricante").autocomplete source : fabricantesDisponibles
+  $('input').filter(".vence_documento").datepicker datepickerOpc
   #Fltrado
   #Por marca
   $("#marcas tbody tr").click ->
@@ -102,3 +104,12 @@ $(document).ready ->
     $("#extra-productos").html xhr.responseText
   $("#importador-existente-form").submit -> 
     $("#importador-existente").dialog "close"
+
+ 
+  #JavaScript para expedientes
+
+  $(".add_nested_fields").mouseup ->
+    inputs = $(".vence_documento")
+    n      = inputs.length
+    for x in [0..n+1]
+      $(inputs[x]).datepicker datepickerOpc

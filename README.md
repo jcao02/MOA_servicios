@@ -14,4 +14,5 @@ NOTAS ->
 4 -> Agregar bootstrap a nested form (hay una gema pero hay que cambiar ciertas cosas)
 5 -> probar que el metodo realmente funcione (el metodo de agregar documentos)
 6 -> Revisar los js en listar usuarios cuando eres responsable pq hay un error que no deja esconder el loading
-
+7 -> Validacion: Si no se especifica importador o presentacion en sus respectivos documentos, debe dar error
+8 -> Before filter para acciones nuevas
