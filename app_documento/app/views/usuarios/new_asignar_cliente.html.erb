@@ -6,9 +6,11 @@
   </br>
   <%= nested_form_for @usuario do |f| %>
     <%= f.fields_for :clientes do |u| %>
-      <%= u.hidden_tag :responsable_id, @usuario.id %>
-      <%= u.select(:cliente_id, options_from_collection_for_select(@clientes, "id", ":cliente_id,compania")) %>
+      <%= u.hidden_field :usuario_id, :value => @usuario.id %>
+      <%= u.select(:cliente_id, options_from_collection_for_select(@clientes, "id", "compania")) %>
+      <%= u.link_to_remove "Eliminar" %>
     <% end %>
+    <%= f.link_to_add "Agregar", :clientes%>
     <%= f.submit "Enviar", :class => "btn btn-default"%>
   <% end %>
 </div>

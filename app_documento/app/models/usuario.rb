@@ -27,7 +27,7 @@ class Usuario < ActiveRecord::Base
   #has_many :usuarios, :through => :logsesions, :source => :usuario
   #has_many :usuarios, :through => :logsesions, :source => :superu 
  
-  accepts_nested_attributes_for :clientes
+  accepts_nested_attributes_for :clientes, reject_if: lambda { |attr| attr['cliente_id'].blank }
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -40,6 +40,7 @@ class Usuario < ActiveRecord::Base
   attr_accessible :admin, :apellido, :compania, :contrasena, :login, :mail 
   attr_accessible :nombre, :rif, :telefono, :sign_in_count, :current_sign_in_at
   attr_accessible :last_sign_in_at, :bloqueado, :transcriptor, :responsable
+  attr_accessible :clientes_attributes
 
   #Validaciones admin
   VALID_ADMIN_REGEX = /\A[012]\z/

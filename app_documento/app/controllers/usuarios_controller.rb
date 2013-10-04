@@ -23,7 +23,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1.json
   def show
     @usuario    = Usuario.find(params[:id])
-    clientesIds = Cliente.where(:responsable_id => params[:id])
+    clientesIds = Cliente.where(:usuario_id => params[:id])
     @clientes   = clientesIds.map{|c| Usuario.find(c.cliente_id)}
 
     respond_to do |format|
@@ -233,7 +233,7 @@ class UsuariosController < ApplicationController
     respond_to do |format|
       if @usuario.responsable? or @usuario.transcriptor?
         for cliente in @clientes.values
-          nuevo = Cliente.create(:responsable_id => @usuario.id, :cliente_id => cliente)
+          nuevo = Cliente.create(:usuario_id => @usuario.id, :cliente_id => cliente)
           @usuario.clientes << nuevo
         end  
         format.html { redirect_to @usuario, notice: 'Clientes asignados satisfactoriamente'}
