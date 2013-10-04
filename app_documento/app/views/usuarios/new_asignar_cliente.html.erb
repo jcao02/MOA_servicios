@@ -1,17 +1,18 @@
 <div class="span4"></div>
-<div class="span5">
-  <h3>Asignación de clientes </h3>
-  <h4>Usuario: <%= @usuario.login %> </h4>
-  </br>
-  </br>
+<div class="span4">
   <%= nested_form_for @usuario do |f| %>
+    <%= f.link_to_add image_tag("add.png"), :clientes, :data => { :target => "#clientes_zone" }, :class => "pull-right"%>
+    <h3>Asignación de clientes </h3>
+    <h4>Usuario: <%= @usuario.login %> </h4>
+    </br>
+    </br>
     <%= f.fields_for :clientes do |u| %>
       <%= u.hidden_field :usuario_id, :value => @usuario.id %>
+      <%= u.link_to_remove image_tag("remove.png"), :class => "pull-right" %>
       <%= u.select :cliente_id, @clientes.map{ |cliente| [cliente.compania, cliente.id] }.unshift(["Seleccione un cliente", ""]) %>
-      <%= u.link_to_remove "Eliminar" %>
     <% end %>
-    <%= f.link_to_add "Agregar", :clientes%>
+    <div id="clientes_zone"></div>
     <%= f.submit "Enviar", :class => "btn btn-default"%>
   <% end %>
 </div>
-<div class="span3"></div>
+<div class="span4"></div>
