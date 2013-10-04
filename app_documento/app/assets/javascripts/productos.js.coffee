@@ -32,7 +32,6 @@ $(document).ready ->
   fabricantesDisponibles = $("#autocomplete").data("fabricantesdisponibles")
   $("#producto_marca").autocomplete source : marcasDisponibles
   $("#producto_fabricante").autocomplete source : fabricantesDisponibles
-  $('input').filter(".vence_documento").datepicker datepickerOpc
   #Fltrado
   #Por marca
   $("#marcas tbody tr").click ->

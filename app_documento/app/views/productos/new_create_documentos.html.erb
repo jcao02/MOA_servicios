@@ -23,6 +23,18 @@
   </br>
   <%= nested_form_for @producto do |f| %>
     <%= f.fields_for :documentos do |d| %>
+      <script>
+        datepickerOpc ={
+          minDate    : 0,
+          dateFormat : "yy-mm-dd",
+          dayNamesMin: ["Do","Lu","Ma","Mie","Jue","Vie","Sab"],
+          monthNames : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+          changeYear : true
+        }
+
+
+        $('input').filter(".vence_documento").datepicker(datepickerOpc)
+      </script>
       <div>
         <h5 style="text-decoration:underline;">Nuevo documento:</h5>
         <%= d.label :TipoDocumento_id, "Tipo" %>
