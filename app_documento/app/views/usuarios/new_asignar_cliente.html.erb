@@ -7,7 +7,7 @@
   <%= nested_form_for @usuario do |f| %>
     <%= f.fields_for :clientes do |u| %>
       <%= u.hidden_field :usuario_id, :value => @usuario.id %>
-      <%= u.select(:cliente_id, options_from_collection_for_select(@clientes, "id", "compania")) %>
+      <%= u.select :cliente_id, @clientes.map{ |cliente| [cliente.compania, cliente.id] }.unshift(["Seleccione un cliente", ""]) %>
       <%= u.link_to_remove "Eliminar" %>
     <% end %>
     <%= f.link_to_add "Agregar", :clientes%>

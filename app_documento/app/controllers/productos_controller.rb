@@ -9,7 +9,7 @@ class ProductosController < ApplicationController
     if current_usuario.admin != 0
 
       flash[:title] = "Productos"
-      clientes      = Cliente.where(:responsable_id => current_usuario.id)
+      clientes      = Cliente.where(:usuario_id => current_usuario.id)
       clientesIds   = clientes.map{ |x| x.cliente_id }
       productosT    = Producto.all
 

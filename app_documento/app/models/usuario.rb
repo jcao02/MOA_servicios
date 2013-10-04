@@ -27,7 +27,7 @@ class Usuario < ActiveRecord::Base
   #has_many :usuarios, :through => :logsesions, :source => :usuario
   #has_many :usuarios, :through => :logsesions, :source => :superu 
  
-  accepts_nested_attributes_for :clientes, reject_if: lambda { |attr| attr['cliente_id'].blank }
+  accepts_nested_attributes_for :clientes, reject_if: lambda { |attr| attr['cliente_id'].blank? }, :allow_destroy => true
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

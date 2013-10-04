@@ -35,18 +35,6 @@
           <td>
           </td>
         </tr>
-        <%= f.semantic_fields_for :documentos do |d| %>
-          <%= d.input :TipoDocumento_id, :as => :hidden, :input_html => { :value => 6 } %>
-          <%= d.input :producto_id, :as => :hidden, :value => @productos_id%>
-          <tr>
-            <td>
-          <%= d.input :pdf, :as => :file, :label => "Inclusión de presentación (Documento)" %>
-            </td>
-            <td>
-          <%= d.input :fecha_vencimiento, :as => :string, :class => "date_picker", :label => "Vence" %>
-            </td>
-          </tr>
-        <% end %>
         <tr>
           <td>
             <%= f.action :submit, :label => flash[:accion], :button_html => { :disable_with => "Enviando..."} %>
