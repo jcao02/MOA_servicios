@@ -24,7 +24,7 @@ class Producto < ActiveRecord::Base
   
   # Atributos accesibles para el modelo
   attr_accessible :registro_sanitario, :codigo_arancelario, :alimento, :fabricante, :marca, :nombre
-  attr_accessible :pais_elaboracion, :grado_alcoholico, :zona_venta, :usuario_id, :on
+  attr_accessible :pais_elaboracion, :grado_alcoholico, :zona_venta, :usuario_id, :on, :documentos_attributes
 
   accepts_nested_attributes_for :documentos, 
                                 reject_if: lambda { |attr| attr[:fecha_vencimiento].blank? or attr[:TipoDocumento_id].blank? }

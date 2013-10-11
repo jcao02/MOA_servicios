@@ -6,23 +6,56 @@
       if (val == '6') {
         $(obj).parent().find('.importador_div').hide();
         $(obj).parent().find('.presentacion_div').show();
+        <% if @presentaciones.empty? %>
+          $(document).ready(function(){
+              $("#crear_documentos").attr('disabled', 'disabled');
+          })
+        <% else %>
+          $(document).ready(function(){
+              $("#crear_documentos").removeAttr('disabled');
+          })
+
+        <% end %>
       } else if (val == '9') {
         $(obj).parent().find('.presentacion_div').hide();
         $(obj).parent().find('.importador_div').show();
+        <% if @importadores.empty? %>
+          $(document).ready(function(){
+              $("#crear_documentos").attr('disabled', 'disabled');
+              })
+        <% else %>
+          $(document).ready(function(){
+              $("#crear_documentos").removeAttr('disabled');
+          })
+        <% end %>
+
       } else {
         $(obj).parent().find('.presentacion_div').hide();
         $(obj).parent().find('.importador_div').hide();
+        $(document).ready(function(){
+            $("#crear_documentos").removeAttr('disabled');
+        })
       }
     }
+    $(document).ready(function(){
+        $("#recordatorio").dialog({ 
+          title : "Aviso",
+          buttons : [{ text: "Aceptar", click: function() { $( this ).dialog( "close" ) }}]})
+      })
   </script>
+  <div id="recordatorio" style="display: none;">
+    <p>Recuerde registrar las presentaciones e importadores de los documentos pertinentes antes de continuar</p>
+  </div>
 </div>
 <div class="span6">
-  <h3>Documentación</h3>
-  <h4>Expendiente: <%= @producto.nombre%></h4>
-  <p>Recuerde registrar las presentaciones e importadores antes de continuar</p>
-  </br>
   <%= nested_form_for @producto do |f| %>
+    <!-- Boton para agregar campos dinamicos-->
+    <%= f.link_to_add image_tag("add.png"), :documentos, :class => "pull-right", :data => { :target => "#documentos_zone"} %>
+    <h3>Documentación</h3>
+    <h4>Expendiente: <%= @producto.nombre%></h4>
+    </br>
     <%= f.fields_for :documentos do |d| %>
+      <!-- datepicker para campos dinamicos-->
       <script>
         datepickerOpc ={
           minDate    : 0,
@@ -31,29 +64,30 @@
           monthNames : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
           changeYear : true
         }
-
-
         $('input').filter(".vence_documento").datepicker(datepickerOpc)
       </script>
+
       <div>
         <h5 style="text-decoration:underline;">Nuevo documento:</h5>
         <%= d.label :TipoDocumento_id, "Tipo" %>
         <%= d.select :TipoDocumento_id, @tipos.map{|x| [x.descripcion, x.id]}.unshift(["Seleccione un tipo",""]), { }, { :class => "tipo_doc", :onchange => "agregarSelect(this)" }%>
-        <%= d.link_to_remove "Eliminar" %>
+        <%= d.link_to_remove image_tag("remove.png"), :class => "pull-right" %>
+        <!-- Select de presentaciones para inclusion de nueva presentacion -->
         <div class="presentacion_div" style="display:none;">
           <% if not @presentaciones.empty? %>
               <%= d.label :presentacion_id, "Presentación"%>
               <%= d.select( :presentacion_id, @presentaciones.map{|x| [x.empaque, x.id] } ) %>
           <% else %>
-            <p>No existen presentaciones asociadas a este producto</p>
+            <span style="color:red;">No existen presentaciones asociadas a este producto</span>
           <% end %>
         </div>
+        <!-- Select de importadores para inclusion de nuevo importador-->
         <div class="importador_div" style="display:none;">
           <% if not @importadores.empty? %>
             <%= d.label :importador_id, "Importador"  %>
             <%= d.select( :importador_id, @importadores.map{|x| [x.nombre, x.id] } ) %>
           <% else %>
-            <p>No existen importadores asociados a este producto</p>
+            <span style="color:red;">No existen importadores asociados a este producto</span>
           <% end %>
         </div>
 
@@ -63,8 +97,8 @@
         <%= d.file_field :pdf, :as => :file, :label => false %>
       </div>
     <% end %>
-    <%= f.link_to_add "Agregar", :documentos %>
-    <%= f.submit 'Enviar', :class => "btn btn-default" %>
+    <div id="documentos_zone"></div>
+    <%= f.submit 'Enviar', :class => "btn btn-default", :id => "crear_documentos" %>
   <% end %>
 </div>
 <div class="span3"></div>

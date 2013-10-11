@@ -32,13 +32,38 @@ $(document).ready ->
   $.ajaxSetup dataType: "html"
   #Datatables
   $("#tabla_list_usuario").dataTable dataTable_opc
-  #Cambiar contraseña con ajax
+  #######################EJEMPLO DE AJAX######################################
+  # En primer lugar, en el .html.erb, solo debes agregar :remote => true
+  # en el form, y ya va ejecutar la accion con AJAX
+
+  # Cambiar contraseña con ajax
   $("#cambiar_contr").click ->
-    #Se crea funcion para generar el form para cambiarla
+    # cambiar_contr es un link que contiene el form con :remote => true 
+    # cuando se le da click a ese boton, se le hace submit a ese form
+    # por lo que hay que crear funciones que reciban los datos AJAX
+    
+    # bind(E, F) asocia el evento E a la funcion F, es decir, cuando ocurra
+    # E, se va a ejecutar F. En el caso de RoR, el evento que se ejecuta cuando llega
+    # la data del servidor al front-end es "ajax:success", y hace falta "agarrar" 
+    # ese evento creando la funcion con bind. API: http://api.jquery.com/bind/
+
+    # Bind para asociar funcion con evento de ajax
     $( this ).bind "ajax:success", (event, data, status, xhr) ->
+    # La funcion F recibe 4 argumentos, de los cuales, para cambiar la interfaz
+    # del front-end nos interesa el cuarto (xhr) que contiene en su propiedad 
+    # responseText el texto html con la vista que retorna el servidor
+    # Por ejemplo, si ejecutasemos la accion "inicio" con ajax al apretar este 
+    # boton e inicio renderiza la caja de login de acuerdo con la accion, 
+    # si colocamos un div X, y le ejecutamos $(X).html xhr.responseText, 
+    # donde quiera que este ese div lo que tuviese dentro de el va a ser 
+    # reemplazado por el codigo completo de la caja de login. (codigo literal
+    # como <div id="login"> ......</div> etc
       $("#dialog_contr").html xhr.responseText
-    #Se muestra el form como un dialog
+
+    # Se muestra el form como un dialog
     $("#dialog_contr").dialog(changePassDialog_opc)
+    #############################################################################
+
   #Se crea funcion para manejar el submit del form en caso de errores o exito
   $("#dialog_contr").bind("ajax:success", (event, data, status, xhr) ->
     str = xhr.responseText
