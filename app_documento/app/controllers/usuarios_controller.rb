@@ -5,6 +5,7 @@ class UsuariosController < ApplicationController
   before_filter :is_admin, :only => [:new, :create] #Solo admin y super admin pueden crear usuarios
   before_filter :change_s_admin, :only => [:deshabilitar] #No se puede deshabilitar a un s-admin
   before_filter :actualizar_alertas
+  before_filter :is_sadmin, :only => [:asignar_cliente, :new_asignar_cliente]
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
 
@@ -13,7 +14,7 @@ class UsuariosController < ApplicationController
   def index
     @usuarios = Usuario.all
 
-    respond_to do |format|
+    espond_to do |format|
       format.html # index.html.erb
       format.json { render json: @usuarios }
     end
@@ -120,6 +121,7 @@ class UsuariosController < ApplicationController
     end
   end
 
+  ######################EJEMPLO ACCION AJAX
   #Cambiar contraseña con ajax
   def update_password
     @usuario = Usuario.find(current_usuario.id)

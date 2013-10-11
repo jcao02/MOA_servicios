@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     redirect_to(inicio_index_path) if current_usuario.id != alerta.usuario_id
   end
 
+  def is_sadmin
+    redirect_to(inicio_index_path) if current_usuario.admin < 2
+  end
+
   #Actualizacion de alertas
   def actualizar_alertas
     puts params[:controller]
