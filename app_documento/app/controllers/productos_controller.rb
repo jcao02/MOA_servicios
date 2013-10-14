@@ -1,7 +1,9 @@
 #encoding: UTF-8
 class ProductosController < ApplicationController
   respond_to :html, :js
-  before_filter :is_admin, :only => [:new, :create, :edit, :update, :destroy, :ocultar]
+  before_filter :is_admin, :only => [ :update, :ocultar, :edit ]
+  before_filter :is_sadmin, :only => [ :destroy ]
+  before_filter :is_transcriptor, :only => [ :new_create_documentos, :create_documentos, :new, :create]
   before_filter :actualizar_alertas
   # GET /productos
   # GET /productos.json

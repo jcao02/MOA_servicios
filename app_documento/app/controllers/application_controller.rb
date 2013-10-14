@@ -29,6 +29,17 @@ class ApplicationController < ActionController::Base
     redirect_to(inicio_index_path) if current_usuario.admin < 2
   end
 
+  def is_transcriptor
+    if current_usuario.admin != 2
+      redirect_to(inicio_index_path) if not current_usuario.transcriptor
+    end
+  end
+  
+  def is_responsable
+    if current_usuario.admin != 2
+      redirect_to(inicio_index_path) if not current_usuario.reponsable
+    end
+  end
   #Actualizacion de alertas
   def actualizar_alertas
     puts params[:controller]
