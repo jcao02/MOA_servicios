@@ -152,9 +152,20 @@ class ProductosController < ApplicationController
     @documentos = get_documentos(@producto.id, current_usuario.admin > 0 )
     @presentaciones = Presentacion.where(:productos_id => @producto.id)
     @importadores_todos = Importador.all
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @producto }
+
+    logp = Logproducto.new(:usuario_id => current_usuario.id, 
+                           :producto_id => @producto.id, 
+                           :tipo => "Visualizado", 
+                           :nusuario => current_usuario.nombre, 
+                           :nproducto => @producto.nombre)
+
+    if logp.save
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @producto }
+      end
+    else
+      format.json { render json: @producto, notice:"La información no fue almacenada en el log." }
     end
   end
 

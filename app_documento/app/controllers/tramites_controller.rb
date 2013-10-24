@@ -43,9 +43,27 @@ class TramitesController < ApplicationController
     @tramite = Tramite.find(params[:id])
     @req_faltantes = get_faltantes @tramite
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @tramite }
+    if @tramite.producto.nil? 
+      nombre = "Producto no registrado"
+    else
+      nombre = @tramite.producto.nombre
+    end
+
+    logt = Logtramite.new(:usuario_id => current_usuario.id,
+                          :tramite_id => @tramite.id, 
+                          :tipo => "Visualizado", 
+                          :nusuario => current_usuario.nombre, 
+                          :ntipodocumento => @tramite.TipoDocumento.descripcion, 
+                          :nproducto => nombre, 
+                          :producto_id => @tramite.producto_id)
+
+    if logt.save
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @tramite }
+      end
+    else
+      format.json { render json: @tramite, notice:"La información no fue almacenada en el log." }
     end
   end
 
