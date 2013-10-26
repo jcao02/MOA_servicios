@@ -26,9 +26,19 @@ class UsuariosController < ApplicationController
     clientesIds = Cliente.where(:usuario_id => params[:id])
     @clientes   = clientesIds.map{|c| Usuario.find(c.cliente_id)}
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @usuario }
+    logs = Logsesion.new(:usuario_id => @usuario.id, 
+                         :superu_id => current_usuario.id,
+                         :tipo => "Visualizado", 
+                         :nusuario => @usuario.login, 
+                         :nsuperu => current_usuario.login)
+
+    if logs.save
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @usuario }
+      end
+    else
+      format.json { render json: @usuario, notice:"La información no fue almacenada en el log." }
     end
   end
 
@@ -58,7 +68,7 @@ class UsuariosController < ApplicationController
     @usuario = current_usuario
     respond_with(@usuario, :layout => false)
   end
- 
+
   # POST /usuarios
   # POST /usuarios.json
   def create
@@ -140,9 +150,9 @@ class UsuariosController < ApplicationController
           sign_in(@usuario, :bypass => true) #Evita que cierre sesion automaticamente
         end
       elsif !@usuario.valid_password?(oldpass)
-          @usuario.errors[:errorpassword] = "Contraseña actual inválida."
+        @usuario.errors[:errorpassword] = "Contraseña actual inválida."
       else
-          @usuario.errors[:errorpassword] = "Contraseñas no coinciden."
+        @usuario.errors[:errorpassword] = "Contraseñas no coinciden."
       end
       if lengthCondition
         @usuario.errors[:errorlength] = "Constraseña nueva inválida (debe tener entre 8 y 16 caracteres)."
