@@ -5,7 +5,6 @@ class UsuariosController < ApplicationController
   before_filter :is_admin, :only => [:new, :create] #Solo admin y super admin pueden crear usuarios
   before_filter :change_s_admin, :only => [:deshabilitar] #No se puede deshabilitar a un s-admin
   before_filter :actualizar_alertas
-  before_filter :is_sadmin, :only => [:asignar_cliente, :new_asignar_cliente]
   skip_before_filter :authenticate_usuario!, :only =>[:ask_password, :recover_password, :send_password] #No se requiere estar logueado para recuperar contraseña
   respond_to :html, :js
 
@@ -14,7 +13,7 @@ class UsuariosController < ApplicationController
   def index
     @usuarios = Usuario.all
 
-    espond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @usuarios }
     end
@@ -68,6 +67,7 @@ class UsuariosController < ApplicationController
       #Usuario esta habilitado
       @usuario.bloqueado = 0
     end
+    usuario.transcriptor = true unless usuario.transcriptor or usuario.responsable
 
     respond_to do |format|
       if not @usuario.transcriptor and not @usuario.responsable
@@ -92,6 +92,7 @@ class UsuariosController < ApplicationController
   # PUT /usuarios/1.json
   def update
     @usuario = Usuario.find(params[:id])
+    usuario.transcriptor = true unless usuario.transcriptor or usuario.responsable
     params[:usuario].delete :password
     respond_to do |format|
       if @usuario.update_attributes(params[:usuario])
@@ -212,8 +213,6 @@ class UsuariosController < ApplicationController
         if @usuario.update_attribute("bloqueado", 0)
           format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
           format.json { head :no_content }
-        else
-          flash.keep
           format.html { render action: "edit" }
           format.json { render json: @usuario.errors, status: :unprocessable_entity }
         end        

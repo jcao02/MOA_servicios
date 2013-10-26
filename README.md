@@ -13,3 +13,4 @@ linea 131 app/views/usuarios/show.html.erb
 NOTAS ->
 1 -> Asegurarse del default de transcriptor
 6 -> Revisar los js en listar usuarios cuando eres responsable pq hay un error que no deja esconder el loading
+sidjasoidjajsio
