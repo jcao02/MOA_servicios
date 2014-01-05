@@ -152,8 +152,18 @@ class DocumentosController < ApplicationController
     end
   end
 
+  def registro
+    tipo = params[:tipo]
+    if registrar_visualizado(tipo)
+      puts "se registro"
+    end
+  end
   private 
 
+    def registrar_visualizado(tipo)
+     log = LodDocumento.new()
+     return log.save
+    end
     # Ocula un documento dado su id
     def ocultar_doc (id)
       doc = Documento.find(id)

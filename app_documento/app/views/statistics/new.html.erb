@@ -1,0 +1,26 @@
+<div class="span3"></div>
+<div id="holder" style="height: 600px;" class="span6">
+  <script>
+    $(document).ready( function () {
+      paper = Raphael('holder', "500", "500");
+      circle1 = paper.circle(100,100,20).attr({"fill":"#48f5ab","stroke":"#48f5ab"});
+      circle2 = paper.circle(200,100,20).attr({"fill":"#a8556b","stroke":"#a8556b"});
+      popup = paper.popup(50,50,"Hi I m a Circle...:)").hide();//paper.popup()
+      circle1.mouseover(function(){
+        popup.show();
+      });
+      circle1.mouseout(function(){
+        popup.hide();
+      });
+      circle2.mouseover(function(){
+        this.popup();
+      });
+      circle2.mouseout(function(){
+      });
+
+
+    });
+  </script>
+
+</div>
+<div class="span3"></div>

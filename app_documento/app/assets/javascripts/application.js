@@ -20,6 +20,11 @@
 //= require jquery_nested_form
 //= require cocoon
 //= require jquery.ui.all
+//= require raphael/raphael.js
+//= require g.raphael/g.raphael.js
+//= require g.raphael/g.line.js
+//= require g.raphael/g.bar.js
+//= require g.raphael/g.pie.js
 
 $(document).ready(function() {
   $('body').css("background-image", "url(/assets/fondo" + (Math.round(1 * Math.random())) + ".png)");

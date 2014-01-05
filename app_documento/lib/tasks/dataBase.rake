@@ -2,7 +2,7 @@
 namespace :set do
   desc "Crea 4 usuarios: S-Admin, responsable, transcriptor y Cliente"
   task :users => :environment do 
-    Rake::Task['db:reset'].invoke
+    #Rake::Task['db:reset'].invoke
     puts 'Creado S-Admin' unless not Usuario.create(
       :login     => "S-Admin",
       :password  => "12345678",

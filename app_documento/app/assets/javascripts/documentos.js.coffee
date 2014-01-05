@@ -60,3 +60,6 @@ $(document).ready ->
       $("#importador_id_form").hide()
       $("#importador_id_input").prop 'disable', true
   $("#show_documentos").dataTable(dataTable_opc)
+
+  $(".link_documento").click -> 
+      $(this).closest('form').submit()

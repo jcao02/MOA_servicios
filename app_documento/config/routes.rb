@@ -1,5 +1,9 @@
 AppDocumento::Application.routes.draw do
 
+  get "statistics/new"
+
+  get "statistics/generate"
+
   #Ruta de ajax para tabs de show producto
   post "productos/show_documentos"
   post "productos/show_importadores"
@@ -49,6 +53,7 @@ AppDocumento::Application.routes.draw do
 
   get "inicio/index"
 
+  post "documentos/registro"
 
   # Autenticacion de usuarios
   devise_for :usuarios, :controllers => { :sessions => :sessions }

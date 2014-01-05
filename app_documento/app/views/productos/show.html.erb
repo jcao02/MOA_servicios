@@ -111,8 +111,11 @@
       <tr>
         <td>
           <div class="list-group">
-              <h5 class="list-group-item-heading">
-                <%= link_to d[1], d[0].pdf.url, :target => "_blank"%> 
+            <h5 class="list-group-item-heading">
+                <!-- form bla bla-->
+                <!-- FORM con remote true y hidden tag con tipo para la accion registro de documento.-->
+                <%= link_to d[1], d[0].pdf.url, :target => "_blank", :class => "link_documento"%> 
+                <!-- end form bla bla -->
               </h5>
               <% if not d[0].importador.nil? %>
                 <p class="list-group-item-text">
